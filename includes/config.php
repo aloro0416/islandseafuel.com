@@ -13,10 +13,10 @@
 |
 */
   define( 'DB_HOST', 'localhost' );          // Set database host
-  define( 'DB_USER', 'root' );             // Set database user
-  define( 'DB_PASS', '' );             // Set database password
-  define( 'DB_NAME', 'inventory_system' );        // Set database name
-  // define( 'DB_USER', 'u510162695_islandsea' );             // Set database user
-  // define( 'DB_PASS', '1islandseA' );             // Set database password
-  // define( 'DB_NAME', 'u510162695_islandsea' );
+  // define( 'DB_USER', 'root' );             // Set database user
+  // define( 'DB_PASS', '' );             // Set database password
+  // define( 'DB_NAME', 'inventory_system' );        // Set database name
+  define( 'DB_USER', 'u510162695_islandsea' );             // Set database user
+  define( 'DB_PASS', '1islandseA' );             // Set database password
+  define( 'DB_NAME', 'u510162695_islandsea' );
 ?>
