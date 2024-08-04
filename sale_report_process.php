@@ -76,11 +76,6 @@ $results = '';
        text-transform: uppercase;
        font-weight: 500;
      }
-     .print{
-      position: absolute;
-      bottom: 20px;
-      right: 160px;
-     }
    </style>
 </head>
 <body>
