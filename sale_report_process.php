@@ -126,8 +126,9 @@ $results = '';
          </tr>
         </tfoot>
       </table>
-      <div class="print">
+      <div class="text-right">
       <button onclick="window.print()" id="print" class="btn btn-primary">Print</button>
+      </div>
     </div>
   <?php
     else:
