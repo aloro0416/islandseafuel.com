@@ -1,9 +1,9 @@
 <?php
-  $page_title = 'POS';
-  require_once('includes/load.php');
-  // Checkin What level user has permission to view this page
-?>
-<?php include_once('layouts/header.php'); 
+ob_start(); // Start output buffering
+
+$page_title = 'POS';
+include('includes/load.php');
+include('layouts/header.php');
 
 if (isset($_POST['add'])) {
     $date = date('Y-m-d');
@@ -12,35 +12,51 @@ if (isset($_POST['add'])) {
     $liter = $_POST['liter'];
     $amount = $_POST['amount'];
     $payment = $_POST['payment'];
-    if ($payment == 'Cash') {
-        $status = 1;
-    }elseif ($payment == 'Debt'){
-        $status = 0;
-    }
+    
+    $status = ($payment == 'Cash') ? 1 : 0;
     
     $sel = "SELECT * FROM products WHERE id = '$product_id'";
     $sel_res = $db->query($sel);
     $sel_row = mysqli_fetch_assoc($sel_res);
 
-    $avail = $sel_row['quantity'];
+    if ($sel_row) {
+        $avail = $sel_row['quantity'];
+        $total_lit = $avail - $liter;
 
-    $total_lit = $avail - $liter;
+        $pro = "UPDATE products SET quantity = '$total_lit' WHERE id = '$product_id'";
+        $pros = $db->query($pro);
 
+        $sqls = "INSERT INTO pos (customer_id, product_id, liter, amount, status) VALUES ('$customer_id', '$product_id', '$liter', '$amount', '$status')";
+        $result = $db->query($sqls);
 
-    $pro = "UPDATE products SET quantity = '$total_lit' WHERE id = '$product_id'";
-    $pros = $db->query($pro);
+        $salesss = "INSERT INTO sales (product_id, qty, price, date) VALUES ('$product_id', '$liter', '$amount', '$date')";
+        $s_result = $db->query($salesss);
 
-    $sqls = "INSERT INTO pos (customer_id,product_id,liter,amount,status) VALUES ('$customer_id','$product_id','$liter','$amount','$status')";
-    $result = $db->query($sqls);
+        if ($pros && $result && $s_result) {
+            $alert_type = 'success';
+            $alert_message = 'Added successfully.';
+        } else {
+            $alert_type = 'error';
+            $alert_message = 'Added failed. Please try again.';
+        }
+    } else {
+        $alert_type = 'error';
+        $alert_message = 'Product not found.';
+    }
 
-    $salesss = "INSERT INTO sales (product_id,qty,price,date) VALUES ('$product_id','$liter','$amount','$date')";
-    $s_result = $db->query($salesss);
+    // Output the alert message and then redirect
+    echo "<script>
+            Swal.fire({
+                icon: '$alert_type',
+                title: '$alert_message',
+                showConfirmButton: true
+            }).then(function() {
+                window.location.href = 'pos.php';
+            });
+          </script>";
 
-    header('location: pos.php');
-
+    exit(); // Ensure no further code is executed after script
 }
-
-
 ?>
 
 <div class="row">
@@ -70,18 +86,12 @@ if (isset($_POST['add'])) {
                                         ₱<?=$row['sale_price']?>
                                         </div>
                                     </div>
-                                    <?php 
-                                    if ($row['quantity'] == 0) {
-                                        ?>
-                                        <div class="row text-center text-light bg-red">
-                                            Out of stock
-                                        </div>
-                                        <?php
-                                    }
-                                    ?>
+                                    <div class="row text-center text-light bg-red">
+                                        Out of stock
+                                    </div>
                                 </div>
                         <?php
-                        }else {
+                        } else {
                             ?>
                             <a href="?product=<?=$row['id']?>">
                                 <div class="box">
@@ -93,14 +103,13 @@ if (isset($_POST['add'])) {
                                         ₱<?=$row['sale_price']?>
                                         </div>
                                     </div>
-                                        <div class="row text-center text-light bg-danger">
-                                            <?=$row['quantity']?> liters left
-                                        </div>
+                                    <div class="row text-center text-light bg-danger">
+                                        <?=$row['quantity']?> liters left
+                                    </div>
                                 </div>
                             </a>
                             <?php
                         }
-                        
                     }
                     ?>
                 </div>
@@ -126,7 +135,6 @@ if (isset($_POST['add'])) {
                                     }
                                     ?>
                                     <option value="Random">Random</option>
-
                                 </select>
                                 <label for="liter" class="control-label">Liter</label>
                                 <input type="number" onchange="calculateAmount(this.value)" min="0" class="form-control" name="liter" required>
@@ -145,7 +153,7 @@ if (isset($_POST['add'])) {
                         </form>
                         
                         <?php
-                    }else{
+                    } else {
                         ?>
                         <h4>Select a product</h4>
                         <?php
@@ -158,18 +166,18 @@ if (isset($_POST['add'])) {
 </div>
 
 <style>
-    .row .col-md-8{
+    .row .col-md-8 {
         display: flex;  
         flex-wrap: wrap;
     }
-    .box{
+    .box {
         width: 190px;
         height: 100px;
         background: green;
         color: white;
         margin-right: 10px;
     }
-    .row .col-md-8 a{
+    .row .col-md-8 a {
         text-decoration: none;
     }
 </style>
@@ -183,3 +191,7 @@ if (isset($_POST['add'])) {
 </script>
 
 <?php include_once('layouts/footer.php'); ?>
+
+<?php
+ob_end_flush(); // Flush the output buffer
+?>
