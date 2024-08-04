@@ -41,6 +41,9 @@ $results = '';
        width: auto;
        margin: auto;
       }
+      #print{
+        display:none;
+      }
     }
     .page-break{
       width: 980px;
@@ -72,6 +75,11 @@ $results = '';
        color:#000;
        text-transform: uppercase;
        font-weight: 500;
+     }
+     .print{
+      position: absolute;
+      bottom: 20px;
+      right: 160px;
      }
    </style>
 </head>
@@ -123,6 +131,8 @@ $results = '';
          </tr>
         </tfoot>
       </table>
+      <div class="print">
+      <button onclick="window.print()" id="print" class="btn btn-primary">Print</button>
     </div>
   <?php
     else:
