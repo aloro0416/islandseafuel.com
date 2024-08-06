@@ -50,7 +50,7 @@
               <thead>
                 <tr>
                   <th class="text-center" style="width: 50px;">#</th>
-                  <th class="text-center">Photo Tom</th>
+                  <th class="text-center">Photo</th>
                   <th class="text-center">Photo Name</th>
                   <th class="text-center" style="width: 20%;">Photo Type</th>
                   <th class="text-center" style="width: 50px;">Actions</th>
