@@ -39,6 +39,7 @@
                 <input type="file" name="file_upload" multiple="multiple" id="file-upload" />
                 <label for="file-upload">Choose File</label>
               </div>
+              <br>
                  <button type="submit" name="submit" class="btn btn-default">Upload</button>
                </div>
               </div>
