@@ -39,7 +39,6 @@
                 <input type="file" name="file_upload" multiple="multiple" id="file-upload" />
                 <label for="file-upload">Choose File</label>
               </div>
-              <br>
                  <button type="submit" name="submit" class="btn btn-default">Upload</button>
                </div>
               </div>
@@ -61,34 +60,27 @@
                   display: inline-block;
                   padding: 6px 12px;
                   cursor: pointer;
-                  background-color: #fff;
-                  color: #333;
-                  border-color: #ccc;
+                  background-color: #007bff;
+                  color: #fff;
                   border-radius: 4px;
                 }
 
                 .btn-upload {
-                  position: relative;
-                  display: inline-block;
-                }
-
-                .btn-upload input[type="file"] {
-                  position: absolute;
-                  opacity: 0;
-                  width: 100%;
-                  height: 100%;
-                  cursor: pointer;
-                }
-
-                .btn-upload label {
                   display: inline-block;
                   padding: 6px 12px;
                   cursor: pointer;
-                  background-color: #fff;
-                  color: #333;
-                  border-color: #ccc;
+                  background-color: #007bff;
+                  color: #fff;
+                  border: 1px solid #007bff;
                   border-radius: 4px;
+                  text-align: center;
+                  font-size: 14px;
                 }
+
+                .btn-upload:hover {
+                  background-color: #0056b3;
+                }
+
               </style>
 
              </form>
