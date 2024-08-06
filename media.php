@@ -35,10 +35,10 @@
               <form class="form-inline" action="media.php" method="POST" enctype="multipart/form-data">
               <div class="form-group">
                 <div class="input-group">
-                  <span class="input-group-btn">
-                    <button type="file" name="file_upload" multiple="multiple" class="btn btn-primary btn-file">Add</button>
-                 </span>
-
+                <div class="custom-file-upload">
+                <input type="file" name="file_upload" multiple="multiple" id="file-upload" />
+                <label for="file-upload">Choose File</label>
+              </div>
                  <button type="submit" name="submit" class="btn btn-default">Upload</button>
                </div>
               </div>
