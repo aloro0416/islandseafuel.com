@@ -173,7 +173,7 @@ if (isset($_POST['add'])) {
     .box {
         width: 190px;
         height: 100px;
-        background: green;
+        background: #ea8181;
         color: black;
         margin-right: 10px;
     }
