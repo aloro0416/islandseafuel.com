@@ -43,28 +43,45 @@
                </div>
               </div>
               <style>
-.custom-file-upload {
-  position: relative;
-  display: inline-block;
-}
+                .custom-file-upload {
+                  position: relative;
+                  display: inline-block;
+                }
 
-.custom-file-upload input[type="file"] {
-  position: absolute;
-  opacity: 0;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-}
+                .custom-file-upload input[type="file"] {
+                  position: absolute;
+                  opacity: 0;
+                  width: 100%;
+                  height: 100%;
+                  cursor: pointer;
+                }
 
-.custom-file-upload label {
-  display: inline-block;
-  padding: 6px 12px;
-  cursor: pointer;
-  background-color: #007bff;
-  color: #fff;
-  border-radius: 4px;
-}
-</style>
+                .custom-file-upload label {
+                  display: inline-block;
+                  padding: 6px 12px;
+                  cursor: pointer;
+                  background-color: #007bff;
+                  color: #fff;
+                  border-radius: 4px;
+                }
+
+                .btn-upload {
+                  display: inline-block;
+                  padding: 6px 12px;
+                  cursor: pointer;
+                  background-color: #007bff;
+                  color: #fff;
+                  border: 1px solid #007bff;
+                  border-radius: 4px;
+                  text-align: center;
+                  font-size: 14px;
+                }
+
+                .btn-upload:hover {
+                  background-color: #0056b3;
+                }
+              </style>
+
              </form>
             </div>
           </div>
