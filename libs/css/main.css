@@ -111,7 +111,7 @@ body{
     letter-spacing: 1px;
     display: inline-block;
     width: 250px;
-    background-color: #ea8181;
+    background-color: red;
 }.header-date{
   color: #9b9b9b;
   margin-left: 20px;
