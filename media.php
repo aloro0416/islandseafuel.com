@@ -42,6 +42,29 @@
                  <button type="submit" name="submit" class="btn btn-default">Upload</button>
                </div>
               </div>
+              <style>
+.custom-file-upload {
+  position: relative;
+  display: inline-block;
+}
+
+.custom-file-upload input[type="file"] {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.custom-file-upload label {
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 4px;
+}
+</style>
              </form>
             </div>
           </div>
