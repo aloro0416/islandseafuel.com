@@ -26,7 +26,7 @@
     <header id="header" style="width: 100%;">
       <div class="logo pull-left">
 
-        <span>Island Sea Management</span>
+        <span>Island Sea Fuel</span>
         
 
       </div>
