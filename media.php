@@ -61,8 +61,9 @@
                   display: inline-block;
                   padding: 6px 12px;
                   cursor: pointer;
-                  background-color: #007bff;
-                  color: #fff;
+                  background-color: #fff;
+                  color: #333;
+                  border-color: #ccc;
                   border-radius: 4px;
                 }
 
