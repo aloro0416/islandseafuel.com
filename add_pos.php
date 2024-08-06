@@ -174,7 +174,7 @@ if (isset($_POST['add'])) {
         width: 190px;
         height: 100px;
         background: green;
-        color: white;
+        color: #e56d6d;
         margin-right: 10px;
     }
     .row .col-md-8 a {
