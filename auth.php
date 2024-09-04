@@ -13,7 +13,7 @@ if(empty($errors)){
     //Update Sign in time
      updateLastLogIn($user_id);
      $session->msg("s", "Welcome to Island SeaManagement System");
-     redirect('dashboard',false);
+     redirect('admin',false);
 
   } else {
     $session->msg("d", "Sorry Username/Password incorrect.");

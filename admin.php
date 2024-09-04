@@ -21,7 +21,7 @@
    </div>
 </div>
   <div class="row">
-    <a href="users.php" style="color:black;">
+    <a href="users" style="color:black;">
 		<div class="col-md-3">
        <div class="panel panel-box clearfix">
          <div class="panel-icon pull-left bg-secondary1">
@@ -35,7 +35,7 @@
     </div>
 	  </a>
 	
-	<a href="categorie.php" style="color:black;">
+	<a href="categorie" style="color:black;">
     <div class="col-md-3">
        <div class="panel panel-box clearfix">
          <div class="panel-icon pull-left bg-red">
@@ -49,7 +49,7 @@
 </div>
 	</a>
 	
-	<a href="product.php" style="color:black;">
+	<a href="product" style="color:black;">
     <div class="col-md-3">
        <div class="panel panel-box clearfix">
          <div class="panel-icon pull-left bg-blue2">
@@ -63,7 +63,7 @@
     </div>
 	</a>
 	
-	<a href="sales.php" style="color:black;">
+	<a href="sales" style="color:black;">
     <div class="col-md-3">
        <div class="panel panel-box clearfix">
          <div class="panel-icon pull-left bg-green">
