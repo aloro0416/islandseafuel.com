@@ -22,7 +22,7 @@ $sales = find_all_sale();
             <span>All Sales</span>
           </strong>
           <div class="pull-right">
-            <a href="add_sale.php" class="btn btn-primary">Add sale</a>
+            <a href="add_sale" class="btn btn-primary">Add sale</a>
           </div>
         </div>
         <div class="panel-body">
@@ -47,10 +47,10 @@ $sales = find_all_sale();
                <td class="text-center"><?php echo $sale['date']; ?></td>
                <td class="text-center">
                   <div class="btn-group">
-                     <a href="edit_sale.php?id=<?php echo (int)$sale['id'];?>" class="btn btn-warning btn-xs"  title="Edit" data-toggle="tooltip">
+                     <a href="edit_sale?id=<?php echo (int)$sale['id'];?>" class="btn btn-warning btn-xs"  title="Edit" data-toggle="tooltip">
                        <span class="glyphicon glyphicon-edit"></span>
                      </a>
-                     <a href="delete_sale.php?id=<?php echo (int)$sale['id'];?>" class="btn btn-danger btn-xs"  title="Delete" data-toggle="tooltip">
+                     <a href="delete_sale?id=<?php echo (int)$sale['id'];?>" class="btn btn-danger btn-xs"  title="Delete" data-toggle="tooltip">
                        <span class="glyphicon glyphicon-trash"></span>
                      </a>
                   </div>

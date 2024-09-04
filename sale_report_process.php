@@ -16,12 +16,12 @@ $results = '';
       $results      = find_sale_by_dates($start_date,$end_date);
     else:
       $session->msg("d", $errors);
-      redirect('sales_report.php', false);
+      redirect('sales_report', false);
     endif;
 
   } else {
     $session->msg("d", "Select dates");
-    redirect('sales_report.php', false);
+    redirect('sales_report', false);
   }
 ?>
 <!doctype html>
@@ -133,7 +133,7 @@ $results = '';
   <?php
     else:
         $session->msg("d", "Sorry no sales has been found. ");
-        redirect('sales_report.php', false);
+        redirect('sales_report', false);
      endif;
   ?>
 </body>

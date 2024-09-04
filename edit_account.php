@@ -11,10 +11,10 @@
   $photo->upload($_FILES['file_upload']);
   if($photo->process_user($user_id)){
     $session->msg('s','photo has been uploaded.');
-    redirect('edit_account.php');
+    redirect('edit_account');
     } else{
       $session->msg('d',join($photo->errors));
-      redirect('edit_account.php');
+      redirect('edit_account');
     }
   }
 ?>
@@ -31,14 +31,14 @@
     $result = $db->query($sql);
           if($result && $db->affected_rows() === 1){
             $session->msg('s',"Acount updated ");
-            redirect('edit_account.php', false);
+            redirect('edit_account', false);
           } else {
             $session->msg('d',' Sorry failed to updated!');
-            redirect('edit_account.php', false);
+            redirect('edit_account', false);
           }
     } else {
       $session->msg("d", $errors);
-      redirect('edit_account.php',false);
+      redirect('edit_account',false);
     }
   }
 ?>

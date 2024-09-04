@@ -15,7 +15,7 @@
 
              if(sha1($_POST['old-password']) !== current_user()['password'] ){
                $session->msg('d', "Your old password not match");
-               redirect('change_password.php',false);
+               redirect('change_password',false);
              }
 
             $id = (int)$_POST['id'];
@@ -25,14 +25,14 @@
                 if($result && $db->affected_rows() === 1):
                   $session->logout();
                   $session->msg('s',"Login with your new password.");
-                  redirect('index.php', false);
+                  redirect('.', false);
                 else:
                   $session->msg('d',' Sorry failed to updated!');
-                  redirect('change_password.php', false);
+                  redirect('change_password', false);
                 endif;
     } else {
       $session->msg("d", $errors);
-      redirect('change_password.php',false);
+      redirect('change_password',false);
     }
   }
 ?>

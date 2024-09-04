@@ -22,7 +22,7 @@
           <span class="glyphicon glyphicon-th"></span>
           <span>Users</span>
        </strong>
-         <a href="add_user.php" class="btn btn-info pull-right">Add New User</a>
+         <a href="add_user" class="btn btn-info pull-right">Add New User</a>
       </div>
      <div class="panel-body">
       <table class="table table-bordered table-striped">
@@ -54,10 +54,10 @@
            <td><?php echo read_date($a_user['last_login'])?></td>
            <td class="text-center">
              <div class="btn-group">
-                <a href="edit_user.php?id=<?php echo (int)$a_user['id'];?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
+                <a href="edit_user?id=<?php echo (int)$a_user['id'];?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
                   <i class="glyphicon glyphicon-pencil"></i>
                </a>
-                <a href="delete_user.php?id=<?php echo (int)$a_user['id'];?>" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
+                <a href="delete_user?id=<?php echo (int)$a_user['id'];?>" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
                   <i class="glyphicon glyphicon-remove"></i>
                 </a>
                 </div>

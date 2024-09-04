@@ -5,5 +5,5 @@ if (isset($_GET['delete'])) {
     $sql = "DELETE FROM customer WHERE id='$id'";
     $result = $db->query($sql);
 
-    header('location: pos.php?proc=customer');
+    header('location: pos?proc=customer');
 }

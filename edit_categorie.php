@@ -9,7 +9,7 @@
   $categorie = find_by_id('categories',(int)$_GET['id']);
   if(!$categorie){
     $session->msg("d","Missing categorie id.");
-    redirect('categorie.php');
+    redirect('categorie');
   }
 ?>
 
@@ -24,14 +24,14 @@ if(isset($_POST['edit_cat'])){
      $result = $db->query($sql);
      if($result && $db->affected_rows() === 1) {
        $session->msg("s", "Successfully updated Categorie");
-       redirect('categorie.php',false);
+       redirect('categorie',false);
      } else {
        $session->msg("d", "Sorry! Failed to Update");
-       redirect('categorie.php',false);
+       redirect('categorie',false);
      }
   } else {
     $session->msg("d", $errors);
-    redirect('categorie.php',false);
+    redirect('categorie',false);
   }
 }
 ?>

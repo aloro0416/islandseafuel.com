@@ -11,10 +11,10 @@
   $photo->upload($_FILES['file_upload']);
     if($photo->process_media()){
         $session->msg('s','photo has been uploaded.');
-        redirect('media.php');
+        redirect('media');
     } else{
       $session->msg('d',join($photo->errors));
-      redirect('media.php');
+      redirect('media');
     }
 
   }
@@ -111,7 +111,7 @@
                   <?php echo $media_file['file_type'];?>
                 </td>
                 <td class="text-center">
-                  <a href="delete_media.php?id=<?php echo (int) $media_file['id'];?>" class="btn btn-danger btn-xs"  title="Edit">
+                  <a href="delete_media?id=<?php echo (int) $media_file['id'];?>" class="btn btn-danger btn-xs"  title="Edit">
                     <span class="glyphicon glyphicon-trash"></span>
                   </a>
                 </td>

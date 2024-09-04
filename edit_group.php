@@ -8,7 +8,7 @@
   $e_group = find_by_id('user_groups',(int)$_GET['id']);
   if(!$e_group){
     $session->msg("d","Missing Group id.");
-    redirect('group.php');
+    redirect('group');
   }
 ?>
 <?php
@@ -28,15 +28,15 @@
          if($result && $db->affected_rows() === 1){
           //sucess
           $session->msg('s',"Group has been updated! ");
-          redirect('edit_group.php?id='.(int)$e_group['id'], false);
+          redirect('edit_group?id='.(int)$e_group['id'], false);
         } else {
           //failed
           $session->msg('d',' Sorry failed to updated Group!');
-          redirect('edit_group.php?id='.(int)$e_group['id'], false);
+          redirect('edit_group?id='.(int)$e_group['id'], false);
         }
    } else {
      $session->msg("d", $errors);
-    redirect('edit_group.php?id='.(int)$e_group['id'], false);
+    redirect('edit_group?id='.(int)$e_group['id'], false);
    }
  }
 ?>

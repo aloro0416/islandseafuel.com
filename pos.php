@@ -55,10 +55,10 @@
                                 <td><?=$row['customer_type']?></td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="add_customer.php?update=<?=$row['id']?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
+                                        <a href="add_customer?update=<?=$row['id']?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
                                         <i class="glyphicon glyphicon-pencil"></i>
                                         </a>
-                                        <a href="delete_customer.php?delete=<?=$row['id']?>" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
+                                        <a href="delete_customer?delete=<?=$row['id']?>" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
                                         <i class="glyphicon glyphicon-remove"></i>
                                         </a>
                                     </div>
@@ -70,7 +70,7 @@
                         </tbody>
                     </table>
                     <div class="pull-right">
-                        <a href="add_customer.php" class="btn btn-primary">Add Customer</a>
+                        <a href="add_customer" class="btn btn-primary">Add Customer</a>
                     </div>
                 </div>
                 
@@ -144,10 +144,10 @@
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="edit_pos.php?update=<?=$row['id']?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
+                                        <a href="edit_pos?update=<?=$row['id']?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
                                         <i class="glyphicon glyphicon-pencil"></i>
                                         </a>
-                                        <a href="delete_pos.php?delete=<?=$row['id']?>" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
+                                        <a href="delete_pos?delete=<?=$row['id']?>" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
                                         <i class="glyphicon glyphicon-remove"></i>
                                         </a>
                                     </div>
@@ -159,7 +159,7 @@
                     </tbody>
                     </table>
                     <div class="pull-right">
-                        <a href="add_pos.php" class="btn btn-primary">Add</a>
+                        <a href="add_pos" class="btn btn-primary">Add</a>
                     </div>
                 </div>
             <?php

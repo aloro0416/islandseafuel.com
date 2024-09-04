@@ -7,7 +7,7 @@
   <?php
   $user_id = (int)$_GET['id'];
   if(empty($user_id)):
-    redirect('home.php',false);
+    redirect('home',false);
   else:
     $user_p = find_by_id('users',$user_id);
   endif;
@@ -22,7 +22,7 @@
          </div>
         <?php if( $user_p['id'] === $user['id']):?>
          <ul class="nav nav-pills nav-stacked">
-          <li><a href="edit_account.php"> <i class="glyphicon glyphicon-edit"></i> Edit profile</a></li>
+          <li><a href="edit_account"> <i class="glyphicon glyphicon-edit"></i> Edit profile</a></li>
          </ul>
        <?php endif;?>
        </div>

@@ -8,9 +8,9 @@
   $photo = new Media();
   if($photo->media_destroy($find_media['id'],$find_media['file_name'])){
       $session->msg("s","Photo has been deleted.");
-      redirect('media.php');
+      redirect('media');
   } else {
       $session->msg("d","Photo deletion failed Or Missing Prm.");
-      redirect('media.php');
+      redirect('media');
   }
 ?>

@@ -8,7 +8,7 @@
 $sale = find_by_id('sales',(int)$_GET['id']);
 if(!$sale){
   $session->msg("d","Missing product id.");
-  redirect('sales.php');
+  redirect('sales');
 }
 ?>
 <?php $product = find_by_id('products',$sale['product_id']); ?>
@@ -31,14 +31,14 @@ if(!$sale){
           if( $result && $db->affected_rows() === 1){
                     update_product_qty($s_qty,$p_id);
                     $session->msg('s',"Sale updated.");
-                    redirect('edit_sale.php?id='.$sale['id'], false);
+                    redirect('edit_sale?id='.$sale['id'], false);
                   } else {
                     $session->msg('d',' Sorry failed to updated!');
-                    redirect('sales.php', false);
+                    redirect('sales', false);
                   }
         } else {
            $session->msg("d", $errors);
-           redirect('edit_sale.php?id='.(int)$sale['id'],false);
+           redirect('edit_sale?id='.(int)$sale['id'],false);
         }
   }
 

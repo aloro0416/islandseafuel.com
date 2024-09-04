@@ -9,7 +9,7 @@
   $groups  = find_all('user_groups');
   if(!$e_user){
     $session->msg("d","Missing user id.");
-    redirect('users.php');
+    redirect('users');
   }
 ?>
 
@@ -28,14 +28,14 @@
          $result = $db->query($sql);
           if($result && $db->affected_rows() === 1){
             $session->msg('s',"Acount Updated ");
-            redirect('edit_user.php?id='.(int)$e_user['id'], false);
+            redirect('edit_user?id='.(int)$e_user['id'], false);
           } else {
             $session->msg('d',' Sorry failed to updated!');
-            redirect('edit_user.php?id='.(int)$e_user['id'], false);
+            redirect('edit_user?id='.(int)$e_user['id'], false);
           }
     } else {
       $session->msg("d", $errors);
-      redirect('edit_user.php?id='.(int)$e_user['id'],false);
+      redirect('edit_user?id='.(int)$e_user['id'],false);
     }
   }
 ?>
@@ -52,14 +52,14 @@ if(isset($_POST['update-pass'])) {
        $result = $db->query($sql);
         if($result && $db->affected_rows() === 1){
           $session->msg('s',"User password has been updated ");
-          redirect('edit_user.php?id='.(int)$e_user['id'], false);
+          redirect('edit_user?id='.(int)$e_user['id'], false);
         } else {
           $session->msg('d',' Sorry failed to updated user password!');
-          redirect('edit_user.php?id='.(int)$e_user['id'], false);
+          redirect('edit_user?id='.(int)$e_user['id'], false);
         }
   } else {
     $session->msg("d", $errors);
-    redirect('edit_user.php?id='.(int)$e_user['id'],false);
+    redirect('edit_user?id='.(int)$e_user['id'],false);
   }
 }
 
