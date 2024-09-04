@@ -25,15 +25,15 @@
         if($db->query($query)){
           //sucess
           $session->msg('s',"User account has been creted! ");
-          redirect('add_user.php', false);
+          redirect('add_user', false);
         } else {
           //failed
           $session->msg('d',' Sorry failed to create account!');
-          redirect('add_user.php', false);
+          redirect('add_user', false);
         }
    } else {
      $session->msg("d", $errors);
-      redirect('add_user.php',false);
+      redirect('add_user',false);
    }
  }
 ?>

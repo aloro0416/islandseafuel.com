@@ -225,7 +225,7 @@
 
         <div class="list-group">
       <?php foreach ($recent_products as  $recent_product): ?>
-            <a class="list-group-item clearfix" href="edit_product.php?id=<?php echo    (int)$recent_product['id'];?>">
+            <a class="list-group-item clearfix" href="edit_product?id=<?php echo    (int)$recent_product['id'];?>">
                 <h4 class="list-group-item-heading">
                  <?php if($recent_product['media_id'] === '0'): ?>
                     <img class="img-avatar img-circle" src="uploads/products/no_image.png" alt="">
@@ -394,7 +394,7 @@
          <tr>
            <td class="text-center"><?php echo count_id();?></td>
            <td>
-            <a href="edit_sale.php?id=<?php echo (int)$recent_sale['id']; ?>">
+            <a href="edit_sale?id=<?php echo (int)$recent_sale['id']; ?>">
              <?php echo remove_junk(first_character($recent_sale['name'])); ?>
            </a>
            </td>

@@ -17,13 +17,13 @@ $password = remove_junk($_POST['password']);
            // redirect user to group home page by user level
            if($user['user_level'] === '1'):
              $session->msg("s", "Hello ".$user['username'].", Welcome to OSWA-INV.");
-             redirect('admin.php',false);
+             redirect('dashboard',false);
            elseif ($user['user_level'] === '2'):
               $session->msg("s", "Hello ".$user['username'].", Welcome to OSWA-INV.");
-             redirect('special.php',false);
+             redirect('special',false);
            else:
               $session->msg("s", "Hello ".$user['username'].", Welcome to OSWA-INV.");
-             redirect('home.php',false);
+             redirect('home',false);
            endif;
 
         else:
@@ -34,7 +34,7 @@ $password = remove_junk($_POST['password']);
   } else {
 
      $session->msg("d", $errors);
-     redirect('login_v2.php',false);
+     redirect('login_v2',false);
   }
 
 ?>

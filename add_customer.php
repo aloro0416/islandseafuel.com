@@ -19,7 +19,7 @@ if (isset($_POST['add'])) {
         $sqls = "INSERT INTO customer (firstname,middlename,lastname,customer_type) VALUES ('$first','$middle','$last','$type')";
         $result = $db->query($sqls);
         $msg = "<span class='alert-msg'>Successfully Added!</span>";
-        header('location: pos.php?proc=customer');
+        header('location: pos?proc=customer');
     }
 }elseif (isset($_POST['update'])) {
     $first = $_POST['firstname'];

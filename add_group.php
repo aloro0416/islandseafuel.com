@@ -12,10 +12,10 @@
 
    if(find_by_groupName($_POST['group-name']) === false ){
      $session->msg('d','<b>Sorry!</b> Entered Group Name already in database!');
-     redirect('add_group.php', false);
+     redirect('add_group', false);
    }elseif(find_by_groupLevel($_POST['group-level']) === false) {
      $session->msg('d','<b>Sorry!</b> Entered Group Level already in database!');
-     redirect('add_group.php', false);
+     redirect('add_group', false);
    }
    if(empty($errors)){
            $name = remove_junk($db->escape($_POST['group-name']));
@@ -30,15 +30,15 @@
         if($db->query($query)){
           //sucess
           $session->msg('s',"Group has been creted! ");
-          redirect('add_group.php', false);
+          redirect('add_group', false);
         } else {
           //failed
           $session->msg('d',' Sorry failed to create Group!');
-          redirect('add_group.php', false);
+          redirect('add_group', false);
         }
    } else {
      $session->msg("d", $errors);
-      redirect('add_group.php',false);
+      redirect('add_group',false);
    }
  }
 ?>

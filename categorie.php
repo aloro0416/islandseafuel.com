@@ -16,14 +16,14 @@
       $sql .= " VALUES ('{$cat_name}')";
       if($db->query($sql)){
         $session->msg("s", "Successfully Added New Category");
-        redirect('categorie.php',false);
+        redirect('categorie',false);
       } else {
         $session->msg("d", "Sorry Failed to insert.");
-        redirect('categorie.php',false);
+        redirect('categorie',false);
       }
    } else {
      $session->msg("d", $errors);
-     redirect('categorie.php',false);
+     redirect('categorie',false);
    }
  }
 ?>
@@ -77,10 +77,10 @@
                     <td><?php echo remove_junk(ucfirst($cat['name'])); ?></td>
                     <td class="text-center">
                       <div class="btn-group">
-                        <a href="edit_categorie.php?id=<?php echo (int)$cat['id'];?>"  class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
+                        <a href="edit_categorie?id=<?php echo (int)$cat['id'];?>"  class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
                           <span class="glyphicon glyphicon-edit"></span>
                         </a>
-                        <a href="delete_categorie.php?id=<?php echo (int)$cat['id'];?>"  class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
+                        <a href="delete_categorie?id=<?php echo (int)$cat['id'];?>"  class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
                           <span class="glyphicon glyphicon-trash"></span>
                         </a>
                       </div>

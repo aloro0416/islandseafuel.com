@@ -30,15 +30,15 @@
      $query .=" ON DUPLICATE KEY UPDATE name='{$p_name}'";
      if($db->query($query)){
        $session->msg('s',"Product added ");
-       redirect('add_product.php', false);
+       redirect('add_product', false);
      } else {
        $session->msg('d',' Sorry failed to added!');
-       redirect('product.php', false);
+       redirect('product', false);
      }
 
    } else{
      $session->msg("d", $errors);
-     redirect('add_product.php',false);
+     redirect('add_product',false);
    }
 
  }
