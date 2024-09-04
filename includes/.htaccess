@@ -7,4 +7,4 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ $1.php [L]
 RewriteRule ^$ index.php [L]
 RewriteRule ^home$ home.php [L]
-RewriteRule ^dashboard admin.php [L]
+RewriteRule ^admin admin.php [L]

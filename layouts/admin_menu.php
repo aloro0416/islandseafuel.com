@@ -1,6 +1,6 @@
 <ul>
   <li>
-    <a href="dashboard">
+    <a href="admin">
       <i class="glyphicon glyphicon-home"></i>
       <span>Dashboard</span>
     </a>
