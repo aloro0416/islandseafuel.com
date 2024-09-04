@@ -28,7 +28,7 @@ $password = remove_junk($_POST['password']);
 
         else:
           $session->msg("d", "Sorry Username/Password incorrect.");
-          redirect('index.php',false);
+          redirect('.',false);
         endif;
 
   } else {
