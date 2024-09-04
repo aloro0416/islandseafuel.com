@@ -44,19 +44,19 @@
             </a>
             <ul class="dropdown-menu">
               <li>
-                  <a href="profile.php?id=<?php echo (int)$user['id'];?>">
+                  <a href="profile?id=<?php echo (int)$user['id'];?>">
                       <i class="glyphicon glyphicon-user"></i>
                       Profile
                   </a>
               </li>
              <li>
-                 <a href="edit_account.php" title="edit account">
+                 <a href="edit_account" title="edit account">
                      <i class="glyphicon glyphicon-cog"></i>
                      Settings
                  </a>
              </li>
              <li class="last">
-                 <a href="logout.php">
+                 <a href="logout">
                      <i class="glyphicon glyphicon-off"></i>
                      Logout
                  </a>

@@ -1,0 +1,10 @@
+# Redirect requests without the .php extension to the corresponding .php file
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.*)$ $1.php [L]
+RewriteRule ^$ index.php [L]
+RewriteRule ^home$ home.php [L]
+RewriteRule ^dashboard admin.php [L]
