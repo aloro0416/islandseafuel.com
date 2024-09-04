@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Redirect requests to 'login' to 'filename.php'
+RewriteRule ^login$ filename.php [L]
+
+# Redirect other requests to the appropriate PHP file or directory
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [L]
