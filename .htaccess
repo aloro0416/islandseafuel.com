@@ -1,9 +1,7 @@
 RewriteEngine On
 
-# Redirect requests to 'login' to 'filename.php'
-RewriteRule ^login$ filename.php [L]
-
-# Redirect other requests to the appropriate PHP file or directory
+# Redirect to login page if not logged in and trying to access protected pages
+RewriteCond %{REQUEST_URI} !^/index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php [L]
