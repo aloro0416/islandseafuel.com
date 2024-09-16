@@ -22,7 +22,7 @@
 </div>
   <div class="row">
     <a href="users" style="color:black;">
-		<div class="col-md-3">
+		<div class="col-md-4">
        <div class="panel panel-box clearfix">
          <div class="panel-icon pull-left bg-secondary1">
           <i class="glyphicon glyphicon-user"></i>
@@ -38,7 +38,7 @@
 	
 	
 	<a href="product" style="color:black;">
-    <div class="col-md-3">
+    <div class="col-md-4">
        <div class="panel panel-box clearfix">
          <div class="panel-icon pull-left bg-blue2">
           <i class="glyphicon glyphicon-shopping-cart"></i>
@@ -52,7 +52,7 @@
 	</a>
 	
 	<a href="sales" style="color:black;">
-    <div class="col-md-3">
+    <div class="col-md-4">
        <div class="panel panel-box clearfix">
          <div class="panel-icon pull-left bg-green">
           <i class="glyphicon glyphicon-usd"></i>
