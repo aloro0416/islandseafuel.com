@@ -87,6 +87,38 @@
           $sum_total = $quantity * $price;
 
           @$total_bought = $total_bought + $sum_total;
+          $product_id = '17'; // Replace with actual product ID
+
+        $monthly_product_sales = [];
+        foreach (['1' => 'Jan', '2' => 'Feb', '3' => 'Mar', '4' => 'Apr', '5' => 'May', '6' => 'Jun', '7' => 'Jul', '8' => 'Aug', '9' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dec'] as $month_num => $month_name) {
+            $sql = "SELECT SUM(price) as total FROM sales WHERE MONTH(date) = $month_num AND product_id = '$product_id'";
+            $result = $db->query($sql);
+            $data = mysqli_fetch_assoc($result);
+            $monthly_product_sales[] = (int)$data['total'];
+        }
+        $product_sales_json = json_encode($monthly_product_sales);
+
+        $product_id_2 = '18'; // Replace with actual product ID for the second line
+
+        $monthly_product_sales_2 = [];
+        foreach (['1' => 'Jan', '2' => 'Feb', '3' => 'Mar', '4' => 'Apr', '5' => 'May', '6' => 'Jun', '7' => 'Jul', '8' => 'Aug', '9' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dec'] as $month_num => $month_name) {
+            $sql = "SELECT SUM(price) as total FROM sales WHERE MONTH(date) = $month_num AND product_id = '$product_id_2'";
+            $result = $db->query($sql);
+            $data = mysqli_fetch_assoc($result);
+            $monthly_product_sales_2[] = (int)$data['total'];
+        }
+        $product_sales_json_2 = json_encode($monthly_product_sales_2);
+
+        $product_id_3 = '19'; // Replace with actual product ID for the second line
+
+        $monthly_product_sales_3 = [];
+        foreach (['1' => 'Jan', '2' => 'Feb', '3' => 'Mar', '4' => 'Apr', '5' => 'May', '6' => 'Jun', '7' => 'Jul', '8' => 'Aug', '9' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dec'] as $month_num => $month_name) {
+            $sql = "SELECT SUM(price) as total FROM sales WHERE MONTH(date) = $month_num AND product_id = '$product_id_2'";
+            $result = $db->query($sql);
+            $data = mysqli_fetch_assoc($result);
+            $monthly_product_sales_3[] = (int)$data['total'];
+        }
+        $product_sales_json_3 = json_encode($monthly_product_sales_3);
         }
        ?>
         <?php 
@@ -160,10 +192,24 @@
 
           <script>
             var options = {
-          series: [{
-            name: "Sales",
-            data: [<?=$january?>, <?= $febuary?>, <?= $march?>, <?= $april?>, <?= $may?>, <?= $june?>, <?= $july?>,  <?= $aug?>, <?= $sept?>, <?= $oct?>, <?= $nov?>, <?= $dec?>],
-        }],
+              series: [
+                    {
+                        name: "Total Sales",
+                        data: [<?=$january?>, <?= $febuary?>, <?= $march?>, <?= $april?>, <?= $may?>, <?= $june?>, <?= $july?>, <?= $aug?>, <?= $sept?>, <?= $oct?>, <?= $nov?>, <?= $dec?>]
+                    },
+                    {
+                        name: "Premium",
+                        data: <?= $product_sales_json ?>  // PHP variable for product sales data
+                    },
+                    {
+                        name: "Diesel",
+                        data: <?= $product_sales_json_2 ?>  // PHP variable for product sales data
+                    },
+                    {
+                        name: "Super93",
+                        data: <?= $product_sales_json_3 ?>  // PHP variable for product sales data
+                    }
+                ],
           chart: {
           height: 350,
           type: 'line',
