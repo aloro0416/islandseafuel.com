@@ -35,19 +35,7 @@
     </div>
 	  </a>
 	
-	<a href="categorie" style="color:black;">
-    <div class="col-md-3">
-       <div class="panel panel-box clearfix">
-         <div class="panel-icon pull-left bg-red">
-          <i class="glyphicon glyphicon-th-large"></i>
-        </div>
-        <div class="panel-value pull-right">
-          <h2 class="margin-top"> <?php  echo $c_categorie['total']; ?> </h2>
-          <p class="text-muted">Categories</p>
-        </div>
-       </div>
-</div>
-	</a>
+	
 	
 	<a href="product" style="color:black;">
     <div class="col-md-3">
