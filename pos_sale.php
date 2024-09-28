@@ -2,6 +2,7 @@
   $page_title = 'POS';
   require_once('includes/load.php');
   // Checkin What level user has permission to view this page
+ if($session->isUserLoggedIn(true)) { redirect('home', false);}
   page_require_level(2);
 ?>
 <?php include_once('layouts/header.php'); ?>
