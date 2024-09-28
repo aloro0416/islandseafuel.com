@@ -1,175 +1,134 @@
 <?php
-  $page_title = 'POS';
+  $page_title = 'POS SALE';
   require_once('includes/load.php');
   // Checkin What level user has permission to view this page
-
   page_require_level(2);
+  $all_categories = find_all('categories');
+  $all_photo = find_all('media');
+?>
+<?php
+ if(isset($_POST['add_product'])){
+   $req_fields = array('product-title','product-categorie','product-quantity','buying-price', 'saleing-price' );
+   validate_fields($req_fields);
+   if(empty($errors)){
+     $p_name  = remove_junk($db->escape($_POST['product-title']));
+     $p_cat   = remove_junk($db->escape($_POST['product-categorie']));
+     $p_qty   = remove_junk($db->escape($_POST['product-quantity']));
+     $p_buy   = remove_junk($db->escape($_POST['buying-price']));
+     $p_sale  = remove_junk($db->escape($_POST['saleing-price']));
+     if (is_null($_POST['product-photo']) || $_POST['product-photo'] === "") {
+       $media_id = '0';
+     } else {
+       $media_id = remove_junk($db->escape($_POST['product-photo']));
+     }
+     $date    = make_date();
+     $query  = "INSERT INTO products (";
+     $query .=" name,quantity,buy_price,sale_price,categorie_id,media_id,date";
+     $query .=") VALUES (";
+     $query .=" '{$p_name}', '{$p_qty}', '{$p_buy}', '{$p_sale}', '{$p_cat}', '{$media_id}', '{$date}'";
+     $query .=")";
+     $query .=" ON DUPLICATE KEY UPDATE name='{$p_name}'";
+     if($db->query($query)){
+       $session->msg('s',"Product added ");
+       redirect('add_product', false);
+     } else {
+       $session->msg('d',' Sorry failed to added!');
+       redirect('product', false);
+     }
+
+   } else{
+     $session->msg("d", $errors);
+     redirect('add_product',false);
+   }
+
+ }
+
 ?>
 <?php include_once('layouts/header.php'); ?>
-
-
 <div class="row">
-    
-    <div class="col-md-12">
+  <div class="col-md-12">
+    <?php echo display_msg($msg); ?>
+  </div>
+</div>
+  <div class="row">
+  <div class="col-md-8">
       <div class="panel panel-default">
-        <div class="panel-heading clearfix">
+        <div class="panel-heading">
           <strong>
             <span class="glyphicon glyphicon-th"></span>
-            <span>
-                <?php
-                if (isset($_GET['proc'])) {
-                    echo $_GET['proc'];
-                }else{
-                    echo "POS";
-                }
-                ?>
-            </span>
-          </strong>
-          <div class="pull-right">
-            <a href="?proc=customer" class="btn btn-primary">Customer</a>
-            <a href="?" class="btn btn-primary">POS</a>
-          </div>
+            <span>Add New Product</span>
+         </strong>
         </div>
-        <?php 
-        if (isset($_GET['proc'])) {
-            if ($_GET['proc'] == 'customer') {
-                ?>
-                <div class="panel-body">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <th class="text-center" style="width: 50px;">#</th>
-                            <th> Name </th>
-                            <th class="text-center" style="width: 30%;"> Customer Type</th>
-                            <th class="text-center" style="width: 100px;"> Actions </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <?php 
-                            $loop = "SELECT * FROM customer";
-                            $result = $db->query($loop);
-                            $i = 1;
-                            while ($row = mysqli_fetch_assoc($result)) {
-                            ?>
-                            <tr>
-                                <td><?=$i++?></td>
-                                <td><?=$row['firstname']." ".substr($row['middlename'], 0 ,1)." ". $row['lastname']?></td>
-                                <td><?=$row['customer_type']?></td>
-                                <td class="text-center">
-                                    <div class="btn-group">
-                                        <a href="add_customer?update=<?=$row['id']?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
-                                        <i class="glyphicon glyphicon-pencil"></i>
-                                        </a>
-                                        <a href="delete_customer?delete=<?=$row['id']?>" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <?php
-                            }
-                            ?>
-                        </tbody>
-                    </table>
-                    <div class="pull-right">
-                        <a href="add_customer" class="btn btn-primary">Add Customer</a>
-                    </div>
+        <div class="panel-body">
+         <div class="col-md-12">
+          <form method="post" action="add_product.php" class="clearfix">
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                   <i class="glyphicon glyphicon-th-large"></i>
+                  </span>
+                  <input type="text" class="form-control" name="product-title" placeholder="Product Title">
+               </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-6">
+                    <select class="form-control" name="product-categorie">
+                      <option value="">Select Product Category</option>
+                    <?php  foreach ($all_categories as $cat): ?>
+                      <option value="<?php echo (int)$cat['id'] ?>">
+                        <?php echo $cat['name'] ?></option>
+                    <?php endforeach; ?>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <select class="form-control" name="product-photo">
+                      <option value="">Select Product Photo</option>
+                    <?php  foreach ($all_photo as $photo): ?>
+                      <option value="<?php echo (int)$photo['id'] ?>">
+                        <?php echo $photo['file_name'] ?></option>
+                    <?php endforeach; ?>
+                    </select>
+                  </div>
                 </div>
-                
-                <?php
-            }
-        }else{
-            ?>
-               <div class="panel-body">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <th class="text-center" style="width: 50px;">#</th>
-                            <th> Customer name </th>
-                            <th class="text-center" style="width: 15%;"> Product</th>
-                            <th class="text-center" style="width: 5%;"> Liter</th>
-                            <th class="text-center" style="width: 10%;"> Amount </th>
-                            <th class="text-center" style="width: 15%;"> Payment type </th>
-                            <th class="text-center" style="width: 15%;"> Payment status </th>
-                            <th class="text-center" style="width: 100px;"> Action </th>
-                        </tr>
-                        </thead>
-                    <tbody>
-                        <?php
-                        $sql = "SELECT * FROM pos";
-                        $res = $db->query($sql);
-                        $e = 1;
-                        while ($row = mysqli_fetch_assoc($res)) {
-                            $cus_id = $row['customer_id'];
-                            $pro_id = $row['product_id'];
-                            $cus = "SELECT * FROM customer WHERE id = '$cus_id'";
-                            $cus_res = $db->query($cus);
-                            $cus_row = mysqli_fetch_assoc($cus_res);
+              </div>
 
-                            $pro = "SELECT * FROM products WHERE id = '$pro_id'";
-                            $pro_res = $db->query($pro);
-                            $pro_row = mysqli_fetch_assoc($pro_res);
-                        ?>
-                            <tr>
-                                <td class="text-center"><?=$e++?></td>
-                                <td>
-                                    <?php 
-                                    if ($row['customer_id'] == 0) {
-                                        echo "Random";
-                                    }else{
-                                        ?>
-                                        <?=$cus_row['firstname'] ." ". $cus_row['lastname']?>
-                                        <?php
-                                    }
-                                    ?>
-                                </td>
-                                <td class="text-center"><?=$pro_row['name']?></td>
-                                <td class="text-center"><?=$row['liter']?></td>
-                                <td class="text-center">₱<?=$row['amount']?></td>
-                                <td class="text-center">
-                                    <?php 
-                                    if ($row['status'] == 1) {
-                                       echo "Cash";
-                                    }elseif($row['status'] == 0){
-                                       echo "Debt";
-                                    }
-                                    ?>
-                                </td>
-                                <td class="text-center">
-                                    <?php 
-                                    if ($row['status'] == 1) {
-                                       echo "Paid";
-                                    }elseif($row['status'] == 0){
-                                       echo "Unpaid";
-                                    }
-                                    ?>
-                                </td>
-                                <td class="text-center">
-                                    <div class="btn-group">
-                                        <a href="edit_pos?update=<?=$row['id']?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
-                                        <i class="glyphicon glyphicon-pencil"></i>
-                                        </a>
-                                        <a href="delete_pos?delete=<?=$row['id']?>" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        <?php 
-                        }
-                        ?>
-                    </tbody>
-                    </table>
-                    <div class="pull-right">
-                        <a href="add_pos" class="btn btn-primary">Add</a>
-                    </div>
-                </div>
-            <?php
-        }
-        ?>
+              <div class="form-group">
+               <div class="row">
+                 <div class="col-md-4">
+                   <div class="input-group">
+                     <span class="input-group-addon">
+                      <i class="glyphicon glyphicon-shopping-cart"></i>
+                     </span>
+                     <input type="number" class="form-control" name="product-quantity" placeholder="Quantity / Liter">
+                  </div>
+                 </div>
+                 <div class="col-md-4">
+                   <div class="input-group">
+                     <span class="input-group-addon">
+                       <i class="glyphicon glyphicon-usd"></i>
+                     </span>
+                     <input type="number" class="form-control" name="buying-price" placeholder="Buying Price">
+                     <span class="input-group-addon">.00</span>
+                  </div>
+                 </div>
+                  <div class="col-md-4">
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-usd"></i>
+                      </span>
+                      <input type="number" class="form-control" name="saleing-price" placeholder="Selling Price">
+                      <span class="input-group-addon">.00</span>
+                   </div>
+                  </div>
+               </div>
+              </div>
+              <button type="submit" name="add_product" class="btn btn-danger">Add product</button>
+          </form>
+         </div>
+        </div>
       </div>
     </div>
-
-</div>
+  </div>
 
 <?php include_once('layouts/footer.php'); ?>
