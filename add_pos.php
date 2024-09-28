@@ -1,8 +1,6 @@
 <?php
 ob_start(); // Start output buffering
-
 $page_title = 'POS';
-
 include('includes/load.php');
  page_require_level(2);
 include('layouts/header.php');
