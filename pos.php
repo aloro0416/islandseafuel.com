@@ -5,10 +5,7 @@
   page_require_level(2);
 ?>
 <?php include_once('layouts/header.php'); ?>
-
-
 <div class="row">
-    
     <div class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-heading clearfix">
@@ -168,7 +165,5 @@
         ?>
       </div>
     </div>
-
 </div>
-
 <?php include_once('layouts/footer.php'); ?>
