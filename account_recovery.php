@@ -82,7 +82,7 @@ if (isset($_POST['send'])) {
       <form method="post" class="clearfix">
         <div class="form-group">
               <label for="email" class="control-label">Email</label> 
-              <input type="name" class="form-control" name="email" placeholder="Email" required>
+              <input type="email" class="form-control" name="email" placeholder="Email" required>
         </div>
         <div class="form-group text-center">
                 <button type="submit" name="send" class="btn btn-danger" style="border-radius:0%">Send Account Recovery Link</button>
