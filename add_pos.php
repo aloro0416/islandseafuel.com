@@ -2,8 +2,9 @@
 ob_start(); // Start output buffering
 
 $page_title = 'POS';
- page_require_level(2);
+
 include('includes/load.php');
+ page_require_level(2);
 include('layouts/header.php');
 
 if (isset($_POST['add'])) {
