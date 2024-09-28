@@ -4,7 +4,6 @@
   // Checkin What level user has permission to view this page
   page_require_level(2);
 ?>
-<?php include_once('layouts/header.php'); ?>
 
 
 <div class="row">
