@@ -22,6 +22,9 @@
         <div class="form-group">
                 <button type="submit" class="btn btn-danger" style="border-radius:0%">Login</button>
         </div>
+        <div class="text-center">
+            <a href="account_recovery.php">Forgot password?</a>
+        </div>
     </form>
 </div>
 
