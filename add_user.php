@@ -10,14 +10,21 @@
 
    $req_fields = array('full-name','username','email','password','level' );
    validate_fields($req_fields);
-
-   if(empty($errors)){
-           $name   = remove_junk($db->escape($_POST['full-name']));
-       $username   = remove_junk($db->escape($_POST['username']));
-       $password   = remove_junk($db->escape($_POST['password']));
-       $email   = remove_junk($db->escape($_POST['email']));
-       $user_level = (int)$db->escape($_POST['level']);
-       $password = sha1($password);
+    $mail = $_POST['email'];
+    $dup = "SELECT * FROM users WHERE email='$mail'";
+    $d_res = $db->query($dup);
+    if (mysqli_num_rows($d_res) > 0) {
+     //email already exist on db
+     $session->msg('d',"Email is already used!");
+     redirect('add_user', false);
+    }else{
+      if(empty($errors)){
+        $name   = remove_junk($db->escape($_POST['full-name']));
+        $username   = remove_junk($db->escape($_POST['username']));
+        $password   = remove_junk($db->escape($_POST['password']));
+        $email   = remove_junk($db->escape($_POST['email']));
+        $user_level = (int)$db->escape($_POST['level']);
+        $password = sha1($password);
         $query = "INSERT INTO users (";
         $query .="name,username,email,password,user_level,status";
         $query .=") VALUES (";
@@ -28,14 +35,17 @@
           $session->msg('s',"User account has been created! ");
           redirect('add_user', false);
         } else {
-          //failed
-          $session->msg('d',' Sorry failed to create account!');
+          //sucess
+          $session->msg('s',"User account has been created! ");
           redirect('add_user', false);
         }
-   } else {
-     $session->msg("d", $errors);
-      redirect('add_user',false);
-   }
+      } else {
+        $session->msg("d", $errors);
+        redirect('add_user',false);
+      }
+    }
+
+  
  }
 ?>
 <?php include_once('layouts/header.php'); ?>
