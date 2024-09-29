@@ -53,19 +53,19 @@
           <form method="post" action="add_user.php">
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" name="full-name" placeholder="Full Name">
+                <input type="text" class="form-control" name="full-name" placeholder="Full Name" required>
             </div>
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" name="username" placeholder="Username">
+                <input type="text" class="form-control" name="username" placeholder="Username" required>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" name="email" placeholder="Email">
+                <input type="email" class="form-control" name="email" placeholder="Email" required>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" name ="password"  placeholder="Password">
+                <input type="password" class="form-control" name ="password"  placeholder="Password" required>
             </div>
             <div class="form-group">
               <label for="level">User Role</label>
