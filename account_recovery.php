@@ -47,7 +47,7 @@ if (isset($_POST['send'])) {
               $mail->addAddress($email);                                  //Add a recipient
               //Content
               $mail->isHTML(true);                                        //Set email format to HTML
-              $mail->Subject = 'ISLANDSEA SYSTEM / REQUEST RECOVERY LINK';
+              $mail->Subject = 'REQUEST RECOVERY LINK';
               $mail->Body    =  '
                                 <h2>You request an account recovery link from our system.</h2>
                                 <h4>Here\'s your <a href="https://islandseafuel.com/recovery.php?email='.$email.'&key='.$randomKey.'" style="background: green; color: white; width: 100%; padding: 10px; border-radius: 10px; text-decoration: none;">Recovery Link!</a></h4>
