@@ -7,7 +7,7 @@
 <div class="login-page">
     <div class="text-center">
         <img src="libs/images/logo.png" alt="ISLAND SEA LOGO" style="height: 100px">
-       <h4>ISLAND SEA MANAGEMENT SYSTEMSS </h4>
+       <h4>ISLAND SEA MANAGEMENT SYSTEMS </h4>
      </div>
      <?php echo display_msg($msg); ?>
       <form method="post" action="auth.php" class="clearfix">
