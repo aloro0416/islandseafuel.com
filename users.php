@@ -25,7 +25,8 @@
          <a href="add_user" class="btn btn-info pull-right">Add New User</a>
       </div>
      <div class="panel-body">
-      <table class="table table-bordered table-striped">
+      <div class="data_table">
+        <table id="dashprint" class="table table-striped table-bordered">
         <thead>
           <tr>
             <th class="text-center" style="width: 50px;">#</th>
@@ -67,6 +68,7 @@
        </tbody>
      </table>
      </div>
+       </div>
     </div>
   </div>
 </div>
