@@ -26,7 +26,8 @@ $sales = find_all_sale();
           </div>
         </div>
         <div class="panel-body">
-          <table class="table table-bordered table-striped">
+           <div class="data_table">
+            <table id="dashprint" class="table table-striped table-bordered">
             <thead>
               <tr>
                 <th class="text-center" style="width: 50px;">#</th>
@@ -60,7 +61,32 @@ $sales = find_all_sale();
            </tbody>
          </table>
         </div>
+        </div>
       </div>
     </div>
   </div>
 <?php include_once('layouts/footer.php'); ?>
+
+<script>
+    $(document).ready(function(){
+    var print = $('#printable').DataTable({
+        buttons:['copy', 'csv', 'excel', 'pdf', 'print']
+    });
+
+    var dashprint = $('#dashprint').DataTable({
+        buttons:['copy', 'csv', 'excel', 'pdf', 'print']
+    });
+
+    var dtable = $('#defaultTable').DataTable({
+    });
+
+    print.buttons().container()
+    .appendTo('#printable_wrapper .col-md-6:eq(0)');
+
+    dashprint.buttons().container()
+    .appendTo('#dashprint_wrapper .col-md-6:eq(0)');
+
+ 
+});
+
+</script>
