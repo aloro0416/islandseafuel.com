@@ -60,7 +60,7 @@
         </div>
         <div class="panel-value pull-right">
           <h2 class="margin-top"> <?php  echo $c_sale['total']; ?></h2>
-          <p class="text-muted">Sales</p>
+          <p class="text-muted">Saless</p>
         </div>
        </div>
     </div>
