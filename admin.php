@@ -84,11 +84,12 @@
         while ($b = mysqli_fetch_assoc($b_res)) {
           $quantity = $b['quantity'];
           $price = $b['sale_price'];
+	  $pro_id= $b['id'];
 
           $sum_total = $quantity * $price;
 
           @$total_bought = $total_bought + $sum_total;
-          $product_id = '17'; // Replace with actual product ID
+          $product_id = $pro_id; // Replace with actual product ID
 
         $monthly_product_sales = [];
         foreach (['1' => 'Jan', '2' => 'Feb', '3' => 'Mar', '4' => 'Apr', '5' => 'May', '6' => 'Jun', '7' => 'Jul', '8' => 'Aug', '9' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dec'] as $month_num => $month_name) {
