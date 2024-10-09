@@ -7,11 +7,11 @@ include('layouts/header.php');
 
 if (isset($_POST['add'])) {
     $date = date('Y-m-d');
-    $product_id = $_GET['product'];
-    $customer_id = $_POST['customer'];
-    $liter = $_POST['liter'];
-    $amount = $_POST['amount'];
-    $payment = $_POST['payment'];
+    $product_id = remove_junk($db->escape($_POST['product']));
+    $customer_id = remove_junk($db->escape($_POST['customer']));
+    $liter = remove_junk($db->escape($_POST['liter']));
+    $amount = remove_junk($db->escape($_POST['amount']));
+    $payment = remove_junk($db->escape($_POST['payment']));
     $receipt_id = substr(str_shuffle(str_repeat("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYX", 5)), 0, 10); 
     
     $status = ($payment == 'Cash') ? 1 : 0;
