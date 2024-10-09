@@ -19,8 +19,9 @@ if (isset($_POST['add'])) {
     }else{
         $sqls = "INSERT INTO customer (firstname,middlename,lastname,customer_type) VALUES ('$first','$middle','$last','$type')";
         $result = $db->query($sqls);
-        $msg = "<span class='alert-msg'>Successfully Added!</span>";
-        header('location: pos?proc=customer');
+        $msg = "<span class='alert-msg'>Successfully Added!</span>";?>
+        <script>window.location = "pos?proc=customer";</script>
+        <?php
     }
 }elseif (isset($_POST['update'])) {
    $first = remove_junk($db->escape($_POST['firstname']));
