@@ -75,7 +75,7 @@ if (isset($_POST['send'])) {
 <div class="login-page">
     <div class="text-center">
         <img src="libs/images/logo.png" alt="ISLAND SEA LOGO" style="height: 100px">
-       <h4>ISLAND SEA MANAGEMENT SYSTEMS </h4>
+       <h4>ISLAND SEA MANAGEMENT SYSTEM</h4>
      </div>
      <?php echo display_msg($msg); ?>
      <?=$error?>
