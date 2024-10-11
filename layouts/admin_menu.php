@@ -42,7 +42,8 @@
         <li><a href="daily_sales">Daily sales</a> </li>
       </ul>
   </li>
-  <li>
+ 
+  
     <li>
     <a href="media" >
       <i class="glyphicon glyphicon-picture"></i>
@@ -56,7 +57,8 @@
       <span>Categories</span>
     </a>
   </li>
-    <a href="#" class="submenu-toggle">
+   <li>
+      <a href="#" class="submenu-toggle">
       <i class="glyphicon glyphicon-user"></i>
       <span>User Management</span>
     </a>
@@ -65,7 +67,6 @@
       <li><a href="users">Manage Users</a> </li>
    </ul>
   </li>
-  
   
   
   
