@@ -26,7 +26,7 @@
 		<div class="col-md-4">
        <div class="panel panel-box clearfix">
          <div class="panel-icon pull-left bg-secondary1">
-          <i class="glyphicon glyphicon-user"></i>
+          <i class="glyphicon glyphicon-user"></i> 
         </div>
         <div class="panel-value pull-right">
           <h2 class="margin-top"> <?php  echo $c_user['total']; ?> </h2>
