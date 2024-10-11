@@ -100,22 +100,22 @@
         }
         $product_sales_json = json_encode($monthly_product_sales);
 
-        $product_id_2 = '18'; // Replace with actual product ID for the second line
+        $product_id_2 = $pro_id; // Replace with actual product ID for the second line
 
         $monthly_product_sales_2 = [];
         foreach (['1' => 'Jan', '2' => 'Feb', '3' => 'Mar', '4' => 'Apr', '5' => 'May', '6' => 'Jun', '7' => 'Jul', '8' => 'Aug', '9' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dec'] as $month_num => $month_name) {
-            $sql = "SELECT SUM(price) as total FROM sales WHERE MONTH(date) = $month_num AND product_id = '$product_id'";
+            $sql = "SELECT SUM(price) as total FROM sales WHERE MONTH(date) = $month_num AND product_id = '$product_id_2'";
             $result = $db->query($sql);
             $data = mysqli_fetch_assoc($result);
             $monthly_product_sales_2[] = (int)$data['total'];
         }
         $product_sales_json_2 = json_encode($monthly_product_sales_2);
 
-        $product_id_3 = '19'; // Replace with actual product ID for the second line
+        $product_id_3 = $pro_id; // Replace with actual product ID for the second line
 
         $monthly_product_sales_3 = [];
         foreach (['1' => 'Jan', '2' => 'Feb', '3' => 'Mar', '4' => 'Apr', '5' => 'May', '6' => 'Jun', '7' => 'Jul', '8' => 'Aug', '9' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dec'] as $month_num => $month_name) {
-            $sql = "SELECT SUM(price) as total FROM sales WHERE MONTH(date) = $month_num AND product_id = '$product_id'";
+            $sql = "SELECT SUM(price) as total FROM sales WHERE MONTH(date) = $month_num AND product_id = '$product_id_3'";
             $result = $db->query($sql);
             $data = mysqli_fetch_assoc($result);
             $monthly_product_sales_3[] = (int)$data['total'];
