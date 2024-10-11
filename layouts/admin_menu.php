@@ -44,17 +44,18 @@
   </li>
  
   
-    <li>
-    <a href="media" >
-      <i class="glyphicon glyphicon-picture"></i>
-      <span>Media Files</span>
-    </a>
-  </li>
+   
   
   <li>
     <a href="categorie" >
       <i class="glyphicon glyphicon-indent-left"></i>
       <span>Categories</span>
+    </a>
+  </li>
+   <li>
+    <a href="media" >
+      <i class="glyphicon glyphicon-picture"></i>
+      <span>Media Files</span>
     </a>
   </li>
    <li>
