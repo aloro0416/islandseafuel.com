@@ -89,7 +89,7 @@
           $sum_total = $quantity * $price;
 
           @$total_bought = $total_bought + $sum_total;
-          $product_id = $pro_id; // Replace with actual product ID
+          $product_id = 14; // Replace with actual product ID
 
         $monthly_product_sales = [];
         foreach (['1' => 'Jan', '2' => 'Feb', '3' => 'Mar', '4' => 'Apr', '5' => 'May', '6' => 'Jun', '7' => 'Jul', '8' => 'Aug', '9' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dec'] as $month_num => $month_name) {
@@ -100,7 +100,7 @@
         }
         $product_sales_json = json_encode($monthly_product_sales);
 
-        $product_id_2 = $pro_id; // Replace with actual product ID for the second line
+        $product_id_2 = 15; // Replace with actual product ID for the second line
 
         $monthly_product_sales_2 = [];
         foreach (['1' => 'Jan', '2' => 'Feb', '3' => 'Mar', '4' => 'Apr', '5' => 'May', '6' => 'Jun', '7' => 'Jul', '8' => 'Aug', '9' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dec'] as $month_num => $month_name) {
@@ -111,7 +111,7 @@
         }
         $product_sales_json_2 = json_encode($monthly_product_sales_2);
 
-        $product_id_3 = $pro_id; // Replace with actual product ID for the second line
+        $product_id_3 = 16; // Replace with actual product ID for the second line
 
         $monthly_product_sales_3 = [];
         foreach (['1' => 'Jan', '2' => 'Feb', '3' => 'Mar', '4' => 'Apr', '5' => 'May', '6' => 'Jun', '7' => 'Jul', '8' => 'Aug', '9' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dec'] as $month_num => $month_name) {
