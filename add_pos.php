@@ -7,7 +7,7 @@ include('layouts/header.php');
 
 if (isset($_POST['add'])) {
     $date = date('Y-m-d');
-    $product_id = remove_junk($db->escape($_POST['product']));
+    $product_id = remove_junk($db->escape($_GET['product']));
     $customer_id = remove_junk($db->escape($_POST['customer']));
     $liter = remove_junk($db->escape($_POST['liter']));
     $amount = remove_junk($db->escape($_POST['amount']));
