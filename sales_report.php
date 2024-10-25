@@ -21,9 +21,10 @@ $page_title = 'Sale Report';
             <div class="form-group">
               <label class="form-label">Date Range</label>
                 <div class="input-group">
-                  <input type="text" class="datepicker form-control" name="start-date" placeholder="From">
-                  <span class="input-group-addon"><i class="glyphicon glyphicon-menu-right"></i></span>
-                  <input type="text" class="datepicker form-control" name="end-date" placeholder="To">
+                  <span class="input-group-addon"><strong>From</strong></span>
+                  <input type="date" class=" form-control" id="start-date" name="start-date" placeholder="From">
+                  <span class="input-group-addon"><strong>To</strong></span>
+                  <input type="date" class=" form-control" id="end-date" name="end-date" placeholder="To">
                 </div>
             </div>
             <div class="form-group">
@@ -36,4 +37,21 @@ $page_title = 'Sale Report';
   </div>
 
 </div>
+
+
+<script>
+const startDateInput = document.getElementById('start-date');
+const endDateInput = document.getElementById('end-date');
+
+startDateInput.addEventListener('change', function() {
+    const selectedStartDate = new Date(startDateInput.value);
+    
+    // Set the minimum end date to the selected start date
+    if (!isNaN(selectedStartDate)) {
+        endDateInput.min = startDateInput.value; // Sets min attribute for end date
+    } else {
+        endDateInput.min = ''; // Clear if no valid start date is selected
+    }
+});
+</script>
 <?php include_once('layouts/footer.php'); ?>
