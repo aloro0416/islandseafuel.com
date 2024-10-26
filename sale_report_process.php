@@ -120,7 +120,7 @@ $results = '';
          <tr class="text-right">
            <td colspan="4"></td>
            <td colspan="1">Grand Total</td>
-           <td> 
+           <td> ₱
            <?php echo number_format(total_price($results)[0], 2);?>
           </td>
          </tr>
