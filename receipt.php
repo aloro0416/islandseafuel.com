@@ -7,10 +7,19 @@ include('includes/load.php');
 $receipt_id = $_GET['receipt_id'];
 $customer_id = $_GET['cus_id'];
 
-$joins = "SELECT * FROM pos INNER JOIN customer ON pos.customer_id=customer.id WHERE receipt_id='$receipt_id'";
-$j_res = $db->query($joins);
-$j_row = mysqli_fetch_assoc($j_res);
+if ($customer_id == 'Random') {
+    $firstname = 'No Details';
+    $lastname = '';
+    $customer_type = 'No Details';
+}else {
+    $joins = "SELECT * FROM pos INNER JOIN customer ON pos.customer_id=customer.id WHERE receipt_id='$receipt_id'";
+    $j_res = $db->query($joins);
+    $j_row = mysqli_fetch_assoc($j_res);
 
+    $firstname = $jrow['firstname'];
+    $lastname = $jrow['lastname'];
+    $customer_type = $jrow['customer_type'];
+}
 $pos = "SELECT * FROM pos WHERE receipt_id='$receipt_id'";
 $pos_res = $db->query($pos);
 $pos = mysqli_fetch_assoc($pos_res);
@@ -53,8 +62,8 @@ $p_row = mysqli_fetch_assoc($p_res);
                         <div class="col-sm-6">
                             <div class="text-muted">
                                 <h5 class="font-size-16 mb-3">Billed To:</h5>
-                                <h5 class="font-size-15 mb-2"><?=$j_row['firstname']." ".$j_row['lastname']?></h5>
-                                <p class="mb-1"><?=$j_row['customer_type']?> Customer</p>
+                                <h5 class="font-size-15 mb-2"><?=$firstname." ".$lastname?></h5>
+                                <p class="mb-1"><?=$customer_type?> Customer</p>
                             </div>
                         </div>
                         <!-- end col -->
