@@ -133,7 +133,7 @@ $results = '';
         </tfoot>
       </table>
       <div class="text-right">
-      <button onclick="window.print()" id="print" class="btn btn-primary">Print</button>
+      <button onclick="window.print()" id="print" class="btn btn-primary"> <i class="fa-solid fa-print"></i>Print</button>
       </div>
     </div>
   <?php
