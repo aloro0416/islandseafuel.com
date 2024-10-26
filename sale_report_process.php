@@ -47,7 +47,6 @@ $results = '';
        margin: auto;
       }
       #print{
-        margin-bottom: 40px;
         display:none;
       }
     }
@@ -136,7 +135,7 @@ $results = '';
          </tr> -->
         </tfoot>
       </table>
-      <div class="text-right">
+      <div class="text-right mb-2">
       <button onclick="window.print()" id="print" class="btn btn-primary"> <i class="fa-solid fa-print"></i>Print</button>
       </div>
     </div>
