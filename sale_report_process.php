@@ -90,7 +90,7 @@ $results = '';
   <?php if($results): ?>
     <div class="page-break">
        <div class="sale-head bg-primary text-light text-center" style="padding: 10px;">
-           <img src="uploads/logo.png" style="height: 200px; object-fit: cover;">
+           <img src="uploads/logo.png" style="height: 100px; object-fit: cover;">
            <h1>Island Sea Management System - Sales Report</h1>
            <strong><?php if(isset($start_date)){ echo $start_date;}?> TILL DATE <?php if(isset($end_date)){echo $end_date;}?> </strong>
        </div>
