@@ -30,7 +30,7 @@ $p_row = mysqli_fetch_assoc($p_res);
         <div class="col-lg-8">
             <div class="card">
                 <div class="card-body">
-                    <div class="invoice-title">
+                    <div class="invoice-title" style="border-bottom: 1px dashed #001a11;">
                         <h4 class="float-end font-size-15">Invoice #<?=$j_row['receipt_id']?> <span class="badge bg-success font-size-12 ms-2">
                             <?php 
                             if ($pos['status'] == 1) {
@@ -49,12 +49,6 @@ $p_row = mysqli_fetch_assoc($p_res);
                             <p><i class="uil uil-phone me-1"></i> +63 905 168 2551</p>
                         </div>
                     </div>
-                  
-                    <center>
-                     <span class="text-muted">_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ </span>
-                    </center>
-                    <br>
-                    <br>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="text-muted">
