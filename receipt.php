@@ -49,8 +49,9 @@ $p_row = mysqli_fetch_assoc($p_res);
                             <p><i class="uil uil-phone me-1"></i> +63 905 168 2551</p>
                         </div>
                     </div>
-
-                    <hr class="my-4">
+            
+                    <div class="w-100" style=""border-bottom: 1px dashed black;> </div>
+                    
 
                     <div class="row">
                         <div class="col-sm-6">
