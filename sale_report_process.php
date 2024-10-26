@@ -10,14 +10,19 @@ $results = '';
     $req_dates = array('start-date','end-date');
     validate_fields($req_dates);
 
-    if(empty($errors)):
-      $start_date   = remove_junk($db->escape($_POST['start-date']));
-      $end_date     = remove_junk($db->escape($_POST['end-date']));
-      $results      = find_sale_by_dates($start_date,$end_date);
-    else:
-      $session->msg("d", $errors);
+    $start_date   = remove_junk($db->escape($_POST['start-date']));
+    $end_date     = remove_junk($db->escape($_POST['end-date']));
+    $startDate = date("Y-m-d", strtotime($start_date));
+    $endDate    = date("Y-m-d", strtotime($end_date));
+
+    $check = "SELECT * FROM sales WHERE date BETWEEN '{$start_date}' AND '{$end_date}'";
+    $c_res = $db->query($check);
+    if ($db->num_rows($c_res) > 0) {
+        $results = find_sale_by_dates($start_date,$end_date);
+    }else {
+      $session->msg("d", 'No sales report has found!');
       redirect('sales_report', false);
-    endif;
+    }
 
   } else {
     $session->msg("d", "Select dates");
