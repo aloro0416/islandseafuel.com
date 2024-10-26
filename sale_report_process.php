@@ -136,7 +136,7 @@ $results = '';
         </tfoot>
       </table>
       <div class="text-right">
-      <button onclick="window.print()" id="print" class="btn btn-primary"> <i class="fa-solid fa-print"></i>Print</button>
+      <button onclick="window.print()" id="print" class="btn btn-primary mb-3"> <i class="fa-solid fa-print"></i>Print</button>
       </div>
     </div>
   <?php
