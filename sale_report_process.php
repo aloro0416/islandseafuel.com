@@ -45,6 +45,7 @@ $results = '';
        page-break-before:always;
        width: auto;
        margin: auto;
+       border-raduis: 10px;
       }
       #print{
         display:none;
