@@ -20,7 +20,7 @@ if ($customer_id == 'Random') {
     $j_res = $db->query($joins);
     $j_row = mysqli_fetch_assoc($j_res);
 
-    $firstname = $_jrow['firstname'];
+    $firstname = $j_row['firstname'];
     $lastname = $j_row['lastname'];
     $customer_type = $j_row['customer_type'];
 }
