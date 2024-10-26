@@ -8,9 +8,13 @@ $receipt_id = $_GET['receipt_id'];
 $customer_id = $_GET['cus_id'];
 
 if ($customer_id == 'Random') {
+    $joins = "SELECT * FROM pos WHERE receipt_id='$receipt_id'";
+    $j_res = $db->query($joins);
+    $j_row = mysqli_fetch_assoc($j_res);
+
     $firstname = 'No Details';
     $lastname = '';
-    $customer_type = 'No Details';
+    $customer_type = '';
 }else {
     $joins = "SELECT * FROM pos INNER JOIN customer ON pos.customer_id=customer.id WHERE receipt_id='$receipt_id'";
     $j_res = $db->query($joins);
@@ -20,6 +24,7 @@ if ($customer_id == 'Random') {
     $lastname = $jrow['lastname'];
     $customer_type = $jrow['customer_type'];
 }
+
 $pos = "SELECT * FROM pos WHERE receipt_id='$receipt_id'";
 $pos_res = $db->query($pos);
 $pos = mysqli_fetch_assoc($pos_res);
