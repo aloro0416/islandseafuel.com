@@ -89,6 +89,7 @@
                                     <th class="text-center" style="width: 10%;"> Amount </th>
                                     <th class="text-center" style="width: 15%;"> Payment type </th>
                                     <th class="text-center" style="width: 15%;"> Payment status </th>
+                                    <th class="text-center" style="width: 15%;"> Receipt Code </th>
                                     <th class="text-center" style="width: 100px;"> Action </th>
                                 </tr>
                                 </thead>
@@ -142,6 +143,7 @@
                                             }
                                             ?>
                                         </td>
+                                        <td class="text-center"><?=$row['receipt_id']?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <a href="edit_pos?update=<?=$row['id']?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
