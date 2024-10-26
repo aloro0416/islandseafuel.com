@@ -74,7 +74,7 @@ $results = '';
      }.sale-head,table.table thead tr th,table tbody tr td,table tfoot tr td{
        border: 1px solid #212121;
        white-space: nowrap;
-     }.sale-head h1,table thead tr th,table tfoot tr td{
+     }table thead tr th,table tfoot tr td{
        background-color: #f8f8f8;
      }tfoot{
        color:#000;
