@@ -75,7 +75,7 @@ $results = '';
        border: 1px solid #212121;
        white-space: nowrap;
      }table thead tr th,table tfoot tr td{
-       background-color: #f8f8f8;
+       background-color: #337ab7;
      }tfoot{
        color:#000;
        text-transform: uppercase;
