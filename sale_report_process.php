@@ -45,7 +45,6 @@ $results = '';
        page-break-before:always;
        width: auto;
        margin: auto;
-       border-raduis: 10px;
       }
       #print{
         display:none;
@@ -54,6 +53,8 @@ $results = '';
     .page-break{
       width: 980px;
       margin: 0 auto;
+       border-raduis: 10px;
+      
     }
      .sale-head{
        margin: 40px 0;
