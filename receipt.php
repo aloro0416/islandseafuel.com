@@ -51,7 +51,7 @@ $p_row = mysqli_fetch_assoc($p_res);
                     </div>
             
                     <div class="w-100" style=""border-bottom: 1px dashed black;> 
-                    <span></span>
+                     <span>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ </span>
                     </div>
                     
 
