@@ -62,7 +62,7 @@ $results = '';
        display: block;
      }.sale-head h1{
        margin: 0;
-       border-bottom: 1px solid #212121;
+       border-bottom: 1px dashed #212121;
      }.table>thead:first-child>tr:first-child>th{
        border-top: 1px solid #000;
       }
