@@ -86,7 +86,7 @@ $results = '';
 <body>
   <?php if($results): ?>
     <div class="page-break">
-       <div class="bg-primary text-light">
+       <div class="bg-primary text-light text-center">
            <h1>Island Sea Management System - Sales Report</h1>
            <strong><?php if(isset($start_date)){ echo $start_date;}?> TILL DATE <?php if(isset($end_date)){echo $end_date;}?> </strong>
        </div>
