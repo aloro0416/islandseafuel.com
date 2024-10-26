@@ -20,9 +20,9 @@ if ($customer_id == 'Random') {
     $j_res = $db->query($joins);
     $j_row = mysqli_fetch_assoc($j_res);
 
-    $firstname = $jrow['firstname'];
-    $lastname = $jrow['lastname'];
-    $customer_type = $jrow['customer_type'];
+    $firstname = $_jrow['firstname'];
+    $lastname = $j_row['lastname'];
+    $customer_type = $j_row['customer_type'];
 }
 
 $pos = "SELECT * FROM pos WHERE receipt_id='$receipt_id'";
