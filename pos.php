@@ -89,7 +89,7 @@
                                     <th class="text-center" style="width: 10%;"> Amount </th>
                                     <th class="text-center" style="width: 15%;"> Payment type </th>
                                     <th class="text-center" style="width: 15%;"> Payment status </th>
-                                    <th class="text-center" style="width: 15%;"> Receipt Code </th>
+                                    <th class="text-center"> Receipt Code </th>
                                     <th class="text-center" style="width: 100px;"> Action </th>
                                 </tr>
                                 </thead>
