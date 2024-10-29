@@ -17,7 +17,7 @@
         </div>
         <div class="form-group">
             <label for="Password" class="control-label">Password</label>
-            <input type="password" name= "password" class="form-control" placeholder="Password">
+            <input type="password" name= "password" class="form-control" id="myInput" placeholder="Password">
             <!-- An element to toggle between password visibility -->
             <input type="checkbox" onclick="myFunction()">Show Password
         </div>
