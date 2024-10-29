@@ -40,6 +40,7 @@
         <li><a href="sales_report">Sales by dates </a></li>
         <li><a href="monthly_sales">Monthly sales</a></li>
         <li><a href="daily_sales">Daily sales</a> </li>
+        <li><a href="product_sales">Product sales</a> </li>
       </ul>
   </li>
  
