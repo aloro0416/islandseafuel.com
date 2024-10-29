@@ -19,10 +19,10 @@
             <label for="Password" class="control-label">Password</label>
             <input type="password" name= "password" class="form-control" id="myInput" placeholder="Password">
             <!-- An element to toggle between password visibility -->
-            <input type="checkbox" onclick="myFunction()">Show Password
+            <input type="checkbox" onclick="myFunction()"> <span class="text-muted">Show Password</span>
         </div>
         <div class="form-group">
-                <button type="submit" class="btn btn-danger" style="border-radius:0%">Login</button>
+            <button type="submit" class="btn btn-danger" style="border-radius:0%">Login</button>
         </div>
         <div class="text-center">
             <a href="account_recovery.php">Forgot password?</a>
