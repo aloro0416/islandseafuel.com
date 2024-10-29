@@ -18,6 +18,8 @@
         <div class="form-group">
             <label for="Password" class="control-label">Password</label>
             <input type="password" name= "password" class="form-control" placeholder="Password">
+            <!-- An element to toggle between password visibility -->
+            <input type="checkbox" onclick="myFunction()">Show Password
         </div>
         <div class="form-group">
                 <button type="submit" class="btn btn-danger" style="border-radius:0%">Login</button>
@@ -27,7 +29,16 @@
         </div>
     </form>
 </div>
-
+<script>
+  function myFunction() {
+  var x = document.getElementById("myInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
 <style>
   body{
     background-image: url('libs/images/bgimg.jpg');
