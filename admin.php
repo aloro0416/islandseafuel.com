@@ -122,7 +122,16 @@
         }
         $product_sales_json_3 = json_encode($monthly_product_sales_3);
 		
-       
+        $product_id_4 = 19; // Replace with actual product ID for the second line
+
+        $monthly_product_sales_4 = [];
+        foreach (['1' => 'Jan', '2' => 'Feb', '3' => 'Mar', '4' => 'Apr', '5' => 'May', '6' => 'Jun', '7' => 'Jul', '8' => 'Aug', '9' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dec'] as $month_num => $month_name) {
+            $sql = "SELECT SUM(price) as total FROM sales WHERE MONTH(date) = $month_num AND product_id = '$product_id_4'";
+            $result = $db->query($sql);
+            $data = mysqli_fetch_assoc($result);
+            $monthly_product_sales_4[] = (int)$data['total'];
+        }
+        $product_sales_json_4 = json_encode($monthly_product_sales_4);
 
 	
         }
@@ -214,6 +223,10 @@
                     {
                         name: "Super93",
                         data: <?= $product_sales_json_3 ?>  // PHP variable for product sales data
+                    },
+                    {
+                        name: "Gas Sample",
+                        data: <?= $product_sales_json_4 ?>  // PHP variable for product sales data
                     }
                 ],
           chart: {
