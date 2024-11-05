@@ -214,19 +214,15 @@
                     {
                         name: "Diesel",
                         data: <?= $product_sales_json_2 ?>  // PHP variable for product sales data
-                    },
-                    {
-                        name: "Super93",
-                        data: <?= $product_sales_json_3 ?>  // PHP variable for product sales data
                     }
 		      // START COPY HERE!
 		      ,
                     {
-                        name: "Gas Sample",
-                        data: <?= $product_sales_json_4 ?>  // PHP variable for product sales data
+                        name: "Super93",
+                        data: <?= $product_sales_json_3 ?>  // PHP variable for product sales data
                     }
 		      // END COPY!
-
+		    
 		    // PASTE IT HERE!
 		      
                 ],
