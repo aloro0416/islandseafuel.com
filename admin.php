@@ -111,6 +111,8 @@
         }
         $product_sales_json_2 = json_encode($monthly_product_sales_2);
 
+		
+	// START COPY HERE!
         $product_id_3 = 16; // Replace with actual product ID for the second line
 
         $monthly_product_sales_3 = [];
@@ -121,9 +123,12 @@
             $monthly_product_sales_3[] = (int)$data['total'];
         }
         $product_sales_json_3 = json_encode($monthly_product_sales_3);
+	// END COPY!
 		
-       
+
+       // PASTE IT HERE
 	
+
         }
        ?>
         <?php 
@@ -213,11 +218,17 @@
                     {
                         name: "Super93",
                         data: <?= $product_sales_json_3 ?>  // PHP variable for product sales data
-                    },
+                    }
+		      // START COPY HERE!
+		      ,
                     {
                         name: "Gas Sample",
                         data: <?= $product_sales_json_4 ?>  // PHP variable for product sales data
                     }
+		      // END COPY!
+
+		    // PASTE IT HERE!
+		      
                 ],
           chart: {
           height: 350,
