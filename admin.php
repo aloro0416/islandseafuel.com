@@ -214,10 +214,6 @@
                     {
                         name: "Super93",
                         data: <?= $product_sales_json_3 ?>  // PHP variable for product sales data
-                    },
-                    {
-                        name: "Gas Sample",
-                        data: <?= $product_sales_json_4 ?>  // PHP variable for product sales data
                     }
                 ],
           chart: {
