@@ -41,7 +41,7 @@
 </script>
 <style>
   body{
-    background-image: url('libs/images/bgimg.jpg');
+    background-image: url('libs/images/bgi2.jpg');
     background-size: cover;
     background-position: center;
   }
