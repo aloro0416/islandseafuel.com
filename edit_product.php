@@ -61,7 +61,7 @@ if(!$product){
         <div class="panel-heading">
           <strong>
             <span class="glyphicon glyphicon-th"></span>
-            <span>Add New Product</span>
+            <span>Update Product</span>
          </strong>
         </div>
         <div class="panel-body">
