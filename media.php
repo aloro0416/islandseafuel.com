@@ -87,7 +87,8 @@
             </div>
           </div>
           <div class="panel-body">
-            <table class="table">
+           <div class="data_table">
+                        <table id="dashprint" class="table table-striped table-bordered">
               <thead>
                 <tr>
                   <th class="text-center" style="width: 50px;">#</th>
@@ -102,7 +103,7 @@
                 <tr class="list-inline">
                  <td class="text-center"><?php echo count_id();?></td>
                   <td class="text-center">
-                      <img src="uploads/products/<?php echo $media_file['file_name'];?>" class="img-thumbnail" />
+                      <img src="uploads/products/<?php echo $media_file['file_name'];?>" class="img-thumbnail" style="object-fit: cover;" />
                   </td>
                 <td class="text-center">
                   <?php echo $media_file['file_name'];?>
@@ -120,8 +121,34 @@
             </tbody>
           </div>
         </div>
+              </div>
       </div>
 </div>
 
 
 <?php include_once('layouts/footer.php'); ?>
+
+              
+<script>
+    $(document).ready(function(){
+    var print = $('#printable').DataTable({
+        buttons:['copy', 'csv', 'excel', 'pdf', 'print']
+    });
+
+    var dashprint = $('#dashprint').DataTable({
+        buttons:['copy', 'csv', 'excel', 'pdf', 'print']
+    });
+
+    var dtable = $('#defaultTable').DataTable({
+    });
+
+    print.buttons().container()
+    .appendTo('#printable_wrapper .col-md-6:eq(0)');
+
+    dashprint.buttons().container()
+    .appendTo('#dashprint_wrapper .col-md-6:eq(0)');
+
+ 
+});
+
+</script>

@@ -62,7 +62,8 @@
        </strong>
       </div>
         <div class="panel-body">
-          <table class="table table-bordered table-striped table-hover">
+         <div class="data_table">
+            <table id="dashprint" class="table table-striped table-bordered">
             <thead>
                 <tr>
                     <th class="text-center" style="width: 50px;">#</th>
@@ -96,3 +97,27 @@
    </div>
   </div>
   <?php include_once('layouts/footer.php'); ?>
+
+<script>
+    $(document).ready(function(){
+    var print = $('#printable').DataTable({
+        buttons:['copy', 'csv', 'excel', 'pdf', 'print']
+    });
+
+    var dashprint = $('#dashprint').DataTable({
+        buttons:['copy', 'csv', 'excel', 'pdf', 'print']
+    });
+
+    var dtable = $('#defaultTable').DataTable({
+    });
+
+    print.buttons().container()
+    .appendTo('#printable_wrapper .col-md-6:eq(0)');
+
+    dashprint.buttons().container()
+    .appendTo('#dashprint_wrapper .col-md-6:eq(0)');
+
+ 
+});
+
+</script>

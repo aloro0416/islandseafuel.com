@@ -58,7 +58,7 @@
         <div class="panel-body">
           <div class="row">
             <div class="col-md-4">
-                <img class="img-circle img-size-2" src="uploads/users/<?php echo $user['image'];?>" alt="">
+                <img class="img-circle img-size-2" src="uploads/users/<?php echo $user['image'];?>" alt="" style="object-fit: cover;">
             </div>
             <div class="col-md-8">
               <form class="form" action="edit_account.php" method="POST" enctype="multipart/form-data">

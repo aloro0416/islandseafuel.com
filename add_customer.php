@@ -2,14 +2,15 @@
   $page_title = 'POS';
   require_once('includes/load.php');
   // Checkin What level user has permission to view this page
+ page_require_level(2);
 ?>
 <?php include_once('layouts/header.php'); 
 $msg = "";
 if (isset($_POST['add'])) {
-    $first = $_POST['firstname'];
-    $middle = $_POST['middlename'];
-    $last = $_POST['lastname'];
-    $type = $_POST['type'];
+   $first = remove_junk($db->escape($_POST['firstname']));
+    $middle = remove_junk($db->escape($_POST['middlename']));
+    $last = remove_junk($db->escape($_POST['lastname']));;
+    $type = remove_junk($db->escape($_POST['type']));;
 
     $sql = "SELECT * FROM customer WHERE firstname = '$first' AND middlename = '$middle' AND lastname = '$last'";
     $result = $db->query($sql);
@@ -18,14 +19,15 @@ if (isset($_POST['add'])) {
     }else{
         $sqls = "INSERT INTO customer (firstname,middlename,lastname,customer_type) VALUES ('$first','$middle','$last','$type')";
         $result = $db->query($sqls);
-        $msg = "<span class='alert-msg'>Successfully Added!</span>";
-        header('location: pos?proc=customer');
+        $msg = "<span class='alert-msg'>Successfully Added!</span>";?>
+        <script>window.location = "pos?proc=customer";</script>
+        <?php
     }
 }elseif (isset($_POST['update'])) {
-    $first = $_POST['firstname'];
-    $middle = $_POST['middlename'];
-    $last = $_POST['lastname'];
-    $type = $_POST['type'];
+   $first = remove_junk($db->escape($_POST['firstname']));
+    $middle = remove_junk($db->escape($_POST['middlename']));
+    $last = remove_junk($db->escape($_POST['lastname']));;
+    $type = remove_junk($db->escape($_POST['type']));;
     $sql = "UPDATE customer SET firstname = '$first' , middlename = '$middle' , lastname = '$last' , customer_type = '$type' WHERE id = '".$_GET['update']."'";
     $result = $db->query($sql);
     $msg = "<span class='alert-msg'>Successfully Updated!</span>";

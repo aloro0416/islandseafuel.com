@@ -10,14 +10,19 @@ $results = '';
     $req_dates = array('start-date','end-date');
     validate_fields($req_dates);
 
-    if(empty($errors)):
-      $start_date   = remove_junk($db->escape($_POST['start-date']));
-      $end_date     = remove_junk($db->escape($_POST['end-date']));
-      $results      = find_sale_by_dates($start_date,$end_date);
-    else:
-      $session->msg("d", $errors);
+    $start_date   = remove_junk($db->escape($_POST['start-date']));
+    $end_date     = remove_junk($db->escape($_POST['end-date']));
+    $startDate = date("Y-m-d", strtotime($start_date));
+    $endDate    = date("Y-m-d", strtotime($end_date));
+
+    $check = "SELECT * FROM sales WHERE date BETWEEN '{$start_date}' AND '{$end_date}'";
+    $c_res = $db->query($check);
+    if ($db->num_rows($c_res) > 0) {
+        $results = find_sale_by_dates($start_date,$end_date);
+    }else {
+      $session->msg("d", 'No sales report has found!');
       redirect('sales_report', false);
-    endif;
+    }
 
   } else {
     $session->msg("d", "Select dates");
@@ -30,6 +35,7 @@ $results = '';
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <title>Default Page Title</title>
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
    <style>
    @media print {
      html,body{
@@ -48,6 +54,8 @@ $results = '';
     .page-break{
       width: 980px;
       margin: 0 auto;
+       border-raduis: 10px;
+      
     }
      .sale-head{
        margin: 40px 0;
@@ -57,7 +65,7 @@ $results = '';
        display: block;
      }.sale-head h1{
        margin: 0;
-       border-bottom: 1px solid #212121;
+       border-bottom: 1px dashed #212121;
      }.table>thead:first-child>tr:first-child>th{
        border-top: 1px solid #000;
       }
@@ -69,8 +77,9 @@ $results = '';
      }.sale-head,table.table thead tr th,table tbody tr td,table tfoot tr td{
        border: 1px solid #212121;
        white-space: nowrap;
-     }.sale-head h1,table thead tr th,table tfoot tr td{
-       background-color: #f8f8f8;
+     }table thead tr th,table tfoot tr td{
+       background-color: #337ab7;
+       color: white;
      }tfoot{
        color:#000;
        text-transform: uppercase;
@@ -81,7 +90,8 @@ $results = '';
 <body>
   <?php if($results): ?>
     <div class="page-break">
-       <div class="sale-head">
+       <div class="sale-head bg-primary text-light text-center" style="padding: 10px;">
+           <img src="uploads/logo.png" style="height: 100px; object-fit: cover;">
            <h1>Island Sea Management System - Sales Report</h1>
            <strong><?php if(isset($start_date)){ echo $start_date;}?> TILL DATE <?php if(isset($end_date)){echo $end_date;}?> </strong>
        </div>
@@ -114,7 +124,7 @@ $results = '';
          <tr class="text-right">
            <td colspan="4"></td>
            <td colspan="1">Grand Total</td>
-           <td> 
+           <td> ₱
            <?php echo number_format(total_price($results)[0], 2);?>
           </td>
          </tr>
@@ -126,8 +136,8 @@ $results = '';
          </tr> -->
         </tfoot>
       </table>
-      <div class="text-right">
-      <button onclick="window.print()" id="print" class="btn btn-primary">Print</button>
+      <div class="text-right" style="margin-bottom: 20px;">
+      <button onclick="window.print()" id="print" class="btn btn-primary btn-lg"> <i class="fa-solid fa-print"></i> Print</button>
       </div>
     </div>
   <?php

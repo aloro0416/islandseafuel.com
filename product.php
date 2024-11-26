@@ -18,7 +18,8 @@
          </div>
         </div>
         <div class="panel-body">
-          <table class="table table-bordered">
+          <div class="data_table">
+            <table id="dashprint" class="table table-striped table-bordered">
             <thead>
               <tr>
                 <th class="text-center" style="width: 50px;">#</th>
@@ -40,7 +41,7 @@
                   <?php if($product['media_id'] === '0'): ?>
                     <img class="img-avatar img-circle" src="uploads/products/no_image.png" alt="">
                   <?php else: ?>
-                  <img class="img-avatar img-circle" src="uploads/products/<?php echo $product['image']; ?>" alt="">
+                  <img class="img-avatar img-circle" src="uploads/products/<?php echo $product['image']; ?>" alt="" style="object-fit: cover;">
                 <?php endif; ?>
                 </td>
                 <td> <?php echo remove_junk($product['name']); ?></td>
@@ -69,7 +70,32 @@
             </tbody>
           </tabel>
         </div>
+              </div>
       </div>
     </div>
   </div>
   <?php include_once('layouts/footer.php'); ?>
+
+<script>
+    $(document).ready(function(){
+    var print = $('#printable').DataTable({
+        buttons:['copy', 'csv', 'excel', 'pdf', 'print']
+    });
+
+    var dashprint = $('#dashprint').DataTable({
+        buttons:['copy', 'csv', 'excel', 'pdf', 'print']
+    });
+
+    var dtable = $('#defaultTable').DataTable({
+    });
+
+    print.buttons().container()
+    .appendTo('#printable_wrapper .col-md-6:eq(0)');
+
+    dashprint.buttons().container()
+    .appendTo('#dashprint_wrapper .col-md-6:eq(0)');
+
+ 
+});
+
+</script>

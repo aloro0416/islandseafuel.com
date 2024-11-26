@@ -7,7 +7,11 @@
 <div class="login-page">
     <div class="text-center">
         <img src="libs/images/logo.png" alt="ISLAND SEA LOGO" style="height: 100px">
+<<<<<<< HEAD
        <h4>ISLAND SEA MANAGEMENT SYSTEM </h4>
+=======
+       <h4>ISLAND SEA MANAGEMENT SYSTEM</h4>
+>>>>>>> fe941ae648280e08fe15dc61ef10d2d5b68a092d
      </div>
      <?php echo display_msg($msg); ?>
       <form method="post" action="auth.php" class="clearfix">
@@ -17,14 +21,28 @@
         </div>
         <div class="form-group">
             <label for="Password" class="control-label">Password</label>
-            <input type="password" name= "password" class="form-control" placeholder="Password">
+            <input type="password" name= "password" class="form-control" id="myInput" placeholder="Password">
+            <!-- An element to toggle between password visibility -->
+            <input type="checkbox" onclick="myFunction()"> <span class="text-muted">Show Password</span>
         </div>
         <div class="form-group">
-                <button type="submit" class="btn btn-danger" style="border-radius:0%">Login</button>
+            <button type="submit" class="btn btn-danger" style="border-radius:0%">Login</button>
+        </div>
+        <div class="text-center">
+            <a href="account_recovery.php">Forgot password?</a>
         </div>
     </form>
 </div>
-
+<script>
+  function myFunction() {
+  var x = document.getElementById("myInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
 <style>
   body{
     background-image: url('libs/images/bgimg.jpg');

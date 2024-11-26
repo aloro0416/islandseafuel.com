@@ -1,17 +1,18 @@
 <?php
 ob_start(); // Start output buffering
-
 $page_title = 'POS';
 include('includes/load.php');
+ page_require_level(2);
 include('layouts/header.php');
 
 if (isset($_POST['add'])) {
     $date = date('Y-m-d');
-    $product_id = $_GET['product'];
-    $customer_id = $_POST['customer'];
-    $liter = $_POST['liter'];
-    $amount = $_POST['amount'];
-    $payment = $_POST['payment'];
+    $product_id = remove_junk($db->escape($_GET['product']));
+    $customer_id = remove_junk($db->escape($_POST['customer']));
+    $liter = remove_junk($db->escape($_POST['liter']));
+    $amount = remove_junk($db->escape($_POST['amount']));
+    $payment = remove_junk($db->escape($_POST['payment']));
+    $receipt_id = substr(str_shuffle(str_repeat("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYX", 5)), 0, 10); 
     
     $status = ($payment == 'Cash') ? 1 : 0;
     
@@ -26,7 +27,7 @@ if (isset($_POST['add'])) {
         $pro = "UPDATE products SET quantity = '$total_lit' WHERE id = '$product_id'";
         $pros = $db->query($pro);
 
-        $sqls = "INSERT INTO pos (customer_id, product_id, liter, amount, status) VALUES ('$customer_id', '$product_id', '$liter', '$amount', '$status')";
+        $sqls = "INSERT INTO pos (customer_id, product_id, liter, amount, receipt_id, status) VALUES ('$customer_id', '$product_id', '$liter', '$amount', '$receipt_id', '$status')";
         $result = $db->query($sqls);
 
         $salesss = "INSERT INTO sales (product_id, qty, price, date) VALUES ('$product_id', '$liter', '$amount', '$date')";
@@ -51,7 +52,7 @@ if (isset($_POST['add'])) {
                 title: '$alert_message',
                 showConfirmButton: true
             }).then(function() {
-                window.location.href = 'pos.php';
+                window.location.href = 'receipt.php?cus_id=".$customer_id."&receipt_id=".$receipt_id."';
             });
           </script>";
 

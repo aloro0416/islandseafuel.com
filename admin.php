@@ -26,7 +26,7 @@
 		<div class="col-md-4">
        <div class="panel panel-box clearfix">
          <div class="panel-icon pull-left bg-secondary1">
-          <i class="glyphicon glyphicon-user"></i>
+          <i class="glyphicon glyphicon-user"></i> 
         </div>
         <div class="panel-value pull-right">
           <h2 class="margin-top"> <?php  echo $c_user['total']; ?> </h2>
@@ -84,11 +84,12 @@
         while ($b = mysqli_fetch_assoc($b_res)) {
           $quantity = $b['quantity'];
           $price = $b['sale_price'];
+	  $pro_id= $b['id'];
 
           $sum_total = $quantity * $price;
 
           @$total_bought = $total_bought + $sum_total;
-          $product_id = '17'; // Replace with actual product ID
+          $product_id = 14; // Replace with actual product ID
 
         $monthly_product_sales = [];
         foreach (['1' => 'Jan', '2' => 'Feb', '3' => 'Mar', '4' => 'Apr', '5' => 'May', '6' => 'Jun', '7' => 'Jul', '8' => 'Aug', '9' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dec'] as $month_num => $month_name) {
@@ -99,7 +100,7 @@
         }
         $product_sales_json = json_encode($monthly_product_sales);
 
-        $product_id_2 = '18'; // Replace with actual product ID for the second line
+        $product_id_2 = 15; // Replace with actual product ID for the second line
 
         $monthly_product_sales_2 = [];
         foreach (['1' => 'Jan', '2' => 'Feb', '3' => 'Mar', '4' => 'Apr', '5' => 'May', '6' => 'Jun', '7' => 'Jul', '8' => 'Aug', '9' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dec'] as $month_num => $month_name) {
@@ -110,11 +111,11 @@
         }
         $product_sales_json_2 = json_encode($monthly_product_sales_2);
 
-        $product_id_3 = '19'; // Replace with actual product ID for the second line
+        $product_id_3 = 16; // Replace with actual product ID for the second line
 
         $monthly_product_sales_3 = [];
         foreach (['1' => 'Jan', '2' => 'Feb', '3' => 'Mar', '4' => 'Apr', '5' => 'May', '6' => 'Jun', '7' => 'Jul', '8' => 'Aug', '9' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dec'] as $month_num => $month_name) {
-            $sql = "SELECT SUM(price) as total FROM sales WHERE MONTH(date) = $month_num AND product_id = '$product_id_2'";
+            $sql = "SELECT SUM(price) as total FROM sales WHERE MONTH(date) = $month_num AND product_id = '$product_id_3'";
             $result = $db->query($sql);
             $data = mysqli_fetch_assoc($result);
             $monthly_product_sales_3[] = (int)$data['total'];
@@ -265,7 +266,7 @@
                  <?php if($recent_product['media_id'] === '0'): ?>
                     <img class="img-avatar img-circle" src="uploads/products/no_image.png" alt="">
                   <?php else: ?>
-                  <img class="img-avatar img-circle" src="uploads/products/<?php echo $recent_product['image'];?>" alt="" />
+                  <img class="img-avatar img-circle" src="uploads/products/<?php echo $recent_product['image'];?>" alt="" style="object-fit: cover;" />
                 <?php endif;?>
                 <?php echo remove_junk(first_character($recent_product['name']));?>
                   <span class="label label-warning pull-right">

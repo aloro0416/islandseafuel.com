@@ -8,33 +8,44 @@
 <?php
   if(isset($_POST['add_user'])){
 
-   $req_fields = array('full-name','username','password','level' );
+   $req_fields = array('full-name','username','email','password','level' );
    validate_fields($req_fields);
-
-   if(empty($errors)){
-           $name   = remove_junk($db->escape($_POST['full-name']));
-       $username   = remove_junk($db->escape($_POST['username']));
-       $password   = remove_junk($db->escape($_POST['password']));
-       $user_level = (int)$db->escape($_POST['level']);
-       $password = sha1($password);
+    $mail = $_POST['email'];
+    $dup = "SELECT * FROM users WHERE email='$mail'";
+    $d_res = $db->query($dup);
+    if (mysqli_num_rows($d_res) > 0) {
+     //email already exist on db
+     $session->msg('d',"Email is already used!");
+     redirect('add_user', false);
+    }else{
+      if(empty($errors)){
+        $name   = remove_junk($db->escape($_POST['full-name']));
+        $username   = remove_junk($db->escape($_POST['username']));
+        $password   = remove_junk($db->escape($_POST['password']));
+        $email   = remove_junk($db->escape($_POST['email']));
+        $user_level = (int)$db->escape($_POST['level']);
+        $password = sha1($password);
         $query = "INSERT INTO users (";
-        $query .="name,username,password,user_level,status";
+        $query .="name,username,email,password,user_level,status";
         $query .=") VALUES (";
-        $query .=" '{$name}', '{$username}', '{$password}', '{$user_level}','1'";
+        $query .=" '{$name}', '{$username}', '{$email}', '{$password}', '{$user_level}','1'";
         $query .=")";
         if($db->query($query)){
           //sucess
-          $session->msg('s',"User account has been creted! ");
+          $session->msg('s',"User account has been created! ");
           redirect('add_user', false);
         } else {
-          //failed
-          $session->msg('d',' Sorry failed to create account!');
+          //sucess
+          $session->msg('s',"User account has been created! ");
           redirect('add_user', false);
         }
-   } else {
-     $session->msg("d", $errors);
-      redirect('add_user',false);
-   }
+      } else {
+        $session->msg("d", $errors);
+        redirect('add_user',false);
+      }
+    }
+
+  
  }
 ?>
 <?php include_once('layouts/header.php'); ?>
@@ -52,15 +63,19 @@
           <form method="post" action="add_user.php">
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" name="full-name" placeholder="Full Name">
+                <input type="text" class="form-control" name="full-name" placeholder="Full Name" required>
             </div>
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" name="username" placeholder="Username">
+                <input type="text" class="form-control" name="username" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" name="email" placeholder="Email" required>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" name ="password"  placeholder="Password">
+                <input type="password" class="form-control" name ="password"  placeholder="Password" required>
             </div>
             <div class="form-group">
               <label for="level">User Role</label>

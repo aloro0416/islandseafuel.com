@@ -1,14 +1,15 @@
 <?php
   $page_title = 'Edit POS';
   require_once('includes/load.php');
+ page_require_level(2);
 ?>
 <?php include_once('layouts/header.php'); 
 
 if (isset($_POST['save'])) {
     $pos_id = $_GET['update'];
-    $p_liter = $_POST['liter'];
+    $p_liter = remove_junk($db->escape($_POST['liter']));
     $product_id = $_POST['product_id'];
-    $amount = $_POST['amount'];
+    $amount = remove_junk($db->escape($_POST['amount']));
     $status = $_POST['status'];
 
     $sql = "SELECT * FROM pos WHERE id='$pos_id'";
