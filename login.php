@@ -30,7 +30,7 @@
 
 <style>
   body{
-    background-image: url('libs/images/bgimg.jpg');
+    background-image: url('libs/images/background.jpg');
     background-size: cover;
     background-position: center;
   }
