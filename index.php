@@ -78,6 +78,10 @@
       background-size: contain; /* Adjusts the background size for smaller screens */
       background-position: top center; /* Aligns the image to the top center for better display on mobile */
       background-attachment: scroll; /* Fixes the background scrolling issue on mobile */
+      padding: 35px 15px 20px 15px; /* Adjust padding for smaller screens */
+      top: 20px; /* Reduce the top margin for mobile */
+      left: 0;
+      width: 100%; /* Ensure full-width on smaller screens */
     }
   }
 </style>
