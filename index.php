@@ -10,17 +10,18 @@
        <h4>ISLAND SEA MANAGEMENT SYSTEM</h4>
      </div>
      <?php echo display_msg($msg); ?>
+     
      <!-- Include Google reCAPTCHA v3 Script -->
      <script src="https://www.google.com/recaptcha/api.js?render=6Lcc25IqAAAAAH635KLYx5TwcXhguTYoIdJzgceI"></script>
 
      <form method="post" action="auth.php" class="clearfix" id="loginForm">
         <div class="form-group">
               <label for="username" class="control-label">Username</label>
-              <input type="name" class="form-control" name="username" placeholder="Username">
+              <input type="name" class="form-control" name="username" placeholder="Username" required>
         </div>
         <div class="form-group">
             <label for="Password" class="control-label">Password</label>
-            <input type="password" name="password" class="form-control" placeholder="Password">
+            <input type="password" name="password" class="form-control" placeholder="Password" required>
         </div>
         <!-- Hidden reCAPTCHA token input will be added here -->
         <div class="form-group">
@@ -47,13 +48,95 @@
 </div>
 
 <style>
-  body{
+  body {
     background-image: url('libs/images/bgi2.jpg');
     background-size: cover;
     background-position: center;
+    margin: 0;
+    font-family: Arial, sans-serif;
   }
-  .login-page{
-    box-shadow: 2px 2px 5px 2px;
+  
+  .login-page {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .login-page .text-center {
+    margin-bottom: 20px;
+  }
+
+  .login-page img {
+    width: 100px;
+    height: auto;
+  }
+
+  .login-page h4 {
+    font-size: 20px;
+    margin-top: 10px;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #d9534f;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn:hover {
+    background-color: #c9302c;
+  }
+
+  .text-center a {
+    color: #d9534f;
+    font-size: 14px;
+    text-decoration: none;
+  }
+
+  .text-center a:hover {
+    text-decoration: underline;
+  }
+
+  /* Responsive Styles */
+  @media (max-width: 576px) {
+    .login-page {
+      padding: 20px;
+      margin: 10px;
+    }
+
+    .login-page h4 {
+      font-size: 18px;
+    }
+
+    .form-control {
+      font-size: 14px;
+      padding: 8px;
+    }
+
+    .btn {
+      font-size: 14px;
+      padding: 8px;
+    }
   }
 </style>
 
