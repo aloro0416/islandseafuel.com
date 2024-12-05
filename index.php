@@ -61,14 +61,26 @@
 </div>
 
 <style>
-  body{
+  body {
     background-image: url('libs/images/bgi2.jpg');
-    background-size: cover;
+    background-size: cover; /* Ensures the image covers the entire screen */
     background-position: center;
+    background-attachment: fixed; /* Keeps the background fixed while scrolling */
   }
-  .login-page{
+
+  .login-page {
     box-shadow: 2px 2px 5px 2px;
   }
+
+  /* Media query for mobile devices */
+  @media (max-width: 768px) {
+    body {
+      background-size: contain; /* Adjusts the background size for smaller screens */
+      background-position: top center; /* Aligns the image to the top center for better display on mobile */
+      background-attachment: scroll; /* Fixes the background scrolling issue on mobile */
+    }
+  }
 </style>
+
 
 <?php include_once('layouts/footer.php'); ?>
