@@ -12,9 +12,9 @@ body{
 }.padding-top{
   padding-top: 20px;
 }.login-page{
-  width: 400px;
+  width: 350px;
   margin: 5% 45% 6% auto;
-  padding: 20px;
+  padding: 0 20px;
   background-color: #f9f9f9;
   border: 1px solid #f2f2f2;
 }.login-page .text-center{
@@ -26,7 +26,7 @@ body{
 }.page{
   position: relative;
   display: block;
-  top: 410px;
+  top: 50px;
   left: 0;
   padding: 50px 25px 30px 300px; /* Increased padding to make the box bigger */
   width: 600px; /* Set a larger width */
