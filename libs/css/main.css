@@ -12,7 +12,7 @@ body{
 }.padding-top{
   padding-top: 20px;
 }.login-page{
-  width: 350px;
+  width: 500px;
   margin: 5% 45% 6% auto;
   padding: 0 20px;
   background-color: #f9f9f9;
@@ -29,9 +29,6 @@ body{
   top: 50px;
   left: 0;
   padding: 35px 15px 20px 270px;
-   /* Optional: Add a max-width for responsiveness */
-   max-width: 100%;
-   box-sizing: border-box; /* Ensures padding doesn't overflow the page */
 }
 
 .page-lgn{
