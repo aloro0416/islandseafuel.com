@@ -29,6 +29,9 @@ body{
   top: 50px;
   left: 0;
   padding: 35px 15px 20px 270px;
+   /* Optional: Add a max-width for responsiveness */
+   max-width: 100%;
+   box-sizing: border-box; /* Ensures padding doesn't overflow the page */
 }
 
 .page-lgn{
