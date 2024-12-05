@@ -12,7 +12,7 @@
      <?php echo display_msg($msg); ?>
       <form method="post" action="auth.php" class="clearfix">
         <div class="form-group">
-              <label for="username" class="control-label">Username</label>
+              <label for="username" class="control-label">Username123</label>
               <input type="name" class="form-control" name="username" placeholder="Username">
         </div>
         <div class="form-group">
