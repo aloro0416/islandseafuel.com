@@ -11,7 +11,7 @@
      </div>
      <?php echo display_msg($msg); ?>
      <!-- Include Google reCAPTCHA v3 Script -->
-     <script src="https://www.google.com/recaptcha/api.js?render=YOUR_SITE_KEY"></script>
+     <script src="https://www.google.com/recaptcha/api.js?render=6Lcc25IqAAAAAH635KLYx5TwcXhguTYoIdJzgceI"></script>
 
      <form method="post" action="auth.php" class="clearfix" id="loginForm">
         <div class="form-group">
@@ -34,7 +34,7 @@
     <!-- JavaScript for reCAPTCHA token generation -->
     <script>
         grecaptcha.ready(function() {
-            grecaptcha.execute('YOUR_SITE_KEY', {action: 'login'}).then(function(token) {
+            grecaptcha.execute('6Lcc25IqAAAAAH635KLYx5TwcXhguTYoIdJzgceI', {action: 'login'}).then(function(token) {
                 // Add the token as a hidden input field in the form
                 var recaptchaInput = document.createElement('input');
                 recaptchaInput.type = 'hidden';
