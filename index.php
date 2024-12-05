@@ -20,7 +20,9 @@
         </div>
         <div class="form-group">
             <label for="Password" class="control-label">Password</label>
-            <input type="password" name="password" class="form-control" placeholder="Password">
+            <input type="password" name= "password" class="form-control" id="myInput" placeholder="Password">
+            <!-- An element to toggle between password visibility -->
+            <input type="checkbox" onclick="myFunction()"> <span class="text-muted">Show Password</span>
         </div>
         <!-- Hidden reCAPTCHA token input will be added here -->
         <div class="form-group">
@@ -44,6 +46,18 @@
             });
         });
     </script>
+
+<script>
+  function myFunction() {
+  var x = document.getElementById("myInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
+
 </div>
 
 <style>
