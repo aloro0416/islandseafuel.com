@@ -7,12 +7,12 @@
 <div class="login-page">
     <div class="text-center">
         <img src="libs/images/logo.png" alt="ISLAND SEA LOGO" style="height: 100px">
-       <h4>ISLAND SEA MANAGEMENT SYSTEM </h4>
+       <h4>ISLAND SEA MANAGEMENT SYSTEM</h4>
      </div>
      <?php echo display_msg($msg); ?>
       <form method="post" action="auth.php" class="clearfix">
         <div class="form-group">
-              <label for="username" class="control-label">Username123</label>
+              <label for="username" class="control-label">Username</label>
               <input type="name" class="form-control" name="username" placeholder="Username">
         </div>
         <div class="form-group">
@@ -21,6 +21,9 @@
         </div>
         <div class="form-group">
                 <button type="submit" class="btn btn-danger" style="border-radius:0%">Login</button>
+        </div>
+        <div class="text-center">
+            <a href="account_recovery.php">Forgot password?</a>
         </div>
     </form>
 </div>
