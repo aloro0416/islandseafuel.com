@@ -1,3 +1,8 @@
+<?php
+  ob_start();
+  require_once('includes/load.php');
+  if($session->isUserLoggedIn(true)) { redirect('home', false);}
+?>
 <?php include_once('layouts/header.php'); ?>
 <div class="login-page">
     <div class="text-center">
