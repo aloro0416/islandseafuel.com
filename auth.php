@@ -39,10 +39,10 @@ if (empty($recaptchaToken)) {
                 // Password is correct, proceed with login
 
                 // Create session with user id
-                $session->login($user['id']);
+                $session->login($user['username']);
 
                 // Update the last login time
-                updateLastLogIn($user['id']);
+                updateLastLogIn($user['username']);
 
                 // Success message and redirect
                 $session->msg("s", "Welcome to Island Sea Management System");
