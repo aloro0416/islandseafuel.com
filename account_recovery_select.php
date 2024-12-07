@@ -11,7 +11,7 @@
     </div>
      <?php echo display_msg($msg); ?>
         <div class="form-group">
-              <a href="account_recovery.php">Reset via email link</a>
+              <a href="account_recovery.php" class="form-control">Reset via email link</a>
         </div>
         <div class="form-group">
             <a href="account_recovery_otp.php">Reset via email otp</a>
