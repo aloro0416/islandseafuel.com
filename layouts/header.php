@@ -16,10 +16,8 @@
     <link rel="stylesheet" href="libs/css/main.css" />
     <link rel="stylesheet" href="libs/css/datatables.min.css" />
     <link rel="stylesheet" href="dist/apexcharts.css" />
-    <!-- SweetAlert CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <!-- SweetAlert JS -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.0/dist/sweetalert2.min.css">
+    <link href="assets/css/sweetalert2.min.css" rel="stylesheet" />
 
     <script type="text/javascript" src="dist/apexcharts.js"></script>
 
