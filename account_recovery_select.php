@@ -11,10 +11,10 @@
     </div>
      <?php echo display_msg($msg); ?>
         <div class="form-group">
-              <a href="account_recovery.php" class="form-control">Reset via email link</a>
+              <a href="account_recovery.php" class="form-control text-center">Reset via email link</a>
         </div>
         <div class="form-group">
-            <a href="account_recovery_otp.php" class="form-control">Reset via email otp</a>
+            <a href="account_recovery_otp.php" class="form-control text-center">Reset via email otp</a>
         </div>
         <div class="text-center">
             <a href=".">Back</a>
