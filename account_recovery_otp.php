@@ -28,14 +28,10 @@ if (isset($_POST['send'])) {
         $dup = "SELECT * FROM recovery WHERE email = '$email' AND status = 1";
         $res = $db->query($dup);
         if (mysqli_num_rows($res) > 0) {
-          echo "<script>
-              Swal.fire({
-                  icon: 'info',
-                  title: 'Oops!',
-                  text: 'We already sent you an OTP!',
-                  confirmButtonText: 'OK'
-              });
-          </script>";
+          $_SESSION['status'] = 'We already sent you an OTP!.';
+          $_SESSION['status_code'] = 'info';
+          header('Location: account_recovery_otp.php');
+          exit(0);
         } else {
           $ins = "INSERT INTO recovery (email, recovery_key, status) VALUES ('$email','$otp',1)";
           $ress = $db->query($ins);
