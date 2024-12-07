@@ -31,30 +31,29 @@ if (empty($recaptchaToken)) {
     // Check if reCAPTCHA was successful
     if (isset($responseKeys['success']) && $responseKeys['success'] == true) {
 
-        // Check if the username exists in the database
-        $user = find_user_by_username($username);
-        if ($user) {
-            // Verify the password using password_verify
-            if (password_verify($password, $user['password'])) {
-                // Password is correct, proceed with login
+        // No validation errors, proceed with user authentication
+        if (empty($errors)) {
+            $user_id = authenticate($username, $password);
 
+            if ($user_id) {
                 // Create session with user id
-                $session->login($user['username']);
+                $session->login($user_id);
 
                 // Update the last login time
-                updateLastLogIn($user['username']);
+                updateLastLogIn($user_id);
 
                 // Success message and redirect
                 $session->msg("s", "Welcome to Island Sea Management System");
                 redirect('admin', false);
             } else {
-                // Authentication failed (incorrect password)
+                // Authentication failed (incorrect username/password)
                 $session->msg("d", "Sorry, Username/Password is incorrect.");
                 redirect('.', false);
             }
+
         } else {
-            // Authentication failed (username not found)
-            $session->msg("d", "Sorry, Username/Password is incorrect.");
+            // Validation errors
+            $session->msg("d", $errors);
             redirect('.', false);
         }
 
