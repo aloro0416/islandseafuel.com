@@ -116,10 +116,10 @@ function tableExists($table){
      $result = $db->query($sql);
      if($db->num_rows($result)){
        $user = $db->fetch_assoc($result);
-       $password_request = sha1($password);
-       if($password_request === $user['password'] ){
-         return $user;
-       }
+       // Verify password using argon2i
+       if (password_verify($password, $user['password'])) {
+          return $user['id'];
+      }
      }
     return false;
    }
