@@ -19,7 +19,7 @@
              }
 
             $id = (int)$_POST['id'];
-            $new = remove_junk($db->escape(sha1($_POST['new-password'])));
+            $new = password_hash($db->escape($_POST['new-password']), PASSWORD_ARGON2I);
             $sql = "UPDATE users SET password ='{$new}' WHERE id='{$db->escape($id)}'";
             $result = $db->query($sql);
                 if($result && $db->affected_rows() === 1):
