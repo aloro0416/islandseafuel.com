@@ -50,7 +50,7 @@
                   $mail->Password = 'bkggsnzgpxrzrovb'; 
                   $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                   $mail->Port = 587;
-                  $mail->setFrom('your-email@gmail.com', 'IslandSea');
+                  $mail->setFrom('islandsea2001@gmail.com', 'IslandSea');
                   $mail->addAddress($email);
                   $mail->isHTML(true);
                   $mail->Subject = 'Your OTP for Account Recovery';
