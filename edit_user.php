@@ -86,6 +86,10 @@ if(isset($_POST['update-pass'])) {
                   <input type="text" class="form-control" name="username" value="<?php echo remove_junk(ucwords($e_user['username'])); ?>">
             </div>
             <div class="form-group">
+                  <label for="username" class="control-label">Username</label>
+                  <input type="text" class="form-control" name="username" value="<?php echo remove_junk(ucwords($e_user['password'])); ?>">
+            </div>
+            <div class="form-group">
               <label for="level">User Role</label>
                 <select class="form-control" name="level">
                   <?php foreach ($groups as $group ):?>
