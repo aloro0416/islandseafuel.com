@@ -85,22 +85,15 @@ function tableExists($table){
     global $db;
     $username = $db->escape($username);
     $password = $db->escape($password);
-    
-    // Query to fetch user data
     $sql = sprintf("SELECT id, username, password, user_level FROM users WHERE username = '%s' LIMIT 1", $username);
     $result = $db->query($sql);
     
-    // Check if the user exists
     if ($db->num_rows($result)) {
         $user = $db->fetch_assoc($result);
-        
-        // Verify password using argon2i
         if (password_verify($password, $user['password'])) {
             return $user['id'];
         }
     }
-    
-    // Return false if authentication fails
     return false;
   }
   /*--------------------------------------------------------------*/
@@ -116,7 +109,6 @@ function tableExists($table){
      $result = $db->query($sql);
      if($db->num_rows($result)){
        $user = $db->fetch_assoc($result);
-       // Verify password using argon2i
        if (password_verify($password, $user['password'])) {
           return $user['id'];
       }

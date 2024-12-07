@@ -13,7 +13,7 @@
 
     if(empty($errors)){
 
-             if (!password_verify($_POST['old-password'], current_user()['password'])) {
+             if(password_verify($_POST['old-password']) !== current_user()['password'] ){
                $session->msg('d', "Your old password not match");
                redirect('change_password',false);
              }
