@@ -31,38 +31,30 @@ if (empty($recaptchaToken)) {
     // Check if reCAPTCHA was successful
     if (isset($responseKeys['success']) && $responseKeys['success'] == true) {
 
-        // No validation errors, proceed with user authentication
-        if (empty($errors)) {
-            // Authenticate the user based on the username
-            $user_id = find_user_by_username($username); // Assuming this function gets the user's data by username
-            $user_password = find_user_by_password($password);
+        // Check if the username exists in the database
+        $user = find_user_by_username($username);
+        if ($user) {
+            // Verify the password using password_verify
+            if (password_verify($password, $user['password'])) {
+                // Password is correct, proceed with login
 
-            if ($user_id) {
-                // Verify the hashed password
-                if (password_verify($password, $user_password)) {
-                    // Password is correct, login the user
-                    $session->login($user_id);
+                // Create session with user id
+                $session->login($user['id']);
 
-                    // Update the last login time
-                    updateLastLogIn($user_id);
+                // Update the last login time
+                updateLastLogIn($user['id']);
 
-                    // Success message and redirect
-                    $session->msg("s", "Welcome to Island Sea Management System");
-                    redirect('admin', false);
-                } else {
-                    // Authentication failed (incorrect password)
-                    $session->msg("d", "Sorry, Username/Password is incorrect.");
-                    redirect('.', false);
-                }
+                // Success message and redirect
+                $session->msg("s", "Welcome to Island Sea Management System");
+                redirect('admin', false);
             } else {
-                // User does not exist
+                // Authentication failed (incorrect password)
                 $session->msg("d", "Sorry, Username/Password is incorrect.");
                 redirect('.', false);
             }
-
         } else {
-            // Validation errors
-            $session->msg("d", $errors);
+            // Authentication failed (username not found)
+            $session->msg("d", "Sorry, Username/Password is incorrect.");
             redirect('.', false);
         }
 
