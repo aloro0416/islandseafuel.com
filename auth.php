@@ -34,16 +34,16 @@ if (empty($recaptchaToken)) {
         // No validation errors, proceed with user authentication
         if (empty($errors)) {
             // Authenticate the user based on the username
-            $user = find_user_by_username($username); // Assuming this function gets the user's data by username
+            $user_id = find_user_by_username($username); // Assuming this function gets the user's data by username
             
-            if ($user) {
+            if ($user_id) {
                 // Verify the hashed password
-                if (password_verify($password, $user['password'])) {
+                if (password_verify($password, $user_id['password'])) {
                     // Password is correct, login the user
-                    $session->login($user['id']);
+                    $session->login($user_id);
 
                     // Update the last login time
-                    updateLastLogIn($user['id']);
+                    updateLastLogIn($user_id);
 
                     // Success message and redirect
                     $session->msg("s", "Welcome to Island Sea Management System");
