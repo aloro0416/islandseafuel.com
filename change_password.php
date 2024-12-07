@@ -8,31 +8,37 @@
 <?php
   if(isset($_POST['update'])){
 
-    $req_fields = array('new-password','old-password','id' );
+    $req_fields = array('new-password','old-password','id');
     validate_fields($req_fields);
 
     if(empty($errors)){
 
-             if(sha1($_POST['old-password']) !== current_user()['password'] ){
-               $session->msg('d', "Your old password not match");
-               redirect('change_password',false);
-             }
+        // Check if the entered old password matches the current password using password_verify
+        if(!password_verify($_POST['old-password'], current_user()['password'])){
+          $session->msg('d', "Your old password does not match");
+          redirect('change_password', false);
+        }
 
-            $id = (int)$_POST['id'];
-            $new = password_hash($db->escape($_POST['new-password']), PASSWORD_ARGON2I);
-            $sql = "UPDATE users SET password ='{$new}' WHERE id='{$db->escape($id)}'";
-            $result = $db->query($sql);
-                if($result && $db->affected_rows() === 1):
-                  $session->logout();
-                  $session->msg('s',"Login with your new password.");
-                  redirect('.', false);
-                else:
-                  $session->msg('d',' Sorry failed to updated!');
-                  redirect('change_password', false);
-                endif;
+        // Get the user ID and hash the new password with argon2i
+        $id = (int)$_POST['id'];
+        $new = password_hash($db->escape($_POST['new-password']), PASSWORD_ARGON2I);
+
+        // Update the password in the database
+        $sql = "UPDATE users SET password ='{$new}' WHERE id='{$db->escape($id)}'";
+        $result = $db->query($sql);
+
+        // Check if the update was successful
+        if($result && $db->affected_rows() === 1):
+          $session->logout();  // Log the user out after updating the password
+          $session->msg('s', "Login with your new password.");
+          redirect('.', false);  // Redirect to the homepage
+        else:
+          $session->msg('d', 'Sorry, failed to update!');
+          redirect('change_password', false);  // Redirect back to the change password page
+        endif;
     } else {
       $session->msg("d", $errors);
-      redirect('change_password',false);
+      redirect('change_password', false);  // Redirect if there were validation errors
     }
   }
 ?>
