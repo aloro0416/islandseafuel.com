@@ -35,10 +35,11 @@ if (empty($recaptchaToken)) {
         if (empty($errors)) {
             // Authenticate the user based on the username
             $user_id = find_user_by_username($username); // Assuming this function gets the user's data by username
-            
+            $user_password = find_user_by_password($password);
+
             if ($user_id) {
                 // Verify the hashed password
-                if (password_verify($password, $user_id['password'])) {
+                if (password_verify($password, $user_password)) {
                     // Password is correct, login the user
                     $session->login($user_id);
 
