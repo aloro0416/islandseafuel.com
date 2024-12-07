@@ -92,10 +92,6 @@
                   <input type="text" class="form-control" name="username" value="<?php echo remove_junk(ucwords($user['username'])); ?>">
             </div>
             <div class="form-group">
-                  <label for="password" class="control-label">Password</label>
-                  <input type="text" class="form-control" name="password" value="<?php echo remove_junk(ucwords($user['password'])); ?>">
-            </div>
-            <div class="form-group">
                   <label for="email" class="control-label">Email</label>
                   <input type="text" class="form-control" name="email" value="<?php echo remove_junk(ucwords($user['email'])); ?>">
             </div>
