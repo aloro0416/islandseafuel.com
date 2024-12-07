@@ -89,7 +89,7 @@ if (isset($_POST['send'])) {
                 <button type="submit" name="send" class="btn btn-danger" style="border-radius:0%">Send Account Recovery Link</button>
         </div>
         <div class="text-center">
-            <a href=".">Back</a>
+            <a href="account_recovery_select.php">Back</a>
         </div>
     </form>
 </div>
