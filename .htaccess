@@ -1,6 +1,45 @@
 # Redirect requests without the .php extension to the corresponding .php file
 RewriteEngine On
 
+# Enforce HSTS (HTTP Strict Transport Security)
+<IfModule mod_headers.c>
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    
+    # Prevent MIME type sniffing
+    Header always set X-Content-Type-Options "nosniff"
+    
+    # Protect against cross-site scripting attacks
+    Header always set X-XSS-Protection "1; mode=block"
+    
+    # Prevent clickjacking by not allowing the site to be embedded in frames
+    Header always set X-Frame-Options "SAMEORIGIN"
+    
+    # Prevent browsers from sending the referrer header on cross-origin requests
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Enable HTTP Strict Transport Security (HSTS) for browsers that support it
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    
+    # Disable content sniffing on the part of the browser
+    Header always set X-Content-Type-Options "nosniff"
+    
+    # Improve cacheability of static assets
+    Header always set Cache-Control "public, max-age=31536000, immutable"
+
+    # Permissions Policy (formerly Feature Policy)
+    Header always set Permissions-Policy "geolocation=(self 'https://islandseafuel.com'), microphone=()"
+
+
+    # Optionally, you can enforce secure and HttpOnly cookie flags for sessions
+    php_value session.cookie_secure 1       # Ensure cookies are only sent over HTTPS
+    php_value session.cookie_httponly 1      # Prevent JavaScript from accessing the session cookie
+
+    # Remove X-Powered-By header
+    Header unset X-Powered-By
+    
+
+</IfModule>
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
