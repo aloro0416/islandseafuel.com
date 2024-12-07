@@ -37,7 +37,7 @@ if (empty($recaptchaToken)) {
 
             if ($user_id) {
 
-                if (password_verify($password, $password)){
+                if (password_verify($password,$user_id['password'])){
                 // Create session with user id
                 $session->login($user_id);
 
