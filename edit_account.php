@@ -95,6 +95,10 @@
                   <label for="password" class="control-label">Password</label>
                   <input type="text" class="form-control" name="password" value="<?php echo remove_junk(ucwords($user['password'])); ?>">
             </div>
+            <div class="form-group">
+                  <label for="email" class="control-label">Email</label>
+                  <input type="text" class="form-control" name="email" value="<?php echo remove_junk(ucwords($user['email'])); ?>">
+            </div>
             <div class="form-group clearfix">
                     <a href="change_password" title="change password" class="btn btn-danger pull-right">Change Password</a>
                     <button type="submit" name="update" class="btn btn-info">Update</button>
