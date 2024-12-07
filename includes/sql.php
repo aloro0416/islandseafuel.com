@@ -81,20 +81,27 @@ function tableExists($table){
  /* Login with the data provided in $_POST,
  /* coming from the login form.
 /*--------------------------------------------------------------*/
-  function authenticate($username='', $password='') {
+  function authenticate($username = '', $password = '') {
     global $db;
     $username = $db->escape($username);
     $password = $db->escape($password);
-    $sql  = sprintf("SELECT id,username,password,user_level FROM users WHERE username ='%s' LIMIT 1", $username);
+    
+    // Query to fetch user data
+    $sql = sprintf("SELECT id, username, password, user_level FROM users WHERE username = '%s' LIMIT 1", $username);
     $result = $db->query($sql);
-    if($db->num_rows($result)){
-      $user = $db->fetch_assoc($result);
-      $password_request = sha1($password);
-      if($password_request === $user['password'] ){
-        return $user['id'];
-      }
+    
+    // Check if the user exists
+    if ($db->num_rows($result)) {
+        $user = $db->fetch_assoc($result);
+        
+        // Verify password using argon2i
+        if (password_verify($password, $user['password'])) {
+            return $user['id'];
+        }
     }
-   return false;
+    
+    // Return false if authentication fails
+    return false;
   }
   /*--------------------------------------------------------------*/
   /* Login with the data provided in $_POST,
