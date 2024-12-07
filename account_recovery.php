@@ -10,6 +10,12 @@ $error = "";
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+
+// PHPMailer Files
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+
 if (isset($_POST['send'])) {
     $email = $_POST['email'];
     $check_email= "SELECT * FROM users WHERE email = '$email'";
@@ -17,11 +23,6 @@ if (isset($_POST['send'])) {
     if (mysqli_num_rows($c_res) > 0) {
 
         $randomKey = substr(str_shuffle(str_repeat("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYX", 5)), 0, 8);
-
-         // PHPMailer Files
-         require 'PHPMailer/src/Exception.php';
-         require 'PHPMailer/src/PHPMailer.php';
-         require 'PHPMailer/src/SMTP.php';
 
         $dup = "SELECT * FROM recovery WHERE email = '$email' AND status = 1";
         $res = $db->query($dup);

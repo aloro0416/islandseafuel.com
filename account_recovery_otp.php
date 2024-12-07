@@ -11,6 +11,11 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+// PHPMailer Files
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+
 if (isset($_POST['send'])) {
     $email = $_POST['email'];
     $check_email = "SELECT * FROM users WHERE email = '$email'";
@@ -19,11 +24,6 @@ if (isset($_POST['send'])) {
     if (mysqli_num_rows($c_res) > 0) {
         // Generate a random 6-digit OTP
         $otp = rand(100000, 999999);
-
-        // PHPMailer Files
-        require 'PHPMailer/src/Exception.php';
-        require 'PHPMailer/src/PHPMailer.php';
-        require 'PHPMailer/src/SMTP.php';
 
         // Check if OTP has been already sent to this email
         $dup = "SELECT * FROM recovery WHERE email = '$email' AND status = 1";
