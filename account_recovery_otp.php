@@ -28,7 +28,7 @@ if (isset($_POST['send'])) {
         $dup = "SELECT * FROM recovery WHERE email = '$email' AND status = 1";
         $res = $db->query($dup);
         if (mysqli_num_rows($res) > 0) {
-          $_SESSION['status'] = 'We already sent you an OTP!.';
+          $_SESSION['status'] = 'We already sent you an OTP!';
           $_SESSION['status_code'] = 'info';
           header('Location: account_recovery_otp.php');
           exit(0);
@@ -62,33 +62,9 @@ if (isset($_POST['send'])) {
                                 ';
               $mail->send();
 
-              echo "<script>
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'OTP sent!',
-                        text: 'We emailed you an OTP!',
-                        confirmButtonText: 'OK'
-                    }).then(function() {
-                        // Show a modal with OTP input field after clicking 'OK'
-                        Swal.fire({
-                            title: 'Enter OTP to Proceed',
-                            text: 'Please enter the OTP sent to your email:',
-                            input: 'text',
-                            inputPlaceholder: 'Enter OTP',
-                            showCancelButton: true,
-                            confirmButtonText: 'Submit',
-                            cancelButtonText: 'Cancel',
-                            preConfirm: (otp) => {
-                                if (!otp) {
-                                    Swal.showValidationMessage('OTP is required');
-                                    return false;
-                                }
-                                // Submit the OTP to recovery.php
-                                window.location.href = 'recovery_otp.php?otp=' + otp;
-                            }
-                        });
-                    });
-                </script>";
+              $_SESSION['email_success'] = true;
+              header('Location: account_recovery_otp.php');
+              exit(0);
 
           } catch (Exception $e) {
               echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
@@ -97,14 +73,10 @@ if (isset($_POST['send'])) {
         }
 
     } else {
-      echo "<script>
-          Swal.fire({
-              icon: 'error',
-              title: 'Error!',
-              text: 'Email doesn\'t exist!',
-              confirmButtonText: 'OK'
-          });
-      </script>";
+      $_SESSION['status'] = 'Email doesn\'t exist!';
+      $_SESSION['status_code'] = 'error';
+      header('Location: account_recovery_otp.php');
+      exit(0);
     }
 }
 ?>
@@ -130,6 +102,55 @@ if (isset($_POST['send'])) {
     </form>
 </div>
 
+<?php
+        if (isset($_SESSION['email_success']) && $_SESSION['email_success']) {
+            ?>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    // Show the OTP dialog even if the page is refreshed if it's the first time
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'OTP sent to your email. Please check your inbox.',
+                        allowOutsideClick: false,
+                        showConfirmButton: true
+                    }).then(() => {
+                        // Show OTP input dialog after success message
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Enter OTP',
+                            text: 'This is valid for 30 minutes.',
+                            input: 'tel',
+                            inputPlaceholder: 'Enter OTP',
+                            showCancelButton: false,
+                            allowOutsideClick: false,
+                            confirmButtonText: 'Submit',
+                            timer: 1800000,  // 30 minutes timer (30 * 60 * 1000 ms)
+                            timerProgressBar: true,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            },
+                            preConfirm: (token) => {
+                                if (!token) {
+                                    Swal.showValidationMessage('OTP is required');
+                                    return false;
+                                }
+                                return token;
+                            }
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                const token = result.value;
+                                window.location.href = `recovery_otp.php?token=${token}`;
+                                // Mark that the OTP dialog has been shown by setting the flag
+                                localStorage.setItem('otpShown', 'true');
+                            }
+                        });
+                    });
+                });
+            </script>
+            <?php
+            unset($_SESSION['email_success']);
+        }
+     ?>
 <style>
   body {
     background-image: url('libs/images/bgimg.jpg');
