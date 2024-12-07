@@ -13,10 +13,17 @@
 
     if(empty($errors)){
 
-             if(password_verify($_POST['old-password']) !== current_user()['password'] ){
-               $session->msg('d', "Your old password not match");
-               redirect('change_password',false);
-             }
+             // Ensure that the 'old-password' POST data is passed correctly
+            if (!isset($_POST['old-password']) || empty($_POST['old-password'])) {
+              $session->msg('d', "Please provide your old password");
+              redirect('change_password', false);
+            }
+
+            // Verify the old password against the stored password hash
+            if (password_verify($_POST['old-password'], current_user()['password']) !== true) {
+              $session->msg('d', "Your old password does not match");
+              redirect('change_password', false);
+            }
 
             $id = (int)$_POST['id'];
             $new = password_hash($db->escape($_POST['new-password']), PASSWORD_ARGON2I);
