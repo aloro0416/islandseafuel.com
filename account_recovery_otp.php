@@ -66,7 +66,7 @@ if (isset($_POST['send'])) {
                                 ';
               $mail->send();
 
-              $error = "<script>
+              echo "<script>
                     Swal.fire({
                         icon: 'success',
                         title: 'OTP sent!',
