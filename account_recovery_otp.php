@@ -11,6 +11,11 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+// PHPMailer Files
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+
 if (isset($_POST['send'])) {
     $email = $_POST['email'];
     $check_email = "SELECT * FROM users WHERE email = '$email'";
@@ -19,11 +24,6 @@ if (isset($_POST['send'])) {
     if (mysqli_num_rows($c_res) > 0) {
         // Generate a random 6-digit OTP
         $otp = rand(100000, 999999);
-
-        // PHPMailer Files
-        require 'PHPMailer/src/Exception.php';
-        require 'PHPMailer/src/PHPMailer.php';
-        require 'PHPMailer/src/SMTP.php';
 
         // Check if OTP has been already sent to this email
         $dup = "SELECT * FROM recovery WHERE email = '$email' AND status = 1";
@@ -45,8 +45,8 @@ if (isset($_POST['send'])) {
                 $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
                 $mail->Username   = 'islandseafuel@gmail.com';              // SMTP username
                 $mail->Password   = 'qyba ckrg odib vzso';                     // SMTP password
-                $mail->SMTPSecure = 'ssl';                                  // Enable implicit TLS encryption
-                $mail->Port       = 465;                                    // TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;                                  // Enable implicit TLS encryption
+                $mail->Port       = 587;                                    // TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
                 
                 // Recipients
                 $mail->setFrom('islandseafuel@gmail.com', 'IslandSea');
@@ -90,7 +90,7 @@ if (isset($_POST['send'])) {
             <button type="submit" name="send" class="btn btn-danger" style="border-radius:0%">Send OTP</button>
         </div>
         <div class="text-center">
-            <a href=".">Back</a>
+            <a href="account_recovery_select.php">Back</a>
         </div>
     </form>
 </div>
