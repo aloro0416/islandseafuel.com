@@ -3,16 +3,13 @@
     <div class="text-center">
         <img src="libs/images/logo.png" alt="ISLAND SEA LOGO" style="height: 100px">
        <h4>ISLAND SEA MANAGEMENT SYSTEM</h4>
-     </div>
+    </div>
      <?php echo display_msg($msg); ?>
-      <form method="post" action="auth.php" class="clearfix">
         <div class="form-group">
-              <label for="username" class="control-label">Username</label>
-              <input type="name" class="form-control" name="username" placeholder="Username">
+              <a href="account_recovery.php">Reset via email link</a>
         </div>
         <div class="form-group">
-            <label for="Password" class="control-label">Password</label>
-            <input type="password" name= "password" class="form-control" placeholder="Password">
+            <a href="account_recovery_otp.php">Reset via email otp</a>
         </div>
         <div class="form-group">
                 <button type="submit" class="btn btn-danger" style="border-radius:0%">Login</button>
@@ -20,7 +17,6 @@
         <div class="text-center">
             <a href="account_recovery.php">Forgot password?</a>
         </div>
-    </form>
 </div>
 
 <style>
