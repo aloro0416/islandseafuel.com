@@ -28,7 +28,14 @@ if (isset($_POST['send'])) {
         $dup = "SELECT * FROM recovery WHERE email = '$email' AND status = 1";
         $res = $db->query($dup);
         if (mysqli_num_rows($res) > 0) {
-            $error = "<center><span class='text-center badge bg-info' style='padding: 8px;'>We already sent you an OTP!</span></center>";
+          echo "<script>
+              Swal.fire({
+                  icon: 'info',
+                  title: 'Oops!',
+                  text: 'We already sent you an OTP!',
+                  confirmButtonText: 'OK'
+              });
+          </script>";
         } else {
           $ins = "INSERT INTO recovery (email, recovery_key, status) VALUES ('$email','$otp',1)";
           $ress = $db->query($ins);
@@ -59,7 +66,33 @@ if (isset($_POST['send'])) {
                                 ';
               $mail->send();
 
-              $error = "<center><span class='text-center badge' style='padding: 8px; background: gold;'>OTP sent!</span></center>";
+              echo "<script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'OTP sent!',
+                        text: 'We emailed you an OTP!',
+                        confirmButtonText: 'OK'
+                    }).then(function() {
+                        // Show a modal with OTP input field after clicking 'OK'
+                        Swal.fire({
+                            title: 'Enter OTP to Proceed',
+                            text: 'Please enter the OTP sent to your email:',
+                            input: 'text',
+                            inputPlaceholder: 'Enter OTP',
+                            showCancelButton: true,
+                            confirmButtonText: 'Submit',
+                            cancelButtonText: 'Cancel',
+                            preConfirm: (otp) => {
+                                if (!otp) {
+                                    Swal.showValidationMessage('OTP is required');
+                                    return false;
+                                }
+                                // Submit the OTP to recovery.php
+                                window.location.href = 'recovery_otp.php?otp=' + otp;
+                            }
+                        });
+                    });
+                </script>";
 
           } catch (Exception $e) {
               echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
@@ -68,7 +101,14 @@ if (isset($_POST['send'])) {
         }
 
     } else {
-        $error = "<center><span class='text-center badge bg-danger' style='padding: 8px;'>Email doesn't exist!</span></center>";
+      echo "<script>
+          Swal.fire({
+              icon: 'error',
+              title: 'Error!',
+              text: 'Email doesn\'t exist!',
+              confirmButtonText: 'OK'
+          });
+      </script>";
     }
 }
 ?>
