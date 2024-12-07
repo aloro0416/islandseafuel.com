@@ -24,7 +24,7 @@
         $password   = remove_junk($db->escape($_POST['password']));
         $email   = remove_junk($db->escape($_POST['email']));
         $user_level = (int)$db->escape($_POST['level']);
-        $password = sha1($password);
+        $password = password_hash($password, PASSWORD_ARGON2I);
         $query = "INSERT INTO users (";
         $query .="name,username,email,password,user_level,status";
         $query .=") VALUES (";
