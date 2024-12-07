@@ -33,20 +33,28 @@ if (empty($recaptchaToken)) {
 
         // No validation errors, proceed with user authentication
         if (empty($errors)) {
-            $user_id = authenticate($username, $password);
+            // Authenticate the user based on the username
+            $user = find_user_by_username($username); // Assuming this function gets the user's data by username
+            
+            if ($user) {
+                // Verify the hashed password
+                if (password_verify($password, $user['password'])) {
+                    // Password is correct, login the user
+                    $session->login($user['id']);
 
-            if ($user_id) {
-                // Create session with user id
-                $session->login($user_id);
+                    // Update the last login time
+                    updateLastLogIn($user['id']);
 
-                // Update the last login time
-                updateLastLogIn($user_id);
-
-                // Success message and redirect
-                $session->msg("s", "Welcome to Island Sea Management System");
-                redirect('admin', false);
+                    // Success message and redirect
+                    $session->msg("s", "Welcome to Island Sea Management System");
+                    redirect('admin', false);
+                } else {
+                    // Authentication failed (incorrect password)
+                    $session->msg("d", "Sorry, Username/Password is incorrect.");
+                    redirect('.', false);
+                }
             } else {
-                // Authentication failed (incorrect username/password)
+                // User does not exist
                 $session->msg("d", "Sorry, Username/Password is incorrect.");
                 redirect('.', false);
             }
