@@ -36,8 +36,6 @@ if (empty($recaptchaToken)) {
             $user_id = authenticate($username, $password);
 
             if ($user_id) {
-
-                if (password_verify($password,$user_id['password'])){
                 // Create session with user id
                 $session->login($user_id);
 
@@ -47,11 +45,6 @@ if (empty($recaptchaToken)) {
                 // Success message and redirect
                 $session->msg("s", "Welcome to Island Sea Management System");
                 redirect('admin', false);
-                } else {
-                    // Authentication failed (incorrect username/password)
-                    $session->msg("d", "Sorry, Username/Password is incorrect.");
-                    redirect('.', false);
-                }
             } else {
                 // Authentication failed (incorrect username/password)
                 $session->msg("d", "Sorry, Username/Password is incorrect.");
