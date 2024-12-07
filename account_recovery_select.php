@@ -14,13 +14,10 @@
               <a href="account_recovery.php" class="form-control">Reset via email link</a>
         </div>
         <div class="form-group">
-            <a href="account_recovery_otp.php">Reset via email otp</a>
-        </div>
-        <div class="form-group">
-                <button type="submit" class="btn btn-danger" style="border-radius:0%">Login</button>
+            <a href="account_recovery_otp.php" class="form-control">Reset via email otp</a>
         </div>
         <div class="text-center">
-            <a href="account_recovery.php">Forgot password?</a>
+            <a href=".">Back</a>
         </div>
 </div>
 
