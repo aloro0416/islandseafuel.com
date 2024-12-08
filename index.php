@@ -347,7 +347,7 @@ window.onclick = function(event) {
 </script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    const loginButton = document.querySelector('#login');
+    const loginButton = document.querySelector('#btn-login');
     const termsCheckbox = document.querySelector('input[type="checkbox"]');
 
     // Add click event listener to the login button
