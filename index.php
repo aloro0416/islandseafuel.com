@@ -14,6 +14,7 @@
                         $lockout_time_remaining = $_SESSION['lockout_time'] - time();
                         $minutes_remaining = ceil($lockout_time_remaining / 60);
                         ?>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.0/dist/sweetalert2.min.css">
                         <script>
                             document.addEventListener('DOMContentLoaded', function() {
                                 const formInputs = document.querySelectorAll('#username, #myInput');
@@ -39,6 +40,7 @@
                                 });
                             });
                         </script>
+                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.0/dist/sweetalert2.all.min.js"></script>
                     <?php endif; ?>
      <!-- Include Google reCAPTCHA v3 Script -->
      <script src="https://www.google.com/recaptcha/api.js?render=6Lcc25IqAAAAAH635KLYx5TwcXhguTYoIdJzgceI"></script>
