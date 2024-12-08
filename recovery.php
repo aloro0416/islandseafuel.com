@@ -6,7 +6,7 @@
 <?php include_once('layouts/header.php'); 
 $error = "";
 $email = encryptor('decrypt', $_GET['email']);
-$key = encryptor('decrypt'.$_GET['key']);
+$key = encryptor('decrypt', $_GET['key']);
 
 $check = "SELECT * FROM recovery WHERE email = '$email' AND recovery_key = '$key' AND status = 1";
 $c_res = $db->query($check);
