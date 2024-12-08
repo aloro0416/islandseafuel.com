@@ -81,7 +81,7 @@ if (isset($_POST['add'])) {
             title: 'Added Successfully!',
             showConfirmButton: 'Ok',
           }).then(() => {
-            window.location.href = 'receipt.php?cus_id=<?php echo $customer_id; ?>&receipt_id=<?php echo $receipt_id;?>';
+            window.location.href = 'receipt?cus_id=<?php echo $customer_id; ?>&receipt_id=<?php echo $receipt_id;?>';
           })
           <?php endif; ?>
         });
