@@ -43,10 +43,7 @@ if (isset($_POST['save'])) {
 
     ?>
     <script>
-        $_SESSION['status'] = "Saved!";
-        $_SESSION['status_code'] = "success";
-        header("Location: edit_pos.php?update='" .$_GET['update'] . "'");
-        exit(0);
+        Swal.fire('Saved!', 'Saved Successfully!', 'success');
     </script>
     <?php
 }
