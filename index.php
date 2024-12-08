@@ -46,17 +46,17 @@
      <form method="post" action="auth.php" class="clearfix" id="loginForm">
         <div class="form-group">
               <label for="username" class="control-label">Username</label>
-              <input type="name" class="form-control" name="username" id="username" placeholder="Username" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?>>
+              <input type="name" class="form-control" name="username" id="username" placeholder="Username" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>
         </div>
         <div class="form-group">
             <label for="Password" class="control-label">Password</label>
-            <input type="password" name= "password" class="form-control" id="myInput" placeholder="Password" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?>>
+            <input type="password" name= "password" class="form-control" id="myInput" placeholder="Password" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>
             <!-- An element to toggle between password visibility -->
             <input type="checkbox" onclick="myFunction()"> <span class="text-muted">Show Password</span>
         </div>
         <!-- Hidden reCAPTCHA token input will be added here -->
         <div class="form-group">
-            <button type="submit" id="btn-login" class="btn btn-danger" style="border-radius:0%" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?>>Login</button>
+            <button type="submit" id="btn-login" class="btn btn-danger" style="border-radius:0%" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>Login</button>
         </div>
         <div class="text-center">
             <a href="account_recovery_select.php">Forgot password?</a>
