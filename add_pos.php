@@ -70,7 +70,6 @@ if (isset($_POST['add'])) {
                 });
             </script>
             <?php
-        }
     }
     ?>
     <script>
