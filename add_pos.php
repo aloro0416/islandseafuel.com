@@ -38,13 +38,13 @@ if (isset($_POST['add'])) {
         } else {
             $_SESSION['status'] = "Added failed. Please try again.";
             $_SESSION['status_code'] = "error";
-            header("Location: add_pos.php?product='".$product_id."'");
+            header("Location: add_pos.php");
             exit(0);
         }
     } else {
         $_SESSION['status'] = "Product not found.";
         $_SESSION['status_code'] = "error";
-        header("Location: add_pos.php?product='".$product_id."'");
+        header("Location: add_pos.php");
         exit(0);
     }
     ?>
