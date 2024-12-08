@@ -9,6 +9,37 @@
         <img src="libs/images/logo.png" alt="ISLAND SEA LOGO" style="height: 100px">
        <h4>ISLAND SEA MANAGEMENT SYSTEM</h4>
      </div>
+     <?php if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']): ?>
+                        <?php
+                        $lockout_time_remaining = $_SESSION['lockout_time'] - time();
+                        $minutes_remaining = ceil($lockout_time_remaining / 60);
+                        ?>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const formInputs = document.querySelectorAll('#admin_type, #email, #password');
+                                const loginButton = document.getElementById('admin_login_btn');
+                                
+                                formInputs.forEach(input => input.disabled = true);
+                                loginButton.disabled = true;
+
+                                Swal.fire({
+                                    title: 'Account Locked',
+                                    text: "Your account is locked. Please wait " + <?php echo $minutes_remaining; ?> + " minute(s) before trying again.",
+                                    icon: 'warning',
+                                    showConfirmButton: false,
+                                    allowOutsideClick: false,
+                                    allowEscapeKey: false, 
+                                    didOpen: () => {
+                                        Swal.showLoading();
+                                    }
+                                }).then(() => {
+                                    setTimeout(function() {
+                                        window.location.reload(); 
+                                    }, 1000);
+                                });
+                            });
+                        </script>
+                    <?php endif; ?>
      <?php echo display_msg($msg); ?>
      <!-- Include Google reCAPTCHA v3 Script -->
      <script src="https://www.google.com/recaptcha/api.js?render=6Lcc25IqAAAAAH635KLYx5TwcXhguTYoIdJzgceI"></script>
@@ -16,17 +47,17 @@
      <form method="post" action="auth.php" class="clearfix" id="loginForm">
         <div class="form-group">
               <label for="username" class="control-label">Username</label>
-              <input type="name" class="form-control" name="username" placeholder="Username">
+              <input type="name" class="form-control" name="username" placeholder="Username" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?>>
         </div>
         <div class="form-group">
             <label for="Password" class="control-label">Password</label>
-            <input type="password" name= "password" class="form-control" id="myInput" placeholder="Password">
+            <input type="password" name= "password" class="form-control" id="myInput" placeholder="Password" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?>>
             <!-- An element to toggle between password visibility -->
             <input type="checkbox" onclick="myFunction()"> <span class="text-muted">Show Password</span>
         </div>
         <!-- Hidden reCAPTCHA token input will be added here -->
         <div class="form-group">
-            <button type="submit" class="btn btn-danger" style="border-radius:0%">Login</button>
+            <button type="submit" class="btn btn-danger" style="border-radius:0%" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?>>Login</button>
         </div>
         <div class="text-center">
             <a href="account_recovery_select.php">Forgot password?</a>
