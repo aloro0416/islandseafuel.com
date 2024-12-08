@@ -292,6 +292,7 @@ const formInputs = document.querySelectorAll('#username, #myInput');
     border: 1px solid #888;
     width: 60%;
     max-width: 600px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
     max-height: 100vh;
 }
@@ -305,6 +306,7 @@ const formInputs = document.querySelectorAll('#username, #myInput');
     color: #aaa;
     float: right;
     font-size: 28px;
+    margin-top: -20px;
     font-weight: bold;
 }
 
