@@ -1,6 +1,18 @@
 <?php include_once('includes/load.php'); ?>
 <?php
 
+if (!isset($_SESSION['login_attempts'])){
+    $_SESSION['login_attempts'] = 0;
+    $_SESSION['lockout_time'] = null;
+}
+
+if ($_SESSION['lockout_time'] && time() < $_SESSION['lockout_time']) {
+    $lockout_time_remaining = $_SESSION['lockout_time'] - time();
+    $minutes_remaining = ceil($lockout_time_remaining / 60);
+    header("Location: .");
+    exit(0);
+}
+
 // reCAPTCHA Secret Key
 $secretKey = '6Lcc25IqAAAAAOVyCiaGjWfDYWXQssIBOfO-i5Pu'; // Replace with your actual Secret Key
 
@@ -37,6 +49,11 @@ if (empty($recaptchaToken)) {
 
             if ($user_id) {
                 // Create session with user id
+                session_regenerate_id(true);
+
+                $_SESSION['login_attempts'] = 0;
+                $_SESSION['lockout_time'] = null;
+
                 $session->login($user_id);
 
                 // Update the last login time
@@ -46,15 +63,25 @@ if (empty($recaptchaToken)) {
                 $session->msg("s", "Welcome to Island Sea Management System");
                 redirect('admin', false);
             } else {
-                // Authentication failed (incorrect username/password)
-                $session->msg("d", "Sorry, Username/Password is incorrect.");
-                redirect('.', false);
+                $_SESSION['login_attempts']++;
+                if ($_SESSION['login_attempts']){
+                    $_SESSION['lockout_time'] = time() + 300;
+                } else {
+                    // Authentication failed (incorrect username/password)
+                    $session->msg("d", "Sorry, Username/Password is incorrect.");
+                    redirect('.', false);
+                }
             }
 
         } else {
-            // Validation errors
-            $session->msg("d", $errors);
-            redirect('.', false);
+            $_SESSION['login_attempts']++;
+            if ($_SESSION['login_attempts'] >= 3) {
+                $_SESSION['lockout_time'] = time() + 300;
+            } else {
+                // Validation errors
+                $session->msg("d", $errors);
+                redirect('.', false);
+            }
         }
 
     } else {
