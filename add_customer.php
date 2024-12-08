@@ -15,10 +15,11 @@ if (isset($_POST['add'])) {
     $sql = "SELECT * FROM customer WHERE firstname = '$first' AND middlename = '$middle' AND lastname = '$last'";
     $result = $db->query($sql);
     if (mysqli_num_rows($result) > 0) {
+        $warning = true;
         ?>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
-            <?php if (isset($success) && $success): ?>
+            <?php if (isset($warning) && $warning): ?>
             Swal.fire({
                 icon: 'warning',
                 title: 'Customer Already Exist!',
