@@ -29,8 +29,6 @@ class Session {
 
   }
   public function logout() {
-    // Assuming you have a global MySQLi connection object
-    global $db; // This should be your MySQLi connection object, not PDO
 
     // Check if user is logged in and user_id is available in session
     if (isset($_SESSION['user_id'])) {
