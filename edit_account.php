@@ -63,7 +63,7 @@
             <div class="col-md-8">
               <form class="form" action="edit_account.php" method="POST" enctype="multipart/form-data">
               <div class="form-group">
-                <input type="file" name="file_upload" multiple="multiple" class="btn btn-default btn-file"/>
+                <input type="file" name="file_upload" multiple="multiple" class="btn btn-default btn-file" id="fileInput"/>
               </div>
               <div class="form-group">
                 <input type="hidden" name="user_id" value="<?php echo $user['id'];?>">
@@ -101,5 +101,35 @@
   </div>
 </div>
 
+<script>
+  document.getElementById('fileInput').addEventListener('change', function(event) {
+    const files = event.target.files;
+    const allowedTypes = ['image/png', 'image/jpg', 'image/jpeg'];
+    const maxSize = 2 * 1024 * 1024; // 2MB
 
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      if (!allowedTypes.includes(file.type)) {
+        // Show SweetAlert for invalid file type
+        Swal.fire({
+          icon: 'error',
+          title: 'Invalid file type',
+          text: 'Only .png, .jpg, .jpeg files are allowed.',
+        });
+        event.target.value = ''; // Clear input
+        return;
+      }
+      if (file.size > maxSize) {
+        // Show SweetAlert for file size error
+        Swal.fire({
+          icon: 'error',
+          title: 'File too large',
+          text: 'Each file must be smaller than 2MB.',
+        });
+        event.target.value = ''; // Clear input
+        return;
+      }
+    }
+  });
+</script>
 <?php include_once('layouts/footer.php'); ?>
