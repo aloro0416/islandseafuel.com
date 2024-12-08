@@ -98,7 +98,7 @@
           title: 'Login Successful',
           showConfirmButton: true
         }).then(() => {
-          window.location.href = 'admin.php';
+          window.location.href = 'admin';
         });
       });
     </script>
