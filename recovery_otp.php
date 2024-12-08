@@ -5,7 +5,7 @@
 ?>
 <?php include_once('layouts/header.php'); 
 $error = "";
-$key = $_GET['otp'];
+$key = $_GET['token'];
 
 $check = "SELECT * FROM recovery WHERE recovery_key = '$key' AND status = 1";
 $c_res = $db->query($check);
