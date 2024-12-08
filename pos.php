@@ -150,7 +150,7 @@
                                                 <a href="edit_pos?update=<?=$row['id']?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
                                                 <i class="glyphicon glyphicon-pencil"></i>
                                                 </a>
-                                                <a href="javascript:void(0);" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove" onclick="confirmDelete(<?=$row['id']?>)">
+                                                <a href="javascript:void(0);" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove" onclick="confirmposDelete(<?=$row['id']?>)">
                                                     <i class="glyphicon glyphicon-remove"></i>
                                                 </a>
 
@@ -244,7 +244,7 @@
 </script>
 
 <script>
-    function confirmDelete(customerId) {
+    function confirmposDelete(customerId) {
         // Show SweetAlert confirmation dialog
         Swal.fire({
             title: 'Are you sure?',
