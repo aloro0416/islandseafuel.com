@@ -29,16 +29,58 @@
      $query .=")";
      $query .=" ON DUPLICATE KEY UPDATE name='{$p_name}'";
      if($db->query($query)){
-       $session->msg('s',"Product added ");
-       redirect('add_product', false);
+       $success = true;
+       ?>
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+          <?php if (isset($success) && $success): ?>
+            Swal.fire({
+            icon: 'success',
+            title: 'Product added',
+            showConfirmButton: 'Ok',
+          }).then(() => {
+            window.location.href = 'add_product';
+          })
+            <?php endif; ?>
+          });
+        </script>
+       <?php
      } else {
-       $session->msg('d',' Sorry failed to added!');
-       redirect('product', false);
+       $error = true;
+       ?>
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+          <?php if (isset($error) && $error): ?>
+            Swal.fire({
+            icon: 'error',
+            title: 'Sorry failed to added!',
+            showConfirmButton: 'Ok',
+          }).then(() => {
+            window.location.href = 'product';
+          })
+            <?php endif; ?>
+          });
+        </script>
+       <?php
      }
 
    } else{
-     $session->msg("d", $errors);
-     redirect('add_product',false);
+     $danger = true;
+       ?>
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+          <?php if (isset($danger) && $danger): ?>
+            Swal.fire({
+            icon: 'error',
+            title: $errors,
+            showConfirmButton: 'Ok',
+          }).then(() => {
+            window.location.href = 'add_product';
+          })
+            <?php endif; ?>
+          });
+        </script>
+       <?php
    }
 
  }
