@@ -40,17 +40,17 @@ if(mysqli_num_rows($c_res) > 0 ){
         <form method="post" class="clearfix">
             <div class="form-group">
                 <label for="password" class="control-label">New Password</label>
-                <input type="password" class="form-control" name="password" placeholder="New Password" required>
+                <input type="password" class="form-control" name="password" id="password" placeholder="New Password" required>
             </div>
             <div class="form-group">
                 <label for="confirmPassword" class="control-label">Confirm Password</label>
-                <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password" required>
+                <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" id="showPassword" class="mt-1"> <label for="showPassword">Show Passwords</label>
             </div>
             <div class="form-group text-center">
                     <button type="submit" name="changePass" class="btn btn-danger" style="border-radius:0%">Change Password</button>
-            </div>
-            <div class="text-center">
-                <a href=".">Back</a>
             </div>
         </form>
     </div>
@@ -72,6 +72,20 @@ if(mysqli_num_rows($c_res) > 0 ){
 
 ?>
 
+<script>
+    // Toggle the visibility of both the New Password and Confirm Password fields
+    document.getElementById('showPassword').addEventListener('change', function() {
+        var passwordField = document.getElementById('password');
+        var confirmPasswordField = document.getElementById('confirmPassword');
+        if (this.checked) {
+            passwordField.type = 'text';
+            confirmPasswordField.type = 'text';
+        } else {
+            passwordField.type = 'password';
+            confirmPasswordField.type = 'password';
+        }
+    });
+</script>
 
 <style>
   body{
