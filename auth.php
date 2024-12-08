@@ -63,9 +63,9 @@ if (empty($recaptchaToken)) {
                 // Update the last login time
                 updateLastLogIn($user_id);
 
-                $_SESSION['login_success'] = true;
-                header("Location: .");
-                exit(0);
+                // Success message and redirect
+                $session->msg("s", "Welcome to Island Sea Management System");
+                redirect('admin', false);
             } else {
                 $_SESSION['login_attempts']++;
                 if ($_SESSION['login_attempts'] >= 3){

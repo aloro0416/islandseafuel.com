@@ -88,25 +88,6 @@
 }
 </script>
 
-<?php
-  if (isset($_SESSION['login_success']) && $_SESSION['login_success']) {
-    ?>
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        Swal.fire({
-          icon: 'success',
-          title: 'Login Successful',
-          showConfirmButton: true
-        }).then(() => {
-          window.location.href = 'admin';
-        });
-      });
-    </script>
-    <?php
-    unset($_SESSION['login_success']);
-  }
-?>
-
 </div>
 
 <style>
