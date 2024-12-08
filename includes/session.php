@@ -29,6 +29,11 @@ class Session {
   }
   public function logout(){
     unset($_SESSION['user_id']);
+    session_destroy();
+    if (isset($_COOKIE[session_name()])) {
+      setcookie(session_name(), '', time() - 20, '/');
+    }
+    $_SESSION = array();
   }
 
   public function msg($type ='', $msg =''){
