@@ -67,7 +67,7 @@
                   <span class="input-group-addon">
                    <i class="glyphicon glyphicon-th-large"></i>
                   </span>
-                  <input type="text" class="form-control" name="product-title" placeholder="Product Title">
+                  <input type="text" class="form-control" name="product-title" id="product-title" placeholder="Product Title">
                </div>
               </div>
               <div class="form-group">
@@ -130,5 +130,26 @@
       </div>
     </div>
   </div>
+
+  <script>
+    document.getElementById('product-title').addEventListener('input', function () {
+        var product-title = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\']/;
+        
+        if (product-title === "") {
+            this.setCustomValidity('Product title cannot be empty or just spaces.');
+        } else if (this.value !== product-title) {
+            this.setCustomValidity('Product title cannot start with a space.');
+        } else if (dangerousCharsPattern.test(product-title)) {
+            this.setCustomValidity('Product title cannot contain HTML special characters like <, >, ", \'.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = product-title !== "" && this.value === product-title && !dangerousCharsPattern.test(product-title);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+  </script>
 
 <?php include_once('layouts/footer.php'); ?>
