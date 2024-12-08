@@ -61,9 +61,6 @@ if(mysqli_num_rows($c_res) > 0 ){
             <div class="form-group text-center">
                     <button type="submit" name="changePass" class="btn btn-danger" style="border-radius:0%">Change Password</button>
             </div>
-            <div class="text-center">
-                <a href=".">Back</a>
-            </div>
         </form>
     </div>
     <?php
