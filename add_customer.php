@@ -34,10 +34,22 @@ if (isset($_POST['add'])) {
     }else{
         $sqls = "INSERT INTO customer (firstname,middlename,lastname,customer_type) VALUES ('$first','$middle','$last','$type')";
         $result = $db->query($sqls);
-        $_SESSION['status'] = "Successfully Added!";
-        $_SESSION['status_code'] = "success";
-        header("Location: pos.php?proc=customer");
-        exit(0);
+        $success = true;
+        ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            <?php if (isset($success) && $success): ?>
+            Swal.fire({
+                icon: 'success',
+                title: 'Successfully Added!',
+                showConfirmButton: 'Ok',
+            }).then(() => {
+                window.location.href = 'pos.php?proc=customer';
+            })
+            <?php endif; ?>
+            });
+        </script>
+        <?php
     }
 }elseif (isset($_POST['update'])) {
    $first = remove_junk($db->escape($_POST['firstname']));
