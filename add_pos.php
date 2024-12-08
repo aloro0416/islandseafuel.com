@@ -34,29 +34,34 @@ if (isset($_POST['add'])) {
         $s_result = $db->query($salesss);
 
         if ($pros && $result && $s_result) {
-            $alert_type = 'success';
-            $alert_message = 'Added successfully.';
+            $success = true;
         } else {
-            $alert_type = 'error';
-            $alert_message = 'Added failed. Please try again.';
+            $_SESSION['status'] = "Added failed. Please try again.";
+            $_SESSION['status_code'] = "error";
+            header("Location: add_pos.php?product='".$product_id."'");
+            exit(0);
         }
     } else {
-        $alert_type = 'error';
-        $alert_message = 'Product not found.';
+        $_SESSION['status'] = "Product not found.";
+        $_SESSION['status_code'] = "error";
+        header("Location: add_pos.php?product='".$product_id."'");
+        exit(0);
     }
-
-    // Output the alert message and then redirect
-    echo "<script>
-            Swal.fire({
-                icon: '$alert_type',
-                title: '$alert_message',
-                showConfirmButton: true
-            }).then(function() {
-                window.location.href = 'receipt.php?cus_id=".$customer_id."&receipt_id=".$receipt_id."';
-            });
-          </script>";
-
-    exit(); // Ensure no further code is executed after script
+    ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          <?php if (isset($success) && $success): ?>
+          Swal.fire({
+            icon: 'success',
+            title: 'Added Successfully!',
+            showConfirmButton: 'Ok',
+          }).then(() => {
+            window.location.href = 'receipt.php?cus_id=<?php echo $customer_id; ?>&receipt_id=<?php echo $receipt_id;?>';
+          })
+          <?php endif; ?>
+        });
+    </script>
+    <?php
 }
 ?>
 
