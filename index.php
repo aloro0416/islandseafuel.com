@@ -13,52 +13,20 @@
      <!-- Include Google reCAPTCHA v3 Script -->
      <script src="https://www.google.com/recaptcha/api.js?render=6Lcc25IqAAAAAH635KLYx5TwcXhguTYoIdJzgceI"></script>
 
-     <!-- <?php if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']); ?>
-     <?php
-     $lockout_time_remaining = $_SESSION['lockout_time'] - time();
-     $minutes_remaining = ceil($lockout_time_remaining / 60);
-     ?>
-     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const formInputs = document.querySelectorAll('#username, #myInput');
-        const loginButton = document.getElementById('login');
-                                
-        formInputs.forEach(input => input.disabled = true);
-        loginButton.disabled = true;
-
-        Swal.fire({
-        title: 'Account Locked',
-        text: "Your account is locked. Please wait " + <?php echo $minutes_remaining; ?> + " minute(s) before trying again.",
-        icon: 'warning',
-        showConfirmButton: false,
-        allowOutsideClick: false,
-        allowEscapeKey: false, 
-        didOpen: () => {
-          Swal.showLoading();
-        }
-        }).then(() => {
-          setTimeout(function() {
-          window.location.reload(); 
-          }, 1000);
-        });
-      });
-     </script>
-     <?php endif; ?> -->
-
      <form method="post" action="auth.php" class="clearfix" id="loginForm">
         <div class="form-group">
               <label for="username" class="control-label">Username</label>
-              <input type="name" class="form-control" name="username" id="username" placeholder="Username" required <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?>>
+              <input type="name" class="form-control" name="username" placeholder="Username">
         </div>
         <div class="form-group">
             <label for="Password" class="control-label">Password</label>
-            <input type="password" name= "password" class="form-control" id="myInput" placeholder="Password" required <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?>>
+            <input type="password" name= "password" class="form-control" id="myInput" placeholder="Password">
             <!-- An element to toggle between password visibility -->
             <input type="checkbox" onclick="myFunction()"> <span class="text-muted">Show Password</span>
         </div>
         <!-- Hidden reCAPTCHA token input will be added here -->
         <div class="form-group">
-            <button type="submit" id="login" class="btn btn-danger" style="border-radius:0%">Login</button>
+            <button type="submit" class="btn btn-danger" style="border-radius:0%">Login</button>
         </div>
         <div class="text-center">
             <a href="account_recovery_select.php">Forgot password?</a>
