@@ -68,7 +68,7 @@ if (isset($_POST['add'])) {
                 title: 'Successfully Updated!',
                 showConfirmButton: 'Ok',
             }).then(() => {
-                window.location.href = 'add_customer';
+                window.location.href = 'add_customer?update="'.$_GET['update'].'"';
             })
             <?php endif; ?>
             });
