@@ -9,8 +9,22 @@ $product = find_by_id('products',(int)$_GET['id']);
 $all_categories = find_all('categories');
 $all_photo = find_all('media');
 if(!$product){
-  $session->msg("d","Missing product id.");
-  redirect('product');
+  $missing = true;
+       ?>
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+          <?php if (isset($missing) && $missing): ?>
+            Swal.fire({
+            icon: 'error',
+            title: 'Missing product id.',
+            showConfirmButton: true,
+          }).then(() => {
+            window.location.href = 'product';
+          })
+            <?php endif; ?>
+          });
+        </script>
+       <?php
 }
 ?>
 <?php
@@ -35,16 +49,58 @@ if(!$product){
        $query  .=" WHERE id ='{$product['id']}'";
        $result = $db->query($query);
                if($result && $db->affected_rows() === 1){
-                 $session->msg('s',"Product updated ");
-                 redirect('product', false);
+                 $updated = true;
+                  ?>
+                    <script>
+                      document.addEventListener('DOMContentLoaded', function () {
+                      <?php if (isset($updated) && $updated): ?>
+                        Swal.fire({
+                        icon: 'success',
+                        title: 'Product updated',
+                        showConfirmButton: true,
+                      }).then(() => {
+                        window.location.href = 'product';
+                      })
+                        <?php endif; ?>
+                      });
+                    </script>
+                  <?php
                } else {
-                 $session->msg('d',' Sorry failed to updated!');
-                 redirect('edit_product?id='.$product['id'], false);
+                 $failed = true;
+                  ?>
+                    <script>
+                      document.addEventListener('DOMContentLoaded', function () {
+                      <?php if (isset($failed) && $failed): ?>
+                        Swal.fire({
+                        icon: 'error',
+                        title: 'Sorry failed to updated!',
+                        showConfirmButton: true,
+                      }).then(() => {
+                        window.location.href = 'edit_product?id=<?php echo $product['id']; ?>';
+                      })
+                        <?php endif; ?>
+                      });
+                    </script>
+                  <?php
                }
 
    } else{
-       $session->msg("d", $errors);
-       redirect('edit_product?id='.$product['id'], false);
+       $error = true;
+       ?>
+       <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        <?php if (isset($error) && $error): ?>
+          Swal.fire({
+          icon: 'error',
+          title: $errors,
+          showConfirmButton: true,
+          }).then(() => {
+             window.location.href = 'edit_product?id=<?php echo $product['id']; ?>';
+          })
+        <?php endif; ?>
+        });
+      </script>
+      <?php  
    }
 
  }
@@ -72,7 +128,7 @@ if(!$product){
                   <span class="input-group-addon">
                    <i class="glyphicon glyphicon-th-large"></i>
                   </span>
-                  <input type="text" class="form-control" name="product-title" value="<?php echo remove_junk($product['name']);?>">
+                  <input type="text" class="form-control" name="product-title" id="product-title" value="<?php echo remove_junk($product['name']);?>">
                </div>
               </div>
               <div class="form-group">
@@ -143,5 +199,26 @@ if(!$product){
         </div>
       </div>
   </div>
+
+  <script>
+    document.getElementById('product-title').addEventListener('input', function () {
+        var product = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\']/;
+        
+        if (product === "") {
+            this.setCustomValidity('Product title cannot be empty or just spaces.');
+        } else if (this.value !== product) {
+            this.setCustomValidity('Product title cannot start with a space.');
+        } else if (dangerousCharsPattern.test(product)) {
+            this.setCustomValidity('Product title cannot contain HTML special characters like <, >, ", \'.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = product !== "" && this.value === product && !dangerousCharsPattern.test(product);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+  </script>
 
 <?php include_once('layouts/footer.php'); ?>
