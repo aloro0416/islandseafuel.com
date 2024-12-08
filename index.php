@@ -9,6 +9,7 @@
         <img src="libs/images/logo.png" alt="ISLAND SEA LOGO" style="height: 100px">
        <h4>ISLAND SEA MANAGEMENT SYSTEM</h4>
      </div>
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.0/dist/sweetalert2.min.css">
      <?php if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']): ?>
                         <?php
                         $lockout_time_remaining = $_SESSION['lockout_time'] - time();
@@ -40,6 +41,7 @@
                             });
                         </script>
                     <?php endif; ?>
+                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.0/dist/sweetalert2.all.min.js"></script>
      <?php echo display_msg($msg); ?>
      <!-- Include Google reCAPTCHA v3 Script -->
      <script src="https://www.google.com/recaptcha/api.js?render=6Lcc25IqAAAAAH635KLYx5TwcXhguTYoIdJzgceI"></script>
