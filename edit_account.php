@@ -83,12 +83,10 @@
       </div>
       <div class="panel-body">
           <form method="post" action="edit_account.php?id=<?php echo (int)$user['id'];?>" class="clearfix">
-          <div class="form-group">
-              <label for="name" class="control-label">Name</label>
-              <input type="text" class="form-control" name="name" id="name" value="<?php echo remove_junk(ucwords($user['name'])); ?>" 
-              pattern="^[A-Za-z]+([ A-Za-z]+)*$" 
-              title="Please enter a valid name with only letters and spaces, no leading or trailing spaces." required>
-          </div>
+            <div class="form-group">
+                  <label for="name" class="control-label">Name</label>
+                  <input type="name" class="form-control" name="name" id="name" value="<?php echo remove_junk(ucwords($user['name'])); ?>">
+            </div>
             <div class="form-group">
                   <label for="username" class="control-label">Username</label>
                   <input type="text" class="form-control" name="username" id="username" value="<?php echo remove_junk(ucwords($user['username'])); ?>">
