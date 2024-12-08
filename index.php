@@ -10,38 +10,36 @@
        <h4>ISLAND SEA MANAGEMENT SYSTEM</h4>
      </div>
      <?php if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']): ?>
-                        <?php
-                        $lockout_time_remaining = $_SESSION['lockout_time'] - time();
-                        $minutes_remaining = ceil($lockout_time_remaining / 60);
-                        ?>
-                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.0/dist/sweetalert2.min.css">
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function() {
-                                const formInputs = document.querySelectorAll('#username, #myInput');
-                                const loginButton = document.getElementById('btn_login');
-                                
-                                formInputs.forEach(input => input.disabled = true);
-                                loginButton.disabled = true;
+        <?php
+        $lockout_time_remaining = $_SESSION['lockout_time'] - time();
+        $minutes_remaining = ceil($lockout_time_remaining / 60);
+        ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const formInputs = document.querySelectorAll('#username, #myInput');
+                const loginButton = document.getElementById('btn-login');
+                
+                formInputs.forEach(input => input.disabled = true);
+                loginButton.disabled = true;
 
-                                Swal.fire({
-                                    title: 'Account Locked',
-                                    text: "Your account is locked. Please wait " + <?php echo $minutes_remaining; ?> + " minute(s) before trying again.",
-                                    icon: 'warning',
-                                    showConfirmButton: false,
-                                    allowOutsideClick: false,
-                                    allowEscapeKey: false, 
-                                    didOpen: () => {
-                                        Swal.showLoading();
-                                    }
-                                }).then(() => {
-                                    setTimeout(function() {
-                                        window.location.reload(); 
-                                    }, 1000);
-                                });
-                            });
-                        </script>
-                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.0/dist/sweetalert2.all.min.js"></script>
-                    <?php endif; ?>
+                Swal.fire({
+                    title: 'Account Locked',
+                    text: "Your account is locked. Please wait " + <?php echo $minutes_remaining; ?> + " minute(s) before trying again.",
+                    icon: 'warning',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                }).then(() => {
+                    setTimeout(function() {
+                        window.location.reload(); 
+                    }, 1000);
+                });
+            });
+        </script>
+    <?php endif; ?>
      <!-- Include Google reCAPTCHA v3 Script -->
      <script src="https://www.google.com/recaptcha/api.js?render=6Lcc25IqAAAAAH635KLYx5TwcXhguTYoIdJzgceI"></script>
 
