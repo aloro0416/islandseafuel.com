@@ -15,10 +15,21 @@ if (isset($_POST['add'])) {
     $sql = "SELECT * FROM customer WHERE firstname = '$first' AND middlename = '$middle' AND lastname = '$last'";
     $result = $db->query($sql);
     if (mysqli_num_rows($result) > 0) {
-        $_SESSION['status'] = "Customer Already Exist!";
-        $_SESSION['status_code'] = "warning";
-        header("Location: add_customer.php");
-        exit(0);
+        ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            <?php if (isset($success) && $success): ?>
+            Swal.fire({
+                icon: 'warning',
+                title: 'Customer Already Exist!',
+                showConfirmButton: 'Ok',
+            }).then(() => {
+                window.location.href = 'add_customer';
+            })
+            <?php endif; ?>
+            });
+        </script>
+        <?php
     }else{
         $sqls = "INSERT INTO customer (firstname,middlename,lastname,customer_type) VALUES ('$first','$middle','$last','$type')";
         $result = $db->query($sqls);
