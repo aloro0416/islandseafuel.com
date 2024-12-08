@@ -15,17 +15,22 @@ if(mysqli_num_rows($c_res) > 0 ){
     if (isset($_POST['changePass'])) {
         $pass = $_POST['password'];
         $Cpass = $_POST['confirmPassword'];
-        $hashed = sha1($pass);
+        $hashed = password_hash($pass, PASSWORD_ARGON2I);
         
         if ($pass != $Cpass) {
-            $error = "<center><span class='text-center badge bg-danger' style='padding: 8px;'>Password didn't match!</span></center>";
+            $_SESSION['status'] = 'Password didn\'t match!';
+            $_SESSION['status_code'] = 'error';
+            header('Location: recovery.php');
+            exit(0);
         }else {
            $up = "UPDATE users SET password = '$hashed' WHERE email = '$email'";
            $up_res = $db->query($up);
            $ur = "UPDATE recovery SET status = 0 WHERE email = '$email'";
            $ur_res = $db->query($ur);
-           $error = "<center><span class='text-center badge' style='padding: 8px; background: gold;'>Password Changed!</span></center>";
-           ?><script>function redirect(){window.location = ".";} setTimeout(redirect, 3000);</script><?php
+           $_SESSION['status'] = 'Password Changed Successfully!';
+            $_SESSION['status_code'] = 'success';
+            header('Location: .');
+            exit(0);
         }
     }
 
