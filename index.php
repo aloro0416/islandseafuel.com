@@ -290,6 +290,104 @@ const formInputs = document.querySelectorAll('#username, #myInput');
       width: 100%; /* Ensure full-width on smaller screens */
     }
   }
+
+  /* Modal background */
+.modal1 {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+}
+
+/* Modal content box */
+.modal-dialog1 {
+  width: 80%;
+  max-width: 600px;
+  margin: 100px auto;
+}
+
+.modal-content1 {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Modal header */
+.modal-header1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Close button */
+.close-btn1 {
+  font-size: 30px;
+  font-weight: bold;
+  color: #aaa;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.close-btn1:hover,
+.close-btn1:focus {
+  color: #000;
+  text-decoration: none;
+}
+
+/* Modal body */
+.modal-body1 {
+  max-height: 400px;
+  overflow-y: auto; /* Enable scrolling if content overflows */
+  padding: 20px;
+}
+
+/* Modal footer */
+.modal-footer11 {
+  text-align: right;
+}
+
+.btn-close1 {
+    padding: 8px;
+    padding-left: 15px;
+    padding-right:15px;
+    margin-top: 10px;
+    background-color: #dc3545;
+    border-radius: 5px;
+    border: none;
+    color: white;
+}
+
+.btn-close1:hover {
+    background-color: #bb2d3b;
+}
+
+.modal-footer1 .close-btn1 {
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-footer1 .close-btn1:hover {
+  background-color: #c82333;
+}
+
 </style>
 
 
