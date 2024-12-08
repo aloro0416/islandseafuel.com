@@ -39,7 +39,7 @@
             title: 'Product added',
             showConfirmButton: true,
           }).then(() => {
-            window.location.href = 'add_product';
+            window.location.href = 'product';
           })
             <?php endif; ?>
           });
