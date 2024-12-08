@@ -53,7 +53,7 @@
             <input type="password" name="password" class="form-control" id="myInput" placeholder="Password" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>
             
             <!-- Eye icon positioned inside the input box -->
-            <i class="fa fa-eye" onclick="myFunction()" id="togglePassword" style="position: absolute; right: 10px; top: 90%; transform: translateY(-50%); cursor: pointer;"></i>
+            <i class="fa fa-eye" onclick="myFunction()" id="togglePassword" style="position: absolute; right: 10px; top: 80%; transform: translateY(-50%); cursor: pointer;"></i>
         </div>
         <!-- Hidden reCAPTCHA token input will be added here -->
         <div class="form-group">
