@@ -29,8 +29,10 @@ $recaptchaToken = remove_junk($_POST['recaptcha_token']);
 
 // Verify the reCAPTCHA token with Google
 if (empty($recaptchaToken)) {
-    $session->msg("d", "reCAPTCHA validation failed. Please try again.");
-    redirect('.', false);
+    $_SESSION['status'] = 'reCAPTCHA validation failed. Please try again.';
+    $_SESSION['status_code'] = 'error';
+    header('Location: .');
+    exit(0);
 } else {
     $data = [
         'secret' => $secretKey,
@@ -69,9 +71,10 @@ if (empty($recaptchaToken)) {
                 if ($_SESSION['login_attempts'] >= 3){
                     $_SESSION['lockout_time'] = time() + 300;
                 } else {
-                    // Authentication failed (incorrect username/password)
-                    $session->msg("d", "Sorry, Username/Password is incorrect.");
-                    redirect('.', false);
+                    $_SESSION['status'] = 'Sorry, Username/Password is incorrect.';
+                    $_SESSION['status_code'] = 'error';
+                    header('Location: .');
+                    exit(0);
                 }
             }
 
@@ -80,16 +83,18 @@ if (empty($recaptchaToken)) {
             if ($_SESSION['login_attempts'] >= 3) {
                 $_SESSION['lockout_time'] = time() + 300;
             } else {
-                // Validation errors
-                $session->msg("d", $errors);
-                redirect('.', false);
+                $_SESSION['status'] = $errors;
+                $_SESSION['status_code'] = 'error';
+                header('Location: .');
+                exit(0);
             }
         }
 
     } else {
-        // reCAPTCHA verification failed
-        $session->msg("d", "reCAPTCHA validation failed. Please try again.");
-        redirect('.', false);
+        $_SESSION['status'] = "reCAPTCHA validation failed. Please try again.";
+        $_SESSION['status_code'] = 'error';
+        header('Location: .');
+        exit(0);
     }
 }
 

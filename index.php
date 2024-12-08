@@ -40,7 +40,6 @@
                             });
                         </script>
                     <?php endif; ?>
-     <?php echo display_msg($msg); ?>
      <!-- Include Google reCAPTCHA v3 Script -->
      <script src="https://www.google.com/recaptcha/api.js?render=6Lcc25IqAAAAAH635KLYx5TwcXhguTYoIdJzgceI"></script>
 
