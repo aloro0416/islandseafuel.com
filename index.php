@@ -2,23 +2,6 @@
   ob_start();
   require_once('includes/load.php');
   if($session->isUserLoggedIn(true)) { redirect('home', false);}
-
-  if (isset($_SESSION['login_success']) && $_SESSION['login_success']) {
-    ?>
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        Swal.fire({
-          icon: 'success',
-          title: 'Login Successful',
-          showConfirmButton: true
-        }).then(() => {
-          window.location.href = 'admin.php';
-        });
-      });
-    </script>
-    <?php
-    unset($_SESSION['login_success']);
-  }
 ?>
 <?php include_once('layouts/header.php'); ?>
 <div class="login-page">
@@ -104,6 +87,25 @@
   }
 }
 </script>
+
+<?php
+  if (isset($_SESSION['login_success']) && $_SESSION['login_success']) {
+    ?>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        Swal.fire({
+          icon: 'success',
+          title: 'Login Successful',
+          showConfirmButton: true
+        }).then(() => {
+          window.location.href = 'admin.php';
+        });
+      });
+    </script>
+    <?php
+    unset($_SESSION['login_success']);
+  }
+?>
 
 </div>
 
