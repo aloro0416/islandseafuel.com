@@ -216,26 +216,18 @@
             if (result.isConfirmed) {
                 // Perform AJAX request to delete customer
                 $.ajax({
-                    url: 'delete_customer.php', // PHP script to handle deletion
-                    type: 'POST', // Use POST request to delete
+                    url: 'delete_customer.php', // Your PHP script for deletion
+                    type: 'GET', // Use GET request
                     data: { delete: customerId }, // Send the customer ID
                     success: function(response) {
                         // If deletion is successful, show success alert
-                        if(response === 'success') {
-                            Swal.fire(
-                                'Deleted!',
-                                'The customer has been deleted.',
-                                'success'
-                            ).then(() => {
-                                location.reload(); // Reload the page to update the list
-                            });
-                        } else {
-                            Swal.fire(
-                                'Error!',
-                                'There was an issue deleting the customer.',
-                                'error'
-                            );
-                        }
+                        Swal.fire(
+                            'Deleted!',
+                            'The customer has been deleted.',
+                            'success'
+                        ).then(() => {
+                            location.reload(); // Reload the page to update the list
+                        });
                     },
                     error: function() {
                         Swal.fire(
