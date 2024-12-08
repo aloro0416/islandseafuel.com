@@ -85,11 +85,11 @@
           <form method="post" action="edit_account.php?id=<?php echo (int)$user['id'];?>" class="clearfix">
             <div class="form-group">
                   <label for="name" class="control-label">Name</label>
-                  <input type="name" class="form-control" name="name" value="<?php echo remove_junk(ucwords($user['name'])); ?>">
+                  <input type="name" class="form-control" name="name" id="name" value="<?php echo remove_junk(ucwords($user['name'])); ?>">
             </div>
             <div class="form-group">
                   <label for="username" class="control-label">Username</label>
-                  <input type="text" class="form-control" name="username" value="<?php echo remove_junk(ucwords($user['username'])); ?>">
+                  <input type="text" class="form-control" name="username" id="username" value="<?php echo remove_junk(ucwords($user['username'])); ?>">
             </div>
             <div class="form-group clearfix">
                     <a href="change_password" title="change password" class="btn btn-danger pull-right">Change Password</a>
@@ -131,5 +131,35 @@
       }
     }
   });
+
+  document.getElementById('name').addEventListener('input', function () {
+     var name = this.value.trim();
+     
+     var alphabetPattern = /^[A-Za-z\s]+$/;
+     
+     if (alphabetPattern.test(name)) {
+          this.setCustomValidity(''); 
+     } else {
+          this.setCustomValidity('Please enter a valid name with only letters and no only spaces or space first.');
+     }
+     
+     var isValid = alphabetPattern.test(name);
+     this.classList.toggle('is-invalid', !isValid);
+     });
+
+     document.getElementById('username').addEventListener('input', function () {
+     var username = this.value.trim();
+     
+     var alphabetPattern = /^[A-Za-z\s]+$/;
+     
+     if (alphabetPattern.test(username)) {
+          this.setCustomValidity(''); 
+     } else {
+          this.setCustomValidity('Please enter a valid username with only letters and no only spaces or space first.');
+     }
+     
+     var isValid = alphabetPattern.test(username);
+     this.classList.toggle('is-invalid', !isValid);
+     });
 </script>
 <?php include_once('layouts/footer.php'); ?>
