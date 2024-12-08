@@ -55,6 +55,13 @@
             <!-- Eye icon positioned inside the input box -->
             <i class="fa fa-eye" onclick="myFunction()" id="togglePassword" style="position: absolute; right: 10px; top: 70%; transform: translateY(-50%); cursor: pointer;"></i>
         </div>
+        <div class="form-group">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+            <label class="form-check-label" for="exampleCheck1">
+                I agree to the 
+                <a href="#" id="openModalLink" data-bs-toggle="modal" data-bs-target="#myModal">Terms and Conditions</a>
+            </label>
+        </div>
         <!-- Hidden reCAPTCHA token input will be added here -->
         <div class="form-group">
             <button type="submit" id="btn-login" class="btn btn-danger" style="border-radius:0%" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>Login</button>
