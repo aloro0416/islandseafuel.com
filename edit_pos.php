@@ -45,13 +45,13 @@ if (isset($_POST['save'])) {
     ?>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-          <?php if (isset($success) && $success: )?>
+          <?php if (isset($success) && $success): ?>
           Swal.fire({
             icon: 'success',
             title: 'Saved Successfully!',
             showConfirmButton: 'Ok',
           }).then(() => {
-            window.location.href = 'edit_pos.php?update="' . $pos_id . '"';
+            window.location.href = 'edit_pos.php?update=<?php echo $pos_id; ?>';
           })
           <?php endif; ?>
         });
