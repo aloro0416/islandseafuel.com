@@ -56,8 +56,7 @@ if(mysqli_num_rows($c_res) > 0 ){
                 <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required>
             </div>
             <div class="form-group">
-                <!-- Single Show Password toggle -->
-                <input type="checkbox" id="showPassword" class="mt-2"> <label for="showPassword">Show Passwords</label>
+                <input type="checkbox" id="showPassword" class="mt-1"> <label for="showPassword">Show Passwords</label>
             </div>
             <div class="form-group text-center">
                     <button type="submit" name="changePass" class="btn btn-danger" style="border-radius:0%">Change Password</button>
