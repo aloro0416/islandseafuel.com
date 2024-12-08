@@ -27,14 +27,34 @@ class Session {
     }
 
   }
-  public function logout(){
+  public function logout() {
+    // Assuming you have a global MySQLi connection object
+    global $db; // This should be your MySQLi connection object, not PDO
+
+    // Check if user is logged in and user_id is available in session
+    if (isset($_SESSION['user_id'])) {
+        // Update the user's status in the database
+        $user_id = $_SESSION['user_id'];
+        
+        // Prepare and execute the SQL query using MySQLi
+        $stmt = $db->prepare("UPDATE users SET status = 0 WHERE id = ?");
+        $stmt->bind_param("i", $user_id); // "i" indicates an integer parameter
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    // Unset session variables and destroy the session
     unset($_SESSION['user_id']);
     session_destroy();
+
+    // Check if session cookie exists, and delete it
     if (isset($_COOKIE[session_name()])) {
-      setcookie(session_name(), '', time() - 20, '/');
+        setcookie(session_name(), '', time() - 20, '/');
     }
+
+    // Clear session array
     $_SESSION = array();
-  }
+}
 
   public function msg($type ='', $msg =''){
     if(!empty($msg)){
