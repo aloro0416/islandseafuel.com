@@ -15,13 +15,17 @@ if (isset($_POST['add'])) {
     $sql = "SELECT * FROM customer WHERE firstname = '$first' AND middlename = '$middle' AND lastname = '$last'";
     $result = $db->query($sql);
     if (mysqli_num_rows($result) > 0) {
-        $msg = "<span class='warning-msg'>Customer Already Exist!</span>";
+        $_SESSION['status'] = 'Customer Already Exist!';
+        $_SESSION['status_code'] = 'warning';
+        header('Location: add_customer');
+        exit(0);
     }else{
         $sqls = "INSERT INTO customer (firstname,middlename,lastname,customer_type) VALUES ('$first','$middle','$last','$type')";
         $result = $db->query($sqls);
-        $msg = "<span class='alert-msg'>Successfully Added!</span>";?>
-        <script>window.location = "pos?proc=customer";</script>
-        <?php
+        $_SESSION['status'] = 'Successfully Added!';
+        $_SESSION['status_code'] = 'success';
+        header('Location: pos?proc=customer');
+        exit(0);
     }
 }elseif (isset($_POST['update'])) {
    $first = remove_junk($db->escape($_POST['firstname']));
@@ -30,7 +34,10 @@ if (isset($_POST['add'])) {
     $type = remove_junk($db->escape($_POST['type']));;
     $sql = "UPDATE customer SET firstname = '$first' , middlename = '$middle' , lastname = '$last' , customer_type = '$type' WHERE id = '".$_GET['update']."'";
     $result = $db->query($sql);
-    $msg = "<span class='alert-msg'>Successfully Updated!</span>";
+    $_SESSION['status'] = 'Successfully Updated!';
+    $_SESSION['status_code'] = 'success';
+    header('Location: add_customer');
+    exit(0);
 }
 ?>
 <div class="row">
@@ -48,15 +55,15 @@ if (isset($_POST['add'])) {
                 <form method="post" class="clearfix">
                     <div class="form-group">
                         <label for="name" class="control-label">Firstname</label>
-                        <input type="text" class="form-control" name="firstname" value="<?=$row['firstname']?>" required>
+                        <input type="text" id="firstname" class="form-control" name="firstname" value="<?=$row['firstname']?>" required>
                     </div>
                     <div class="form-group">
                         <label for="level" class="control-label">Middlename (Optional)</label>
-                        <input type="text" class="form-control" name="middlename" value="<?=$row['middlename']?>">
+                        <input type="text" id="middlename" class="form-control" name="middlename" value="<?=$row['middlename']?>">
                     </div>
                     <div class="form-group">
                         <label for="level" class="control-label">Lastname</label>
-                        <input type="text" class="form-control" name="lastname" value="<?=$row['lastname']?>" required>
+                        <input type="text" id="lastname" class="form-control" name="lastname" value="<?=$row['lastname']?>" required>
                     </div>
                     <div class="form-group">
                     <label for="type">Customer Type</label>
@@ -81,15 +88,15 @@ if (isset($_POST['add'])) {
                 <form method="post" class="clearfix">
                     <div class="form-group">
                         <label for="name" class="control-label">Firstname</label>
-                        <input type="text" class="form-control" name="firstname" required>
+                        <input type="text" id="firstname" class="form-control" name="firstname" required>
                     </div>
                     <div class="form-group">
                         <label for="level" class="control-label">Middlename (Optional)</label>
-                        <input type="text" class="form-control" name="middlename">
+                        <input type="text" id="middlename" class="form-control" name="middlename">
                     </div>
                     <div class="form-group">
                         <label for="level" class="control-label">Lastname</label>
-                        <input type="text" class="form-control" name="lastname" required>
+                        <input type="text" id="lastname" class="form-control" name="lastname" required>
                     </div>
                     <div class="form-group">
                     <label for="type">Customer Type</label>
@@ -108,5 +115,64 @@ if (isset($_POST['add'])) {
         ?>
     </div>
 </div>
+
+<script>
+    document.getElementById('firstname').addEventListener('input', function () {
+          var firstname = this.value.trim(); // Remove any leading or trailing spaces
+          
+          var alphabetPattern = /^[A-Za-z\s]+$/; // Pattern for alphabet and spaces only
+          
+          // Check if input starts with a space
+          if (this.value !== firstname) {
+               this.setCustomValidity('Name cannot start with a space.');
+          } else if (alphabetPattern.test(firstname)) {
+               this.setCustomValidity(''); // If valid, clear any previous error message
+          } else {
+               this.setCustomValidity('Please enter a valid name with only letters and no leading/trailing spaces.');
+          }
+          
+          // Check validity and toggle the invalid class
+          var isValid = alphabetPattern.test(firstname) && this.value === firstname; // Ensure no leading spaces
+          this.classList.toggle('is-invalid', !isValid);
+     });
+
+     document.getElementById('lastname').addEventListener('input', function () {
+          var lastname = this.value.trim(); // Remove any leading or trailing spaces
+          
+          var alphabetPattern = /^[A-Za-z\s]+$/; // Pattern for alphabet and spaces only
+          
+          // Check if input starts with a space
+          if (this.value !== lastname) {
+               this.setCustomValidity('Name cannot start with a space.');
+          } else if (alphabetPattern.test(lastname)) {
+               this.setCustomValidity(''); // If valid, clear any previous error message
+          } else {
+               this.setCustomValidity('Please enter a valid name with only letters and no leading/trailing spaces.');
+          }
+          
+          // Check validity and toggle the invalid class
+          var isValid = alphabetPattern.test(lastname) && this.value === lastname; // Ensure no leading spaces
+          this.classList.toggle('is-invalid', !isValid);
+     });
+
+     document.getElementById('middlename').addEventListener('input', function () {
+          var middlename = this.value.trim(); // Remove any leading or trailing spaces
+          
+          var alphabetPattern = /^[A-Za-z\s]+$/; // Pattern for alphabet and spaces only
+          
+          // Check if input starts with a space
+          if (this.value !== middlename) {
+               this.setCustomValidity('Name cannot start with a space.');
+          } else if (alphabetPattern.test(middlename)) {
+               this.setCustomValidity(''); // If valid, clear any previous error message
+          } else {
+               this.setCustomValidity('Please enter a valid name with only letters and no leading/trailing spaces.');
+          }
+          
+          // Check validity and toggle the invalid class
+          var isValid = alphabetPattern.test(middlename) && this.value === middlename; // Ensure no leading spaces
+          this.classList.toggle('is-invalid', !isValid);
+     });
+</script>
 
 <?php include_once('layouts/footer.php'); ?>
