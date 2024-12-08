@@ -58,10 +58,22 @@ if (isset($_POST['add'])) {
     $type = remove_junk($db->escape($_POST['type']));;
     $sql = "UPDATE customer SET firstname = '$first' , middlename = '$middle' , lastname = '$last' , customer_type = '$type' WHERE id = '".$_GET['update']."'";
     $result = $db->query($sql);
-    $_SESSION['status'] = "Successfully Updated!";
-    $_SESSION['status_code'] = "success";
-    header("Location: add_customer");
-    exit(0);
+    $update_success = true;
+        ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            <?php if (isset($update_success) && $update_success): ?>
+            Swal.fire({
+                icon: 'success',
+                title: 'Successfully Updated!',
+                showConfirmButton: 'Ok',
+            }).then(() => {
+                window.location.href = 'add_customer';
+            })
+            <?php endif; ?>
+            });
+        </script>
+        <?php
 }
 ?>
 <div class="row">
