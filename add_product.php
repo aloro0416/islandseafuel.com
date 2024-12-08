@@ -133,21 +133,21 @@
 
   <script>
     document.getElementById('product-title').addEventListener('input', function () {
-        var product-title = this.value.trim();
+        var product = this.value.trim();
         
         var dangerousCharsPattern = /[<>\"\']/;
         
-        if (product-title === "") {
+        if (product === "") {
             this.setCustomValidity('Product title cannot be empty or just spaces.');
-        } else if (this.value !== product-title) {
+        } else if (this.value !== product) {
             this.setCustomValidity('Product title cannot start with a space.');
-        } else if (dangerousCharsPattern.test(product-title)) {
+        } else if (dangerousCharsPattern.test(product)) {
             this.setCustomValidity('Product title cannot contain HTML special characters like <, >, ", \'.');
         } else {
             this.setCustomValidity('');
         }
         
-        var isValid = product-title !== "" && this.value === product-title && !dangerousCharsPattern.test(product-title);
+        var isValid = product !== "" && this.value === product && !dangerousCharsPattern.test(product);
         this.classList.toggle('is-invalid', !isValid);
     });
   </script>
