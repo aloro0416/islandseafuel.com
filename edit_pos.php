@@ -37,19 +37,23 @@ if (isset($_POST['save'])) {
     $prose = "UPDATE products SET quantity = '$total_lit' WHERE id = '$product_id'";
     $db->query($prose);
 
-    
     $pro = "UPDATE pos SET product_id = '$product_id', liter = '$p_liter', amount = '$amount', status = '$status'  WHERE id = '$pos_id'";
     $db->query($pro);
 
-    ?>
-    <script>
-        Swal.fire('Saved!', 'Saved Successfully!', 'success');
-    </script>
-    <?php
+    // Add a success flag to trigger SweetAlert after page load
+    $success = true;
 }
-
-
 ?>
+
+<?php if (isset($success) && $success): ?>
+    <script>
+        Swal.fire('Saved!', 'Saved Successfully!', 'success').then(() => {
+            // Optional: Reload the page or stay on the same page after the alert
+            window.location.href = 'edit_pos.php?update=<?php echo $pos_id; ?>';  // Redirect to the same page
+        });
+    </script>
+<?php endif; ?>
+
 
     <div class="row">
     <div class="panel">
