@@ -27,7 +27,10 @@ if (isset($_POST['send'])) {
         $dup = "SELECT * FROM recovery WHERE email = '$email' AND status = 1";
         $res = $db->query($dup);
         if (mysqli_num_rows($res) > 0) {
-            $error = "<center><span class='text-center badge bg-info' style='padding: 8px;'>We already sent you a recovery link!</span></center>";
+          $_SESSION['status'] = 'We already sent you an link!';
+          $_SESSION['status_code'] = 'error';
+          header('Location: account_recovery.php');
+          exit(0);
         }else{
           $ins = "INSERT INTO recovery (email, recovery_key, status) VALUES ('$email','$randomKey',1)";
           $ress = $db->query($ins);
@@ -57,7 +60,10 @@ if (isset($_POST['send'])) {
               $mail->send();
 
               $error = "<center><span class='text-center badge' style='padding: 8px; background: gold;'>Recovery link sent!</span></center>";
-
+              $_SESSION['status'] = 'Recovery link sent!';
+              $_SESSION['status_code'] = 'success';
+              header('Location: account_recovery.php');
+              exit(0);
 
           } catch (Exception $e) {
               echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
