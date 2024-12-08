@@ -17,14 +17,14 @@ if (isset($_POST['add'])) {
     if (mysqli_num_rows($result) > 0) {
         $_SESSION['status'] = 'Customer Already Exist!';
         $_SESSION['status_code'] = 'warning';
-        header('Location: add_customer');
+        header('Location: add_customer.php');
         exit(0);
     }else{
         $sqls = "INSERT INTO customer (firstname,middlename,lastname,customer_type) VALUES ('$first','$middle','$last','$type')";
         $result = $db->query($sqls);
         $_SESSION['status'] = 'Successfully Added!';
         $_SESSION['status_code'] = 'success';
-        header('Location: pos?proc=customer');
+        header('Location: pos.php?proc=customer');
         exit(0);
     }
 }elseif (isset($_POST['update'])) {
