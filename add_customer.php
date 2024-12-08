@@ -66,9 +66,9 @@ if (isset($_POST['add'])) {
             Swal.fire({
                 icon: 'success',
                 title: 'Successfully Updated!',
-                showConfirmButton: 'Ok',
+                showConfirmButton: true,
             }).then(() => {
-                window.location.href = 'add_customer?update="'.$_GET['update'].'"';
+                window.location.href = 'add_customer?update=' + <?php echo $_GET['update']; ?>;
             })
             <?php endif; ?>
             });
