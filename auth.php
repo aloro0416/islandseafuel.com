@@ -1,11 +1,13 @@
 <?php include_once('includes/load.php'); ?>
 <?php
 
-if (!isset($_SESSION['login_attempts'])){
+// Initialize session variables if not already set
+if (!isset($_SESSION['login_attempts'])) {
     $_SESSION['login_attempts'] = 0;
     $_SESSION['lockout_time'] = null;
 }
 
+// Check if user is locked out
 if ($_SESSION['lockout_time'] && time() < $_SESSION['lockout_time']) {
     $lockout_time_remaining = $_SESSION['lockout_time'] - time();
     $minutes_remaining = ceil($lockout_time_remaining / 60);
@@ -49,12 +51,12 @@ if (empty($recaptchaToken)) {
 
             if ($user_id) {
                 // Create session with user id
+                $session->login($user_id);
+
                 session_regenerate_id(true);
 
                 $_SESSION['login_attempts'] = 0;
                 $_SESSION['lockout_time'] = null;
-
-                $session->login($user_id);
 
                 // Update the last login time
                 updateLastLogIn($user_id);
