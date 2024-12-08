@@ -18,11 +18,14 @@ require 'PHPMailer/src/SMTP.php';
 
 if (isset($_POST['send'])) {
     $email = $_POST['email'];
+    $secret = encryptor('encrypt', $email);
     $check_email= "SELECT * FROM users WHERE email = '$email'";
     $c_res = $db->query($check_email);
     if (mysqli_num_rows($c_res) > 0) {
 
         $randomKey = substr(str_shuffle(str_repeat("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYX", 5)), 0, 8);
+
+        $key = encryptor('encrypt', $randomKey);
 
         $dup = "SELECT * FROM recovery WHERE email = '$email' AND status = 1";
         $res = $db->query($dup);
@@ -54,7 +57,7 @@ if (isset($_POST['send'])) {
               $mail->Subject = 'REQUEST RECOVERY LINK';
               $mail->Body    =  '
                                 <h2>You request an account recovery link from our system.</h2>
-                                <h4>Here\'s your <a href="https://islandseafuel.com/recovery.php?email='.$email.'&key='.$randomKey.'" style="background: green; color: white; width: 100%; padding: 10px; border-radius: 10px; text-decoration: none;">Recovery Link!</a></h4>
+                                <h4>Here\'s your <a href="https://islandseafuel.com/recovery.php?email='.$secret.'&key='.$key.'" style="background: green; color: white; width: 100%; padding: 10px; border-radius: 10px; text-decoration: none;">Recovery Link!</a></h4>
                                 <p style="margin-top: 100px;">Have a good day!</p>
                                 ';
               $mail->send();
