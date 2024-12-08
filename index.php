@@ -13,7 +13,7 @@
      <!-- Include Google reCAPTCHA v3 Script -->
      <script src="https://www.google.com/recaptcha/api.js?render=6Lcc25IqAAAAAH635KLYx5TwcXhguTYoIdJzgceI"></script>
 
-     <?php if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']); ?>
+     <!-- <?php if (isset($_SESSION['lockout_time']) && time() < $_SESSION['lockout_time']); ?>
      <?php
      $lockout_time_remaining = $_SESSION['lockout_time'] - time();
      $minutes_remaining = ceil($lockout_time_remaining / 60);
@@ -43,7 +43,7 @@
         });
       });
      </script>
-     <?php endif; ?>
+     <?php endif; ?> -->
 
      <form method="post" action="auth.php" class="clearfix" id="loginForm">
         <div class="form-group">
