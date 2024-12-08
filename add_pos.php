@@ -36,16 +36,41 @@ if (isset($_POST['add'])) {
         if ($pros && $result && $s_result) {
             $success = true;
         } else {
-            $_SESSION['status'] = "Added failed. Please try again.";
-            $_SESSION['status_code'] = "error";
-            header("Location: add_pos.php");
-            exit(0);
+            $error = true;
+            ?>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                <?php if (isset($error) && $error): ?>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Added failed. Please try again.',
+                    showConfirmButton: 'Ok',
+                }).then(() => {
+                    window.location.href = 'add_pos';
+                })
+                <?php endif; ?>
+                });
+            </script>
+            <?php
         }
     } else {
-        $_SESSION['status'] = "Product not found.";
-        $_SESSION['status_code'] = "error";
-        header("Location: add_pos.php");
-        exit(0);
+        $errors = true;
+            ?>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                <?php if (isset($errors) && $errors): ?>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Product not found.',
+                    showConfirmButton: 'Ok',
+                }).then(() => {
+                    window.location.href = 'add_pos';
+                })
+                <?php endif; ?>
+                });
+            </script>
+            <?php
+        }
     }
     ?>
     <script>
