@@ -107,7 +107,7 @@ if (isset($_POST['save'])) {
                 </select>
                 </td>
                 <td id="s_price">
-                  <input type="text" onchange="calculateAmount(this.value)" class="form-control" name="liter"  value="<?=$row['liter']?>" required>
+                  <input type="text" id="liter" onchange="calculateAmount(this.value)" class="form-control" name="liter"  value="<?=$row['liter']?>" required>
                 </td>
                 <td>
                 <input type="text" class="form-control" name="amount" id="tot_amount" value="<?=$row['amount']?>" readonly>
@@ -137,5 +137,22 @@ if (isset($_POST['save'])) {
         var divobj = document.getElementById('tot_amount');
         divobj.value = tot_price;
     }
+
+    document.getElementById('liter').addEventListener('input', function () {
+        var liter = this.value.trim(); 
+        
+        var isbnPattern = /^[0-9]+$/;
+        
+        if (this.value !== liter) {
+            this.setCustomValidity('ISBN cannot start with a space.');
+        } else if (isbnPattern.test(liter)) {
+            this.setCustomValidity('');
+        } else {
+            this.setCustomValidity('Please enter only numbers');
+        }
+        
+        var isValid = isbnPattern.test(liter) && this.value === liter;
+        this.classList.toggle('is-invalid', !isValid);
+    });
 </script>
 <?php include_once('layouts/footer.php'); ?>
