@@ -64,7 +64,7 @@ if (empty($recaptchaToken)) {
                 redirect('admin', false);
             } else {
                 $_SESSION['login_attempts']++;
-                if ($_SESSION['login_attempts']){
+                if ($_SESSION['login_attempts'] >= 3){
                     $_SESSION['lockout_time'] = time() + 300;
                 } else {
                     // Authentication failed (incorrect username/password)
