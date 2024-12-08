@@ -294,7 +294,7 @@ const formInputs = document.querySelectorAll('#username, #myInput');
     max-width: 600px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
-    max-height: 80vh;
+    max-height: 100vh;
 }
 
 .terms-text {
