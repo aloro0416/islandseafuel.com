@@ -89,7 +89,7 @@
 
 // Select form input elements to disable initially
 const formInputs = document.querySelectorAll('#username, #myInput');
-        const loginButton = document.querySelector('[id="btn_login"]');
+        const loginButton = document.getElementById('btn-login');
 
         // Function to request and check location permissions
         function requestLocation() {
