@@ -1,6 +1,5 @@
 <?php
  session_start();
- require_once('includes/load.php');
 
 class Session {
 
@@ -29,6 +28,7 @@ class Session {
 
   }
   public function logout() {
+    require_once('includes/load.php');
     // Assuming you have a global MySQLi connection object
     global $db; // This should be your MySQLi connection object, not PDO
 
