@@ -20,8 +20,8 @@
      ?>
      <script>
       document.addEventListener('DOMContentLoaded', function() {
-        const formInputs = document.querySelectorAll('#admin_type, #email, #password');
-        const loginButton = document.getElementById('admin_login_btn');
+        const formInputs = document.querySelectorAll('#username, #myInput');
+        const loginButton = document.getElementById('login');
                                 
         formInputs.forEach(input => input.disabled = true);
         loginButton.disabled = true;
@@ -48,7 +48,7 @@
      <form method="post" action="auth.php" class="clearfix" id="loginForm">
         <div class="form-group">
               <label for="username" class="control-label">Username</label>
-              <input type="name" class="form-control" name="username" placeholder="Username" required <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?>>
+              <input type="name" class="form-control" name="username" id="username" placeholder="Username" required <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?>>
         </div>
         <div class="form-group">
             <label for="Password" class="control-label">Password</label>
@@ -58,7 +58,7 @@
         </div>
         <!-- Hidden reCAPTCHA token input will be added here -->
         <div class="form-group">
-            <button type="submit" class="btn btn-danger" style="border-radius:0%">Login</button>
+            <button type="submit" id="login" class="btn btn-danger" style="border-radius:0%">Login</button>
         </div>
         <div class="text-center">
             <a href="account_recovery_select.php">Forgot password?</a>
