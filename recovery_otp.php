@@ -45,7 +45,7 @@ if(mysqli_num_rows($c_res) > 0 ){
         <?php echo $error ?>
         <form method="post" class="clearfix">
             <div class="form-group">
-                <input type="hidden" name="email" value="<?php echo $email ?>" required>
+                <input type="text" name="email" value="<?php echo $email ?>" required>
             </div>
             <div class="form-group">
                 <label for="password" class="control-label">New Password</label>
