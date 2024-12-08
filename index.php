@@ -56,10 +56,9 @@
             <i class="fa fa-eye" onclick="myFunction()" id="togglePassword" style="position: absolute; right: 10px; top: 70%; transform: translateY(-50%); cursor: pointer;"></i>
         </div>
         <div class="form-group">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
-            <label class="form-check-label" for="exampleCheck1">
-                I agree to the 
-                <a href="#" id="openModalLink" data-bs-toggle="modal" data-bs-target="#myModal">Terms and Conditions</a>
+            <label>
+                <input type="checkbox"> I agree to the
+                <a href="#" id="openModalLink">Terms and Condition</a>
             </label>
         </div>
         <!-- Hidden reCAPTCHA token input will be added here -->
@@ -71,20 +70,12 @@
         </div>
     </form>
 
-    <!-- The Modal -->
-    <div class="modal1" id="myModal">
-                    <div class="modal-dialog1 modal-dialog-scrollable">
-                        <div class="modal-content1">
-
-                        <!-- Modal Header -->
-                        <div class="modal-header1">
-                            <h4 class="modal-title1">Terms and Condition</h4>
-                            <button type="button" class="close-btn1" data-bs-dismiss="modal" id="closeModalBtn">&times;</button>
-                        </div>
-
-                        <!-- Modal body -->
-                        <div class="modal-body1" style="text-align:left;">
-                            <h3 style="margin-bottom:5px;">General Terms and Conditions for Data Privacy Act of 2012 Compliance</h3>
+    <!-- Modal Structure -->
+    <div id="termsModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3 style="margin-bottom:5px;">General Terms and Conditions for Data Privacy Act of 2012 Compliance</h3>
+                <div class="terms-text">
                             <p style="margin-bottom:5px;font-weight:bold;">1. Principles of Data Privacy</p>
                             <p style="magin-bottom:5px;">Organizations must adhere to these principles when handling personal data:</p>
                             <ul style="margin-left:25px;margin-bottom:7px;">
@@ -148,17 +139,9 @@
                             </ul>
                             <p style="margin-bottom:5px;font-weight:bold;">Regulatory Authority</p>
                             <p style="magin-bottom:5px;">The <b>National Privacy Commission (NPC)</b> oversees the enforcement of the DPA and issues guidelines and advisories to ensure compliance.</p>
-
-                        </div>
-
-                        <!-- Modal footer -->
-                        <div class="modal-footer1">
-                            <button type="button" class="btn btn-danger btn-close1" data-bs-dismiss="modal" id="closeModalBtnFooter">Close</button>
-                        </div>
-
-                        </div>
-                    </div>
-                    </div>
+                </div>
+            </div>
+        </div>
 
     <!-- JavaScript for reCAPTCHA token generation -->
     <script>
@@ -291,104 +274,112 @@ const formInputs = document.querySelectorAll('#username, #myInput');
     }
   }
 
-  /* Modal background */
-.modal1 {
-  display: none; /* Hidden by default */
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+#termsModal {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
-/* Modal content box */
-.modal-dialog1 {
-  width: 80%;
-  max-width: 600px;
-  margin: 100px auto;
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    margin-right: 40%;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    max-width: 600px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    max-height: 80vh;
 }
 
-.modal-content1 {
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+.terms-text {
+    max-height: 300px;
+    overflow-y: auto;
 }
 
-/* Modal header */
-.modal-header1 {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
 }
 
-.modal-title1 {
-  font-size: 24px;
-  font-weight: bold;
-  margin: 0;
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
-
-/* Close button */
-.close-btn1 {
-  font-size: 30px;
-  font-weight: bold;
-  color: #aaa;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-}
-
-.close-btn1:hover,
-.close-btn1:focus {
-  color: #000;
-  text-decoration: none;
-}
-
-/* Modal body */
-.modal-body1 {
-  max-height: 400px;
-  overflow-y: auto; /* Enable scrolling if content overflows */
-  padding: 20px;
-}
-
-/* Modal footer */
-.modal-footer11 {
-  text-align: right;
-}
-
-.btn-close1 {
-    padding: 8px;
-    padding-left: 15px;
-    padding-right:15px;
-    margin-top: 10px;
-    background-color: #dc3545;
-    border-radius: 5px;
-    border: none;
-    color: white;
-}
-
-.btn-close1:hover {
-    background-color: #bb2d3b;
-}
-
-.modal-footer1 .close-btn1 {
-  background-color: #dc3545;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.modal-footer1 .close-btn1:hover {
-  background-color: #c82333;
-}
-
 </style>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("termsModal");
+
+// Get the link that opens the modal
+var link = document.getElementById("openModalLink");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the link, open the modal
+link.onclick = function(event) {
+    event.preventDefault(); // Prevent the default link behavior
+    modal.style.display = "block"; // Show the modal
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const loginButton = document.querySelector('#login');
+    const termsCheckbox = document.querySelector('input[type="checkbox"]');
+
+    // Add click event listener to the login button
+    loginButton.addEventListener('click', function () {
+        // Automatically check the Terms and Condition checkbox
+        if (termsCheckbox) {
+            termsCheckbox.checked = true;
+        }
+    });
+
+    // Modal handling for terms
+    var modal = document.getElementById("termsModal");
+    var link = document.getElementById("openModalLink");
+    var span = document.getElementsByClassName("close")[0];
+
+    link.onclick = function(event) {
+        event.preventDefault();
+        modal.style.display = "block";
+    }
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+});
+</script>
 
 
 <?php include_once('layouts/footer.php'); ?>
