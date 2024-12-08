@@ -306,7 +306,7 @@ const formInputs = document.querySelectorAll('#username, #myInput');
     color: #aaa;
     float: right;
     font-size: 28px;
-    margin-top: -20px;
+    margin-top: -10px;
     font-weight: bold;
 }
 
