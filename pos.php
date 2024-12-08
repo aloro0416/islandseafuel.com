@@ -57,9 +57,10 @@
                                             <a href="add_customer?update=<?=$row['id']?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
                                             <i class="glyphicon glyphicon-pencil"></i>
                                             </a>
-                                            <a href="delete_customer?delete=<?=$row['id']?>" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
-                                            <i class="glyphicon glyphicon-remove"></i>
+                                            <a href="javascript:void(0);" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove" onclick="confirmDelete(<?=$row['id']?>)">
+                                                <i class="glyphicon glyphicon-remove"></i>
                                             </a>
+
                                         </div>
                                     </td>
                                 </tr>
@@ -197,4 +198,54 @@
  
 });
 
+</script>
+
+<script>
+    function confirmDelete(customerId) {
+        // Show SweetAlert confirmation dialog
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You won\'t be able to revert this!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Perform AJAX request to delete customer
+                $.ajax({
+                    url: 'delete_customer.php', // PHP script to handle deletion
+                    type: 'POST', // Use POST request to delete
+                    data: { delete: customerId }, // Send the customer ID
+                    success: function(response) {
+                        // If deletion is successful, show success alert
+                        if(response === 'success') {
+                            Swal.fire(
+                                'Deleted!',
+                                'The customer has been deleted.',
+                                'success'
+                            ).then(() => {
+                                location.reload(); // Reload the page to update the list
+                            });
+                        } else {
+                            Swal.fire(
+                                'Error!',
+                                'There was an issue deleting the customer.',
+                                'error'
+                            );
+                        }
+                    },
+                    error: function() {
+                        Swal.fire(
+                            'Error!',
+                            'There was a problem with the server.',
+                            'error'
+                        );
+                    }
+                });
+            }
+        });
+    }
 </script>
