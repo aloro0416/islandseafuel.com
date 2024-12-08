@@ -288,7 +288,6 @@ const formInputs = document.querySelectorAll('#username, #myInput');
 .modal-content {
     background-color: white;
     margin: 10% auto;
-    margin-right: 40%;
     padding: 20px;
     border: 1px solid #888;
     width: 60%;
