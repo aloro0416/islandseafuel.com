@@ -72,10 +72,10 @@ if (empty($recaptchaToken)) {
                     $_SESSION['lockout_time'] = time() + 300;
                 } else {
                     $_SESSION['status'] = 'Sorry, Username/Password is incorrect.';
+                }
                     $_SESSION['status_code'] = 'error';
                     header('Location: .');
                     exit(0);
-                }
             }
 
         } else {
@@ -84,10 +84,10 @@ if (empty($recaptchaToken)) {
                 $_SESSION['lockout_time'] = time() + 300;
             } else {
                 $_SESSION['status'] = $errors;
+            }
                 $_SESSION['status_code'] = 'error';
                 header('Location: .');
                 exit(0);
-            }
         }
 
     } else {
