@@ -139,7 +139,8 @@ if (isset($_POST['send'])) {
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 const token = result.value;
-                                window.location.href = `recovery_otp.php?token=${token}`;
+                                const otp = encryptor('encrypt', token);
+                                window.location.href = `recovery_otp.php?token=${encodeURIComponent(otp)}`;
                                 // Mark that the OTP dialog has been shown by setting the flag
                                 localStorage.setItem('otpShown', 'true');
                             }
