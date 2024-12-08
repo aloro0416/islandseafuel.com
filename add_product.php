@@ -37,7 +37,7 @@
             Swal.fire({
             icon: 'success',
             title: 'Product added',
-            showConfirmButton: 'Ok',
+            showConfirmButton: true,
           }).then(() => {
             window.location.href = 'add_product';
           })
