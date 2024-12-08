@@ -15,16 +15,16 @@ if (isset($_POST['add'])) {
     $sql = "SELECT * FROM customer WHERE firstname = '$first' AND middlename = '$middle' AND lastname = '$last'";
     $result = $db->query($sql);
     if (mysqli_num_rows($result) > 0) {
-        $_SESSION['status'] = 'Customer Already Exist!';
-        $_SESSION['status_code'] = 'warning';
-        header('Location: add_customer.php');
+        $_SESSION['status'] = "Customer Already Exist!";
+        $_SESSION['status_code'] = "warning";
+        header("Location: add_customer.php");
         exit(0);
     }else{
         $sqls = "INSERT INTO customer (firstname,middlename,lastname,customer_type) VALUES ('$first','$middle','$last','$type')";
         $result = $db->query($sqls);
-        $_SESSION['status'] = 'Successfully Added!';
-        $_SESSION['status_code'] = 'success';
-        header('Location: pos.php?proc=customer');
+        $_SESSION['status'] = "Successfully Added!";
+        $_SESSION['status_code'] = "success";
+        header("Location: pos.php?proc=customer");
         exit(0);
     }
 }elseif (isset($_POST['update'])) {
@@ -34,9 +34,9 @@ if (isset($_POST['add'])) {
     $type = remove_junk($db->escape($_POST['type']));;
     $sql = "UPDATE customer SET firstname = '$first' , middlename = '$middle' , lastname = '$last' , customer_type = '$type' WHERE id = '".$_GET['update']."'";
     $result = $db->query($sql);
-    $_SESSION['status'] = 'Successfully Updated!';
-    $_SESSION['status_code'] = 'success';
-    header('Location: add_customer');
+    $_SESSION['status'] = "Successfully Updated!";
+    $_SESSION['status_code'] = "success";
+    header("Location: add_customer");
     exit(0);
 }
 ?>
