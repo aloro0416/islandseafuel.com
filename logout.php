@@ -7,7 +7,7 @@
       $user_id = $session->user_id;
 
       // Prepare the SQL query to update the user's status to 0
-      $query = "UPDATE users SET status = 0 WHERE user_id = '{$user_id}'";
+      $query = "UPDATE users SET status = 0 WHERE id = '{$user_id}'";
       
       // Execute the query
       if ($db->query($query)) {
