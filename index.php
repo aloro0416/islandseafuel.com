@@ -48,11 +48,12 @@
               <label for="username" class="control-label">Username</label>
               <input type="name" class="form-control" name="username" id="username" placeholder="Username" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="position: relative;">
             <label for="Password" class="control-label">Password</label>
-            <input type="password" name= "password" class="form-control" id="myInput" placeholder="Password" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>
-            <!-- An element to toggle between password visibility -->
-            <input type="checkbox" onclick="myFunction()"> <span class="text-muted">Show Password</span>
+            <input type="password" name="password" class="form-control" id="myInput" placeholder="Password" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>
+            
+            <!-- Eye icon positioned inside the input box -->
+            <i class="fa fa-eye" onclick="myFunction()" id="togglePassword" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
         </div>
         <!-- Hidden reCAPTCHA token input will be added here -->
         <div class="form-group">
@@ -78,14 +79,20 @@
     </script>
 
 <script>
-  function myFunction() {
-  var x = document.getElementById("myInput");
-  if (x.type === "password") {
-    x.type = "text";
-  } else {
-    x.type = "password";
-  }
-}
+   function myFunction() {
+        var x = document.getElementById("myInput");
+        var eyeIcon = document.getElementById("togglePassword");
+        
+        if (x.type === "password") {
+            x.type = "text";
+            eyeIcon.classList.remove("fa-eye");
+            eyeIcon.classList.add("fa-eye-slash");
+        } else {
+            x.type = "password";
+            eyeIcon.classList.remove("fa-eye-slash");
+            eyeIcon.classList.add("fa-eye");
+        }
+    }
 
 // Select form input elements to disable initially
 const formInputs = document.querySelectorAll('#username, #myInput');
