@@ -43,7 +43,10 @@ if (isset($_POST['save'])) {
 
     ?>
     <script>
-        alert('Saved!');
+        $_SESSION['status'] = "Saved!";
+        $_SESSION['status_code'] = "success";
+        header("Location: edit_pos.php?update='" .$_GET['update'] . "'");
+        exit(0);
     </script>
     <?php
 }
