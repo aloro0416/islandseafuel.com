@@ -10,11 +10,39 @@
   $photo = new Media();
   $photo->upload($_FILES['file_upload']);
     if($photo->process_media()){
-        $session->msg('s','photo has been uploaded.');
-        redirect('media');
+        $success = true;
+        ?>
+        <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        <?php if (isset($success) && $success): ?>
+        Swal.fire({
+        icon: 'success',
+        title: 'Photo has been uploaded',
+        showConfirmButton: true,
+        }).then(() => {
+        window.location.href = 'media';
+        })
+        <?php endif; ?>
+        });
+        </script>
+        <?php
     } else{
-      $session->msg('d',join($photo->errors));
-      redirect('media');
+      $error = true;
+      ?>
+      <script>
+      document.addEventListener('DOMContentLoaded', function () {
+      <?php if (isset($error) && $error): ?>
+      Swal.fire({
+      icon: 'error',
+      title: join($photo->errors),
+      showConfirmButton: true,
+      }).then(() => {
+      window.location.href = 'media';
+      })
+      <?php endif; ?>
+      });
+      </script>
+      <?php
     }
 
   }
@@ -36,7 +64,7 @@
               <div class="form-group">
                 <div class="input-group">
                 <div class="custom-file-upload">
-                <input type="file" name="file_upload" multiple="multiple" id="file-upload" />
+                <input type="file" name="file_upload" multiple="multiple" id="file-upload" class="form-control" />
                 <label for="file-upload">Choose File</label>
               </div>
                  <button type="submit" name="submit" class="btn btn-default">Upload</button>
@@ -81,6 +109,14 @@
                   background-color: #0056b3;
                 }
 
+                .is-valid {
+                    border-color: #28a745; /* Green */
+                }
+
+                .is-invalid {
+                    border-color: #dc3545; /* Red */
+                }
+
               </style>
 
              </form>
@@ -115,6 +151,9 @@
                   <a href="delete_media?id=<?php echo (int) $media_file['id'];?>" class="btn btn-danger btn-xs"  title="Edit">
                     <span class="glyphicon glyphicon-trash"></span>
                   </a>
+                  <a href="javascript:void(0);" class="btn btn-danger btn-xs" title="Delete" data-toggle="tooltip" onclick="confirmDelete(<?=$media_file['id']?>)">
+                      <span class="glyphicon glyphicon-trash"></span>
+                    </a>
                 </td>
                </tr>
               <?php endforeach;?>
@@ -151,4 +190,100 @@
  
 });
 
+function confirmDelete(mediaId) {
+        // Show SweetAlert confirmation dialog
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You won\'t be able to revert this!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Perform AJAX request to delete the product
+                $.ajax({
+                    url: 'delete_media.php', // Your PHP script to handle deletion
+                    type: 'GET', // Use GET request
+                    data: { id: mediaId }, // Send the product ID to the PHP script
+                    dataType: 'json', // Expecting a JSON response
+                    success: function(response) {
+                        // Handle success and failure responses from the server
+                        if (response.status === 'success') {
+                            Swal.fire(
+                                'Deleted!',
+                                response.message, // Show success message from the PHP response
+                                'success'
+                            ).then(() => {
+                                location.reload(); // Reload the page to update the list
+                            });
+                        } else {
+                            Swal.fire(
+                                'Error!',
+                                response.message, // Show error message from the PHP response
+                                'error'
+                            );
+                        }
+                    },
+                    error: function() {
+                        Swal.fire(
+                            'Error!',
+                            'There was a problem with the server.',
+                            'error'
+                        );
+                    }
+                });
+            }
+        });
+    }
+
+
+    document.getElementById('file-upload').addEventListener('change', function() {
+    var fileInput = this;
+    var files = fileInput.files;
+    var isValid = true;
+    var invalidFiles = [];
+    var exceededFiles = [];
+
+    // Loop through selected files and check the extension and size
+    for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        var fileExtension = file.name.split('.').pop().toLowerCase();
+        var fileSize = file.size / 1024 / 1024; // Convert size to MB
+
+        // Check if the file extension is valid
+        if (!['png', 'jpg', 'jpeg'].includes(fileExtension)) {
+            isValid = false;
+            invalidFiles.push(file.name);
+        }
+
+        // Check if the file size exceeds 2MB
+        if (fileSize > 2) {
+            isValid = false;
+            exceededFiles.push(file.name);
+        }
+    }
+
+    // Add the is-valid or is-invalid class based on the validation result
+    if (isValid) {
+        fileInput.classList.remove('is-invalid');
+        fileInput.classList.add('is-valid');
+    } else {
+        fileInput.classList.remove('is-valid');
+        fileInput.classList.add('is-invalid');
+        
+        // Alert invalid file types and size exceeded files
+        var errorMessages = [];
+        if (invalidFiles.length > 0) {
+            errorMessages.push('Invalid file types: ' + invalidFiles.join(', '));
+        }
+        if (exceededFiles.length > 0) {
+            errorMessages.push('Files exceeded 2MB: ' + exceededFiles.join(', '));
+        }
+
+        alert(errorMessages.join('\n'));
+    }
+});
 </script>
