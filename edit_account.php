@@ -163,7 +163,7 @@
                   <input type="text" class="form-control" name="username" id="username" value="<?php echo remove_junk(ucwords($user['username'])); ?>">
             </div>
             <div class="form-group clearfix">
-                    <a href="change_password" title="change password" class="btn btn-danger pull-right">Change Password</a>
+                    <!-- <a href="change_password" title="change password" class="btn btn-danger pull-right">Change Password</a> -->
                     <button type="submit" name="update" class="btn btn-info">Update</button>
             </div>
         </form>
