@@ -273,7 +273,6 @@ const formInputs = document.querySelectorAll('#username, #myInput');
     }
     .login-page {
         position: absolute;
-        margin: auto 0;
         top: 0;
         bottom: 0;
         left: 0;
