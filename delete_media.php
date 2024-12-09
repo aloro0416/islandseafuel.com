@@ -6,7 +6,7 @@
   // Check if 'id' parameter is passed for deletion
   if (isset($_GET['id'])) {
       $media_id = (int)$_GET['id'];
-      $find_media = find_by_id('products', $media_id);
+      $find_media = find_by_id('media', $media_id);
       $photo = new Media();
 
       // If product does not exist, return an error
@@ -16,7 +16,7 @@
       }
 
       // Attempt to delete the product
-      $delete_id = delete_by_id('products', $media_id);
+      $delete_id = delete_by_id('media', $media_id);
 
       if($photo->media_destroy($delete_id['id'],$delete_id['file_name'])) {
           // Return success response
