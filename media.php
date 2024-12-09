@@ -262,7 +262,14 @@ function confirmDelete(mediaId) {
             }
 
             if (!valid) {
-                alert(errorMessage);
+                // Use SweetAlert to show error message
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid File',
+                    text: errorMessage,
+                    confirmButtonText: 'Ok'
+                });
+
                 input.value = '';  // Clear the selected file(s)
             }
         }
