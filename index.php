@@ -271,6 +271,16 @@ const formInputs = document.querySelectorAll('#username, #myInput');
       left: 0;
       width: 100%; /* Ensure full-width on smaller screens */
     }
+    .login-page {
+        position: absolute;
+        margin: auto 0;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+    }
   }
 
 #termsModal {
