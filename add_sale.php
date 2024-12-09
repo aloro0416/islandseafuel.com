@@ -24,15 +24,57 @@
 
                 if($db->query($sql)){
                   update_product_qty($s_qty,$p_id);
-                  $session->msg('s',"Sale added. ");
-                  redirect('sales', false);
+                  $success = true;
+                  ?>
+                    <script>
+                      document.addEventListener('DOMContentLoaded', function () {
+                        <?php if (isset($success) && $success): ?>
+                          Swal.fire({
+                          icon: 'success',
+                          title: 'Sale added',
+                          showConfirmButton: true,
+                        }).then(() => {
+                          window.location.href = 'sales';
+                        })
+                        <?php endif; ?>
+                      });
+                    </script>
+                  <?php
                 } else {
-                  $session->msg('d',' Sorry failed to add!');
-                  redirect('add_sale', false);
+                  $failed = true;
+                  ?>
+                    <script>
+                      document.addEventListener('DOMContentLoaded', function () {
+                        <?php if (isset($failed) && $failed): ?>
+                          Swal.fire({
+                          icon: 'error',
+                          title: 'Sorry failed to add!',
+                          showConfirmButton: true,
+                        }).then(() => {
+                          window.location.href = 'add_sale';
+                        })
+                        <?php endif; ?>
+                      });
+                    </script>
+                  <?php
                 }
         } else {
-           $session->msg("d", $errors);
-           redirect('add_sale',false);
+           $error = true;
+            ?>
+            <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            <?php if (isset($error) && $error): ?>
+            Swal.fire({
+            icon: 'error',
+            title: $errors,
+            showConfirmButton: true,
+            }).then(() => {
+            window.location.href = 'add_sale';
+            })
+            <?php endif; ?>
+            });
+            </script>
+            <?php
         }
   }
 
