@@ -63,11 +63,11 @@
           <form method="post" action="add_user.php">
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" name="full-name" placeholder="Full Name" required>
+                <input type="text" class="form-control" id="full_name" name="full-name" placeholder="Full Name" required>
             </div>
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" name="username" placeholder="Username" required>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
@@ -75,7 +75,7 @@
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" name ="password"  placeholder="Password" required>
+                <input type="password" class="form-control" id="password" name ="password"  placeholder="Password" required>
             </div>
             <div class="form-group">
               <label for="level">User Role</label>
@@ -95,5 +95,66 @@
 
     </div>
   </div>
+
+
+  <script>
+    document.getElementById('full_name').addEventListener('input', function () {
+        var full_name = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\']/;
+        var alphabeticPattern = /^[A-Za-z\s]+$/;
+        
+        if (full_name === "") {
+            this.setCustomValidity('Full name cannot be empty or just spaces.');
+        } else if (this.value !== full_name) {
+            this.setCustomValidity('Full name cannot start with a space.');
+        } else if (dangerousCharsPattern.test(full_name)) {
+            this.setCustomValidity('Full name cannot contain HTML special characters like <, >, ", \'.');
+        } else if (!alphabeticPattern.test(full_name)) {
+            this.setCustomValidity('Full name can only contain letters.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = full_name !== "" && this.value === full_name && !dangerousCharsPattern.test(full_name);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+
+    document.getElementById('username').addEventListener('input', function () {
+        var username = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\']/;
+        
+        if (username === "") {
+            this.setCustomValidity('Username cannot be empty or just spaces.');
+        } else if (this.value !== username) {
+            this.setCustomValidity('Username cannot start with a space.');
+        } else if (dangerousCharsPattern.test(username)) {
+            this.setCustomValidity('Username cannot contain HTML special characters like <, >, ", \'.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = username !== "" && this.value === username && !dangerousCharsPattern.test(username);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+
+    document.getElementById('password').addEventListener('input', function () {
+        var password = this.value.trim();
+        
+        var strongPasswordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
+        
+        if (password === "") {
+            this.setCustomValidity('Password cannot be empty.');
+        } else if (!strongPasswordPattern.test(password)) {
+            this.setCustomValidity('Password must contain at least 8 characters, including uppercase, lowercase, numbers, and special characters.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = strongPasswordPattern.test(password);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+  </script>
 
 <?php include_once('layouts/footer.php'); ?>
