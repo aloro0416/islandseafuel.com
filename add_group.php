@@ -11,39 +11,11 @@
    validate_fields($req_fields);
 
    if(find_by_groupName($_POST['group-name']) === false ){
-     $sorry = true;
-      ?>
-      <script>
-      document.addEventListener('DOMContentLoaded', function () {
-      <?php if (isset($sorry) && $sorry): ?>
-      Swal.fire({
-      icon: 'error',
-      title: 'Sorry! Entered Group Name already in database!',
-      showConfirmButton: true,
-      }).then(() => {
-      window.location.href = 'add_group';
-      })
-      <?php endif; ?>
-      });
-      </script>
-      <?php
+     $session->msg('d','<b>Sorry!</b> Entered Group Name already in database!');
+     redirect('add_group', false);
    }elseif(find_by_groupLevel($_POST['group-level']) === false) {
-     $level = true;
-      ?>
-      <script>
-      document.addEventListener('DOMContentLoaded', function () {
-      <?php if (isset($level) && $level): ?>
-      Swal.fire({
-      icon: 'error',
-      title: 'Sorry! Entered Group Level already in database!',
-      showConfirmButton: true,
-      }).then(() => {
-      window.location.href = 'add_group';
-      })
-      <?php endif; ?>
-      });
-      </script>
-      <?php
+     $session->msg('d','<b>Sorry!</b> Entered Group Level already in database!');
+     redirect('add_group', false);
    }
    if(empty($errors)){
            $name = remove_junk($db->escape($_POST['group-name']));
