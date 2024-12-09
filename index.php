@@ -273,7 +273,7 @@ const formInputs = document.querySelectorAll('#username, #myInput');
     }
     .login-page {
         margin: auto 0;
-        width: 70%;
+        width: 100%;
     }
   }
 
