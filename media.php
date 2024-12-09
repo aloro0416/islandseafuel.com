@@ -10,39 +10,11 @@
   $photo = new Media();
   $photo->upload($_FILES['file_upload']);
     if($photo->process_media()){
-        $success = true;
-        ?>
-        <script>
-        document.addEventListener('DOMContentLoaded', function () {
-        <?php if (isset($success) && $success): ?>
-        Swal.fire({
-        icon: 'success',
-        title: 'Photo has been uploaded',
-        showConfirmButton: true,
-        }).then(() => {
-        window.location.href = 'media';
-        })
-        <?php endif; ?>
-        });
-        </script>
-        <?php
+        $session->msg('s','photo has been uploaded.');
+        redirect('media');
     } else{
-      $error = true;
-      ?>
-      <script>
-      document.addEventListener('DOMContentLoaded', function () {
-      <?php if (isset($error) && $error): ?>
-      Swal.fire({
-      icon: 'error',
-      title: join($photo->errors),
-      showConfirmButton: true,
-      }).then(() => {
-      window.location.href = 'media';
-      })
-      <?php endif; ?>
-      });
-      </script>
-      <?php
+      $session->msg('d',join($photo->errors));
+      redirect('media');
     }
 
   }
@@ -140,9 +112,9 @@
                   <?php echo $media_file['file_type'];?>
                 </td>
                 <td class="text-center">
-                  <a href="javascript:void(0);" class="btn btn-danger btn-xs" title="Delete" data-toggle="tooltip" onclick="confirmDelete(<?=$media_file['id']?>)">
-                      <span class="glyphicon glyphicon-trash"></span>
-                    </a>
+                  <a href="delete_media?id=<?php echo (int) $media_file['id'];?>" class="btn btn-danger btn-xs"  title="Edit">
+                    <span class="glyphicon glyphicon-trash"></span>
+                  </a>
                 </td>
                </tr>
               <?php endforeach;?>
@@ -179,52 +151,4 @@
  
 });
 
-function confirmDelete(mediaId) {
-        // Show SweetAlert confirmation dialog
-        Swal.fire({
-            title: 'Are you sure?',
-            text: 'You won\'t be able to revert this!',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'Cancel'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Perform AJAX request to delete the product
-                $.ajax({
-                    url: 'delete_media.php', // Your PHP script to handle deletion
-                    type: 'GET', // Use GET request
-                    data: { id: mediaId }, // Send the product ID to the PHP script
-                    dataType: 'json', // Expecting a JSON response
-                    success: function(response) {
-                        // Handle success and failure responses from the server
-                        if (response.status === 'success') {
-                            Swal.fire(
-                                'Deleted!',
-                                response.message, // Show success message from the PHP response
-                                'success'
-                            ).then(() => {
-                                location.reload(); // Reload the page to update the list
-                            });
-                        } else {
-                            Swal.fire(
-                                'Error!',
-                                response.message, // Show error message from the PHP response
-                                'error'
-                            );
-                        }
-                    },
-                    error: function() {
-                        Swal.fire(
-                            'Error!',
-                            'There was a problem with the server.',
-                            'error'
-                        );
-                    }
-                });
-            }
-        });
-    }
 </script>
