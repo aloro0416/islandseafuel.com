@@ -148,9 +148,6 @@
                   <?php echo $media_file['file_type'];?>
                 </td>
                 <td class="text-center">
-                  <a href="delete_media?id=<?php echo (int) $media_file['id'];?>" class="btn btn-danger btn-xs"  title="Edit">
-                    <span class="glyphicon glyphicon-trash"></span>
-                  </a>
                   <a href="javascript:void(0);" class="btn btn-danger btn-xs" title="Delete" data-toggle="tooltip" onclick="confirmDelete(<?=$media_file['id']?>)">
                       <span class="glyphicon glyphicon-trash"></span>
                     </a>
