@@ -11,11 +11,39 @@
    validate_fields($req_fields);
 
    if(find_by_groupName($_POST['group-name']) === false ){
-     $session->msg('d','<b>Sorry!</b> Entered Group Name already in database!');
-     redirect('add_group', false);
+     $sorry = true;
+      ?>
+      <script>
+      document.addEventListener('DOMContentLoaded', function () {
+      <?php if (isset($sorry) && $sorry): ?>
+      Swal.fire({
+      icon: 'error',
+      title: 'Sorry! Entered Group Name already in database!',
+      showConfirmButton: true,
+      }).then(() => {
+      window.location.href = 'add_group';
+      })
+      <?php endif; ?>
+      });
+      </script>
+      <?php
    }elseif(find_by_groupLevel($_POST['group-level']) === false) {
-     $session->msg('d','<b>Sorry!</b> Entered Group Level already in database!');
-     redirect('add_group', false);
+     $level = true;
+      ?>
+      <script>
+      document.addEventListener('DOMContentLoaded', function () {
+      <?php if (isset($level) && $level): ?>
+      Swal.fire({
+      icon: 'error',
+      title: 'Sorry! Entered Group Level already in database!',
+      showConfirmButton: true,
+      }).then(() => {
+      window.location.href = 'add_group';
+      })
+      <?php endif; ?>
+      });
+      </script>
+      <?php
    }
    if(empty($errors)){
            $name = remove_junk($db->escape($_POST['group-name']));
@@ -28,17 +56,57 @@
         $query .=" '{$name}', '{$level}','{$status}'";
         $query .=")";
         if($db->query($query)){
-          //sucess
-          $session->msg('s',"Group has been creted! ");
-          redirect('add_group', false);
+          $success = true;
+          ?>
+          <script>
+          document.addEventListener('DOMContentLoaded', function () {
+          <?php if (isset($success) && $success): ?>
+          Swal.fire({
+          icon: 'success',
+          title: 'Group has been creted!',
+          showConfirmButton: true,
+          }).then(() => {
+          window.location.href = 'add_group';
+          })
+          <?php endif; ?>
+          });
+          </script>
+          <?php
         } else {
-          //failed
-          $session->msg('d',' Sorry failed to create Group!');
-          redirect('add_group', false);
+          $failed = true;
+          ?>
+          <script>
+          document.addEventListener('DOMContentLoaded', function () {
+          <?php if (isset($failed) && $failed): ?>
+          Swal.fire({
+          icon: 'error',
+          title: 'Sorry failed to create Group!',
+          showConfirmButton: true,
+          }).then(() => {
+          window.location.href = 'add_group';
+          })
+          <?php endif; ?>
+          });
+          </script>
+          <?php
         }
    } else {
-     $session->msg("d", $errors);
-      redirect('add_group',false);
+      $error = true;
+          ?>
+          <script>
+          document.addEventListener('DOMContentLoaded', function () {
+          <?php if (isset($error) && $error): ?>
+          Swal.fire({
+          icon: 'error',
+          title: $errors,
+          showConfirmButton: true,
+          }).then(() => {
+          window.location.href = 'add_group';
+          })
+          <?php endif; ?>
+          });
+          </script>
+          <?php
    }
  }
 ?>
