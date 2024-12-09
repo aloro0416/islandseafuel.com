@@ -51,7 +51,7 @@ $sales = find_all_sale();
                      <a href="edit_sale?id=<?php echo (int)$sale['id'];?>" class="btn btn-warning btn-xs"  title="Edit" data-toggle="tooltip">
                        <span class="glyphicon glyphicon-edit"></span>
                      </a>
-                     <a href="javascript:void(0);" class="btn btn-danger btn-xs" title="Delete" data-toggle="tooltip" onclick="confirmDelete(<?=(int)$sale['id']?>)">
+                     <a href="javascript:void(0);" class="btn btn-danger btn-xs" title="Delete" data-toggle="tooltip" onclick="confirmDelete(<?=$sale['id']?>)">
                       <span class="glyphicon glyphicon-trash"></span>
                     </a>
                   </div>
