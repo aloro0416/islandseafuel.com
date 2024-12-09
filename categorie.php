@@ -181,8 +181,10 @@ document.getElementById('categorie_name').addEventListener('input', function () 
         var isValid = categorie_name !== "" && this.value === categorie_name && !dangerousCharsPattern.test(categorie_name);
         this.classList.toggle('is-invalid', !isValid);
     });
+</script>
 
-    function confirmDelete(catId) {
+<script>
+  function confirmDelete(catId) {
         // Show SweetAlert confirmation dialog
         Swal.fire({
             title: 'Are you sure?',
