@@ -10,11 +10,40 @@
   $user_id = (int)$_POST['user_id'];
   $photo->upload($_FILES['file_upload']);
   if($photo->process_user($user_id)){
-    $session->msg('s','photo has been uploaded.');
-    redirect('edit_account');
+    $success = true;
+        ?>
+        <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        <?php if (isset($success) && $success): ?>
+        Swal.fire({
+        icon: 'success',
+        title: 'Photo has been uploaded',
+        showConfirmButton: true,
+        }).then(() => {
+        window.location.href = 'edit_account';
+        })
+        <?php endif; ?>
+        });
+        </script>
+        <?php
     } else{
-      $session->msg('d',join($photo->errors));
-      redirect('edit_account');
+      $error_message = join($photo->errors);
+      $error = true;
+      ?>
+      <script>
+      document.addEventListener('DOMContentLoaded', function () {
+      <?php if (isset($error) && $error): ?>
+      Swal.fire({
+      icon: 'error',
+      title: '<?php echo addslashes($error_message); ?>',
+      showConfirmButton: true,
+      }).then(() => {
+      window.location.href = 'edit_account';
+      })
+      <?php endif; ?>
+      });
+      </script>
+      <?php
     }
   }
 ?>
@@ -30,15 +59,57 @@
             $sql = "UPDATE users SET name ='{$name}', username ='{$username}' WHERE id='{$id}'";
     $result = $db->query($sql);
           if($result && $db->affected_rows() === 1){
-            $session->msg('s',"Acount updated ");
-            redirect('edit_account', false);
+            $success = true;
+            ?>
+            <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            <?php if (isset($success) && $success): ?>
+            Swal.fire({
+            icon: 'success',
+            title: 'Acount updated',
+            showConfirmButton: true,
+            }).then(() => {
+            window.location.href = 'edit_account';
+            })
+            <?php endif; ?>
+            });
+            </script>
+            <?php
           } else {
-            $session->msg('d',' Sorry failed to updated!');
-            redirect('edit_account', false);
+            $failed = true;
+            ?>
+            <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            <?php if (isset($failed) && $failed): ?>
+            Swal.fire({
+            icon: 'error',
+            title: 'Sorry failed to updated!',
+            showConfirmButton: true,
+            }).then(() => {
+            window.location.href = 'edit_account';
+            })
+            <?php endif; ?>
+            });
+            </script>
+            <?php
           }
     } else {
-      $session->msg("d", $errors);
-      redirect('edit_account',false);
+      $error = true;
+            ?>
+            <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            <?php if (isset($error) && $error): ?>
+            Swal.fire({
+            icon: 'error',
+            title: $errors,
+            showConfirmButton: true,
+            }).then(() => {
+            window.location.href = 'edit_account';
+            })
+            <?php endif; ?>
+            });
+            </script>
+            <?php
     }
   }
 ?>
