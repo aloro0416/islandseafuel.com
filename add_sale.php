@@ -61,19 +61,19 @@
         } else {
            $error = true;
             ?>
-            <script>
-            document.addEventListener('DOMContentLoaded', function () {
-            <?php if (isset($error) && $error): ?>
-            Swal.fire({
-            icon: 'error',
-            title: $errors,
-            showConfirmButton: true,
-            }).then(() => {
-            window.location.href = 'add_sale';
-            })
-            <?php endif; ?>
-            });
-            </script>
+              <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                  <?php if (isset($error) && $error): ?>
+                    Swal.fire({
+                    icon: 'error',
+                    title: $errors,
+                    showConfirmButton: true,
+                  }).then(() => {
+                    window.location.href = 'add_sale';
+                  })
+                  <?php endif; ?>
+                });
+              </script>
             <?php
         }
   }
