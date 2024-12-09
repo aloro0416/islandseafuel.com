@@ -33,7 +33,7 @@
    if(find_by_groupName($_POST['group-name']) === false ){
     $session->msg('d','<b>Sorry!</b> Entered Group Name already in database!');
     redirect('edit_group?id='.(int)$e_group['id'], false);
-  }else if(find_by_groupLevel($_POST['group-level']) === false) {
+  }else {
     $session->msg('d','<b>Sorry!</b> Entered Group Level already in database!');
     redirect('edit_group?id='.(int)$e_group['id'], false);
   }
