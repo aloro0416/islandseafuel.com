@@ -252,96 +252,31 @@ const formInputs = document.querySelectorAll('#username, #myInput');
 <style>
   body {
     background-image: url('libs/images/bgi2.jpg');
-    background-size: cover;
+    background-size: cover; /* Ensures the image covers the entire screen */
     background-position: center;
-    background-attachment: fixed;
-    margin: 0; /* Make sure there's no margin around the body */
+    background-attachment: fixed; /* Keeps the background fixed while scrolling */
   }
 
   .login-page {
     box-shadow: 2px 2px 5px 2px;
-    max-width: 400px; /* Limit max width for the form */
-    margin: 0 auto; /* Center the login form horizontally */
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8); /* Add background color for readability */
-    border-radius: 10px;
-    margin-top: 50px; /* Add some space from top */
-  }
-
-  .form-group {
-    margin-bottom: 15px;
-  }
-
-  .form-control {
-    width: 100%; /* Make input fields take up the full width */
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-
-  .btn {
-    width: 100%; /* Make button take up full width */
-    padding: 12px;
-    border-radius: 5px;
-    background-color: #ff4d4d;
-    border: none;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-  }
-
-  .btn:hover {
-    background-color: #ff3333;
-  }
-
-  .login-page h4 {
-    font-size: 1.4em;
-    margin: 20px 0;
   }
 
   /* Media query for mobile devices */
   @media (max-width: 768px) {
     body {
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      top: 0;
+      background-size: cover; /* Adjusts the background size for smaller screens */
+      background-position: center; /* Aligns the image to the top center for better display on mobile */
+      background-attachment: fixed; /* Fixes the background scrolling issue on mobile */
+      top: 0; /* Reduce the top margin for mobile */
       left: 0;
-      width: 100%;
+      width: 100%; /* Ensure full-width on smaller screens */
     }
-
     .login-page {
-      width: 90%; /* Make login form occupy most of the screen on mobile */
-      margin-top: 20px; /* Reduce margin for mobile */
-      box-shadow: none;
-      padding: 15px;
-    }
-
-    .form-group {
-      margin-bottom: 10px; /* Reduce margin for mobile */
-    }
-
-    .form-control {
-      padding: 12px;
-      font-size: 16px;
-    }
-
-    .btn {
-      padding: 12px;
-      font-size: 16px;
-    }
-
-    .text-center img {
-      width: 80px; /* Adjust logo size for mobile */
-      height: auto;
-    }
-
-    .login-page h4 {
-      font-size: 1.2em; /* Reduce the heading size on smaller screens */
+        margin: auto 0;
+        width: 100%;
+        margin-right: 10%;
     }
   }
-
 
 #termsModal {
     display: none;
