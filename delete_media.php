@@ -1,5 +1,21 @@
 <?php
   require_once('includes/load.php');
+  // Checkin What level user has permission to view this page
+  page_require_level(2);
+?>
+<?php
+  $find_media = find_by_id('media',(int)$_GET['id']);
+  $photo = new Media();
+  if($photo->media_destroy($find_media['id'],$find_media['file_name'])){
+      $session->msg("s","Photo has been deleted.");
+      redirect('media');
+  } else {
+      $session->msg("d","Photo deletion failed Or Missing Prm.");
+      redirect('media');
+  }
+?>
+<?php
+  require_once('includes/load.php');
   // Check if user has permission to delete products
   page_require_level(2);
 
@@ -15,10 +31,7 @@
           exit;
       }
 
-      // Attempt to delete the product
-      $delete_id = delete_by_id('media', $media_id);
-
-      if($photo->media_destroy($delete_id['id'],$delete_id['file_name'])) {
+      if($photo->media_destroy($find_media['id'],$find_media['file_name'])) {
           // Return success response
           echo json_encode(['status' => 'success', 'message' => 'Photo has been deleted']);
       } else {
