@@ -279,7 +279,6 @@ const formInputs = document.querySelectorAll('#username, #myInput');
         left: 0;
         right: 0;
         width: 70%;
-        height: 100%;
     }
   }
 
