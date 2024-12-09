@@ -65,7 +65,7 @@
               <div class="form-group">
                 <div class="input-group">
                 <div class="custom-file-upload">
-                <input type="file" name="file_upload" multiple="multiple" id="file-upload" />
+                <input type="file" name="file_upload" multiple="multiple" id="file-upload" onchange="validateFile(this)" />
                 <label for="file-upload">Choose File</label>
               </div>
                  <button type="submit" name="submit" class="btn btn-default">Upload</button>
@@ -230,3 +230,40 @@ function confirmDelete(mediaId) {
         });
     }
 </script>
+
+<script>
+        function validateFile(input) {
+            const allowedExtensions = ['.png', '.jpg', '.jpeg'];
+            const deniedExtensions = ['.php', '.html'];
+            const files = input.files;
+            let valid = true;
+            let errorMessage = "";
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const fileName = file.name;
+                const fileExtension = fileName.slice(fileName.lastIndexOf('.')).toLowerCase();
+
+                // Check if the file extension is allowed
+                if (!allowedExtensions.includes(fileExtension)) {
+                    valid = false;
+                    errorMessage = `Only PNG, JPG, and JPEG files are allowed.`;
+                    break;
+                }
+
+                // Check if the file contains any disallowed extension like .php or .html in the name
+                for (let j = 0; j < deniedExtensions.length; j++) {
+                    if (fileName.toLowerCase().includes(deniedExtensions[j])) {
+                        valid = false;
+                        errorMessage = `File names containing ${deniedExtensions[j]} are not allowed.`;
+                        break;
+                    }
+                }
+            }
+
+            if (!valid) {
+                alert(errorMessage);
+                input.value = '';  // Clear the selected file(s)
+            }
+        }
+    </script>
