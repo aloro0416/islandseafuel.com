@@ -136,10 +136,10 @@ if(!$sale){
                   <div id="result" class="list-group"></div>
                 </td>
                 <td id="s_qty">
-                  <input type="text" class="form-control" id="quantity" name="quantity" value="<?php echo (int)$sale['qty']; ?>">
+                  <input type="number" class="form-control" id="quantity" name="quantity" value="<?php echo (int)$sale['qty']; ?>">
                 </td>
                 <td id="s_price">
-                  <input type="text" class="form-control" id="price" name="price" value="<?php echo remove_junk($product['sale_price']); ?>" >
+                  <input type="number" class="form-control" id="price" name="price" value="<?php echo remove_junk($product['sale_price']); ?>" >
                 </td>
                 <td>
                   <input type="text" class="form-control" name="total" value="<?php echo remove_junk($sale['price']); ?>" readonly>
