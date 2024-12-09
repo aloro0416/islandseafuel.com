@@ -31,17 +31,57 @@
         $query .=" '{$name}', '{$username}', '{$email}', '{$password}', '{$user_level}','1'";
         $query .=")";
         if($db->query($query)){
-          //sucess
-          $session->msg('s',"User account has been created! ");
-          redirect('add_user', false);
+          $success = true;
+          ?>
+          <script>
+          document.addEventListener('DOMContentLoaded', function () {
+          <?php if (isset($success) && $success): ?>
+          Swal.fire({
+          icon: 'success',
+          title: 'User account has been created!',
+          showConfirmButton: true,
+          }).then(() => {
+          window.location.href = 'add_user';
+          })
+          <?php endif; ?>
+          });
+          </script>
+          <?php
         } else {
-          //sucess
-          $session->msg('s',"User account has been created! ");
-          redirect('add_user', false);
+          $failed = true;
+          ?>
+          <script>
+          document.addEventListener('DOMContentLoaded', function () {
+          <?php if (isset($failed) && $failed): ?>
+          Swal.fire({
+          icon: 'error',
+          title: 'Failed to create user account!',
+          showConfirmButton: true,
+          }).then(() => {
+          window.location.href = 'add_user';
+          })
+          <?php endif; ?>
+          });
+          </script>
+          <?php
         }
       } else {
-        $session->msg("d", $errors);
-        redirect('add_user',false);
+        $error = true;
+        ?>
+        <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        <?php if (isset($error) && $error): ?>
+        Swal.fire({
+        icon: 'error',
+        title: $errors,
+        showConfirmButton: true,
+        }).then(() => {
+        window.location.href = 'add_user';
+        })
+        <?php endif; ?>
+        });
+        </script>
+        <?php
       }
     }
 
