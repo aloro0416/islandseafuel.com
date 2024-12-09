@@ -63,3 +63,51 @@
     echo json_encode($html);
   }
  ?>
+
+<script>
+  document.getElementById('price').addEventListener('input', function () {
+    var price = this.value.trim();
+
+    var dangerousCharsPattern = /[<>\"']/;
+    var numericPattern = /^[0-9]*$/;  // Only allows numbers
+
+    if (price === "") {
+        this.setCustomValidity('Price cannot be empty or just spaces.');
+    } else if (this.value !== price) {
+        this.setCustomValidity('Price cannot start with a space.');
+    } else if (dangerousCharsPattern.test(price)) {
+        this.setCustomValidity('Price cannot contain HTML special characters like <, >, ", \'.');
+    } else if (!numericPattern.test(price)) {
+        this.setCustomValidity('Please enter only numbers.');
+    } else {
+        this.setCustomValidity('');
+    }
+
+    var isValid = price !== "" && this.value === price && !dangerousCharsPattern.test(price) && numericPattern.test(price);
+    this.classList.toggle('is-invalid', !isValid);
+    this.classList.toggle('is-valid', isValid); // Optional for positive feedback
+  });
+
+  document.getElementById('quantity').addEventListener('input', function () {
+      var quantity = this.value.trim();
+
+      var dangerousCharsPattern = /[<>\"']/;
+      var numericPattern = /^[0-9]*$/;  // Only allows numbers
+
+      if (quantity === "") {
+          this.setCustomValidity('Quantity cannot be empty or just spaces.');
+      } else if (this.value !== quantity) {
+          this.setCustomValidity('Quantity cannot start with a space.');
+      } else if (dangerousCharsPattern.test(quantity)) {
+          this.setCustomValidity('Quantity cannot contain HTML special characters like <, >, ", \'.');
+      } else if (!numericPattern.test(quantity)) {
+          this.setCustomValidity('Please enter only numbers.');
+      } else {
+          this.setCustomValidity('');
+      }
+
+      var isValid = quantity !== "" && this.value === quantity && !dangerousCharsPattern.test(quantity) && numericPattern.test(quantity);
+      this.classList.toggle('is-invalid', !isValid);
+      this.classList.toggle('is-valid', isValid); // Optional for positive feedback
+  });
+</script>
