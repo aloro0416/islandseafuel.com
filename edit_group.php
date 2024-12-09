@@ -7,8 +7,22 @@
 <?php
   $e_group = find_by_id('user_groups',(int)$_GET['id']);
   if(!$e_group){
-    $session->msg("d","Missing Group id.");
-    redirect('group');
+    $missing = true;
+    ?>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    <?php if (isset($missing) && $missing): ?>
+    Swal.fire({
+    icon: 'error',
+    title: 'Missing Group id',
+    showConfirmButton: true,
+    }).then(() => {
+    window.location.href = 'group';
+    })
+    <?php endif; ?>
+    });
+    </script>
+    <?php
   }
 ?>
 <?php
@@ -26,17 +40,57 @@
         $query .= "WHERE ID='{$db->escape($e_group['id'])}'";
         $result = $db->query($query);
          if($result && $db->affected_rows() === 1){
-          //sucess
-          $session->msg('s',"Group has been updated! ");
-          redirect('edit_group?id='.(int)$e_group['id'], false);
+          $success = true;
+          ?>
+          <script>
+          document.addEventListener('DOMContentLoaded', function () {
+          <?php if (isset($success) && $success): ?>
+          Swal.fire({
+          icon: 'success',
+          title: 'Group has been updated!',
+          showConfirmButton: true,
+          }).then(() => {
+          window.location.href = 'edit_group?id=<?php echo $e_group['id']; ?>';
+          })
+          <?php endif; ?>
+          });
+          </script>
+          <?php
         } else {
-          //failed
-          $session->msg('d',' Sorry failed to updated Group!');
-          redirect('edit_group?id='.(int)$e_group['id'], false);
+          $failed = true;
+          ?>
+          <script>
+          document.addEventListener('DOMContentLoaded', function () {
+          <?php if (isset($failed) && $failed): ?>
+          Swal.fire({
+          icon: 'error',
+          title: 'Sorry failed to updated Group!',
+          showConfirmButton: true,
+          }).then(() => {
+          window.location.href = 'edit_product?id=<?php echo $e_group['id']; ?>';
+          })
+          <?php endif; ?>
+          });
+          </script>
+          <?php
         }
    } else {
-     $session->msg("d", $errors);
-    redirect('edit_group?id='.(int)$e_group['id'], false);
+    $error = true;
+    ?>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    <?php if (isset($error) && $error): ?>
+    Swal.fire({
+    icon: 'error',
+    title: $errors,
+    showConfirmButton: true,
+    }).then(() => {
+    window.location.href = 'edit_product?id=<?php echo $e_group['id']; ?>';
+    })
+    <?php endif; ?>
+    });
+    </script>
+    <?php
    }
  }
 ?>
@@ -49,7 +103,7 @@
       <form method="post" action="edit_group.php?id=<?php echo (int)$e_group['id'];?>" class="clearfix">
         <div class="form-group">
               <label for="name" class="control-label">Group Name</label>
-              <input type="name" class="form-control" name="group-name" value="<?php echo remove_junk(ucwords($e_group['group_name'])); ?>">
+              <input type="name" class="form-control" id="group_name" name="group-name" value="<?php echo remove_junk(ucwords($e_group['group_name'])); ?>">
         </div>
         <div class="form-group">
               <label for="level" class="control-label">Group Level</label>
@@ -67,5 +121,26 @@
         </div>
     </form>
 </div>
+
+<script>
+  document.getElementById('group_name').addEventListener('input', function () {
+        var group_name = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\']/;
+        
+        if (group_name === "") {
+            this.setCustomValidity('Group name cannot be empty or just spaces.');
+        } else if (this.value !== group_name) {
+            this.setCustomValidity('Group name cannot start with a space.');
+        } else if (dangerousCharsPattern.test(group_name)) {
+            this.setCustomValidity('Group name cannot contain HTML special characters like <, >, ", \'.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = group_name !== "" && this.value === group_name && !dangerousCharsPattern.test(group_name);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+</script>
 
 <?php include_once('layouts/footer.php'); ?>
