@@ -30,13 +30,6 @@
 
    $req_fields = array('group-name','group-level');
    validate_fields($req_fields);
-   if(find_by_groupName($_POST['group-name']) === false ){
-    $session->msg('d','<b>Sorry!</b> Entered Group Name already in database!');
-    redirect('edit_group?id='.(int)$e_group['id'], false);
-  }elseif(find_by_groupLevel($_POST['group-level']) === false) {
-    $session->msg('d','<b>Sorry!</b> Entered Group Level already in database!');
-    redirect('edit_group?id='.(int)$e_group['id'], false);
-  }
    if(empty($errors)){
            $name = remove_junk($db->escape($_POST['group-name']));
           $level = remove_junk($db->escape($_POST['group-level']));
