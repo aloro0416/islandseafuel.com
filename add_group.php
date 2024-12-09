@@ -21,7 +21,7 @@
                 title: '<b>Sorry!</b> Entered Group Name already in database!',
                 showConfirmButton: true,
             }).then(() => {
-                window.location.href = 'add_group'; // Redirection after Swal popup
+                window.location.href = 'add_group';
             });
             <?php endif; ?>
         });
