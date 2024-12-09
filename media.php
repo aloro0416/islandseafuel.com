@@ -10,11 +10,40 @@
   $photo = new Media();
   $photo->upload($_FILES['file_upload']);
     if($photo->process_media()){
-        $session->msg('s','photo has been uploaded.');
-        redirect('media');
+        $success = true;
+        ?>
+        <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        <?php if (isset($success) && $success): ?>
+        Swal.fire({
+        icon: 'success',
+        title: 'Photo has been uploaded',
+        showConfirmButton: true,
+        }).then(() => {
+        window.location.href = 'media';
+        })
+        <?php endif; ?>
+        });
+        </script>
+        <?php
     } else{
-      $session->msg('d',join($photo->errors));
-      redirect('media');
+      $error_message = join($photo->errors);
+      $error = true;
+      ?>
+      <script>
+      document.addEventListener('DOMContentLoaded', function () {
+      <?php if (isset($error) && $error): ?>
+      Swal.fire({
+      icon: 'error',
+      title: '<?php echo addslashes($error_message); ?>',
+      showConfirmButton: true,
+      }).then(() => {
+      window.location.href = 'media';
+      })
+      <?php endif; ?>
+      });
+      </script>
+      <?php
     }
 
   }
