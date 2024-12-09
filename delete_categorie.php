@@ -1,22 +1,30 @@
 <?php
   require_once('includes/load.php');
-  // Checkin What level user has permission to view this page
+  // Check if user has permission to delete products
   page_require_level(1);
-?>
-<?php
-  $categorie = find_by_id('categories',(int)$_GET['id']);
-  if(!$categorie){
-    $session->msg("d","Missing Categorie id.");
-    redirect('categorie');
-  }
-?>
-<?php
-  $delete_id = delete_by_id('categories',(int)$categorie['id']);
-  if($delete_id){
-      $session->msg("s","Categorie deleted.");
-      redirect('categorie');
+
+  // Check if 'id' parameter is passed for deletion
+  if (isset($_GET['id'])) {
+      $categorie_id = (int)$_GET['id'];
+      $categorie = find_by_id('categories', $categorie_id);
+
+      // If product does not exist, return an error
+      if (!$categorie) {
+          echo json_encode(['status' => 'error', 'message' => 'Missing Categorie id']);
+          exit;
+      }
+
+      // Attempt to delete the product
+      $delete_id = delete_by_id('categories', $categorie_id);
+
+      if ($delete_id) {
+          // Return success response
+          echo json_encode(['status' => 'success', 'message' => 'Categorie deleted successfully']);
+      } else {
+          // Return error response if deletion failed
+          echo json_encode(['status' => 'error', 'message' => 'Categorie deletion failed']);
+      }
   } else {
-      $session->msg("d","Categorie deletion failed.");
-      redirect('categorie');
+      echo json_encode(['status' => 'error', 'message' => 'No categorie ID specified']);
   }
 ?>

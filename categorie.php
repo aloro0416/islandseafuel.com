@@ -123,7 +123,7 @@
                         <a href="edit_categorie?id=<?php echo (int)$cat['id'];?>"  class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
                           <span class="glyphicon glyphicon-edit"></span>
                         </a>
-                        <a href="delete_categorie?id=<?php echo (int)$cat['id'];?>"  class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
+                        <a href="javascript:void(0);" class="btn btn-danger btn-xs" title="Delete" data-toggle="tooltip" onclick="confirmDelete(<?=$cat['id']?>)">
                           <span class="glyphicon glyphicon-trash"></span>
                         </a>
                       </div>
@@ -181,4 +181,54 @@ document.getElementById('categorie_name').addEventListener('input', function () 
         var isValid = categorie_name !== "" && this.value === categorie_name && !dangerousCharsPattern.test(categorie_name);
         this.classList.toggle('is-invalid', !isValid);
     });
+
+
+    function confirmDelete(catId) {
+        // Show SweetAlert confirmation dialog
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You won\'t be able to revert this!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Perform AJAX request to delete the product
+                $.ajax({
+                    url: 'delete_categorie.php', // Your PHP script to handle deletion
+                    type: 'GET', // Use GET request
+                    data: { id: catId }, // Send the product ID to the PHP script
+                    dataType: 'json', // Expecting a JSON response
+                    success: function(response) {
+                        // Handle success and failure responses from the server
+                        if (response.status === 'success') {
+                            Swal.fire(
+                                'Deleted!',
+                                response.message, // Show success message from the PHP response
+                                'success'
+                            ).then(() => {
+                                location.reload(); // Reload the page to update the list
+                            });
+                        } else {
+                            Swal.fire(
+                                'Error!',
+                                response.message, // Show error message from the PHP response
+                                'error'
+                            );
+                        }
+                    },
+                    error: function() {
+                        Swal.fire(
+                            'Error!',
+                            'There was a problem with the server.',
+                            'error'
+                        );
+                    }
+                });
+            }
+        });
+    }
 </script>
