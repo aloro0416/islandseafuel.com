@@ -51,7 +51,7 @@
       <form method="post" action="add_group.php" class="clearfix">
         <div class="form-group">
               <label for="name" class="control-label">Group Name</label>
-              <input type="name" class="form-control" name="group-name">
+              <input type="name" class="form-control" id="group_name" name="group-name">
         </div>
         <div class="form-group">
               <label for="level" class="control-label">Group Level</label>
@@ -70,4 +70,24 @@
     </form>
 </div>
 
+<script>
+  document.getElementById('group_name').addEventListener('input', function () {
+        var group_name = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\']/;
+        
+        if (group_name === "") {
+            this.setCustomValidity('Group name cannot be empty or just spaces.');
+        } else if (this.value !== group_name) {
+            this.setCustomValidity('Group name cannot start with a space.');
+        } else if (dangerousCharsPattern.test(group_name)) {
+            this.setCustomValidity('Group name cannot contain HTML special characters like <, >, ", \'.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = group_name !== "" && this.value === group_name && !dangerousCharsPattern.test(group_name);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+</script>
 <?php include_once('layouts/footer.php'); ?>
