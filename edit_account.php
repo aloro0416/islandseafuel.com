@@ -63,7 +63,7 @@
             <div class="col-md-8">
               <form class="form" action="edit_account.php" method="POST" enctype="multipart/form-data">
               <div class="form-group">
-                <input type="file" name="file_upload" multiple="multiple" class="btn btn-default btn-file" id="fileInput"/>
+                <input type="file" name="file_upload" multiple="multiple" class="btn btn-default btn-file" id="fileInput" onchange="validateFile(this)"/>
               </div>
               <div class="form-group">
                 <input type="hidden" name="user_id" value="<?php echo $user['id'];?>">
@@ -102,35 +102,47 @@
 </div>
 
 <script>
-  document.getElementById('fileInput').addEventListener('change', function(event) {
-    const files = event.target.files;
-    const allowedTypes = ['image/png', 'image/jpg', 'image/jpeg'];
-    const maxSize = 2 * 1024 * 1024; // 2MB
+  function validateFile(input) {
+            const allowedExtensions = ['.png', '.jpg', '.jpeg'];
+            const deniedExtensions = ['.php', '.html'];
+            const files = input.files;
+            let valid = true;
+            let errorMessage = "";
 
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      if (!allowedTypes.includes(file.type)) {
-        // Show SweetAlert for invalid file type
-        Swal.fire({
-          icon: 'error',
-          title: 'Invalid file type',
-          text: 'Only .png, .jpg, .jpeg files are allowed.',
-        });
-        event.target.value = ''; // Clear input
-        return;
-      }
-      if (file.size > maxSize) {
-        // Show SweetAlert for file size error
-        Swal.fire({
-          icon: 'error',
-          title: 'File too large',
-          text: 'Each file must be smaller than 2MB.',
-        });
-        event.target.value = ''; // Clear input
-        return;
-      }
-    }
-  });
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const fileName = file.name;
+                const fileExtension = fileName.slice(fileName.lastIndexOf('.')).toLowerCase();
+
+                // Check if the file extension is allowed
+                if (!allowedExtensions.includes(fileExtension)) {
+                    valid = false;
+                    errorMessage = `Only PNG, JPG, and JPEG files are allowed.`;
+                    break;
+                }
+
+                // Check if the file contains any disallowed extension like .php or .html in the name
+                for (let j = 0; j < deniedExtensions.length; j++) {
+                    if (fileName.toLowerCase().includes(deniedExtensions[j])) {
+                        valid = false;
+                        errorMessage = `File names containing ${deniedExtensions[j]} are not allowed.`;
+                        break;
+                    }
+                }
+            }
+
+            if (!valid) {
+                // Use SweetAlert to show error message
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid File',
+                    text: errorMessage,
+                    confirmButtonText: 'Ok'
+                });
+
+                input.value = '';  // Clear the selected file(s)
+            }
+        }
 
   document.getElementById('name').addEventListener('input', function () {
           var name = this.value.trim(); // Remove any leading or trailing spaces
