@@ -8,8 +8,22 @@
   $e_user = find_by_id('users',(int)$_GET['id']);
   $groups  = find_all('user_groups');
   if(!$e_user){
-    $session->msg("d","Missing user id.");
-    redirect('users');
+    $missing = true;
+    ?>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    <?php if (isset($missing) && $missing): ?>
+    Swal.fire({
+    icon: 'error',
+    title: 'Missing user id',
+    showConfirmButton: true,
+    }).then(() => {
+    window.location.href = 'users';
+    })
+    <?php endif; ?>
+    });
+    </script>
+    <?php
   }
 ?>
 
@@ -27,15 +41,57 @@
             $sql = "UPDATE users SET name ='{$name}', username ='{$username}',user_level='{$level}',status='{$status}' WHERE id='{$db->escape($id)}'";
          $result = $db->query($sql);
           if($result && $db->affected_rows() === 1){
-            $session->msg('s',"Acount Updated ");
-            redirect('edit_user?id='.(int)$e_user['id'], false);
+            $success = true;
+              ?>
+              <script>
+              document.addEventListener('DOMContentLoaded', function () {
+              <?php if (isset($success) && $success): ?>
+              Swal.fire({
+              icon: 'success',
+              title: 'Acount Updated',
+              showConfirmButton: true,
+              }).then(() => {
+              window.location.href = 'edit_user?id=<?php echo $e_user['id']; ?>';
+              })
+              <?php endif; ?>
+              });
+              </script>
+              <?php
           } else {
-            $session->msg('d',' Sorry failed to updated!');
-            redirect('edit_user?id='.(int)$e_user['id'], false);
+            $failed = true;
+              ?>
+              <script>
+              document.addEventListener('DOMContentLoaded', function () {
+              <?php if (isset($failed) && $failed): ?>
+              Swal.fire({
+              icon: 'error',
+              title: 'Sorry failed to updated!',
+              showConfirmButton: true,
+              }).then(() => {
+              window.location.href = 'edit_user?id=<?php echo $e_user['id']; ?>';
+              })
+              <?php endif; ?>
+              });
+              </script>
+              <?php
           }
     } else {
-      $session->msg("d", $errors);
-      redirect('edit_user?id='.(int)$e_user['id'],false);
+      $error = true;
+              ?>
+              <script>
+              document.addEventListener('DOMContentLoaded', function () {
+              <?php if (isset($error) && $error): ?>
+              Swal.fire({
+              icon: 'error',
+              title: $errors,
+              showConfirmButton: true,
+              }).then(() => {
+              window.location.href = 'edit_user?id=<?php echo $e_user['id']; ?>';
+              })
+              <?php endif; ?>
+              });
+              </script>
+              <?php
     }
   }
 ?>
@@ -51,15 +107,57 @@ if(isset($_POST['update-pass'])) {
           $sql = "UPDATE users SET password='{$h_pass}' WHERE id='{$db->escape($id)}'";
        $result = $db->query($sql);
         if($result && $db->affected_rows() === 1){
-          $session->msg('s',"User password has been updated ");
-          redirect('edit_user?id='.(int)$e_user['id'], false);
+          $success = true;
+              ?>
+              <script>
+              document.addEventListener('DOMContentLoaded', function () {
+              <?php if (isset($success) && $success): ?>
+              Swal.fire({
+              icon: 'success',
+              title: 'User password has been updated',
+              showConfirmButton: true,
+              }).then(() => {
+              window.location.href = 'edit_user?id=<?php echo $e_user['id']; ?>';
+              })
+              <?php endif; ?>
+              });
+              </script>
+              <?php
         } else {
-          $session->msg('d',' Sorry failed to updated user password!');
-          redirect('edit_user?id='.(int)$e_user['id'], false);
+          $failed = true;
+              ?>
+              <script>
+              document.addEventListener('DOMContentLoaded', function () {
+              <?php if (isset($failed) && $failed): ?>
+              Swal.fire({
+              icon: 'error',
+              title: 'Sorry failed to updated user password!',
+              showConfirmButton: true,
+              }).then(() => {
+              window.location.href = 'edit_user?id=<?php echo $e_user['id']; ?>';
+              })
+              <?php endif; ?>
+              });
+              </script>
+              <?php
         }
   } else {
-    $session->msg("d", $errors);
-    redirect('edit_user?id='.(int)$e_user['id'],false);
+    $error = true;
+              ?>
+              <script>
+              document.addEventListener('DOMContentLoaded', function () {
+              <?php if (isset($error) && $error): ?>
+              Swal.fire({
+              icon: 'error',
+              title: $errors,
+              showConfirmButton: true,
+              }).then(() => {
+              window.location.href = 'edit_user?id=<?php echo $e_user['id']; ?>';
+              })
+              <?php endif; ?>
+              });
+              </script>
+              <?php
   }
 }
 
@@ -79,11 +177,11 @@ if(isset($_POST['update-pass'])) {
           <form method="post" action="edit_user.php?id=<?php echo (int)$e_user['id'];?>" class="clearfix">
             <div class="form-group">
                   <label for="name" class="control-label">Name</label>
-                  <input type="name" class="form-control" name="name" value="<?php echo remove_junk(ucwords($e_user['name'])); ?>">
+                  <input type="name" class="form-control" id="name" name="name" value="<?php echo remove_junk(ucwords($e_user['name'])); ?>">
             </div>
             <div class="form-group">
                   <label for="username" class="control-label">Username</label>
-                  <input type="text" class="form-control" name="username" value="<?php echo remove_junk(ucwords($e_user['username'])); ?>">
+                  <input type="text" class="form-control" id="username" name="username" value="<?php echo remove_junk(ucwords($e_user['username'])); ?>">
             </div>
             <div class="form-group">
               <label for="level">User Role</label>
@@ -120,7 +218,7 @@ if(isset($_POST['update-pass'])) {
         <form action="edit_user.php?id=<?php echo (int)$e_user['id'];?>" method="post" class="clearfix">
           <div class="form-group">
                 <label for="password" class="control-label">Password</label>
-                <input type="password" class="form-control" name="password" placeholder="Type user new password">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Type user new password">
           </div>
           <div class="form-group clearfix">
                   <button type="submit" name="update-pass" class="btn btn-danger pull-right">Change</button>
@@ -131,4 +229,65 @@ if(isset($_POST['update-pass'])) {
   </div>
 
  </div>
+
+
+ <script>
+  document.getElementById('name').addEventListener('input', function () {
+        var name = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\']/;
+        var alphabeticPattern = /^[A-Za-z\s]+$/;
+        
+        if (name === "") {
+            this.setCustomValidity('Name cannot be empty or just spaces.');
+        } else if (this.value !== name) {
+            this.setCustomValidity('Name cannot start with a space.');
+        } else if (dangerousCharsPattern.test(name)) {
+            this.setCustomValidity('Name cannot contain HTML special characters like <, >, ", \'.');
+        } else if (!alphabeticPattern.test(name)) {
+            this.setCustomValidity('Name can only contain letters.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = name !== "" && this.value === name && !dangerousCharsPattern.test(name);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+
+    document.getElementById('username').addEventListener('input', function () {
+        var username = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\']/;
+        
+        if (username === "") {
+            this.setCustomValidity('Username cannot be empty or just spaces.');
+        } else if (this.value !== username) {
+            this.setCustomValidity('Username cannot start with a space.');
+        } else if (dangerousCharsPattern.test(username)) {
+            this.setCustomValidity('Username cannot contain HTML special characters like <, >, ", \'.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = username !== "" && this.value === username && !dangerousCharsPattern.test(username);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+
+    document.getElementById('password').addEventListener('input', function () {
+        var password = this.value.trim();
+        
+        var strongPasswordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
+        
+        if (password === "") {
+            this.setCustomValidity('Password cannot be empty.');
+        } else if (!strongPasswordPattern.test(password)) {
+            this.setCustomValidity('Password must contain at least 8 characters, including uppercase, lowercase, numbers, and special characters.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = strongPasswordPattern.test(password);
+        this.classList.toggle('is-invalid', !isValid);
+    });
+ </script>
 <?php include_once('layouts/footer.php'); ?>
