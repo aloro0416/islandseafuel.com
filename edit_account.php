@@ -164,22 +164,22 @@
      });
 
      document.getElementById('username').addEventListener('input', function () {
-          var username = this.value.trim(); // Remove any leading or trailing spaces
-          
-          var alphabetPattern = /^[A-Za-z\s]+$/; // Pattern for alphabet and spaces only
-          
-          // Check if input starts with a space
-          if (this.value !== username) {
-               this.setCustomValidity('Name cannot start with a space.');
-          } else if (alphabetPattern.test(username)) {
-               this.setCustomValidity(''); // If valid, clear any previous error message
-          } else {
-               this.setCustomValidity('Please enter a valid name with only letters and no leading/trailing spaces.');
-          }
-          
-          // Check validity and toggle the invalid class
-          var isValid = alphabetPattern.test(username) && this.value === username; // Ensure no leading spaces
-          this.classList.toggle('is-invalid', !isValid);
-     });
+        var username = this.value.trim();
+        
+        var dangerousCharsPattern = /[<>\"\']/;
+        
+        if (username === "") {
+            this.setCustomValidity('Username cannot be empty or just spaces.');
+        } else if (this.value !== username) {
+            this.setCustomValidity('Username cannot start with a space.');
+        } else if (dangerousCharsPattern.test(username)) {
+            this.setCustomValidity('Username cannot contain HTML special characters like <, >, ", \'.');
+        } else {
+            this.setCustomValidity('');
+        }
+        
+        var isValid = username !== "" && this.value === username && !dangerousCharsPattern.test(username);
+        this.classList.toggle('is-invalid', !isValid);
+    });
 </script>
 <?php include_once('layouts/footer.php'); ?>
