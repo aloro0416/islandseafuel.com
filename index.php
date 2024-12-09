@@ -267,13 +267,10 @@ const formInputs = document.querySelectorAll('#username, #myInput');
       background-size: cover; /* Adjusts the background size for smaller screens */
       background-position: center; /* Aligns the image to the top center for better display on mobile */
       background-attachment: fixed; /* Fixes the background scrolling issue on mobile */
-      top: 0; /* Reduce the top margin for mobile */
-      left: 0;
       width: 100%; /* Ensure full-width on smaller screens */
     }
     .login-page {
         width: 100%;
-        margin-right: 10%;
     }
   }
 
