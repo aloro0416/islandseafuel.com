@@ -7,8 +7,22 @@
 <?php
 $sale = find_by_id('sales',(int)$_GET['id']);
 if(!$sale){
-  $session->msg("d","Missing product id.");
-  redirect('sales');
+  $missing = true;
+  ?>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    <?php if (isset($missing) && $missing): ?>
+      Swal.fire({
+        icon: 'error',
+        title: 'Missing product id.',
+        showConfirmButton: true,
+      }).then(() => {
+        window.location.href = 'sales';
+      })
+    <?php endif; ?>
+    });
+  </script>
+  <?php
 }
 ?>
 <?php $product = find_by_id('products',$sale['product_id']); ?>
@@ -30,15 +44,57 @@ if(!$sale){
           $result = $db->query($sql);
           if( $result && $db->affected_rows() === 1){
                     update_product_qty($s_qty,$p_id);
-                    $session->msg('s',"Sale updated.");
-                    redirect('edit_sale?id='.$sale['id'], false);
+                    $success = true;
+                    ?>
+                      <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                        <?php if (isset($success) && $success): ?>
+                          Swal.fire({
+                          icon: 'success',
+                          title: 'Sale updated!',
+                          showConfirmButton: true,
+                        }).then(() => {
+                          window.location.href = 'edit_sale?id=<?php echo $sale['id']; ?>';
+                        })
+                          <?php endif; ?>
+                        });
+                      </script>
+                    <?php
                   } else {
-                    $session->msg('d',' Sorry failed to updated!');
-                    redirect('sales', false);
+                    $failed = true;
+                    ?>
+                      <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                        <?php if (isset($failed) && $failed): ?>
+                          Swal.fire({
+                          icon: 'error',
+                          title: 'Sorry failed to updated!',
+                          showConfirmButton: true,
+                        }).then(() => {
+                          window.location.href = 'sales';
+                        })
+                          <?php endif; ?>
+                        });
+                      </script>
+                    <?php
                   }
         } else {
-           $session->msg("d", $errors);
-           redirect('edit_sale?id='.(int)$sale['id'],false);
+          $error = true;
+          ?>
+            <script>
+              document.addEventListener('DOMContentLoaded', function () {
+                <?php if (isset($error) && $error): ?>
+                  Swal.fire({
+                    icon: 'error',
+                    title: $errors,
+                    showConfirmButton: true,
+                  }).then(() => {
+                    window.location.href = 'edit_sale?id=<?php echo (int)$sale['id']; ?>';
+                  })
+                <?php endif; ?>
+              });
+            </script>
+          <?php
         }
   }
 
