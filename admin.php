@@ -194,7 +194,7 @@
         ?>
       <div class="row">
         <div class="col">
-        <div class="panel panel-box clearfix" style="padding: 5px;">
+        <div class="panel panel-box clearfix" style="padding: 10px;">
         <div id="Hchart"></div>
         </div>
 
@@ -227,7 +227,7 @@
 		      
                 ],
           chart: {
-          height: 350,
+          height: 250,
           type: 'line',
           zoom: {
             enabled: false
