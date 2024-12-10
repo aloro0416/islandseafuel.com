@@ -157,7 +157,7 @@
                   <div class="col-md-4">
                     <div class="input-group">
                       <span class="input-group-addon">
-                        <i class="glyphicon glyphicon-coins"></i>
+                        <i class="glyphicon glyphicon-coins"><span style="font-size: 1.2 em;">₱</span></i>
                       </span>
                       <input type="number" class="form-control" name="saleing-price" placeholder="Selling Price">
                       <span class="input-group-addon">.00</span>
