@@ -65,7 +65,7 @@
               <div class="form-group">
                 <div class="input-group">
                 <div class="custom-file-upload">
-                <input type="file" name="file_upload" multiple="multiple" id="file-upload" onchange="validateFile(this)" />
+                <input type="file" name="file_upload" multiple="multiple" id="file-upload" onchange="validateFile(this)" accept="image/jpeg, image/png, image/jpg" />
                 <label for="file-upload">Choose File</label>
               </div>
                  <button type="submit" name="submit" class="btn btn-default">Upload</button>
