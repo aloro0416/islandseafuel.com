@@ -227,7 +227,7 @@
 		      
                 ],
           chart: {
-          height: 250,
+          height: 450,
           type: 'line',
           zoom: {
             enabled: false
