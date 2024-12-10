@@ -227,7 +227,7 @@
 		      
                 ],
           chart: {
-          height: 350,
+          height: 450,
           type: 'line',
           zoom: {
             enabled: false
@@ -331,7 +331,7 @@
             },
             
             xaxis: {
-              categories: ["Avaible Gas", "Sales"],
+              categories: ["Available Gas", "Sales"],
               position: 'top',
               axisBorder: {
                 show: false
