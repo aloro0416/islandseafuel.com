@@ -194,7 +194,7 @@
         ?>
       <div class="row">
         <div class="col">
-        <div class="panel panel-box clearfix" style="padding: 10px;">
+        <div class="panel panel-box clearfix" style="padding: 5px;">
         <div id="Hchart"></div>
         </div>
 
