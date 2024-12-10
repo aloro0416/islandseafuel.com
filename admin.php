@@ -331,7 +331,7 @@
             },
             
             xaxis: {
-              categories: ["Avaible Gas", "Sales"],
+              categories: ["Available Gas", "Sales"],
               position: 'top',
               axisBorder: {
                 show: false
