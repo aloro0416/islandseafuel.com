@@ -56,7 +56,7 @@ function encryptor($action, $string) {
 
       <div class="header-content">
       <div class="header-date pull-left">
-        <strong><?php echo date("F j, Y, g:i a");?></strong>
+      <strong><?php echo date("F j, Y, h:i:s a"); ?></strong>
       </div>
       <div class="pull-right clearfix">
         <ul class="info-menu list-inline list-unstyled">
