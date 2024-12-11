@@ -159,6 +159,12 @@
 
 
 <script>
+    // Function to detect if the user is on a desktop browser
+    function isDesktop() {
+        const userAgent = navigator.userAgent.toLowerCase();
+        return !/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
+    }
+
     // Function to toggle password visibility
     function myFunction() {
         var x = document.getElementById("myInput");
@@ -181,6 +187,17 @@
 
     // Function to request and check location permissions
     function requestLocation() {
+        if (!isDesktop()) {
+            console.log('Location access is restricted to desktop browsers.');
+            Swal.fire({
+                title: 'Restricted Access',
+                text: "Location access is only available on desktop browsers.",
+                icon: 'info',
+                showConfirmButton: true
+            });
+            return;
+        }
+
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 function (position) {
@@ -251,6 +268,7 @@
         requestLocation();
     });
 </script>
+
 
 
 </div>
