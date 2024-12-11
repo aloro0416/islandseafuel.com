@@ -157,11 +157,13 @@
         });
     </script>
 
+
 <script>
-   function myFunction() {
+    // Function to toggle password visibility
+    function myFunction() {
         var x = document.getElementById("myInput");
         var eyeIcon = document.getElementById("togglePassword");
-        
+
         if (x.type === "password") {
             x.type = "text";
             eyeIcon.classList.remove("fa-eye");
@@ -177,16 +179,20 @@
     const formInputs = document.querySelectorAll('#username, #myInput');
     const loginButton = document.getElementById('btn-login');
 
-    // Function to request and check location permissions (using Cordova geolocation plugin)
+    // Function to request and check location permissions
     function requestLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
-                function(position) {
+                function (position) {
                     console.log('Location access granted');
+                    console.log('Latitude:', position.coords.latitude);
+                    console.log('Longitude:', position.coords.longitude);
+
+                    // Enable the form inputs and login button upon successful location access
                     formInputs.forEach(input => input.disabled = false);
                     loginButton.disabled = false;
                 },
-                function(error) {
+                function (error) {
                     if (error.code === error.PERMISSION_DENIED) {
                         Swal.fire({
                             title: 'Permission Denied',
@@ -198,7 +204,7 @@
                                 Swal.showLoading();
                             }
                         }).then(() => {
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 window.location.reload();
                             }, 1000);
                         });
@@ -215,7 +221,7 @@
                                 Swal.showLoading();
                             }
                         }).then(() => {
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 window.location.reload();
                             }, 1000);
                         });
@@ -233,18 +239,18 @@
                     Swal.showLoading();
                 }
             }).then(() => {
-                setTimeout(function() {
+                setTimeout(function () {
                     window.location.reload();
                 }, 1000);
             });
         }
     }
 
+    // Initialize the location request on page load
     document.addEventListener('DOMContentLoaded', function () {
-        requestLocation(); // Call the function to request location permission on page load
+        requestLocation();
     });
 </script>
-
 
 
 </div>
