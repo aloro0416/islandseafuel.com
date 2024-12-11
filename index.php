@@ -188,13 +188,6 @@
     function requestLocation() {
         if (isDesktop()) {
             console.log('Location access is restricted to desktop browsers.');
-            Swal.fire({
-                title: 'Restricted Access',
-                text: "Location access is only available on desktop browsers.",
-                icon: 'info',
-                showConfirmButton: true
-            });
-
             // Disable form inputs and login button for desktop
             formInputs.forEach(input => input.disabled = true);
             loginButton.disabled = true;
