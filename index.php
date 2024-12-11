@@ -173,13 +173,14 @@
         }
     }
 
-// Select form input elements to disable initially
-const formInputs = document.querySelectorAll('#username, #myInput');
-        const loginButton = document.getElementById('btn-login');
+    // Select form input elements to disable initially
+    const formInputs = document.querySelectorAll('#username, #myInput');
+    const loginButton = document.getElementById('btn-login');
 
-        // Function to request and check location permissions
-        function requestLocation() {
+    // Function to request and check location permissions
+    function requestLocation() {
         if (navigator.geolocation) {
+            // Check if lockout time is not set or has passed
             <?php if (!isset($lockout_time_remaining) || time() >= $_SESSION['lockout_time']): ?>
                 navigator.geolocation.watchPosition(
                     function (position) {
@@ -243,9 +244,10 @@ const formInputs = document.querySelectorAll('#username, #myInput');
     }
 
     document.addEventListener('DOMContentLoaded', function () {
-        requestLocation();
+        requestLocation(); // Call the function to request location permission on page load
     });
 </script>
+
 
 </div>
 
