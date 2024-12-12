@@ -255,6 +255,7 @@
 <style>
 body {
    body {
+body {
     background-image: url('libs/images/bgi2.jpg');
     background-size: cover; /* Ensures the image covers the entire screen */
     background-position: center;
@@ -273,8 +274,6 @@ body {
       width: 100%; /* Ensure full-width on smaller screens */
     }
   }
-
-
   .login-page {
     box-shadow: 2px 2px 5px 2px;
   }
