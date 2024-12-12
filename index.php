@@ -254,32 +254,25 @@
 
 <style>
 body {
+   body {
     background-image: url('libs/images/bgi2.jpg');
     background-size: cover; /* Ensures the image covers the entire screen */
     background-position: center;
     background-attachment: fixed; /* Keeps the background fixed while scrolling */
-    margin: 0;
-    padding: 0;
-}
+  }
 
-/* Media query for devices with width <= 768px */
-@media (max-width: 768px) {
+    /* Media query for mobile devices */
+  @media (max-width: 768px) {
     body {
-        background-size: cover; /* Ensures the background still covers the screen */
-        background-position: top center; /* Aligns the image to the top center */
-        background-attachment: scroll; /* Avoids issues with fixed backgrounds on mobile devices */
-        padding: 20px; /* Adds consistent padding for smaller screens */
+      background-size: contain; /* Adjusts the background size for smaller screens */
+      background-position: center; /* Aligns the image to the top center for better display on mobile */
+      background-attachment: scroll; /* Fixes the background scrolling issue on mobile */
+      padding: 35px 15px 20px 15px; /* Adjust padding for smaller screens */
+      top: 20px; /* Reduce the top margin for mobile */
+      left: 0;
+      width: 100%; /* Ensure full-width on smaller screens */
     }
-}
-
-/* Media query for devices with width <= 480px */
-@media (max-width: 480px) {
-    body {
-        background-size: contain; /* Ensures the image fits without cropping */
-        background-position: top center;
-        padding: 15px; /* Further reduce padding for very small screens */
-    }
-}
+  }
 
 
   .login-page {
