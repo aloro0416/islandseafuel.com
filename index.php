@@ -253,17 +253,38 @@
 </div>
 
 <style>
-  body {
+body {
     background-image: url('libs/images/bgi2.jpg');
     background-size: cover; /* Ensures the image covers the entire screen */
     background-position: center;
     background-attachment: fixed; /* Keeps the background fixed while scrolling */
-  }
+    margin: 0;
+    padding: 0;
+}
+
+/* Media query for devices with width <= 768px */
+@media (max-width: 768px) {
+    body {
+        background-size: cover; /* Ensures the background still covers the screen */
+        background-position: top center; /* Aligns the image to the top center */
+        background-attachment: scroll; /* Avoids issues with fixed backgrounds on mobile devices */
+        padding: 20px; /* Adds consistent padding for smaller screens */
+    }
+}
+
+/* Media query for devices with width <= 480px */
+@media (max-width: 480px) {
+    body {
+        background-size: contain; /* Ensures the image fits without cropping */
+        background-position: top center;
+        padding: 15px; /* Further reduce padding for very small screens */
+    }
+}
+
 
   .login-page {
     box-shadow: 2px 2px 5px 2px;
   }
-
 
 
 #termsModal {
