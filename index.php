@@ -42,18 +42,103 @@
     <?php endif; ?>
      <!-- Include Google reCAPTCHA v3 Script -->
      <script src="https://www.google.com/recaptcha/api.js?render=6Lcc25IqAAAAAH635KLYx5TwcXhguTYoIdJzgceI"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Basic Reset */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f9f9f9;
+        }
+        form {
+            width: 100%;
+            max-width: 400px;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-size: 14px;
+            color: #333;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+        .form-group i {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 18px;
+            color: #666;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #d9534f;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #c9302c;
+        }
+        .text-center {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .text-center a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .text-center a:hover {
+            text-decoration: underline;
+        }
 
-     <form method="post" action="auth.php" class="clearfix" id="loginForm">
+        /* Media Queries for Smaller Devices */
+        @media (max-width: 480px) {
+            form {
+                padding: 15px;
+            }
+            button {
+                font-size: 14px;
+            }
+        }
+    </style>
+    <body>
+    <form method="post" action="auth.php" id="loginForm">
         <div class="form-group">
-              <label for="username" class="control-label">Username</label>
-              <input type="name" class="form-control" name="username" id="username" placeholder="Username" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" placeholder="Username" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>
         </div>
         <div class="form-group" style="position: relative;">
-            <label for="Password" class="control-label">Password</label>
-            <input type="password" name="password" class="form-control" id="myInput" placeholder="Password" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>
-            
-            <!-- Eye icon positioned inside the input box -->
-            <i class="fa fa-eye" onclick="myFunction()" id="togglePassword" style="position: absolute; right: 10px; top: 70%; transform: translateY(-50%); cursor: pointer;"></i>
+            <label for="myInput">Password</label>
+            <input type="password" name="password" id="myInput" placeholder="Password" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>
+            <i class="fa fa-eye" onclick="myFunction()" id="togglePassword"></i>
         </div>
         <div class="form-group">
             <label>
@@ -61,14 +146,14 @@
                 <a href="#" id="openModalLink">Terms and Condition</a>
             </label>
         </div>
-        <!-- Hidden reCAPTCHA token input will be added here -->
         <div class="form-group">
-            <button type="submit" id="btn-login" class="btn btn-danger" style="border-radius:0%" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>Login</button>
+            <button type="submit" id="btn-login" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>Login</button>
         </div>
         <div class="text-center">
             <a href="account_recovery_select.php">Forgot password?</a>
         </div>
     </form>
+</body>
 
     <!-- Modal Structure -->
     <div id="termsModal" class="modal">
