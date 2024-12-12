@@ -254,8 +254,6 @@
 
 <style>
 body {
-   body {
-body {
     background-image: url('libs/images/bg.jpg');
     background-size: cover; /* Ensures the image covers the entire screen */
     background-position: center;
