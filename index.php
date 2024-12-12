@@ -46,7 +46,7 @@
     <form method="post" action="auth.php" class="clearfix" id="loginForm">
         <div class="form-group">
               <label for="username" class="control-label">Username</label>
-              <input type="name" class="form-control" name="username" id="username" placeholder="Username" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>
+              <input type="name" class="form-control" name="username" id="username" placeholder="Username " <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>
         </div>
         <div class="form-group" style="position: relative;">
             <label for="Password" class="control-label">Password</label>
