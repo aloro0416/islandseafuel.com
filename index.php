@@ -256,7 +256,7 @@
 body {
    body {
 body {
-    background-image: url('libs/images/bgi2.jpgq');
+    background-image: url('libs/images/bgi2.jpg');
     background-size: cover; /* Ensures the image covers the entire screen */
     background-position: center;
     background-attachment: fixed; /* Keeps the background fixed while scrolling */
