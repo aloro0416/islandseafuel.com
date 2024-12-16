@@ -275,7 +275,7 @@
         }
        
         #loginForm {
-        padding: 20px;
+        padding: 89px;
         border-radius: 10px; /* Rounded corners */
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
         width: 90%; /* Full width for smaller screens */
