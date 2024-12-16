@@ -217,6 +217,7 @@
                 {
                     extend: 'print',
                     text: 'Print',
+                    title: '',
                     customize: function (win) {
                         // Add a logo and custom styling to the print output
                         $(win.document.body).prepend(`
@@ -224,6 +225,7 @@
                                 <img src="libs/images/logo.png" alt="Company Logo" style="width: 150px;">
                                 <h2>ISLAND SEA FUEL</h2>
                                 <h4>KANGWAYAN MADRIDEJOS CEBU</h4>
+                                 <h4>POS</h4>
                             </div>
                         `);
                         $(win.document.body).find('table')
