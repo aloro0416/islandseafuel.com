@@ -89,6 +89,37 @@ $sales = find_all_sale();
  
 });
 
+  $(document).ready(function () {
+    var dashprint = $('#dashprint').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'print',
+                text: 'Print',
+                customize: function (win) {
+                    // Add custom header
+                    $(win.document.body)
+                        .prepend(
+                            '<div style="text-align: center; margin-bottom: 20px;">' +
+                            '<img src="your_logo_url_here" style="height: 50px; margin-right: 10px;" alt="Logo">' +
+                            '<h1 style="display: inline;">Island Sea Fuel</h1>' +
+                            '</div>'
+                        );
+
+                    // Optional: Adjust table styling for print
+                    $(win.document.body).find('table')
+                        .addClass('compact')
+                        .css('font-size', '12px');
+                }
+            }
+        ]
+    });
+
+    dashprint.buttons().container()
+        .appendTo('#dashprint_wrapper .col-md-6:eq(0)');
+});
+
+
 
 function confirmDelete(saleId) {
         // Show SweetAlert confirmation dialog
