@@ -258,20 +258,23 @@
         background-size: cover; /* Ensures the image covers the entire screen */
         background-position: center;
         background-attachment: fixed; /* Keeps the background fixed while scrolling */
+        background-repeat: no-repeat; /* Prevents the image from repeating */
     }
 
     /* Media query for mobile devices */
     @media (max-width: 768px) {
         body {
-        background-size: contain; /* Adjusts the background size for smaller screens */
-        background-position: center;
-        background-attachment: fixed; /* Fixes the background scrolling issue on mobile */
-        padding: 35px 15px 20px 15px; /* Adjust padding for smaller screens */
-        top: 20px; /* Reduce the top margin for mobile */
-        left: 0;
-        width: 100%; /* Ensure full-width on smaller screens */
+            background-size: contain; /* Adjusts the background size for smaller screens */
+            background-position: center;
+            background-attachment: fixed; /* Fixes the background scrolling issue on mobile */
+            background-repeat: no-repeat; /* Ensure no repeating on smaller screens */
+            padding: 35px 15px 20px 15px; /* Adjust padding for smaller screens */
+            top: 20px; /* Reduce the top margin for mobile */
+            left: 0;
+            width: 100%; /* Ensure full-width on smaller screens */
         }
     }
+
     .login-page {
         box-shadow: 2px 2px 5px 2px;
     }
