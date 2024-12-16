@@ -82,7 +82,7 @@ $sales = find_all_sale();
                         // Add a logo and custom styling to the print output
                         $(win.document.body).prepend(`
                             <div style="text-align: center; margin-bottom: 20px;">
-                                <img src="path/to/your/logo.png" alt="Company Logo" style="width: 150px;">
+                                <img src="libs/images/logo.png" alt="Company Logo" style="width: 150px;">
                                 <h2>Island Sea Fuel</h2>
                             </div>
                         `);
@@ -107,7 +107,7 @@ $sales = find_all_sale();
                         // Add a logo and custom styling to the print output
                         $(win.document.body).prepend(`
                             <div style="text-align: center; margin-bottom: 20px;">
-                                <img src="path/to/your/logo.png" alt="Company Logo" style="width: 150px;">
+                                <img src="libs/images/logo.png" alt="Company Logo" style="width: 150px;">
                                 <h2>Island Sea Fuel</h2>
                             </div>
                         `);
