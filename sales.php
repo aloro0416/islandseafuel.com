@@ -1,5 +1,5 @@
 <?php
-  $page_title = 'All sale';
+  $page_title = '';
   require_once('includes/load.php');
   // Checkin What level user has permission to view this page
    page_require_level(3);
@@ -83,7 +83,7 @@ $sales = find_all_sale();
                         $(win.document.body).prepend(`
                             <div style="text-align: center; margin-bottom: 20px;">
                                 <img src="path/to/your/logo.png" alt="Company Logo" style="width: 150px;">
-                                <h2>All Sales</h2>
+                                <h2>Island Sea Fuel</h2>
                             </div>
                         `);
                         $(win.document.body).find('table')
