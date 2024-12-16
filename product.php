@@ -77,6 +77,7 @@
   <?php include_once('layouts/footer.php'); ?>
 
 <script>
+  var pageTitle = "<?php echo $page_title; ?>";
    $(document).ready(function(){
         var print = $('#printable').DataTable({
             buttons:[
@@ -94,6 +95,7 @@
                                 <img src="libs/images/logo.png" alt="Company Logo" style="width: 150px;">
                                 <h2>ISLAND SEA FUEL</h2>
                                 <h4>KANGWAYAN MADRIDEJOS CEBU</h4>
+                                <h4>${pageTitle}</h4>
                             </div>
                         `);
                         $(win.document.body).find('table')
