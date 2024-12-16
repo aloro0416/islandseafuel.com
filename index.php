@@ -45,29 +45,32 @@
      <!-- Include Google reCAPTCHA v3 Script -->
      <script src="https://www.google.com/recaptcha/api.js?render=6Lcc25IqAAAAAH635KLYx5TwcXhguTYoIdJzgceI"></script>
 
-     <form method="post" action="auth.php" id="loginForm">
-      <div class="form-group position-relative">
-        <label for="username">Username</label>
-        <input type="text" class="form-control" name="username" id="username" placeholder="Enter your username" disabled>
-      </div>
-      <div class="form-group position-relative">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password" disabled>
-        <i class="fa fa-eye" id="togglePassword"></i>
-      </div>
-      <div class="form-group">
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="termsCheck">
-          <label class="form-check-label" for="termsCheck">
-            I agree to the <a href="#" id="openModalLink">Terms and Conditions</a>
-          </label>
-        </div>
-      </div>
-      <button type="submit" class="btn btn-custom btn-block" id="btn-login" disabled>Login</button>
-      <div class="text-center mt-3">
-        <a href="account_recovery_select.php">Forgot password?</a>
-      </div>
-    </form>
+        <form method="post" action="auth.php" class="clearfix" id="loginForm">
+            <div class="form-group">
+                <label for="username" class="control-label">Username</label>
+                <input type="name" class="form-control" name="username" id="username" placeholder="Username " <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>
+            </div>
+            <div class="form-group" style="position: relative;">
+                <label for="Password" class="control-label">Password</label>
+                <input type="password" name="password" class="form-control" id="myInput" placeholder="Password" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>
+                
+                <!-- Eye icon positioned inside the input box -->
+                <i class="fa fa-eye" onclick="myFunction()" id="togglePassword" style="position: absolute; right: 10px; top: 70%; transform: translateY(-50%); cursor: pointer;"></i>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="checkbox"> I agree to the
+                    <a href="#" id="openModalLink">Terms and Condition</a>
+                </label>
+            </div>
+            <!-- Hidden reCAPTCHA token input will be added here -->
+            <div class="form-group">
+                <button type="submit" id="btn-login" class="btn btn-danger" style="border-radius:0%" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>Login</button>
+            </div>
+            <div class="text-center">
+                <a href="account_recovery_select.php">Forgot password?</a>
+            </div>
+        </form>
 
     <!-- Modal Structure -->
     <div id="termsModal" class="modal">
@@ -252,7 +255,7 @@
 
 <style>
    /* General Styles */
-   body {
+    body {
       background-image: url('libs/images/bgi2.jpg');
       background-size: cover;
       background-position: center;
