@@ -4,7 +4,9 @@
   if($session->isUserLoggedIn(true)) { redirect('home', false);}
 ?>
 <?php include_once('layouts/header.php'); ?>
-<div class="login-page">
+
+<div class="d-flex justify-content-center align-items-center vh-100" style="background-image: url('libs/images/bgi2.jpg'); background-size: cover; background-position: center;">
+
     <div class="text-center">
         <img src="libs/images/logo.png" alt="ISLAND SEA LOGO" style="height: 100px">
        <h4>ISLAND SEA MANAGEMENT SYSTEM</h4>
@@ -157,231 +159,230 @@
         });
     </script>
 
-<script>
-    // Function to detect if the user is on a desktop browser
-    function isDesktop() {
-        const userAgent = navigator.userAgent.toLowerCase();
-        return !/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
-    }
-
-    // Function to toggle password visibility
-    function myFunction() {
-        var x = document.getElementById("myInput");
-        var eyeIcon = document.getElementById("togglePassword");
-
-        if (x.type === "password") {
-            x.type = "text";
-            eyeIcon.classList.remove("fa-eye");
-            eyeIcon.classList.add("fa-eye-slash");
-        } else {
-            x.type = "password";
-            eyeIcon.classList.remove("fa-eye-slash");
-            eyeIcon.classList.add("fa-eye");
+    <script>
+        // Function to detect if the user is on a desktop browser
+        function isDesktop() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            return !/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
         }
-    }
 
-    // Select form input elements and login button
-    const formInputs = document.querySelectorAll('#username, #myInput');
-    const loginButton = document.getElementById('btn-login');
+        // Function to toggle password visibility
+        function myFunction() {
+            var x = document.getElementById("myInput");
+            var eyeIcon = document.getElementById("togglePassword");
 
-    // Function to request and check location permissions
-    function requestLocation() {
-        if (isDesktop()) {
-            console.log('Location access is restricted to desktop browsers.');
-            // Disable form inputs and login button for desktop
-            formInputs.forEach(input => input.disabled = true);
-            loginButton.disabled = true;
-
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    function (position) {
-                        console.log('Location access granted');
-                        console.log('Latitude:', position.coords.latitude);
-                        console.log('Longitude:', position.coords.longitude);
-
-                        // Enable form inputs and login button upon successful location access
-                        formInputs.forEach(input => input.disabled = false);
-                        loginButton.disabled = false;
-                    },
-                    function (error) {
-                        Swal.fire({
-                            title: 'Permission Denied',
-                            text: "Please allow location access to use this login page.",
-                            icon: 'warning',
-                            showConfirmButton: false,
-                            allowOutsideClick: false,
-                            didOpen: () => {
-                                Swal.showLoading();
-                            }
-                        }).then(() => {
-                            setTimeout(function () {
-                                window.location.reload();
-                            }, 1000);
-                        });
-                    }
-                );
+            if (x.type === "password") {
+                x.type = "text";
+                eyeIcon.classList.remove("fa-eye");
+                eyeIcon.classList.add("fa-eye-slash");
             } else {
-                Swal.fire({
-                    title: 'Geolocation Not Supported',
-                    text: "Geolocation is not supported by this browser.",
-                    icon: 'error',
-                    showConfirmButton: false,
-                    allowOutsideClick: false,
-                    didOpen: () => {
-                        Swal.showLoading();
-                    }
-                }).then(() => {
-                    setTimeout(function () {
-                        window.location.reload();
-                    }, 1000);
-                });
+                x.type = "password";
+                eyeIcon.classList.remove("fa-eye-slash");
+                eyeIcon.classList.add("fa-eye");
             }
-        } else {
-            // Allow form to be enabled on mobile
-            formInputs.forEach(input => input.disabled = false);
-            loginButton.disabled = false;
         }
-    }
 
-    // Initialize the location request on page load
-    document.addEventListener('DOMContentLoaded', function () {
-        requestLocation();
-    });
-</script>
+        // Select form input elements and login button
+        const formInputs = document.querySelectorAll('#username, #myInput');
+        const loginButton = document.getElementById('btn-login');
+
+        // Function to request and check location permissions
+        function requestLocation() {
+            if (isDesktop()) {
+                console.log('Location access is restricted to desktop browsers.');
+                // Disable form inputs and login button for desktop
+                formInputs.forEach(input => input.disabled = true);
+                loginButton.disabled = true;
+
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        function (position) {
+                            console.log('Location access granted');
+                            console.log('Latitude:', position.coords.latitude);
+                            console.log('Longitude:', position.coords.longitude);
+
+                            // Enable form inputs and login button upon successful location access
+                            formInputs.forEach(input => input.disabled = false);
+                            loginButton.disabled = false;
+                        },
+                        function (error) {
+                            Swal.fire({
+                                title: 'Permission Denied',
+                                text: "Please allow location access to use this login page.",
+                                icon: 'warning',
+                                showConfirmButton: false,
+                                allowOutsideClick: false,
+                                didOpen: () => {
+                                    Swal.showLoading();
+                                }
+                            }).then(() => {
+                                setTimeout(function () {
+                                    window.location.reload();
+                                }, 1000);
+                            });
+                        }
+                    );
+                } else {
+                    Swal.fire({
+                        title: 'Geolocation Not Supported',
+                        text: "Geolocation is not supported by this browser.",
+                        icon: 'error',
+                        showConfirmButton: false,
+                        allowOutsideClick: false,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    }).then(() => {
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 1000);
+                    });
+                }
+            } else {
+                // Allow form to be enabled on mobile
+                formInputs.forEach(input => input.disabled = false);
+                loginButton.disabled = false;
+            }
+        }
+
+        // Initialize the location request on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            requestLocation();
+        });
+    </script>
 
 
 </div>
 
 <style>
-body {
-    background-image: url('libs/images/bgi2.jpg');
-    background-size: cover; /* Ensures the image covers the entire screen */
-    background-position: center;
-    background-attachment: fixed; /* Keeps the background fixed while scrolling */
-  }
-
-    /* Media query for mobile devices */
-  @media (max-width: 768px) {
     body {
-      background-size: contain; /* Adjusts the background size for smaller screens */
-      background-position: top center; /* Aligns the image to the top center for better display on mobile */
-      background-attachment: scroll; /* Fixes the background scrolling issue on mobile */
-      padding: 35px 15px 20px 15px; /* Adjust padding for smaller screens */
-      top: 20px; /* Reduce the top margin for mobile */
-      left: 0;
-      width: 100%; /* Ensure full-width on smaller screens */
+        background-image: url('libs/images/bgi2.jpg');
+        background-size: cover; /* Ensures the image covers the entire screen */
+        background-position: center;
+        background-attachment: fixed; /* Keeps the background fixed while scrolling */
     }
-  }
-  .login-page {
-    box-shadow: 2px 2px 5px 2px;
-  }
+
+        /* Media query for mobile devices */
+    @media (max-width: 768px) {
+        body {
+        background-size: contain; /* Adjusts the background size for smaller screens */
+        background-position: top center; /* Aligns the image to the top center for better display on mobile */
+        background-attachment: scroll; /* Fixes the background scrolling issue on mobile */
+        padding: 35px 15px 20px 15px; /* Adjust padding for smaller screens */
+        top: 20px; /* Reduce the top margin for mobile */
+        left: 0;
+        width: 100%; /* Ensure full-width on smaller screens */
+        }
+    }
+    .login-page {
+        box-shadow: 2px 2px 5px 2px;
+    }
 
 
-#termsModal {
-    display: none;
-    position: absolute;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-}
+    #termsModal {
+        display: none;
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+    }
 
-.modal-content {
-    background-color: white;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 60%;
-    max-width: 600px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    overflow-y: auto;
-    max-height: 100vh;
-}
+    .modal-content {
+        background-color: white;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 60%;
+        max-width: 600px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+        max-height: 100vh;
+    }
 
-.terms-text {
-    max-height: 300px;
-    overflow-y: auto;
-}
+    .terms-text {
+        max-height: 300px;
+        overflow-y: auto;
+    }
 
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    margin-top: -10px;
-    font-weight: bold;
-}
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        margin-top: -10px;
+        font-weight: bold;
+    }
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
 </style>
 
 <script>
     // Get the modal
     var modal = document.getElementById("termsModal");
 
-// Get the link that opens the modal
-var link = document.getElementById("openModalLink");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the link, open the modal
-link.onclick = function(event) {
-    event.preventDefault(); // Prevent the default link behavior
-    modal.style.display = "block"; // Show the modal
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const loginButton = document.querySelector('#btn-login');
-    const termsCheckbox = document.querySelector('input[type="checkbox"]');
-
-    // Add click event listener to the login button
-    loginButton.addEventListener('click', function () {
-        // Automatically check the Terms and Condition checkbox
-        if (termsCheckbox) {
-            termsCheckbox.checked = true;
-        }
-    });
-
-    // Modal handling for terms
-    var modal = document.getElementById("termsModal");
+    // Get the link that opens the modal
     var link = document.getElementById("openModalLink");
+
+    // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
 
+    // When the user clicks the link, open the modal
     link.onclick = function(event) {
-        event.preventDefault();
-        modal.style.display = "block";
+        event.preventDefault(); // Prevent the default link behavior
+        modal.style.display = "block"; // Show the modal
     }
 
+    // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
         modal.style.display = "none";
     }
 
+    // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
         }
     }
-});
-</script>
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const loginButton = document.querySelector('#btn-login');
+        const termsCheckbox = document.querySelector('input[type="checkbox"]');
 
+        // Add click event listener to the login button
+        loginButton.addEventListener('click', function () {
+            // Automatically check the Terms and Condition checkbox
+            if (termsCheckbox) {
+                termsCheckbox.checked = true;
+            }
+        });
+
+        // Modal handling for terms
+        var modal = document.getElementById("termsModal");
+        var link = document.getElementById("openModalLink");
+        var span = document.getElementsByClassName("close")[0];
+
+        link.onclick = function(event) {
+            event.preventDefault();
+            modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    });
+</script>
 
 <?php include_once('layouts/footer.php'); ?>
