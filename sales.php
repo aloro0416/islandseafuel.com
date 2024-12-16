@@ -1,5 +1,5 @@
 <?php
-  $page_title = 'All sales';
+  $page_title = 'All sale';
   require_once('includes/load.php');
   // Checkin What level user has permission to view this page
    page_require_level(3);
@@ -31,7 +31,7 @@ $sales = find_all_sale();
             <thead>
               <tr>
                 <th class="text-center" style="width: 50px;">#</th>
-                <th> Product namess </th>
+                <th> Product name </th>
                 <th class="text-center" style="width: 15%;"> Quantity</th>
                 <th class="text-center" style="width: 15%;"> Total </th>
                 <th class="text-center" style="width: 15%;"> Date </th>
@@ -72,7 +72,30 @@ $sales = find_all_sale();
     var print = $('#printable').DataTable({
         buttons:['copy', 'csv', 'excel', 'pdf', 'print']
     });
-      
+
+    $(document).ready(function () {
+    var dashprint = $('#dashprint').DataTable({
+      dom: 'Bfrtip',
+      buttons: [
+        {
+          extend: 'print',
+          text: 'Print',
+          customize: function (win) {
+            $(win.document.body)
+              .prepend(
+                '<div style="text-align: center; margin-bottom: 20px;">' +
+                '<img src="path/to/logo.png" style="height: 50px; margin-right: 10px;" alt="Logo">' +
+                '<h1 style="display: inline;">Island Sea Fuel</h1>' +
+                '</div>'
+              );
+            $(win.document.body).find('table')
+              .addClass('compact')
+              .css('font-size', '12px');
+          }
+        }
+      ]
+    });
+
     var dashprint = $('#dashprint').DataTable({
         buttons:['copy', 'csv', 'excel', 'pdf', 'print']
     });
@@ -85,6 +108,8 @@ $sales = find_all_sale();
 
     dashprint.buttons().container()
     .appendTo('#dashprint_wrapper .col-md-6:eq(0)');
+
+ 
 });
 
 
