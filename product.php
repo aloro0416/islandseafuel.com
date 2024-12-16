@@ -77,14 +77,56 @@
   <?php include_once('layouts/footer.php'); ?>
 
 <script>
-    $(document).ready(function(){
-    var print = $('#printable').DataTable({
-        buttons:['copy', 'csv', 'excel', 'pdf', 'print']
-    });
+   $(document).ready(function(){
+        var print = $('#printable').DataTable({
+            buttons:[
+                'copy', 
+                'csv', 
+                'excel', 
+                'pdf', 
+                {
+                    extend: 'print',
+                    text: 'Print',
+                    customize: function (win) {
+                        // Add a logo and custom styling to the print output
+                        $(win.document.body).prepend(`
+                            <div style="text-align: center; margin-bottom: 20px;">
+                                <img src="libs/images/logo.png" alt="Company Logo" style="width: 150px;">
+                                <h2>Island Sea Fuel</h2>
+                            </div>
+                        `);
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', '12px');
+                    }
+                }
+            ]
+        });
 
-    var dashprint = $('#dashprint').DataTable({
-        buttons:['copy', 'csv', 'excel', 'pdf', 'print']
-    });
+        var dashprint = $('#dashprint').DataTable({
+            buttons:[
+                'copy', 
+                'csv', 
+                'excel', 
+                'pdf', 
+                {
+                    extend: 'print',
+                    text: 'Print',
+                    customize: function (win) {
+                        // Add a logo and custom styling to the print output
+                        $(win.document.body).prepend(`
+                            <div style="text-align: center; margin-bottom: 20px;">
+                                <img src="libs/images/logo.png" alt="Company Logo" style="width: 150px;">
+                                <h2>Island Sea Fuel</h2>
+                            </div>
+                        `);
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', '12px');
+                    }
+                }
+            ]
+        });
 
     var dtable = $('#defaultTable').DataTable({
     });
