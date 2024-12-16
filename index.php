@@ -45,32 +45,29 @@
      <!-- Include Google reCAPTCHA v3 Script -->
      <script src="https://www.google.com/recaptcha/api.js?render=6Lcc25IqAAAAAH635KLYx5TwcXhguTYoIdJzgceI"></script>
 
-        <form method="post" action="auth.php" class="clearfix" id="loginForm">
-            <div class="form-group">
-                <label for="username" class="control-label">Username</label>
-                <input type="name" class="form-control" name="username" id="username" placeholder="Username " <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>
-            </div>
-            <div class="form-group" style="position: relative;">
-                <label for="Password" class="control-label">Password</label>
-                <input type="password" name="password" class="form-control" id="myInput" placeholder="Password" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>
-                
-                <!-- Eye icon positioned inside the input box -->
-                <i class="fa fa-eye" onclick="myFunction()" id="togglePassword" style="position: absolute; right: 10px; top: 70%; transform: translateY(-50%); cursor: pointer;"></i>
-            </div>
-            <div class="form-group">
-                <label>
-                    <input type="checkbox"> I agree to the
-                    <a href="#" id="openModalLink">Terms and Condition</a>
-                </label>
-            </div>
-            <!-- Hidden reCAPTCHA token input will be added here -->
-            <div class="form-group">
-                <button type="submit" id="btn-login" class="btn btn-danger" style="border-radius:0%" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>Login</button>
-            </div>
-            <div class="text-center">
-                <a href="account_recovery_select.php">Forgot password?</a>
-            </div>
-        </form>
+     <form method="post" action="auth.php" id="loginForm">
+      <div class="form-group position-relative">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" name="username" id="username" placeholder="Enter your username" disabled>
+      </div>
+      <div class="form-group position-relative">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password" disabled>
+        <i class="fa fa-eye" id="togglePassword"></i>
+      </div>
+      <div class="form-group">
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="termsCheck">
+          <label class="form-check-label" for="termsCheck">
+            I agree to the <a href="#" id="openModalLink">Terms and Conditions</a>
+          </label>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-custom btn-block" id="btn-login" disabled>Login</button>
+      <div class="text-center mt-3">
+        <a href="account_recovery_select.php">Forgot password?</a>
+      </div>
+    </form>
 
     <!-- Modal Structure -->
     <div id="termsModal" class="modal">
@@ -254,27 +251,71 @@
 </div>
 
 <style>
-    body {
-        background-image: url('libs/images/bgi2.jpg');
-        background-size: cover; /* Ensures the image covers the entire screen */
-        background-position: center;
-        background-attachment: fixed; /* Keeps the background fixed while scrolling */
+   /* General Styles */
+   body {
+      background-image: url('libs/images/bgi2.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
     }
 
-        /* Media query for mobile devices */
-    @media (max-width: 768px) {
-        body {
-        background-size: contain; /* Adjusts the background size for smaller screens */
-        background-position: top center; /* Aligns the image to the top center for better display on mobile */
-        background-attachment: scroll; /* Fixes the background scrolling issue on mobile */
-        padding: 35px 15px 20px 15px; /* Adjust padding for smaller screens */
-        top: 20px; /* Reduce the top margin for mobile */
-        left: 0;
-        width: 100%; /* Ensure full-width on smaller screens */
-        }
+    /* Login Card */
+    .login-form {
+      background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent for modern look */
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      max-width: 400px;
+      width: 90%; /* Responsive width for smaller screens */
     }
-    .login-page {
-        box-shadow: 2px 2px 5px 2px;
+
+    .form-group i {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+
+    .btn-custom {
+      background-color: #d9534f;
+      border: none;
+      color: #fff;
+      padding: 10px;
+      border-radius: 50px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-custom:hover {
+      background-color: #c9302c;
+    }
+
+    .text-center a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .text-center a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      body {
+        background-size: cover;
+        background-position: top center;
+        padding: 20px;
+      }
+
+      .login-form {
+        padding: 20px;
+      }
     }
 
 
