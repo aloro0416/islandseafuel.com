@@ -261,18 +261,16 @@
     }
 
     /* Media query for mobile devices */
-    @media (max-width: 100px) {
-        body {
-        background-size: contain; /* Adjusts the background size for smaller screens */
-        background-position: center;
-        background-size: cover; 
-        background-repeat:no-repeat;
-        background-attachment: fixed; /* Fixes the background scrolling issue on mobile */
-        top: 90px; /* Reduce the top margin for mobile */
-        left: 0;
-        width: 100%; /* Ensure full-width on smaller screens */
-        }
+    @media (max-width: 768px) {
+    body {
+        padding: 0; /* Remove extra padding on mobile */
     }
+
+    #loginForm {
+        width: 90%; /* Ensure full-width on mobile */
+        max-width: 100%; /* Remove width limit */
+    }
+}
 
     .login-page {
         box-shadow: 2px 2px 5px 2px;
