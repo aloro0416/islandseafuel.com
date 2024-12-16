@@ -254,71 +254,27 @@
 </div>
 
 <style>
-   /* General Styles */
     body {
-      background-image: url('libs/images/bgi2.jpg');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      font-family: Arial, sans-serif;
+        background-image: url('libs/images/bgi2.jpg');
+        background-size: cover; /* Ensures the image covers the entire screen */
+        background-position: center;
+        background-attachment: fixed; /* Keeps the background fixed while scrolling */
     }
 
-    /* Login Card */
-    .login-form {
-      background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent for modern look */
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-      max-width: 400px;
-      width: 90%; /* Responsive width for smaller screens */
-    }
-
-    .form-group i {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      cursor: pointer;
-    }
-
-    .btn-custom {
-      background-color: #d9534f;
-      border: none;
-      color: #fff;
-      padding: 10px;
-      border-radius: 50px;
-      transition: background-color 0.3s ease;
-    }
-
-    .btn-custom:hover {
-      background-color: #c9302c;
-    }
-
-    .text-center a {
-      color: #007bff;
-      text-decoration: none;
-    }
-
-    .text-center a:hover {
-      text-decoration: underline;
-    }
-
-    /* Responsive Design */
+        /* Media query for mobile devices */
     @media (max-width: 768px) {
-      body {
-        background-size: cover;
-        background-position: top center;
-        padding: 20px;
-      }
-
-      .login-form {
-        padding: 20px;
-      }
+        body {
+        background-size: contain; /* Adjusts the background size for smaller screens */
+        background-position: middle center; /* Aligns the image to the top center for better display on mobile */
+        background-attachment: scroll; /* Fixes the background scrolling issue on mobile */
+        padding: 35px 15px 20px 15px; /* Adjust padding for smaller screens */
+        top: 20px; /* Reduce the top margin for mobile */
+        left: 0;
+        width: 100%; /* Ensure full-width on smaller screens */
+        }
+    }
+    .login-page {
+        box-shadow: 2px 2px 5px 2px;
     }
 
 
