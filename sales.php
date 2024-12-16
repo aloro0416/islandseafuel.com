@@ -1,5 +1,5 @@
 <?php
-  $page_title = 'All saless';
+  $page_title = 'All sale';
   require_once('includes/load.php');
   // Checkin What level user has permission to view this page
    page_require_level(3);
@@ -89,7 +89,36 @@ $sales = find_all_sale();
  
 });
 
+$(document).ready(function () {
+    var dashprint = $('#dashprint').DataTable({
+      dom: 'Bfrtip',
+      buttons: [
+        {
+          extend: 'print',
+          text: 'Print',
+          customize: function (win) {
+            // Add a custom title with a logo
+            $(win.document.body)
+              .prepend(
+                '<div style="text-align: center; margin-bottom: 20px;">' +
+                '<img src="path/to/logo.png" style="height: 50px; margin-right: 10px;" alt="Logo">' +
+                '<h1 style="display: inline;">Island Sea Fuel</h1>' +
+                '</div>'
+              );
+            // Style the table for printing
+            $(win.document.body).find('table')
+              .addClass('compact')
+              .css('font-size', '12px');
+          }
+        }
+      ]
+    });
 
+    dashprint.buttons().container()
+      .appendTo('#dashprint_wrapper .col-md-6:eq(0)');
+  });
+
+  
 function confirmDelete(saleId) {
         // Show SweetAlert confirmation dialog
         Swal.fire({
