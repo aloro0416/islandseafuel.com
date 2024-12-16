@@ -269,23 +269,10 @@
         background-repeat:no-repeat;
         background-attachment: fixed; /* Fixes the background scrolling issue on mobile */
         padding: 35px 15px 20px 15px; /* Adjust padding for smaller screens */
-        top: 20px; /* Reduce the top margin for mobile */
+        top: 60px; /* Reduce the top margin for mobile */
         left: 0;
         width: 100%; /* Ensure full-width on smaller screens */
         }
-       
-        #loginForm {
-        top: 50px;
-        height: 100vh;
-        border-radius: 10px; /* Rounded corners */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-        width: 90%; /* Full width for smaller screens */
-        max-width: 400px; /* Limit width for larger screens */
-        display: flex;
-        align: center;
-        flex-direction: column;
-        gap: 15px; /* Space between form elements */
-         }
     }
 
     .login-page {
