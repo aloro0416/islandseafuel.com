@@ -227,7 +227,7 @@
 		      
                 ],
           chart: {
-          height: 450,
+          height: 350,
           type: 'line',
           zoom: {
             enabled: false
@@ -295,171 +295,172 @@
     </div>
   </div>
  </div>
- </div>
-      <div class="col-md-8">
-        <div class="panel panel-box clearfix" style="padding: 10px;">
-          <div id="chart"></div>
-          <script>
-            var options = {
-              series: [{
-              name: 'Amount',
-              data: [<?=$total_bought?>, <?=$total_sales?>]
-            }],
-              chart: {
-              height: 350,
-              type: 'bar',
-            },
-            plotOptions: {
-              bar: {
-                columnWidth: '45%',
-                borderRadius: 10,
-                dataLabels: {
-                  position: 'top', // top, center, bottom
-                },
-              }
-            },
-            dataLabels: {
-              enabled: true,
-              formatter: function (val) {
-                return "₱ " + val;
+  </div>
+        <div class="col-md-8">
+          <div class="panel panel-box clearfix" style="padding: 10px;">
+            <div id="chart"></div>
+            <script>
+              var options = {
+                series: [{
+                name: 'Amount',
+                data: [<?=$total_bought?>, <?=$total_sales?>]
+              }],
+                chart: {
+                height: 350,
+                type: 'bar',
               },
-              offsetY: -20,
-              style: {
-                fontSize: '12px',
-                colors: ["#304758"]
-              }
-            },
-            
-            xaxis: {
-              categories: ["Available Gas", "Sales"],
-              position: 'top',
-              axisBorder: {
-                show: false
-              },
-              axisTicks: {
-                show: false
-              },
-              crosshairs: {
-                fill: {
-                  type: 'gradient',
-                  gradient: {
-                    colorFrom: '#D8E3F0',
-                    colorTo: '#BED1E6',
-                    stops: [0, 100],
-                    opacityFrom: 0.4,
-                    opacityTo: 0.5,
-                  }
+              plotOptions: {
+                bar: {
+                  columnWidth: '45%',
+                  borderRadius: 10,
+                  dataLabels: {
+                    position: 'top', // top, center, bottom
+                  },
                 }
               },
-              tooltip: {
+              dataLabels: {
                 enabled: true,
-              }
-            },
-            yaxis: {
-              axisBorder: {
-                show: false
-              },
-              axisTicks: {
-                show: false,
-              },
-              labels: {
-                show: false,
                 formatter: function (val) {
                   return "₱ " + val;
+                },
+                offsetY: -20,
+                style: {
+                  fontSize: '12px',
+                  colors: ["#304758"]
+                }
+              },
+              
+              xaxis: {
+                categories: ["Available Gas", "Sales"],
+                position: 'top',
+                axisBorder: {
+                  show: false
+                },
+                axisTicks: {
+                  show: false
+                },
+                crosshairs: {
+                  fill: {
+                    type: 'gradient',
+                    gradient: {
+                      colorFrom: '#D8E3F0',
+                      colorTo: '#BED1E6',
+                      stops: [0, 100],
+                      opacityFrom: 0.4,
+                      opacityTo: 0.5,
+                    }
+                  }
+                },
+                tooltip: {
+                  enabled: true,
+                }
+              },
+              
+              yaxis: {
+                axisBorder: {
+                  show: false
+                },
+                axisTicks: {
+                  show: false,
+                },
+                labels: {
+                  show: false,
+                  formatter: function (val) {
+                    return "₱ " + val;
+                  }
+                }
+              
+              },
+              title: {
+                text: 'OVER ALL SALES',
+                floating: true,
+                offsetY: 330,
+                align: 'center',
+                style: {
+                  color: '#444'
                 }
               }
-            
-            },
-            title: {
-              text: 'OVER ALL SALES',
-              floating: true,
-              offsetY: 330,
-              align: 'center',
-              style: {
-                color: '#444'
-              }
-            }
-            };
+              };
 
-            var chart = new ApexCharts(document.querySelector("#chart"), options);
-            chart.render();
-          </script>
+              var chart = new ApexCharts(document.querySelector("#chart"), options);
+              chart.render();
+            </script>
+            </div>
           </div>
+          
         </div>
         
-      </div>
-      
-  </div>
+    </div>
   <div class="row">
-  <div class="col-md-6">
-     <div class="panel panel-default">
-       <div class="panel-heading">
-         <strong>
-           <span class="glyphicon glyphicon-th"></span>
-           <span>Highest Selling Products</span>
-         </strong>
-       </div>
-       <div class="panel-body">
-         <table class="table table-striped table-bordered table-condensed">
-          <thead>
-           <tr>
-             <th>Title</th>
-             <th>Total Sold</th>
-             <th>Total Quantity</th>
-           <tr>
-          </thead>
-          <tbody>
-            <?php foreach ($products_sold as  $product_sold): ?>
-              <tr>
-                <td><?php echo remove_junk(first_character($product_sold['name'])); ?></td>
-                <td><?php echo (int)$product_sold['totalSold']; ?></td>
-                <td><?php echo (int)$product_sold['totalQty']; ?></td>
-              </tr>
-            <?php endforeach; ?>
-          <tbody>
-         </table>
-       </div>
-     </div>
-   </div>
-   <div class="col-md-6">
+    <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-heading">
           <strong>
             <span class="glyphicon glyphicon-th"></span>
-            <span>LATEST SALES</span>
+            <span>Highest Selling Products</span>
           </strong>
         </div>
         <div class="panel-body">
           <table class="table table-striped table-bordered table-condensed">
-       <thead>
-         <tr>
-           <th class="text-center" style="width: 50px;">#</th>
-           <th>Product Name</th>
-           <th>Date</th>
-           <th>Total Sale</th>
-         </tr>
-       </thead>
-       <tbody>
-         <?php foreach ($recent_sales as  $recent_sale): ?>
-         <tr>
-           <td class="text-center"><?php echo count_id();?></td>
-           <td>
-            <a href="edit_sale?id=<?php echo (int)$recent_sale['id']; ?>">
-             <?php echo remove_junk(first_character($recent_sale['name'])); ?>
-           </a>
-           </td>
-           <td><?php echo remove_junk(ucfirst($recent_sale['date'])); ?></td>
-           <td><?php echo remove_junk(first_character($recent_sale['price'])); ?></td>
-        </tr>
-
-       <?php endforeach; ?>
-       </tbody>
-     </table>
+            <thead>
+            <tr>
+              <th>Title</th>
+              <th>Total Sold</th>
+              <th>Total Quantity</th>
+            <tr>
+            </thead>
+            <tbody>
+              <?php foreach ($products_sold as  $product_sold): ?>
+                <tr>
+                  <td><?php echo remove_junk(first_character($product_sold['name'])); ?></td>
+                  <td><?php echo (int)$product_sold['totalSold']; ?></td>
+                  <td><?php echo (int)$product_sold['totalQty']; ?></td>
+                </tr>
+              <?php endforeach; ?>
+            <tbody>
+          </table>
+        </div>
+      </div>
     </div>
-   </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <strong>
+              <span class="glyphicon glyphicon-th"></span>
+              <span>LATEST SALES</span>
+            </strong>
+          </div>
+          <div class="panel-body">
+            <table class="table table-striped table-bordered table-condensed">
+        <thead>
+          <tr>
+            <th class="text-center" style="width: 50px;">#</th>
+            <th>Product Name</th>
+            <th>Date</th>
+            <th>Total Sale</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($recent_sales as  $recent_sale): ?>
+          <tr>
+            <td class="text-center"><?php echo count_id();?></td>
+            <td>
+              <a href="edit_sale?id=<?php echo (int)$recent_sale['id']; ?>">
+              <?php echo remove_junk(first_character($recent_sale['name'])); ?>
+            </a>
+            </td>
+            <td><?php echo remove_junk(ucfirst($recent_sale['date'])); ?></td>
+            <td><?php echo remove_junk(first_character($recent_sale['price'])); ?></td>
+          </tr>
+
+        <?php endforeach; ?>
+        </tbody>
+      </table>
+      </div>
+    </div>
+    </div>
+    
   </div>
-  
-</div>
  </div>
   <div class="row">
 
