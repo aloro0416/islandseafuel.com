@@ -260,31 +260,30 @@
         background-attachment: fixed; /* Keeps the background fixed while scrolling */
     }
 
+    /* Media query for mobile devices */
     @media (max-width: 768px) {
-    body {
+        body {
         background-size: contain; /* Adjusts the background size for smaller screens */
         background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
+        background-size: cover; 
+        background-repeat:no-repeat;
         background-attachment: fixed; /* Fixes the background scrolling issue on mobile */
         padding: 35px 15px 20px 15px; /* Adjust padding for smaller screens */
+        top: 20px; /* Reduce the top margin for mobile */
+        left: 0;
         width: 100%; /* Ensure full-width on smaller screens */
+        }
+        #loginForm {
+        padding: 20px;
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        width: 90%; /* Full width for smaller screens */
+        max-width: 400px; /* Limit width for larger screens */
+        display: flex;
+        flex-direction: column;
+        gap: 15px; /* Space between form elements */
+         }
     }
-
-    #loginForm {
-        display: flex; /* Use flexbox for centering */
-        flex-direction: column; /* Stack items vertically */
-        justify-content: center; /* Center content vertically */
-        align-items: center; /* Center content horizontally */
-        height: 100vh; /* Full height to center vertically */
-        padding: 20px; /* Add some padding */
-        margin: 0 auto; /* Center horizontally */
-        width: 90%; /* Adjust the width for mobile view */
-        max-width: 400px; /* Restrict maximum width */
-        border-radius: 10px; /* Optional: Add rounded corners */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
-    }
-}
 
     .login-page {
         box-shadow: 2px 2px 5px 2px;
