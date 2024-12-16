@@ -1,5 +1,5 @@
 <?php
-  // $page_title = 'All sale';
+  $page_title = 'All sale';
   require_once('includes/load.php');
   // Checkin What level user has permission to view this page
    page_require_level(3);
@@ -12,18 +12,6 @@ $sales = find_all_sale();
   <div class="col-md-6">
     <?php echo display_msg($msg); ?>
   </div>
-
-  <div id="page-title">
-  <?php $page_title = 'All sale'; ?>
-</div>
-<style>
-@media print {
-    #page-title {
-        display: none;
-    }
-}
-</style>
-
 </div>
   <div class="row">
     <div class="col-md-12">
