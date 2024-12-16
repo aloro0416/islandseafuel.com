@@ -1,8 +1,8 @@
 <?php
   $page_title = 'All sale';
   require_once('includes/load.php');
-  // Checkin What level user has permission to view this page
-   page_require_level(3);
+  // // Checkin What level user has permission to view this page
+  //  page_require_level(3);
 ?>
 <?php
 $sales = find_all_sale();
