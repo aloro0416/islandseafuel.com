@@ -255,25 +255,45 @@
 <style>
     body {
         background-image: url('libs/images/bgi2.jpg');
-        background-size: cover; /* Ensures the image covers the entire screen */
+        background-size: cover; /* Default: Ensures the image covers the entire screen */
         background-position: center;
         background-attachment: fixed; /* Keeps the background fixed while scrolling */
         background-repeat: no-repeat; /* Prevents the image from repeating */
+        margin: 0;
+        padding: 0;
     }
 
     /* Media query for mobile devices */
     @media (max-width: 768px) {
         body {
-            background-size: contain; /* Adjusts the background size for smaller screens */
+            background-size: contain; /* Adjust background size for smaller screens */
             background-position: center;
-            background-attachment: fixed; /* Fixes the background scrolling issue on mobile */
-            background-repeat: no-repeat; /* Ensure no repeating on smaller screens */
-            padding: 35px 15px 20px 15px; /* Adjust padding for smaller screens */
-            top: 20px; /* Reduce the top margin for mobile */
-            left: 0;
-            width: 100%; /* Ensure full-width on smaller screens */
+            background-attachment: scroll; /* Avoid issues with 'fixed' on mobile */
+            padding: 15px; /* Adjust padding for mobile */
+        }
+
+        /* Example adjustments for content */
+        h1, h2, h3, p {
+            font-size: 1rem; /* Reduce font size for better readability on small screens */
+        }
+
+        .container {
+            width: 100%; /* Ensure full-width layout for smaller screens */
+            padding: 10px; /* Adjust container padding */
+        }
+
+        img {
+            max-width: 100%; /* Make images responsive */
+            height: auto;
+        }
+
+        /* Example layout fixes */
+        .flex-container {
+            flex-direction: column; /* Stack elements vertically on mobile */
+            align-items: center; /* Center align elements */
         }
     }
+
 
     .login-page {
         box-shadow: 2px 2px 5px 2px;
