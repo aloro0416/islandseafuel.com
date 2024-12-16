@@ -4,7 +4,6 @@
   if($session->isUserLoggedIn(true)) { redirect('home', false);}
 ?>
 <?php include_once('layouts/header.php'); ?>
-
 <div class="login-page">
     <div class="text-center">
         <img src="libs/images/logo.png" alt="ISLAND SEA LOGO" style="height: 100px">
@@ -40,37 +39,36 @@
                 });
             });
         </script>
-
-        <?php endif; ?>
+    <?php endif; ?>
      <!-- Include Google reCAPTCHA v3 Script -->
      <script src="https://www.google.com/recaptcha/api.js?render=6Lcc25IqAAAAAH635KLYx5TwcXhguTYoIdJzgceI"></script>
 
-        <form method="post" action="auth.php" class="clearfix" id="loginForm">
-            <div class="form-group">
-                <label for="username" class="control-label">Username</label>
-                <input type="name" class="form-control" name="username" id="username" placeholder="Username " <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>
-            </div>
-            <div class="form-group" style="position: relative;">
-                <label for="Password" class="control-label">Password</label>
-                <input type="password" name="password" class="form-control" id="myInput" placeholder="Password" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>
-                
-                <!-- Eye icon positioned inside the input box -->
-                <i class="fa fa-eye" onclick="myFunction()" id="togglePassword" style="position: absolute; right: 10px; top: 70%; transform: translateY(-50%); cursor: pointer;"></i>
-            </div>
-            <div class="form-group">
-                <label>
-                    <input type="checkbox"> I agree to the
-                    <a href="#" id="openModalLink">Terms and Condition</a>
-                </label>
-            </div>
-            <!-- Hidden reCAPTCHA token input will be added here -->
-            <div class="form-group">
-                <button type="submit" id="btn-login" class="btn btn-danger" style="border-radius:0%" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>Login</button>
-            </div>
-            <div class="text-center">
-                <a href="account_recovery_select.php">Forgot password?</a>
-            </div>
-        </form>
+    <form method="post" action="auth.php" class="clearfix" id="loginForm">
+        <div class="form-group">
+              <label for="username" class="control-label">Username</label>
+              <input type="name" class="form-control" name="username" id="username" placeholder="Username " <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>
+        </div>
+        <div class="form-group" style="position: relative;">
+            <label for="Password" class="control-label">Password</label>
+            <input type="password" name="password" class="form-control" id="myInput" placeholder="Password" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>
+            
+            <!-- Eye icon positioned inside the input box -->
+            <i class="fa fa-eye" onclick="myFunction()" id="togglePassword" style="position: absolute; right: 10px; top: 70%; transform: translateY(-50%); cursor: pointer;"></i>
+        </div>
+        <div class="form-group">
+            <label>
+                <input type="checkbox"> I agree to the
+                <a href="#" id="openModalLink">Terms and Condition</a>
+            </label>
+        </div>
+        <!-- Hidden reCAPTCHA token input will be added here -->
+        <div class="form-group">
+            <button type="submit" id="btn-login" class="btn btn-danger" style="border-radius:0%" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>Login</button>
+        </div>
+        <div class="text-center">
+            <a href="account_recovery_select.php">Forgot password?</a>
+        </div>
+    </form>
 
     <!-- Modal Structure -->
     <div id="termsModal" class="modal">
@@ -143,7 +141,7 @@
                             <p style="magin-bottom:5px;">The <b>National Privacy Commission (NPC)</b> oversees the enforcement of the DPA and issues guidelines and advisories to ensure compliance.</p>
                 </div>
             </div>
-    </div>
+        </div>
 
     <!-- JavaScript for reCAPTCHA token generation -->
     <script>
@@ -251,6 +249,7 @@
         });
     </script>
 
+
 </div>
 
 <style>
@@ -265,7 +264,7 @@
     @media (max-width: 768px) {
         body {
         background-size: contain; /* Adjusts the background size for smaller screens */
-        background-position: middle center; /* Aligns the image to the top center for better display on mobile */
+        background-position: center; /* Aligns the image to the top center for better display on mobile */
         background-attachment: scroll; /* Fixes the background scrolling issue on mobile */
         padding: 35px 15px 20px 15px; /* Adjust padding for smaller screens */
         top: 20px; /* Reduce the top margin for mobile */
