@@ -68,6 +68,7 @@ $sales = find_all_sale();
 <?php include_once('layouts/footer.php'); ?>
 
 <script>
+   var pageTitle = "<?php echo $page_title; ?>";
     $(document).ready(function(){
         var print = $('#printable').DataTable({
             buttons:[
@@ -78,6 +79,7 @@ $sales = find_all_sale();
                 {
                     extend: 'print',
                     text: 'Print',
+                    title: '',
                     customize: function (win) {
                         // Add a logo and custom styling to the print output
                         $(win.document.body).prepend(`
@@ -85,6 +87,7 @@ $sales = find_all_sale();
                                 <img src="libs/images/logo.png" alt="Company Logo" style="width: 150px;">
                                 <h2>ISLAND SEA FUEL</h2>
                                 <h4>KANGWAYAN MADRIDEJOS CEBU</h4>
+                                <h4>All Sale</h4>
                             </div>
                         `);
                         $(win.document.body).find('table')
@@ -104,6 +107,7 @@ $sales = find_all_sale();
                 {
                     extend: 'print',
                     text: 'Print',
+                    title: '',
                     customize: function (win) {
                         // Add a logo and custom styling to the print output
                         $(win.document.body).prepend(`
@@ -111,6 +115,7 @@ $sales = find_all_sale();
                                 <img src="libs/images/logo.png" alt="Company Logo" style="width: 150px;">
                                 <h2>ISLAND SEA FUEL</h2>
                                 <h4>KANGWAYAN MADRIDEJOS CEBU</h4>
+                                  <h4>All Sale</h4>
                             </div>
                         `);
                         $(win.document.body).find('table')
