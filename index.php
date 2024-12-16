@@ -252,45 +252,54 @@
 
 </div>
 
-<style>
-    body {
-        background-image: url('libs/images/bgi2.jpg');
-        background-size: cover; /* Default: Ensures the image covers the entire screen */
-        background-position: center;
-        background-attachment: fixed; /* Keeps the background fixed while scrolling */
-        background-repeat: no-repeat; /* Prevents the image from repeating */
+<style>  
+    html, body {
         margin: 0;
         padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden; /* Prevent horizontal scroll */
+        background-color: #f5f5f5; /* Optional background color */
+        font-family: Arial, sans-serif;
+        box-sizing: border-box;
+    }
+
+    body {
+        background-image: url('libs/images/bgi2.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }
 
     /* Media query for mobile devices */
     @media (max-width: 768px) {
         body {
-            background-size: contain; /* Adjust background size for smaller screens */
+            background-size: contain; /* Adjust background for smaller screens */
             background-position: center;
-            background-attachment: scroll; /* Avoid issues with 'fixed' on mobile */
-            padding: 15px; /* Adjust padding for mobile */
-        }
-
-        /* Example adjustments for content */
-        h1, h2, h3, p {
-            font-size: 1rem; /* Reduce font size for better readability on small screens */
+            background-attachment: scroll; /* Avoid fixed background issues */
+            padding: 10px; /* Adjust padding for smaller devices */
         }
 
         .container {
-            width: 100%; /* Ensure full-width layout for smaller screens */
-            padding: 10px; /* Adjust container padding */
+            width: 100%; /* Ensure containers don't exceed screen width */
+            max-width: 100%;
+            padding: 10px; /* Adjust padding */
         }
 
         img {
-            max-width: 100%; /* Make images responsive */
-            height: auto;
+            max-width: 100%;
+            height: auto; /* Keep images responsive */
         }
 
-        /* Example layout fixes */
+        h1, h2, p {
+            font-size: 1rem; /* Smaller font sizes for mobile */
+            text-align: center; /* Optional: center text */
+        }
+
         .flex-container {
-            flex-direction: column; /* Stack elements vertically on mobile */
-            align-items: center; /* Center align elements */
+            display: flex;
+            flex-direction: column; /* Stack items vertically */
+            align-items: center; /* Center content */
         }
     }
 
