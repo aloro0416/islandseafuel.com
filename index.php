@@ -273,6 +273,7 @@
         left: 0;
         width: 100%; /* Ensure full-width on smaller screens */
         }
+       
         #loginForm {
         padding: 20px;
         border-radius: 10px; /* Rounded corners */
@@ -280,6 +281,7 @@
         width: 90%; /* Full width for smaller screens */
         max-width: 400px; /* Limit width for larger screens */
         display: flex;
+        align: center;
         flex-direction: column;
         gap: 15px; /* Space between form elements */
          }
