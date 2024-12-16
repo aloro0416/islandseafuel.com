@@ -69,58 +69,66 @@ $sales = find_all_sale();
 
 <script>
     $(document).ready(function(){
-    var print = $('#printable').DataTable({
-        buttons:['copy', 'csv', 'excel', 'pdf', 'print']
+        var print = $('#printable').DataTable({
+            buttons:[
+                'copy', 
+                'csv', 
+                'excel', 
+                'pdf', 
+                {
+                    extend: 'print',
+                    text: 'Print',
+                    customize: function (win) {
+                        // Add a logo and custom styling to the print output
+                        $(win.document.body).prepend(`
+                            <div style="text-align: center; margin-bottom: 20px;">
+                                <img src="path/to/your/logo.png" alt="Company Logo" style="width: 150px;">
+                                <h2>All Sales</h2>
+                            </div>
+                        `);
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', '12px');
+                    }
+                }
+            ]
+        });
+
+        var dashprint = $('#dashprint').DataTable({
+            buttons:[
+                'copy', 
+                'csv', 
+                'excel', 
+                'pdf', 
+                {
+                    extend: 'print',
+                    text: 'Print',
+                    customize: function (win) {
+                        // Add a logo and custom styling to the print output
+                        $(win.document.body).prepend(`
+                            <div style="text-align: center; margin-bottom: 20px;">
+                                <img src="path/to/your/logo.png" alt="Company Logo" style="width: 150px;">
+                                <h2>All Sales</h2>
+                            </div>
+                        `);
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', '12px');
+                    }
+                }
+            ]
+        });
+
+        var dtable = $('#defaultTable').DataTable({});
+
+        print.buttons().container()
+            .appendTo('#printable_wrapper .col-md-6:eq(0)');
+
+        dashprint.buttons().container()
+            .appendTo('#dashprint_wrapper .col-md-6:eq(0)');
     });
 
-    var dashprint = $('#dashprint').DataTable({
-        buttons:['copy', 'csv', 'excel', 'pdf', 'print']
-    });
-
-    var dtable = $('#defaultTable').DataTable({
-    });
-
-    print.buttons().container()
-    .appendTo('#printable_wrapper .col-md-6:eq(0)');
-
-    dashprint.buttons().container()
-    .appendTo('#dashprint_wrapper .col-md-6:eq(0)');
-
- 
-});
-
-$(document).ready(function () {
-    var dashprint = $('#dashprint').DataTable({
-      dom: 'Bfrtip',
-      buttons: [
-        {
-          extend: 'print',
-          text: 'Print',
-          customize: function (win) {
-            // Add a custom title with a logo
-            $(win.document.body)
-              .prepend(
-                '<div style="text-align: center; margin-bottom: 20px;">' +
-                '<img src="path/to/logo.png" style="height: 50px; margin-right: 10px;" alt="Logo">' +
-                '<h1 style="display: inline;">Island Sea Fuel</h1>' +
-                '</div>'
-              );
-            // Style the table for printing
-            $(win.document.body).find('table')
-              .addClass('compact')
-              .css('font-size', '12px');
-          }
-        }
-      ]
-    });
-
-    dashprint.buttons().container()
-      .appendTo('#dashprint_wrapper .col-md-6:eq(0)');
-  });
-
-  
-function confirmDelete(saleId) {
-        // Show SweetAlert confirmation dialog
+    function confirmDelete(saleId) {
         Swal.fire({
             title: 'Are you sure?',
             text: 'You won\'t be able to revert this!',
@@ -132,26 +140,24 @@ function confirmDelete(saleId) {
             cancelButtonText: 'Cancel'
         }).then((result) => {
             if (result.isConfirmed) {
-                // Perform AJAX request to delete the product
                 $.ajax({
-                    url: 'delete_sale.php', // Your PHP script to handle deletion
-                    type: 'GET', // Use GET request
-                    data: { id: saleId }, // Send the product ID to the PHP script
-                    dataType: 'json', // Expecting a JSON response
+                    url: 'delete_sale.php',
+                    type: 'GET',
+                    data: { id: saleId },
+                    dataType: 'json',
                     success: function(response) {
-                        // Handle success and failure responses from the server
                         if (response.status === 'success') {
                             Swal.fire(
                                 'Deleted!',
-                                response.message, // Show success message from the PHP response
+                                response.message,
                                 'success'
                             ).then(() => {
-                                location.reload(); // Reload the page to update the list
+                                location.reload();
                             });
                         } else {
                             Swal.fire(
                                 'Error!',
-                                response.message, // Show error message from the PHP response
+                                response.message,
                                 'error'
                             );
                         }
@@ -168,3 +174,4 @@ function confirmDelete(saleId) {
         });
     }
 </script>
+
