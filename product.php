@@ -100,6 +100,7 @@
                 {
                     extend: 'print',
                     text: 'Print',
+                    title: '',
                     customize: function (win) {
                         // Add a logo and custom styling to the print output
                         $(win.document.body).prepend(`
@@ -127,6 +128,7 @@
                 {
                     extend: 'print',
                     text: 'Print',
+                    title: '',
                     customize: function (win) {
                         // Add a logo and custom styling to the print output
                         $(win.document.body).prepend(`
