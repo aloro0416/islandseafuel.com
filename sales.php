@@ -19,7 +19,7 @@ $sales = find_all_sale();
         <div class="panel-heading clearfix">
           <strong>
             <span class="glyphicon glyphicon-th"></span>
-            <span>All Salesss</span>
+            <span>All Sales</span>
           </strong>
           <div class="pull-right">
             <a href="add_sale" class="btn btn-primary">Add sale</a>
