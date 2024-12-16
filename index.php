@@ -261,7 +261,7 @@
     }
 
     /* Media query for mobile devices */
-    @media (max-width: 768px) {
+    @media (max-width: 100px) {
         body {
         background-size: contain; /* Adjusts the background size for smaller screens */
         background-position: center;
