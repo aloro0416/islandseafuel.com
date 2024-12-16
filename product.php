@@ -1,8 +1,8 @@
 <?php
-  $page_title = 'All Product';
-  require_once('includes/load.php');
-  // Checkin What level user has permission to view this page
-  //  page_require_level(2);
+  // $page_title = 'All Product';
+  // require_once('includes/load.php');
+  // // Checkin What level user has permission to view this page
+   page_require_level(2);
   $products = join_product_table();
 ?>
 <?php include_once('layouts/header.php'); ?>
