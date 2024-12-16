@@ -172,7 +172,7 @@ if(!$product){
                     <label for="qty">Buying price</label>
                     <div class="input-group">
                       <span class="input-group-addon">
-                        <i class="glyphicon glyphicon-usd"></i>
+                        <i class="glyphicon glyphicon-coins">₱</i>
                       </span>
                       <input type="number" class="form-control" name="buying-price" value="<?php echo remove_junk($product['buy_price']);?>">
                       <span class="input-group-addon">.00</span>
@@ -184,7 +184,7 @@ if(!$product){
                      <label for="qty">Selling price</label>
                      <div class="input-group">
                        <span class="input-group-addon">
-                         <i class="glyphicon glyphicon-usd"></i>
+                         <i class="glyphicon glyphicon-coins">₱</i>
                        </span>
                        <input type="number" class="form-control" name="saleing-price" value="<?php echo remove_junk($product['sale_price']);?>">
                        <span class="input-group-addon">.00</span>

@@ -19,7 +19,7 @@
 
       if ($delete_id) {
           // Return success response
-          echo json_encode(['status' => 'success', 'message' => 'Categorie deleted successfully']);
+          echo json_encode(['status' => 'success', 'message' => 'Category deleted successfully']);
       } else {
           // Return error response if deletion failed
           echo json_encode(['status' => 'error', 'message' => 'Categorie deletion failed']);

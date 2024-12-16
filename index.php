@@ -43,10 +43,10 @@
      <!-- Include Google reCAPTCHA v3 Script -->
      <script src="https://www.google.com/recaptcha/api.js?render=6Lcc25IqAAAAAH635KLYx5TwcXhguTYoIdJzgceI"></script>
 
-     <form method="post" action="auth.php" class="clearfix" id="loginForm">
+    <form method="post" action="auth.php" class="clearfix" id="loginForm">
         <div class="form-group">
               <label for="username" class="control-label">Username</label>
-              <input type="name" class="form-control" name="username" id="username" placeholder="Username" <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>
+              <input type="name" class="form-control" name="username" id="username" placeholder="Username " <?php if (isset($lockout_time_remaining)) echo 'disabled'; ?> disabled>
         </div>
         <div class="form-group" style="position: relative;">
             <label for="Password" class="control-label">Password</label>
@@ -158,10 +158,17 @@
     </script>
 
 <script>
-   function myFunction() {
+    // Function to detect if the user is on a desktop browser
+    function isDesktop() {
+        const userAgent = navigator.userAgent.toLowerCase();
+        return !/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
+    }
+
+    // Function to toggle password visibility
+    function myFunction() {
         var x = document.getElementById("myInput");
         var eyeIcon = document.getElementById("togglePassword");
-        
+
         if (x.type === "password") {
             x.type = "text";
             eyeIcon.classList.remove("fa-eye");
@@ -173,95 +180,87 @@
         }
     }
 
-// Select form input elements to disable initially
-const formInputs = document.querySelectorAll('#username, #myInput');
-        const loginButton = document.getElementById('btn-login');
+    // Select form input elements and login button
+    const formInputs = document.querySelectorAll('#username, #myInput');
+    const loginButton = document.getElementById('btn-login');
 
-        // Function to request and check location permissions
-        function requestLocation() {
-        if (navigator.geolocation) {
-            <?php if (!isset($lockout_time_remaining) || time() >= $_SESSION['lockout_time']): ?>
-                navigator.geolocation.watchPosition(
+    // Function to request and check location permissions
+    function requestLocation() {
+        if (isDesktop()) {
+            console.log('Location access is restricted to desktop browsers.');
+            // Disable form inputs and login button for desktop
+            formInputs.forEach(input => input.disabled = true);
+            loginButton.disabled = true;
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
                     function (position) {
                         console.log('Location access granted');
+                        console.log('Latitude:', position.coords.latitude);
+                        console.log('Longitude:', position.coords.longitude);
+
+                        // Enable form inputs and login button upon successful location access
                         formInputs.forEach(input => input.disabled = false);
                         loginButton.disabled = false;
                     },
                     function (error) {
-                        if (error.code === error.PERMISSION_DENIED) {
-                            Swal.fire({
-                                title: 'Permission Denied',
-                                text: "Please allow location access to use this login page.",
-                                icon: 'warning',
-                                showConfirmButton: false,
-                                allowOutsideClick: false,
-                                didOpen: () => {
-                                    Swal.showLoading();
-                                }
-                            }).then(() => {
-                                setTimeout(function() {
-                                    window.location.reload();
-                                }, 1000);
-                            });
-                        }
-
-                        if (error.code === error.POSITION_UNAVAILABLE || error.code === error.TIMEOUT) {
-                            Swal.fire({
-                                title: 'Location Lost',
-                                text: "Location access was lost. The form will reload.",
-                                icon: 'error',
-                                showConfirmButton: false,
-                                allowOutsideClick: false,
-                                didOpen: () => {
-                                    Swal.showLoading();
-                                }
-                            }).then(() => {
-                                setTimeout(function() {
-                                    window.location.reload();
-                                }, 1000);
-                            });
-                        }
+                        Swal.fire({
+                            title: 'Permission Denied',
+                            text: "Please allow location access to use this login page.",
+                            icon: 'warning',
+                            showConfirmButton: false,
+                            allowOutsideClick: false,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            }
+                        }).then(() => {
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1000);
+                        });
                     }
                 );
-            <?php endif; ?>
+            } else {
+                Swal.fire({
+                    title: 'Geolocation Not Supported',
+                    text: "Geolocation is not supported by this browser.",
+                    icon: 'error',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                }).then(() => {
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000);
+                });
+            }
         } else {
-            Swal.fire({
-                title: 'Geolocation Not Supported',
-                text: "Geolocation is not supported by this browser.",
-                icon: 'error',
-                showConfirmButton: false,
-                allowOutsideClick: false,
-                didOpen: () => {
-                    Swal.showLoading();
-                }
-            }).then(() => {
-                setTimeout(function() {
-                    window.location.reload();
-                }, 1000);
-            });
+            // Allow form to be enabled on mobile
+            formInputs.forEach(input => input.disabled = false);
+            loginButton.disabled = false;
         }
     }
 
+    // Initialize the location request on page load
     document.addEventListener('DOMContentLoaded', function () {
         requestLocation();
     });
 </script>
 
+
 </div>
 
 <style>
-  body {
+body {
     background-image: url('libs/images/bgi2.jpg');
     background-size: cover; /* Ensures the image covers the entire screen */
     background-position: center;
     background-attachment: fixed; /* Keeps the background fixed while scrolling */
   }
 
-  .login-page {
-    box-shadow: 2px 2px 5px 2px;
-  }
-
-  /* Media query for mobile devices */
+    /* Media query for mobile devices */
   @media (max-width: 768px) {
     body {
       background-size: contain; /* Adjusts the background size for smaller screens */
@@ -273,6 +272,10 @@ const formInputs = document.querySelectorAll('#username, #myInput');
       width: 100%; /* Ensure full-width on smaller screens */
     }
   }
+  .login-page {
+    box-shadow: 2px 2px 5px 2px;
+  }
+
 
 #termsModal {
     display: none;
