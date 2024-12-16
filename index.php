@@ -265,6 +265,8 @@
         body {
         background-size: contain; /* Adjusts the background size for smaller screens */
         background-position: center;
+        background-size: cover; 
+        background-repeat:no-repeat;
         background-attachment: fixed; /* Fixes the background scrolling issue on mobile */
         padding: 35px 15px 20px 15px; /* Adjust padding for smaller screens */
         top: 20px; /* Reduce the top margin for mobile */
