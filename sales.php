@@ -72,7 +72,7 @@ $sales = find_all_sale();
     var print = $('#printable').DataTable({
         buttons:['copy', 'csv', 'excel', 'pdf', 'print']
     });
-
+      
     var dashprint = $('#dashprint').DataTable({
         buttons:['copy', 'csv', 'excel', 'pdf', 'print']
     });
