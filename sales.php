@@ -73,29 +73,6 @@ $sales = find_all_sale();
         buttons:['copy', 'csv', 'excel', 'pdf', 'print']
     });
 
-    $(document).ready(function () {
-    var dashprint = $('#dashprint').DataTable({
-      dom: 'Bfrtip',
-      buttons: [
-        {
-          extend: 'print',
-          text: 'Print',
-          customize: function (win) {
-            $(win.document.body)
-              .prepend(
-                '<div style="text-align: center; margin-bottom: 20px;">' +
-                '<img src="path/to/logo.png" style="height: 50px; margin-right: 10px;" alt="Logo">' +
-                '<h1 style="display: inline;">Island Sea Fuel</h1>' +
-                '</div>'
-              );
-            $(win.document.body).find('table')
-              .addClass('compact')
-              .css('font-size', '12px');
-          }
-        }
-      ]
-    });
-
     var dashprint = $('#dashprint').DataTable({
         buttons:['copy', 'csv', 'excel', 'pdf', 'print']
     });
