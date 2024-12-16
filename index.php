@@ -260,12 +260,12 @@
         background-attachment: fixed; /* Keeps the background fixed while scrolling */
     }
 
-        /* Media query for mobile devices */
+    /* Media query for mobile devices */
     @media (max-width: 768px) {
         body {
         background-size: contain; /* Adjusts the background size for smaller screens */
-        background-position: center; /* Aligns the image to the top center for better display on mobile */
-        background-attachment: scroll; /* Fixes the background scrolling issue on mobile */
+        background-position: center;
+        background-attachment: fixed; /* Fixes the background scrolling issue on mobile */
         padding: 35px 15px 20px 15px; /* Adjust padding for smaller screens */
         top: 20px; /* Reduce the top margin for mobile */
         left: 0;
