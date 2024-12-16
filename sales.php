@@ -84,7 +84,7 @@ $sales = find_all_sale();
                             <div style="text-align: center; margin-bottom: 20px;">
                                 <img src="libs/images/logo.png" alt="Company Logo" style="width: 150px;">
                                 <h2>ISLAND SEA FUEL</h2>
-                                <h4>KANGWAYAN MADRIDEJOS CEBUl</h4>
+                                <h4>KANGWAYAN MADRIDEJOS CEBU</h4>
                             </div>
                         `);
                         $(win.document.body).find('table')
@@ -110,7 +110,7 @@ $sales = find_all_sale();
                             <div style="text-align: center; margin-bottom: 20px;">
                                 <img src="libs/images/logo.png" alt="Company Logo" style="width: 150px;">
                                 <h2>ISLAND SEA FUEL</h2>
-                                <h4>KANGWAYAN MADRIDEJOS CEBUl</h4>
+                                <h4>KANGWAYAN MADRIDEJOS CEBU</h4>
                             </div>
                         `);
                         $(win.document.body).find('table')
