@@ -254,37 +254,38 @@
 
 <style>
     body {
-        margin: 0;
-        padding: 0;
         background-image: url('libs/images/bgi2.jpg');
         background-size: cover; /* Ensures the image covers the entire screen */
         background-position: center;
         background-attachment: fixed; /* Keeps the background fixed while scrolling */
-        display: flex; /* Enables flexbox on the body */
-        justify-content: center; /* Centers form horizontally */
-        align-items: center; /* Centers form vertically */
-        height: 100vh; /* Full height to center the form vertically */
-        box-sizing: border-box;
     }
 
     /* Media query for mobile devices */
     @media (max-width: 768px) {
         body {
-            background-size: cover; /* Ensures the image covers the entire screen */
-            padding: 0; /* Removes extra padding */
+        background-size: contain; /* Adjusts the background size for smaller screens */
+        background-position: center;
+        background-size: cover; 
+        background-repeat:no-repeat;
+        background-attachment: fixed; /* Fixes the background scrolling issue on mobile */
+        padding: 35px 15px 20px 15px; /* Adjust padding for smaller screens */
+        top: 20px; /* Reduce the top margin for mobile */
+        left: 0;
+        width: 100%; /* Ensure full-width on smaller screens */
         }
-
+       
         #loginForm {
-            padding: 20px;
-            border-radius: 10px; /* Rounded corners */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-            width: 90%; /* Full width for smaller screens */
-            max-width: 400px; /* Limit width for larger screens */
-            display: flex;
-            flex-direction: column; /* Stack elements vertically */
-            gap: 15px; /* Space between form elements */
-            background: rgba(255, 255, 255, 0.9); /* Semi-transparent background for better contrast */
-        }
+        top: 50px;
+        height: 100vh;
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        width: 90%; /* Full width for smaller screens */
+        max-width: 400px; /* Limit width for larger screens */
+        display: flex;
+        align: center;
+        flex-direction: column;
+        gap: 15px; /* Space between form elements */
+         }
     }
 
     .login-page {
