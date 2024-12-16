@@ -252,58 +252,26 @@
 
 </div>
 
-<style>  
-    html, body {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        height: 100%;
-        overflow-x: hidden; /* Prevent horizontal scroll */
-        background-color: #f5f5f5; /* Optional background color */
-        font-family: Arial, sans-serif;
-        box-sizing: border-box;
-    }
-
+<style>
     body {
         background-image: url('libs/images/bgi2.jpg');
-        background-size: cover;
+        background-size: cover; /* Ensures the image covers the entire screen */
         background-position: center;
-        background-repeat: no-repeat;
+        background-attachment: fixed; /* Keeps the background fixed while scrolling */
     }
 
     /* Media query for mobile devices */
     @media (max-width: 768px) {
         body {
-            background-size: contain; /* Adjust background for smaller screens */
-            background-position: center;
-            background-attachment: scroll; /* Avoid fixed background issues */
-            padding: 10px; /* Adjust padding for smaller devices */
-        }
-
-        .container {
-            width: 100%; /* Ensure containers don't exceed screen width */
-            max-width: 100%;
-            padding: 10px; /* Adjust padding */
-        }
-
-        img {
-            max-width: 100%;
-            height: auto; /* Keep images responsive */
-        }
-
-        h1, h2, p {
-            font-size: 1rem; /* Smaller font sizes for mobile */
-            text-align: center; /* Optional: center text */
-        }
-
-        .flex-container {
-            display: flex;
-            flex-direction: column; /* Stack items vertically */
-            align-items: center; /* Center content */
+        background-size: contain; /* Adjusts the background size for smaller screens */
+        background-position: center;
+        background-attachment: fixed; /* Fixes the background scrolling issue on mobile */
+        padding: 35px 15px 20px 15px; /* Adjust padding for smaller screens */
+        top: 20px; /* Reduce the top margin for mobile */
+        left: 0;
+        width: 100%; /* Ensure full-width on smaller screens */
         }
     }
-
-
     .login-page {
         box-shadow: 2px 2px 5px 2px;
     }
