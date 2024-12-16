@@ -5,6 +5,18 @@
    page_require_level(2);
   $products = join_product_table();
 ?>
+
+<div id="page-title">
+    <?php $page_title = 'All Product'; ?>
+</div>
+<style>
+@media print {
+    #page-title {
+        display: none;
+    }
+}
+</style>
+
 <?php include_once('layouts/header.php'); ?>
   <div class="row">
      <div class="col-md-12">
@@ -142,9 +154,9 @@
     .appendTo('#dashprint_wrapper .col-md-6:eq(0)');
 
  
-});
+  });
 
-function confirmDelete(productId) {
+  function confirmDelete(productId) {
         // Show SweetAlert confirmation dialog
         Swal.fire({
             title: 'Are you sure?',
