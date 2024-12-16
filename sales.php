@@ -1,5 +1,5 @@
 <?php
-  $page_title = 'All sale';
+  $page_title = 'All sales';
   require_once('includes/load.php');
   // Checkin What level user has permission to view this page
    page_require_level(3);
@@ -19,7 +19,7 @@ $sales = find_all_sale();
         <div class="panel-heading clearfix">
           <strong>
             <span class="glyphicon glyphicon-th"></span>
-            <span>All Salesss</span>
+            <span>All Sales</span>
           </strong>
           <div class="pull-right">
             <a href="add_sale" class="btn btn-primary">Add sale</a>
@@ -85,8 +85,6 @@ $sales = find_all_sale();
 
     dashprint.buttons().container()
     .appendTo('#dashprint_wrapper .col-md-6:eq(0)');
-
- 
 });
 
 
