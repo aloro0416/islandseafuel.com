@@ -387,6 +387,52 @@
             </script>
             </div>
           </div>
+
+          <div class="col-md-8" style="margin-top: 20px;"> <!-- Added margin-top for spacing -->
+              <div class="panel panel-box clearfix" style="padding: 10px;">
+                <div id="chart2"></div> <!-- Second Chart -->
+                <script>
+                  var options2 = {
+                    series: [<?php echo $all_categories; ?>],  // Ensure $all_categories is an array of numeric values.
+                    chart: {
+                      height: 350,
+                      type: 'pie',
+                    },
+                    labels: <?php echo json_encode(array_column($categories, 'name')); ?>,  // Assuming $categories is an array with category names
+                    dataLabels: {
+                      enabled: true,
+                      formatter: function (val) {
+                        return "₱ " + val;
+                      },
+                      style: {
+                        fontSize: '12px',
+                        colors: ["#304758"]
+                      }
+                    },
+                    tooltip: {
+                      enabled: true,
+                      y: {
+                        formatter: function (val) {
+                          return "₱ " + val;
+                        }
+                      }
+                    },
+                    title: {
+                      text: 'CATEGORIES',
+                      floating: true,
+                      offsetY: 330,
+                      align: 'center',
+                      style: {
+                        color: '#444'
+                      }
+                    }
+                  };
+
+                  var chart2 = new ApexCharts(document.querySelector("#chart2"), options2);
+                  chart2.render();
+                </script>
+              </div>
+            </div>
         </div>
         
     </div>
