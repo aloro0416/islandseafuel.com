@@ -373,26 +373,21 @@
       </div>
     </div>
 
-    <!-- Separate Pie Chart for Category Distribution -->
-    <div class="col-md-8" style="margin-top: 20px;">
+    <div class="col-md-8" style="margin-top: 20px;"> <!-- Added margin-top for spacing -->
       <div class="panel panel-box clearfix" style="padding: 10px;">
-        <div id="category-pie-chart"></div> <!-- Chart container for the pie chart -->
+        <div id="chart2"></div> <!-- Changed ID for the second chart -->
         <script>
-          // Prepare data for the pie chart (category counts)
-          var categoryNames = <?php echo json_encode(array_column($all_categories, 'name')); ?>; // Get all category names
-          var categoryCounts = Array(categoryNames.length).fill(1); // Assuming each category has 1 count (you can customize this based on actual counts)
-
           var options = {
-            series: categoryCounts,  // Use the counts for the pie chart series
+            series: [<?=$all_categories?>,],
             chart: {
               height: 350,
-              type: 'pie',  // Pie chart type
+              type: 'pie',
             },
-            labels: categoryNames,  // Use category names as labels for the pie chart
+            labels: ['Available Gas', 'Sales'],
             dataLabels: {
               enabled: true,
               formatter: function (val) {
-                return val + " category";  // Optional: Display the count for each category
+                return "₱ " + val;
               },
               style: {
                 fontSize: '12px',
@@ -403,12 +398,12 @@
               enabled: true,
               y: {
                 formatter: function (val) {
-                  return val + " category";  // Tooltip will show the count of categories
+                  return "₱ " + val;
                 }
               }
             },
             title: {
-              text: 'Category Distribution',
+              text: 'CATEGORIE',
               floating: true,
               offsetY: 330,
               align: 'center',
@@ -418,7 +413,7 @@
             }
           };
 
-          var chart = new ApexCharts(document.querySelector("#category-pie-chart"), options);
+          var chart = new ApexCharts(document.querySelector("#chart2"), options);
           chart.render();
         </script>
       </div>
