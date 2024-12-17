@@ -470,41 +470,91 @@
       </div>
     </div>
     <div class="col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <strong>
-              <span class="glyphicon glyphicon-th"></span>
-              <span>LATEST SALES</span>
-            </strong>
-          </div>
-          <div class="panel-body">
-            <table class="table table-striped table-bordered table-condensed">
-        <thead>
-          <tr>
-            <th class="text-center" style="width: 50px;">#</th>
-            <th>Product Name</th>
-            <th>Date</th>
-            <th>Total Sale</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php foreach ($recent_sales as  $recent_sale): ?>
-          <tr>
-            <td class="text-center"><?php echo count_id();?></td>
-            <td>
-              <a href="edit_sale?id=<?php echo (int)$recent_sale['id']; ?>">
-              <?php echo remove_junk(first_character($recent_sale['name'])); ?>
-            </a>
-            </td>
-            <td><?php echo remove_junk(ucfirst($recent_sale['date'])); ?></td>
-            <td><?php echo remove_junk(first_character($recent_sale['price'])); ?></td>
-          </tr>
-
-        <?php endforeach; ?>
-        </tbody>
-      </table>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <strong>
+        <span class="glyphicon glyphicon-th"></span>
+        <span>LATEST SALES</span>
+      </strong>
+    </div>
+    <div class="panel-body">
+      <div id="pieChart"></div>
+    </div>
       </div>
     </div>
+
+    <script>
+      // Prepare sales data for pie chart (assuming PHP array $recent_sales)
+      var salesData = <?php echo json_encode($recent_sales); ?>;
+      
+      // Prepare an object to store the total sales per product
+      var salesSummary = {};
+      
+      // Summarize sales by product
+      salesData.forEach(function(sale) {
+        var productName = sale.name;
+        var saleAmount = parseFloat(sale.price);  // Convert price to float
+
+        // If the product already exists in salesSummary, add the amount to it
+        if (salesSummary[productName]) {
+          salesSummary[productName] += saleAmount;
+        } else {
+          // Otherwise, initialize with the sale amount
+          salesSummary[productName] = saleAmount;
+        }
+      });
+
+      // Prepare data for the pie chart
+      var chartData = [];
+      var chartLabels = [];
+      
+      for (var product in salesSummary) {
+        chartLabels.push(product);
+        chartData.push(salesSummary[product]);
+      }
+
+      // Options for the pie chart
+      var options = {
+        series: chartData,  // Sale amounts for each product
+        chart: {
+          height: 350,
+          type: 'pie', // Pie chart type
+        },
+        labels: chartLabels,  // Product names as labels
+        dataLabels: {
+          enabled: true,
+          formatter: function(val) {
+            return "₱ " + val.toFixed(2);  // Format the values with currency
+          },
+          style: {
+            fontSize: '12px',
+            colors: ["#304758"]
+          }
+        },
+        tooltip: {
+          enabled: true,
+          y: {
+            formatter: function(val) {
+              return "₱ " + val.toFixed(2);  // Tooltip formatting with currency
+            }
+          }
+        },
+        title: {
+          text: 'Sales Distribution by Product',
+          floating: true,
+          offsetY: 330,
+          align: 'center',
+          style: {
+            color: '#444'
+          }
+        }
+      };
+
+      // Render the pie chart
+      var chart = new ApexCharts(document.querySelector("#pieChart"), options);
+      chart.render();
+    </script>
+
     </div>
     
   </div>
