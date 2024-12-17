@@ -373,52 +373,6 @@
       </div>
     </div>
 
-    <div class="col-md-8" style="margin-top: 20px;"> <!-- Added margin-top for spacing -->
-      <div class="panel panel-box clearfix" style="padding: 10px;">
-        <div id="chart2"></div> <!-- Changed ID for the second chart -->
-        <script>
-          var options = {
-            series: [<?=$all_categories?>,],
-            chart: {
-              height: 350,
-              type: 'pie',
-            },
-            labels: ['Available Gas', 'Sales'],
-            dataLabels: {
-              enabled: true,
-              formatter: function (val) {
-                return "₱ " + val;
-              },
-              style: {
-                fontSize: '12px',
-                colors: ["#304758"]
-              }
-            },
-            tooltip: {
-              enabled: true,
-              y: {
-                formatter: function (val) {
-                  return "₱ " + val;
-                }
-              }
-            },
-            title: {
-              text: 'CATEGORIE',
-              floating: true,
-              offsetY: 330,
-              align: 'center',
-              style: {
-                color: '#444'
-              }
-            }
-          };
-
-          var chart = new ApexCharts(document.querySelector("#chart2"), options);
-          chart.render();
-        </script>
-      </div>
-    </div>
-
   <div class="row">
     <div class="col-md-6">
       <div class="panel panel-default">
