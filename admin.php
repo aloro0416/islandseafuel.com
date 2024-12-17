@@ -307,10 +307,12 @@
           title: {
             text: 'Sales Distribution by Product',
             floating: true,
-            offsetY: 330,
+            offsetY: 20,  // Reduced offsetY to move the title closer to the chart
             align: 'center',
             style: {
-              color: '#444'
+              color: '#444',
+              fontSize: '16px',  // Increased font size for better readability
+              fontWeight: 'bold'  // Made the title bold for emphasis
             }
           }
         };
