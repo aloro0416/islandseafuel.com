@@ -195,134 +195,125 @@
         ?>
 
 
-    <div class="row">
-      <div class="col">
-        <div class="panel panel-box clearfix" style="padding: 10px;">
-          <!-- Second Chart: Line Chart -->
-          <div id="lineChart"></div>
-        </div>
-
-        <script>
-          var options = {
-            series: [
-              {
-                name: "Total Sales",
-                data: [<?=$january?>, <?=$febuary?>, <?=$march?>, <?=$april?>, <?=$may?>, <?=$june?>, <?=$july?>, <?=$aug?>, <?=$sept?>, <?=$oct?>, <?=$nov?>, <?=$dec?>]
-              },
-              {
-                name: "Premium",
-                data: <?= $product_sales_json ?>  // Product sales data for Premium
-              },
-              {
-                name: "Diesel",
-                data: <?= $product_sales_json_2 ?>  // Product sales data for Diesel
-              },
-              {
-                name: "Super93",
-                data: <?= $product_sales_json_3 ?>  // Product sales data for Super93
-              }
-            ],
-            chart: {
-              height: 350,
-              type: 'line',
-            },
-            xaxis: {
-              categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            },
-            title: {
-              text: 'Sales by Month',
-              align: 'left'
-            },
-            stroke: {
-              curve: 'smooth'
-            },
-          };
-
-          var chart2 = new ApexCharts(document.querySelector("#lineChart"), options);
-          chart2.render();
-        </script>
-      </div>
+<div class="row">
+  <!-- Line Chart -->
+  <div class="col-md-8">
+    <div class="panel panel-box clearfix" style="padding: 10px;">
+      <div id="lineChart"></div>
     </div>
-    <div class="row">
-
-    <div class="col">
-      <div class="panel panel-box clearfix" style="padding: 10px; margin-bottom: 20px;">
-        <!-- Pie Chart -->
-        <div id="pieChart" style="padding-bottom: 20px;"></div>
-      </div>
-
-      <script>
-        // Prepare the sales data from the PHP variable $recent_sales
-        var recentSales = <?php echo json_encode($recent_sales); ?>;
-
-        // Summarize the sales by product
-        var salesSummary = {};
-        recentSales.forEach(function(sale) {
-          var productName = sale.name;  // Product name from the sale record
-          var saleAmount = parseFloat(sale.price);  // Sale amount as a number
-
-          // If the product already exists, add the sale amount to it
-          if (salesSummary[productName]) {
-            salesSummary[productName] += saleAmount;
-          } else {
-            // Otherwise, initialize the sale amount for this product
-            salesSummary[productName] = saleAmount;
+    <script>
+      var options = {
+        series: [
+          {
+            name: "Total Sales",
+            data: [<?=$january?>, <?=$febuary?>, <?=$march?>, <?=$april?>, <?=$may?>, <?=$june?>, <?=$july?>, <?=$aug?>, <?=$sept?>, <?=$oct?>, <?=$nov?>, <?=$dec?>]
+          },
+          {
+            name: "Premium",
+            data: <?= $product_sales_json ?>
+          },
+          {
+            name: "Diesel",
+            data: <?= $product_sales_json_2 ?>
+          },
+          {
+            name: "Super93",
+            data: <?= $product_sales_json_3 ?>
           }
-        });
+        ],
+        chart: {
+          height: 350,
+          type: 'line',
+        },
+        xaxis: {
+          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        },
+        title: {
+          text: 'Sales by Month',
+          align: 'left'
+        },
+        stroke: {
+          curve: 'smooth'
+        },
+      };
 
-        // Prepare the data for the pie chart
-        var chartData = [];
-        var chartLabels = [];
-        for (var product in salesSummary) {
-          chartLabels.push(product);  // Product name
-          chartData.push(salesSummary[product]);  // Total sales for that product
+      var chart2 = new ApexCharts(document.querySelector("#lineChart"), options);
+      chart2.render();
+    </script>
+  </div>
+
+  <!-- Pie Chart -->
+  <div class="col-md-4">
+    <div class="panel panel-box clearfix" style="padding: 10px;">
+      <div id="pieChart"></div>
+    </div>
+    <script>
+      var recentSales = <?php echo json_encode($recent_sales); ?>;
+
+      var salesSummary = {};
+      recentSales.forEach(function(sale) {
+        var productName = sale.name;
+        var saleAmount = parseFloat(sale.price);
+
+        if (salesSummary[productName]) {
+          salesSummary[productName] += saleAmount;
+        } else {
+          salesSummary[productName] = saleAmount;
         }
+      });
 
-        // Options for the pie chart
-        var options = {
-          series: chartData,  // Total sales for each product
-          chart: {
-            height: 350,
-            type: 'pie',  // Pie chart type
+      var chartData = [];
+      var chartLabels = [];
+      for (var product in salesSummary) {
+        chartLabels.push(product);
+        chartData.push(salesSummary[product]);
+      }
+
+      var options = {
+        series: chartData,
+        chart: {
+          height: 250,  // Smaller height for the pie chart
+          type: 'pie',
+        },
+        labels: chartLabels,
+        dataLabels: {
+          enabled: true,
+          formatter: function(val) {
+            return val.toFixed(2) + "% ";
           },
-          labels: chartLabels,  // Product names as labels
-          dataLabels: {
-            enabled: true,
+          style: {
+            fontSize: '10px',
+            colors: ["#304758"]
+          }
+        },
+        tooltip: {
+          enabled: true,
+          y: {
             formatter: function(val) {
-              return val.toFixed(2) + "% " ;  // Format the values as percentage
-            },
-            style: {
-              fontSize: '12px',
-              colors: ["#304758"]
-            }
-          },
-          tooltip: {
-            enabled: true,
-            y: {
-              formatter: function(val) {
-                return "₱ " + val.toFixed(2);  // Tooltip formatting with currency
-              }
-            }
-          },
-          title: {
-            text: 'Sales Distribution by Product',
-            floating: true,
-            offsetY: 340,  // Adjust the offset to create space below the chart
-            align: 'center',
-            style: {
-              color: '#444',        // Font color
-              fontSize: '10px',     // Font size
-              fontWeight: 'bold',   // Font weight (e.g., 'normal', 'bold', or numeric like 600)
-              fontFamily: 'Arial, sans-serif' // Font family
+              return "₱ " + val.toFixed(2);
             }
           }
-        };
+        },
+        title: {
+          text: 'Sales Distribution by Product',
+          floating: true,
+          offsetY: 300,
+          align: 'center',
+          style: {
+            color: '#444',
+            fontSize: '10px',
+            fontWeight: 'bold',
+            fontFamily: 'Arial, sans-serif'
+          }
+        }
+      };
 
-        // Render the pie chart
-        var chart = new ApexCharts(document.querySelector("#pieChart"), options);
-        chart.render();
-      </script>
-    </div>
+      var chart = new ApexCharts(document.querySelector("#pieChart"), options);
+      chart.render();
+    </script>
+  </div>
+</div>
+
 
   <div class="row">
   <div class="col-md-4">
