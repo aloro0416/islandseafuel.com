@@ -245,13 +245,18 @@
     </div>
     <div class="row">
 
-      <div class="col">
+    <div class="col">
         <div class="panel panel-box clearfix" style="padding: 10px;">
           <!-- Second Chart: Pie Chart -->
           <div id="pieChart"></div>
         </div>
 
         <script>
+          // Console log to debug PHP variables
+          console.log(<?=$january?>, <?=$febuary?>, <?=$march?>, <?=$april?>, <?=$may?>, <?=$june?>, <?=$july?>, <?=$aug?>, <?=$sept?>, <?=$oct?>, <?=$nov?>, <?=$dec?>);
+          console.log(<?= $product_sales_json ?>, <?= $product_sales_json_2 ?>, <?= $product_sales_json_3 ?>);
+
+          // Ensure all data arrays are correctly populated
           var options = {
             series: [
               <?=$january?>, <?=$febuary?>, <?=$march?>, <?=$april?>, <?=$may?>, <?=$june?>, <?=$july?>, <?=$aug?>, <?=$sept?>, <?=$oct?>, <?=$nov?>, <?=$dec?>,
@@ -296,10 +301,12 @@
             }
           };
 
+          // Render the chart
           var chart2 = new ApexCharts(document.querySelector("#pieChart"), options);
           chart2.render();
         </script>
       </div>
+
     </div>
 
   <div class="row">
