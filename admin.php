@@ -244,9 +244,20 @@
 
   <!-- Pie Chart -->
   <div class="col-md-4">
-    <div class="panel panel-box clearfix" style="padding: 10px; text-align: center;">
+    <div class="panel panel-box clearfix" style="padding: 10px; text-align: center; position: relative;">
       <!-- Pie Chart -->
-      <div id="pieChart"></div>
+      <div id="pieChart" style="position: relative;"></div>
+
+      <!-- Centered Icon -->
+      <div id="centerIcon" style="
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 40px;
+        color: #5A57FF;">
+        <i class="fa fa-shopping-cart"></i> <!-- FontAwesome Icon -->
+      </div>
 
       <!-- Product Labels Below Pie Chart -->
       <div id="pieChartLabels" style="margin-top: 20px; text-align: center; font-size: 12px; font-weight: bold;"></div>
@@ -285,24 +296,16 @@
         labels: chartLabels,
         legend: { show: false }, // Disable default legend
         colors: ['#5A57FF', '#0DC27B', '#E3E5E5'], // Adjust colors
-        // dataLabels: {
-        //   // enabled: true,
-        //   // // formatter: function (val) {
-        //   // //   return val.toFixed(1) + "%"; // Display as percentage
-        //   // // },
-        //   style: {
-        //     fontSize: '10px',
-        //     fontWeight: 'bold',
-        //     colors: ["#333"]
-        //   }
-        // },
+        dataLabels: {
+          enabled: false, // Disable percentage in the donut
+        },
         tooltip: {
           y: {
             formatter: function (val) {
               return "₱ " + val.toFixed(2); // Show values in currency
             }
           }
-        }
+        },
       };
 
       // Render the pie chart
@@ -325,6 +328,8 @@
         labelsContainer.appendChild(labelDiv);
       });
     </script>
+    <!-- FontAwesome for Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   </div>
 </div>
 
