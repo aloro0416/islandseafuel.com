@@ -305,13 +305,14 @@
             }
           },
           title: {
-            text: '',
-            text: '<br>Sales Distribution by Product',
-            floating: true,
-            offsetY: 330,
-            align: 'center',
+            text: 'Sales Distribution by Product',
+            floating: false,  // This should be false so the title is properly aligned at the bottom
+            offsetY: 40,  // This will give some space between the chart and the title
+            align: 'center',  // This centers the title horizontally
             style: {
-              color: '#444'
+              color: '#444',
+              fontSize: '16px',  // Font size of the title
+              fontWeight: 'bold'  // Bold style for the title
             }
           }
         };
