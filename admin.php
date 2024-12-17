@@ -290,6 +290,18 @@
         chartData.push(salesSummary[product]);
       }
 
+      // Generate colors dynamically based on the number of products
+      function generateColors(count) {
+        var colors = [];
+        var colorPalette = ['#5A57FF', '#0DC27B', '#E3E5E5', '#FF6F61', '#F7B731', '#FF6347', '#2D9CDB', '#56CCF2', '#BB6BD9', '#FDCB82'];
+        for (var i = 0; i < count; i++) {
+          colors.push(colorPalette[i % colorPalette.length]);
+        }
+        return colors;
+      }
+
+      var colors = generateColors(chartLabels.length); // Get the color palette for the number of products
+
       // Pie chart options
       var options = {
         series: chartData,
@@ -299,7 +311,7 @@
         },
         labels: chartLabels,
         legend: { show: false }, // Disable default legend
-        colors: ['#5A57FF', '#0DC27B', '#E3E5E5'], // Adjust colors
+        colors: colors, // Use dynamically generated colors
         dataLabels: {
           enabled: false, // Disable percentage in the donut
         },
