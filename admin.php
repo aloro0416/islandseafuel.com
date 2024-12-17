@@ -246,9 +246,9 @@
     <div class="row">
 
     <div class="col">
-      <div class="panel panel-box clearfix" style="padding: 10px;">
+      <div class="panel panel-box clearfix" style="padding: 10px; margin-bottom: 20px;">
         <!-- Pie Chart -->
-        <div id="pieChart"></div>
+        <div id="pieChart" style="padding-bottom: 20px;"></div>
       </div>
 
       <script>
@@ -289,7 +289,7 @@
           dataLabels: {
             enabled: true,
             formatter: function(val) {
-              return val.toFixed(2) + "% " ;  // Format the values as currency
+              return val.toFixed(2) + "% " ;  // Format the values as percentage
             },
             style: {
               fontSize: '12px',
@@ -305,17 +305,17 @@
             }
           },
           title: {
-              text: 'Sales Distribution by Product',
-              floating: true,
-              offsetY: 335,
-              align: 'center',
-              style: {
-                color: '#444',        // Font color
-                fontSize: '10px',     // Font size
-                fontWeight: 'bold',   // Font weight (e.g., 'normal', 'bold', or numeric like 600)
-                fontFamily: 'Arial, sans-serif' // Font family
-              }
+            text: 'Sales Distribution by Product',
+            floating: true,
+            offsetY: 360,  // Adjust the offset to create space below the chart
+            align: 'center',
+            style: {
+              color: '#444',        // Font color
+              fontSize: '10px',     // Font size
+              fontWeight: 'bold',   // Font weight (e.g., 'normal', 'bold', or numeric like 600)
+              fontFamily: 'Arial, sans-serif' // Font family
             }
+          }
         };
 
         // Render the pie chart
@@ -323,7 +323,6 @@
         chart.render();
       </script>
     </div>
-
 
   <div class="row">
   <div class="col-md-4">
