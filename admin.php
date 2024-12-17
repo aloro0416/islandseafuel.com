@@ -305,7 +305,8 @@
             }
           },
           title: {
-            text: 'Sales Distribution by Product',
+            text: '',
+            text: '<br>Sales Distribution by Product',
             floating: true,
             offsetY: 330,
             align: 'center',
