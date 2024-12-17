@@ -289,7 +289,7 @@
           dataLabels: {
             enabled: true,
             formatter: function(val) {
-              return "% " + val.toFixed(2);  // Format the values as currency
+              return val.toFixed(2) + "% " ;  // Format the values as currency
             },
             style: {
               fontSize: '12px',
