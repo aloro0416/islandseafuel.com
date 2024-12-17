@@ -193,237 +193,54 @@
         $dec = (int) $j['dece'];
         ?>
 
-      <div class="row">
-        <div class="col">
+    <div class="row">
+      <div class="col">
         <div class="panel panel-box clearfix" style="padding: 10px;">
-        <div id="Hchart"></div>
+          <!-- Second Chart: Line Chart -->
+          <div id="lineChart"></div>
         </div>
 
-        
+        <script>
+          var options = {
+            series: [
+              {
+                name: "Total Sales",
+                data: [<?=$january?>, <?=$febuary?>, <?=$march?>, <?=$april?>, <?=$may?>, <?=$june?>, <?=$july?>, <?=$aug?>, <?=$sept?>, <?=$oct?>, <?=$nov?>, <?=$dec?>]
+              },
+              {
+                name: "Premium",
+                data: <?= $product_sales_json ?>  // Product sales data for Premium
+              },
+              {
+                name: "Diesel",
+                data: <?= $product_sales_json_2 ?>  // Product sales data for Diesel
+              },
+              {
+                name: "Super93",
+                data: <?= $product_sales_json_3 ?>  // Product sales data for Super93
+              }
+            ],
+            chart: {
+              height: 350,
+              type: 'line',
+            },
+            xaxis: {
+              categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            },
+            title: {
+              text: 'Sales by Month',
+              align: 'left'
+            },
+            stroke: {
+              curve: 'smooth'
+            },
+          };
 
-          <script>
-            var options = {
-              series: [
-                    {
-                        name: "Total Sales",
-                        data: [<?=$january?>, <?= $febuary?>, <?= $march?>, <?= $april?>, <?= $may?>, <?= $june?>, <?= $july?>, <?= $aug?>, <?= $sept?>, <?= $oct?>, <?= $nov?>, <?= $dec?>]
-                    },
-                    {
-                        name: "Premium",
-                        data: <?= $product_sales_json ?>  // PHP variable for product sales data
-                    },
-                    {
-                        name: "Diesel",
-                        data: <?= $product_sales_json_2 ?>  // PHP variable for product sales data
-                    }
-		      // START COPY HERE!
-		      ,
-                    {
-                        name: "Super93",
-                        data: <?= $product_sales_json_3 ?>  // PHP variable for product sales data
-                    }
-		      // END COPY!
-		    
-		    // PASTE IT HERE!
-		      
-                ],
-          chart: {
-          height: 350,
-          type: 'line',
-          zoom: {
-            enabled: false
-          }
-        },
-        dataLabels: {
-          enabled: false
-        },
-        stroke: {
-          curve: 'straight'
-        },
-        title: {
-          text: 'Sales by Month',
-          align: 'left'
-        },
-        grid: {
-          row: {
-            colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-            opacity: 0.5
-          },
-        },
-        xaxis: {
-          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        }
-        };
-
-        var chart = new ApexCharts(document.querySelector("#Hchart"), options);
-        chart.render();
-      
-          </script>
-        </div>
+          var chart2 = new ApexCharts(document.querySelector("#lineChart"), options);
+          chart2.render();
+        </script>
       </div>
-
-      <div class="row">
-          <div class="col">
-            <div class="panel panel-box clearfix" style="padding: 10px;">
-              <div id="Hchart"></div>
-            </div>
-
-            <script>
-              var options = {
-                series: [
-                  <?=$january?>, <?= $febuary?>, <?= $march?>, <?= $april?>, <?= $may?>, <?= $june?>, <?= $july?>, <?= $aug?>, <?= $sept?>, <?= $oct?>, <?= $nov?>, <?= $dec?>,
-                  <?= $product_sales_json ?>,  // Product sales data for Premium
-                  <?= $product_sales_json_2 ?>, // Product sales data for Diesel
-                  <?= $product_sales_json_3 ?>  // Product sales data for Super93
-                ],
-                chart: {
-                  height: 350,
-                  type: 'pie',
-                },
-                labels: [
-                  'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',
-                  'Premium', 'Diesel', 'Super93'
-                ],
-                dataLabels: {
-                  enabled: true,
-                  formatter: function(val) {
-                    return "₱ " + val.toFixed(2);  // Format the values with currency
-                  },
-                  style: {
-                    fontSize: '12px',
-                    colors: ["#304758"]
-                  }
-                },
-                tooltip: {
-                  enabled: true,
-                  y: {
-                    formatter: function(val) {
-                      return "₱ " + val.toFixed(2);  // Tooltip formatting with currency
-                    }
-                  }
-                },
-                title: {
-                  text: 'Sales Distribution',
-                  floating: true,
-                  offsetY: 330,
-                  align: 'center',
-                  style: {
-                    color: '#444'
-                  }
-                }
-              };
-
-              var chart = new ApexCharts(document.querySelector("#Hchart"), options);
-              chart.render();
-            </script>
-          </div><div class="row">
-  <div class="col">
-    <div class="panel panel-box clearfix" style="padding: 10px;">
-      <!-- First Chart: Pie Chart -->
-      <div id="pieChart"></div>
     </div>
-    
-    <script>
-      var options = {
-        series: [
-          <?=$january?>, <?=$febuary?>, <?=$march?>, <?=$april?>, <?=$may?>, <?=$june?>, <?=$july?>, <?=$aug?>, <?=$sept?>, <?=$oct?>, <?=$nov?>, <?=$dec?>,
-          <?= $product_sales_json ?>,  // Product sales data for Premium
-          <?= $product_sales_json_2 ?>, // Product sales data for Diesel
-          <?= $product_sales_json_3 ?>  // Product sales data for Super93
-        ],
-        chart: {
-          height: 350,
-          type: 'pie',
-        },
-        labels: [
-          'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',
-          'Premium', 'Diesel', 'Super93'
-        ],
-        dataLabels: {
-          enabled: true,
-          formatter: function(val) {
-            return "₱ " + val.toFixed(2);  // Format the values with currency
-          },
-          style: {
-            fontSize: '12px',
-            colors: ["#304758"]
-          }
-        },
-        tooltip: {
-          enabled: true,
-          y: {
-            formatter: function(val) {
-              return "₱ " + val.toFixed(2);  // Tooltip formatting with currency
-            }
-          }
-        },
-        title: {
-          text: 'Sales Distribution',
-          floating: true,
-          offsetY: 330,
-          align: 'center',
-          style: {
-            color: '#444'
-          }
-        }
-      };
-
-      var chart = new ApexCharts(document.querySelector("#pieChart"), options);
-      chart.render();
-    </script>
-  </div>
-</div>
-
-<!-- Second Chart: Line Chart (if needed) -->
-<div class="row">
-  <div class="col">
-    <div class="panel panel-box clearfix" style="padding: 10px;">
-      <!-- Second Chart: Line Chart -->
-      <div id="lineChart"></div>
-    </div>
-
-    <script>
-      var options = {
-        series: [
-          {
-            name: "Total Sales",
-            data: [<?=$january?>, <?=$febuary?>, <?=$march?>, <?=$april?>, <?=$may?>, <?=$june?>, <?=$july?>, <?=$aug?>, <?=$sept?>, <?=$oct?>, <?=$nov?>, <?=$dec?>]
-          },
-          {
-            name: "Premium",
-            data: <?= $product_sales_json ?>  // Product sales data for Premium
-          },
-          {
-            name: "Diesel",
-            data: <?= $product_sales_json_2 ?>  // Product sales data for Diesel
-          },
-          {
-            name: "Super93",
-            data: <?= $product_sales_json_3 ?>  // Product sales data for Super93
-          }
-        ],
-        chart: {
-          height: 350,
-          type: 'line',
-        },
-        xaxis: {
-          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        },
-        title: {
-          text: 'Sales by Month',
-          align: 'left'
-        },
-        stroke: {
-          curve: 'smooth'
-        },
-      };
-
-      var chart2 = new ApexCharts(document.querySelector("#lineChart"), options);
-      chart2.render();
-    </script>
-  </div>
-</div>
-
       </div>
 
 
