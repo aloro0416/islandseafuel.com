@@ -192,6 +192,7 @@
         $j = mysqli_fetch_assoc($j_res);
         $dec = (int) $j['dece'];
         ?>
+
       <div class="row">
         <div class="col">
         <div class="panel panel-box clearfix" style="padding: 10px;">
@@ -229,6 +230,75 @@
           chart: {
           height: 350,
           type: 'line',
+          zoom: {
+            enabled: false
+          }
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          curve: 'straight'
+        },
+        title: {
+          text: 'Sales by Month',
+          align: 'left'
+        },
+        grid: {
+          row: {
+            colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+            opacity: 0.5
+          },
+        },
+        xaxis: {
+          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#Hchart"), options);
+        chart.render();
+      
+          </script>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+        <div class="panel panel-box clearfix" style="padding: 10px;">
+        <div id="Hchart"></div>
+        </div>
+
+        
+
+          <script>
+            var options = {
+              series: [
+                    {
+                        name: "Total Sales",
+                        data: [<?=$january?>, <?= $febuary?>, <?= $march?>, <?= $april?>, <?= $may?>, <?= $june?>, <?= $july?>, <?= $aug?>, <?= $sept?>, <?= $oct?>, <?= $nov?>, <?= $dec?>]
+                    },
+                    {
+                        name: "Premium",
+                        data: <?= $product_sales_json ?>  // PHP variable for product sales data
+                    },
+                    {
+                        name: "Diesel",
+                        data: <?= $product_sales_json_2 ?>  // PHP variable for product sales data
+                    }
+		      // START COPY HERE!
+		      ,
+                    {
+                        name: "Super93",
+                        data: <?= $product_sales_json_3 ?>  // PHP variable for product sales data
+                    }
+		      // END COPY!
+		    
+		    // PASTE IT HERE!
+		      
+                ],
+          chart: {
+          height: 350,
+          type: 'pei',
           zoom: {
             enabled: false
           }
