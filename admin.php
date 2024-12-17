@@ -243,7 +243,7 @@
   </div>
 
   <!-- Pie Chart -->
-  <div class="col-md-8">
+  <div class="col-md-2">
     <div class="panel panel-box clearfix" style="padding: 10px;">
       <div id="pieChart"></div>
       <!-- Product Labels Below Pie Chart -->
