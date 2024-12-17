@@ -243,17 +243,20 @@
   </div>
 
   <!-- Pie Chart -->
-  <div class="col-md-2">
-    <div class="panel panel-box clearfix" style="padding: 10px;">
+  <div class="col-md-4">
+    <div class="panel panel-box clearfix" style="padding: 10px; text-align: center;">
+      <!-- Pie Chart -->
       <div id="pieChart"></div>
+
       <!-- Product Labels Below Pie Chart -->
-      <div id="pieChartLabels" style="text-align: center; margin-top: 20px;"></div>
+      <div id="pieChartLabels" style="margin-top: 20px; text-align: center; font-size: 12px; font-weight: bold;"></div>
     </div>
     <script>
       var recentSales = <?php echo json_encode($recent_sales); ?>;
 
+      // Summarize sales data
       var salesSummary = {};
-      recentSales.forEach(function(sale) {
+      recentSales.forEach(function (sale) {
         var productName = sale.name;
         var saleAmount = parseFloat(sale.price);
 
@@ -264,6 +267,7 @@
         }
       });
 
+      // Prepare the data for the pie chart
       var chartData = [];
       var chartLabels = [];
       for (var product in salesSummary) {
@@ -271,53 +275,53 @@
         chartData.push(salesSummary[product]);
       }
 
+      // Pie chart options
       var options = {
         series: chartData,
         chart: {
-          height: 350, // Match the height of the line chart
-          type: 'pie',
+          height: 250, // Smaller height to match design
+          type: 'donut',
         },
         labels: chartLabels,
+        legend: { show: false }, // Disable default legend
+        colors: ['#5A57FF', '#0DC27B', '#E3E5E5'], // Adjust colors
         dataLabels: {
           enabled: true,
-          formatter: function(val) {
-            return val.toFixed(2) + "% ";
+          formatter: function (val) {
+            return val.toFixed(1) + "%"; // Display as percentage
           },
           style: {
             fontSize: '10px',
-            colors: ["#304758"]
+            fontWeight: 'bold',
+            colors: ["#333"]
           }
         },
         tooltip: {
-          enabled: true,
           y: {
-            formatter: function(val) {
-              return "₱ " + val.toFixed(2);
+            formatter: function (val) {
+              return "₱ " + val.toFixed(2); // Show values in currency
             }
-          }
-        },
-        title: {
-          text: 'Sales Distribution by Product',
-          align: 'center',
-          style: {
-            color: '#444',
-            fontSize: '12px',
-            fontWeight: 'bold',
-            fontFamily: 'Arial, sans-serif'
           }
         }
       };
 
+      // Render the pie chart
       var chart = new ApexCharts(document.querySelector("#pieChart"), options);
       chart.render();
 
       // Render product labels below the pie chart
       var labelsContainer = document.querySelector("#pieChartLabels");
-      chartLabels.forEach(function(label, index) {
-        var color = chart.w.config.colors[index]; // Get the color for the current label
+      chartLabels.forEach(function (label, index) {
+        var color = options.colors[index % options.colors.length]; // Ensure color matches
+        var percentage = ((chartData[index] / chartData.reduce((a, b) => a + b)) * 100).toFixed(1);
+
+        // Add the legend-like labels
         var labelDiv = document.createElement("div");
         labelDiv.style.margin = "5px 0";
-        labelDiv.innerHTML = `<span style="display: inline-block; width: 15px; height: 15px; background-color: ${color}; margin-right: 5px;"></span>${label}`;
+        labelDiv.innerHTML = `
+          <span style="display: inline-block; width: 12px; height: 12px; background-color: ${color}; margin-right: 5px; border-radius: 50%;"></span>
+          ${label}: <strong>${percentage}%</strong>
+        `;
         labelsContainer.appendChild(labelDiv);
       });
     </script>
