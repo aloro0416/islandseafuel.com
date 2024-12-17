@@ -373,56 +373,56 @@
       </div>
     </div>
 
-  <!-- Pie chart displaying the categories -->
-  <div class="col-md-8" style="margin-top: 20px;">
-    <div class="panel panel-box clearfix" style="padding: 10px;">
-      <div id="chart2"></div> <!-- Chart container for the pie chart -->
-      <script>
-        // Prepare data for the pie chart (category counts)
-        var categoryNames = <?php echo json_encode(array_column($all_categories, 'name')); ?>; // Get all category names
-        var categoryCounts = Array(categoryNames.length).fill(1); // We assume each category has 1 count (you can customize this based on actual counts)
+    <!-- Separate Pie Chart for Category Distribution -->
+    <div class="col-md-8" style="margin-top: 20px;">
+      <div class="panel panel-box clearfix" style="padding: 10px;">
+        <div id="category-pie-chart"></div> <!-- Chart container for the pie chart -->
+        <script>
+          // Prepare data for the pie chart (category counts)
+          var categoryNames = <?php echo json_encode(array_column($all_categories, 'name')); ?>; // Get all category names
+          var categoryCounts = Array(categoryNames.length).fill(1); // Assuming each category has 1 count (you can customize this based on actual counts)
 
-        var options = {
-          series: categoryCounts,  // Use the counts for the pie chart series
-          chart: {
-            height: 350,
-            type: 'pie',
-          },
-          labels: categoryNames,  // Use category names as labels for the pie chart
-          dataLabels: {
-            enabled: true,
-            formatter: function (val) {
-              return val + " category";  // Optional: Display the count for each category
+          var options = {
+            series: categoryCounts,  // Use the counts for the pie chart series
+            chart: {
+              height: 350,
+              type: 'pie',  // Pie chart type
             },
-            style: {
-              fontSize: '12px',
-              colors: ["#304758"]
-            }
-          },
-          tooltip: {
-            enabled: true,
-            y: {
+            labels: categoryNames,  // Use category names as labels for the pie chart
+            dataLabels: {
+              enabled: true,
               formatter: function (val) {
-                return val + " category";  // Tooltip will show the count of categories
+                return val + " category";  // Optional: Display the count for each category
+              },
+              style: {
+                fontSize: '12px',
+                colors: ["#304758"]
+              }
+            },
+            tooltip: {
+              enabled: true,
+              y: {
+                formatter: function (val) {
+                  return val + " category";  // Tooltip will show the count of categories
+                }
+              }
+            },
+            title: {
+              text: 'Category Distribution',
+              floating: true,
+              offsetY: 330,
+              align: 'center',
+              style: {
+                color: '#444'
               }
             }
-          },
-          title: {
-            text: 'Category Distribution',
-            floating: true,
-            offsetY: 330,
-            align: 'center',
-            style: {
-              color: '#444'
-            }
-          }
-        };
+          };
 
-        var chart = new ApexCharts(document.querySelector("#chart2"), options);
-        chart.render();
-      </script>
+          var chart = new ApexCharts(document.querySelector("#category-pie-chart"), options);
+          chart.render();
+        </script>
+      </div>
     </div>
-  </div>
 
   <div class="row">
     <div class="col-md-6">
