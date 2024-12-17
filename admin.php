@@ -307,7 +307,7 @@
           title: {
             text: 'Sales Distribution by Product',
             floating: true,
-            offsetY: 360,  // Adjust the offset to create space below the chart
+            offsetY: 340,  // Adjust the offset to create space below the chart
             align: 'center',
             style: {
               color: '#444',        // Font color
