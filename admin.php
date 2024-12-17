@@ -378,7 +378,7 @@
         <div id="chart2"></div> <!-- Changed ID for the second chart -->
         <script>
           var options = {
-            series: [<?=$total_bought?>, <?=$total_sales?>],
+            series: [<?=$total_bought?>, <?=$total_sales?>, <?=$all_categories?>],
             chart: {
               height: 350,
               type: 'pie',
@@ -418,7 +418,6 @@
         </script>
       </div>
     </div>
-
 
   <div class="row">
     <div class="col-md-6">
