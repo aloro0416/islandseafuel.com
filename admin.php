@@ -13,20 +13,6 @@
  $products_sold   = find_higest_saleing_product('10');
  $recent_products = find_recent_product_added('5');
  $recent_sales    = find_recent_sale_added('5')
-$result = $conn->query($sql);
-
-$categories = [];
-$all_categories = [];
-
-if ($result->num_rows > 0) {
-  // Loop through the results and prepare the data for the pie chart
-  while($row = $result->fetch_assoc()) {
-      $categories[] = ['name' => $row['name'], 'total_sales' => $row['total_sales']];
-      $all_categories[] = $row['total_sales'];  // This array holds the sales values for the pie chart
-  }
-} else {
-  echo "No results found";
-}
 ?>
 <?php include_once('layouts/header.php'); ?>
 
@@ -401,52 +387,7 @@ if ($result->num_rows > 0) {
             </script>
             </div>
           </div>
-
-          <div class="col-md-8" style="margin-top: 20px;">
-            <div class="panel panel-box clearfix" style="padding: 10px;">
-              <div id="chart2"></div>
-              <script>
-                var options2 = {
-                  series: [<?php echo implode(',', $all_categories); ?>],  // Populate with sales data
-                  chart: {
-                    height: 350,
-                    type: 'pie',
-                  },
-                  labels: <?php echo json_encode(array_column($categories, 'name')); ?>,  // Category names
-                  dataLabels: {
-                    enabled: true,
-                    formatter: function (val) {
-                      return "₱ " + val.toFixed(2);  // Formatting the value to show currency
-                    },
-                    style: {
-                      fontSize: '12px',
-                      colors: ["#304758"]
-                    }
-                  },
-                  tooltip: {
-                    enabled: true,
-                    y: {
-                      formatter: function (val) {
-                        return "₱ " + val.toFixed(2);  // Formatting the tooltip to show currency
-                      }
-                    }
-                  },
-                  title: {
-                    text: 'CATEGORIES',
-                    floating: true,
-                    offsetY: 330,
-                    align: 'center',
-                    style: {
-                      color: '#444'
-                    }
-                  }
-                };
-
-                var chart2 = new ApexCharts(document.querySelector("#chart2"), options2);
-                chart2.render();
-              </script>
-            </div>
-          </div>
+          
         </div>
         
     </div>
