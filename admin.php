@@ -298,9 +298,9 @@
   </div>
   <div class="col-md-8" style="margin-bottom: 20px;"> <!-- Added margin-bottom for spacing -->
       <div class="panel panel-box clearfix" style="padding: 10px;">
-        <div id="chart1"></div> <!-- Changed ID for the first chart -->
+        <div id="chart1"></div> <!-- First Chart -->
         <script>
-          var options = {
+          var options1 = {
             series: [{
               name: 'Amount',
               data: [<?=$total_bought?>, <?=$total_sales?>]
@@ -337,9 +337,6 @@
               },
               axisTicks: {
                 show: false
-              },
-              tooltip: {
-                enabled: true,
               }
             },
             yaxis: {
@@ -367,22 +364,23 @@
             }
           };
 
-          var chart = new ApexCharts(document.querySelector("#chart1"), options);
-          chart.render();
+          var chart1 = new ApexCharts(document.querySelector("#chart1"), options1);
+          chart1.render();
         </script>
       </div>
+    </div>
 
     <div class="col-md-8" style="margin-top: 20px;"> <!-- Added margin-top for spacing -->
       <div class="panel panel-box clearfix" style="padding: 10px;">
-        <div id="chart2"></div> <!-- Changed ID for the second chart -->
+        <div id="chart2"></div> <!-- Second Chart -->
         <script>
-          var options = {
-            series: [<?=$all_categories?>,],
+          var options2 = {
+            series: [<?php echo $all_categories; ?>],  // Ensure $all_categories is an array of numeric values.
             chart: {
               height: 350,
               type: 'pie',
             },
-            labels: ['Available Gas', 'Sales'],
+            labels: <?php echo json_encode(array_column($categories, 'name')); ?>,  // Assuming $categories is an array with category names
             dataLabels: {
               enabled: true,
               formatter: function (val) {
@@ -402,7 +400,7 @@
               }
             },
             title: {
-              text: 'CATEGORIE',
+              text: 'CATEGORIES',
               floating: true,
               offsetY: 330,
               align: 'center',
@@ -412,12 +410,12 @@
             }
           };
 
-          var chart = new ApexCharts(document.querySelector("#chart2"), options);
-          chart.render();
+          var chart2 = new ApexCharts(document.querySelector("#chart2"), options2);
+          chart2.render();
         </script>
       </div>
     </div>
-  </div>
+
   <div class="row">
     <div class="col-md-6">
       <div class="panel panel-default">
