@@ -305,14 +305,17 @@
             }
           },
           title: {
-            text: 'Sales Distribution by Product',
-            floating: true,
-            offsetY: 335,
-            align: 'center',
-            style: {
-              color: '#444'
+              text: 'Sales Distribution by Product',
+              floating: true,
+              offsetY: 335,
+              align: 'center',
+              style: {
+                color: '#444',        // Font color
+                fontSize: '16px',     // Font size
+                fontWeight: 'bold',   // Font weight (e.g., 'normal', 'bold', or numeric like 600)
+                fontFamily: 'Arial, sans-serif' // Font family
+              }
             }
-          }
         };
 
         // Render the pie chart
