@@ -13,6 +13,29 @@
  $products_sold   = find_higest_saleing_product('10');
  $recent_products = find_recent_product_added('5');
  $recent_sales    = find_recent_sale_added('5')
+ // SQL query to get the sum of sales or quantity per category (adjust query as needed)
+$sql = "
+SELECT categories.name, SUM(sales.price * sales.qty) AS total_sales
+FROM categories
+LEFT JOIN products ON categories.id = products.categorie_id
+LEFT JOIN sales ON products.id = sales.product_id
+GROUP BY categories.name;
+";
+
+$result = $conn->query($sql);
+
+$categories = [];
+$all_categories = [];
+
+if ($result->num_rows > 0) {
+  // Loop through the results and prepare the data for the pie chart
+  while($row = $result->fetch_assoc()) {
+      $categories[] = ['name' => $row['name'], 'total_sales' => $row['total_sales']];
+      $all_categories[] = $row['total_sales'];  // This array holds the sales values for the pie chart
+  }
+} else {
+  echo "No results found";
+}
 ?>
 <?php include_once('layouts/header.php'); ?>
 
@@ -388,51 +411,51 @@
             </div>
           </div>
 
-          <div class="col-md-8" style="margin-top: 20px;"> <!-- Added margin-top for spacing -->
-              <div class="panel panel-box clearfix" style="padding: 10px;">
-                <div id="chart2"></div> <!-- Second Chart -->
-                <script>
-                  var options2 = {
-                    series: [<?php echo $all_categories; ?>],  // Ensure $all_categories is an array of numeric values.
-                    chart: {
-                      height: 350,
-                      type: 'pie',
+          <div class="col-md-8" style="margin-top: 20px;">
+            <div class="panel panel-box clearfix" style="padding: 10px;">
+              <div id="chart2"></div>
+              <script>
+                var options2 = {
+                  series: [<?php echo implode(',', $all_categories); ?>],  // Populate with sales data
+                  chart: {
+                    height: 350,
+                    type: 'pie',
+                  },
+                  labels: <?php echo json_encode(array_column($categories, 'name')); ?>,  // Category names
+                  dataLabels: {
+                    enabled: true,
+                    formatter: function (val) {
+                      return "₱ " + val.toFixed(2);  // Formatting the value to show currency
                     },
-                    labels: <?php echo json_encode(array_column($categories, 'name')); ?>,  // Assuming $categories is an array with category names
-                    dataLabels: {
-                      enabled: true,
+                    style: {
+                      fontSize: '12px',
+                      colors: ["#304758"]
+                    }
+                  },
+                  tooltip: {
+                    enabled: true,
+                    y: {
                       formatter: function (val) {
-                        return "₱ " + val;
-                      },
-                      style: {
-                        fontSize: '12px',
-                        colors: ["#304758"]
-                      }
-                    },
-                    tooltip: {
-                      enabled: true,
-                      y: {
-                        formatter: function (val) {
-                          return "₱ " + val;
-                        }
-                      }
-                    },
-                    title: {
-                      text: 'CATEGORIES',
-                      floating: true,
-                      offsetY: 330,
-                      align: 'center',
-                      style: {
-                        color: '#444'
+                        return "₱ " + val.toFixed(2);  // Formatting the tooltip to show currency
                       }
                     }
-                  };
+                  },
+                  title: {
+                    text: 'CATEGORIES',
+                    floating: true,
+                    offsetY: 330,
+                    align: 'center',
+                    style: {
+                      color: '#444'
+                    }
+                  }
+                };
 
-                  var chart2 = new ApexCharts(document.querySelector("#chart2"), options2);
-                  chart2.render();
-                </script>
-              </div>
+                var chart2 = new ApexCharts(document.querySelector("#chart2"), options2);
+                chart2.render();
+              </script>
             </div>
+          </div>
         </div>
         
     </div>
