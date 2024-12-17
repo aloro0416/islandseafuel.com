@@ -311,7 +311,6 @@
             align: 'center',
             style: {
               color: '#444'
-              top: '20px'
             }
           }
         };
