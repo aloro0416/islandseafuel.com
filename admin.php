@@ -371,7 +371,6 @@
           chart.render();
         </script>
       </div>
-    </div>
     <div class="col-md-8" style="margin-top: 20px;"> <!-- Added margin-top for spacing -->
       <div class="panel panel-box clearfix" style="padding: 10px;">
         <div id="chart2"></div> <!-- Changed ID for the second chart -->
