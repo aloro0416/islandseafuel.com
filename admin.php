@@ -296,18 +296,18 @@
               colors: ["#304758"]
             }
           },
-          // tooltip: {
-          //   enabled: true,
-          //   y: {
-          //     formatter: function(val) {
-          //       return "₱ " + val.toFixed(2);  // Tooltip formatting with currency
-          //     }
-          //   }
-          // },
+          tooltip: {
+            enabled: true,
+            y: {
+              formatter: function(val) {
+                return "₱ " + val.toFixed(2);  // Tooltip formatting with currency
+              }
+            }
+          },
           title: {
             text: 'Sales Distribution by Product',
             floating: true,
-            offsetY: 345,
+            offsetY: 335,
             align: 'center',
             style: {
               color: '#444'
