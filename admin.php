@@ -247,7 +247,7 @@
     <div class="panel panel-box clearfix" style="padding: 10px; text-align: center; position: relative;">
       
       <!-- Title Above the Donut Chart -->
-      <h3 style="font-size: 16px; font-weight: bold; margin-bottom: 10px;">Sales Distribution</h3>
+      <h3 style="font-size: 16px; font-weight: bold; margin-bottom: 10px;">Latest Sales Distribution</h3>
       
       <!-- Pie Chart -->
       <div id="pieChart" style="position: relative;"></div>
