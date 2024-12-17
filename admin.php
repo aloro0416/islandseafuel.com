@@ -285,17 +285,17 @@
         labels: chartLabels,
         legend: { show: false }, // Disable default legend
         colors: ['#5A57FF', '#0DC27B', '#E3E5E5'], // Adjust colors
-        dataLabels: {
-          // enabled: true,
-          // // formatter: function (val) {
-          // //   return val.toFixed(1) + "%"; // Display as percentage
-          // // },
-          style: {
-            fontSize: '10px',
-            fontWeight: 'bold',
-            colors: ["#333"]
-          }
-        },
+        // dataLabels: {
+        //   // enabled: true,
+        //   // // formatter: function (val) {
+        //   // //   return val.toFixed(1) + "%"; // Display as percentage
+        //   // // },
+        //   style: {
+        //     fontSize: '10px',
+        //     fontWeight: 'bold',
+        //     colors: ["#333"]
+        //   }
+        // },
         tooltip: {
           y: {
             formatter: function (val) {
