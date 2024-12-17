@@ -311,7 +311,7 @@
               align: 'center',
               style: {
                 color: '#444',        // Font color
-                fontSize: '16px',     // Font size
+                fontSize: '10px',     // Font size
                 fontWeight: 'bold',   // Font weight (e.g., 'normal', 'bold', or numeric like 600)
                 fontFamily: 'Arial, sans-serif' // Font family
               }
