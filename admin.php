@@ -306,8 +306,8 @@
           },
           title: {
             text: 'Sales Distribution by Product',
-            floating: true,
-            offsetY: 20,  // Reduced offsetY to move the title closer to the chart
+            floating: false,  // Set to false to make the title a part of the chart's layout
+            offsetY: 50,  // Adjust this value to position the title further from the chart
             align: 'center',
             style: {
               color: '#444',
@@ -322,6 +322,7 @@
         chart.render();
       </script>
     </div>
+
 
 
   <div class="row">
