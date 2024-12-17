@@ -246,6 +246,7 @@
   <div class="col-md-4">
     <div class="panel panel-box clearfix" style="padding: 10px;">
       <div id="pieChart"></div>
+      <div id="pieChartLabels" style="text-align: center; margin-top: 10px;"></div>
     </div>
     <script>
       var recentSales = <?php echo json_encode($recent_sales); ?>;
@@ -272,7 +273,7 @@
       var options = {
         series: chartData,
         chart: {
-          height: 250,  // Smaller height for the pie chart
+          height: 350,  // Match the height of the line chart
           type: 'pie',
         },
         labels: chartLabels,
@@ -297,7 +298,7 @@
         title: {
           text: 'Sales Distribution by Product',
           floating: true,
-          offsetY: 300,
+          offsetY: 330, // Adjust for title position
           align: 'center',
           style: {
             color: '#444',
@@ -310,9 +311,20 @@
 
       var chart = new ApexCharts(document.querySelector("#pieChart"), options);
       chart.render();
+
+      // Add product names below the pie chart
+      var labelsHtml = chartLabels
+        .map(function(label, index) {
+          return `<span style="display: inline-block; margin: 0 5px; font-size: 12px; color: #444;">
+                    <strong>${label}</strong>
+                  </span>`;
+        })
+        .join(" ");
+      document.getElementById("pieChartLabels").innerHTML = labelsHtml;
     </script>
   </div>
 </div>
+
 
 
   <div class="row">
