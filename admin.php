@@ -4,8 +4,7 @@
   // Checkin What level user has permission to view this page
    page_require_level(1);
 ?>
-<!-- ApexCharts Library -->
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <?php
  $c_categorie     = count_by_id('categories');
@@ -195,6 +194,7 @@
         $dec = (int) $j['dece'];
         ?>
 
+
     <div class="row">
       <div class="col">
         <div class="panel panel-box clearfix" style="padding: 10px;">
@@ -301,9 +301,6 @@
         </script>
       </div>
     </div>
-      </div>
-
-
 
   <div class="row">
   <div class="col-md-4">
