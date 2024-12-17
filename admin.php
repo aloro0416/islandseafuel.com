@@ -296,143 +296,129 @@
   </div>
  </div>
   </div>
-        <div class="col-md-8">
-          <div class="panel panel-box clearfix" style="padding: 10px;">
-            <div id="chart"></div>
-            <script>
-              var options = {
-                series: [{
-                name: 'Amount',
-                data: [<?=$total_bought?>, <?=$total_sales?>]
-              }],
-                chart: {
-                height: 350,
-                type: 'bar',
+  <div class="col-md-8" style="margin-bottom: 20px;"> <!-- Added margin-bottom for spacing -->
+      <div class="panel panel-box clearfix" style="padding: 10px;">
+        <div id="chart1"></div> <!-- Changed ID for the first chart -->
+        <script>
+          var options = {
+            series: [{
+              name: 'Amount',
+              data: [<?=$total_bought?>, <?=$total_sales?>]
+            }],
+            chart: {
+              height: 350,
+              type: 'bar',
+            },
+            plotOptions: {
+              bar: {
+                columnWidth: '45%',
+                borderRadius: 10,
+                dataLabels: {
+                  position: 'top',
+                },
+              }
+            },
+            dataLabels: {
+              enabled: true,
+              formatter: function (val) {
+                return "₱ " + val;
               },
-              plotOptions: {
-                bar: {
-                  columnWidth: '45%',
-                  borderRadius: 10,
-                  dataLabels: {
-                    position: 'top', // top, center, bottom
-                  },
-                }
+              offsetY: -20,
+              style: {
+                fontSize: '12px',
+                colors: ["#304758"]
+              }
+            },
+            xaxis: {
+              categories: ["Available Gas", "Sales"],
+              position: 'top',
+              axisBorder: {
+                show: false
               },
-              dataLabels: {
+              axisTicks: {
+                show: false
+              },
+              tooltip: {
                 enabled: true,
+              }
+            },
+            yaxis: {
+              axisBorder: {
+                show: false
+              },
+              axisTicks: {
+                show: false,
+              },
+              labels: {
+                show: false,
                 formatter: function (val) {
                   return "₱ " + val;
-                },
-                offsetY: -20,
-                style: {
-                  fontSize: '12px',
-                  colors: ["#304758"]
-                }
-              },
-              
-              xaxis: {
-                categories: ["Available Gas", "Sales"],
-                position: 'top',
-                axisBorder: {
-                  show: false
-                },
-                axisTicks: {
-                  show: false
-                },
-                crosshairs: {
-                  fill: {
-                    type: 'gradient',
-                    gradient: {
-                      colorFrom: '#D8E3F0',
-                      colorTo: '#BED1E6',
-                      stops: [0, 100],
-                      opacityFrom: 0.4,
-                      opacityTo: 0.5,
-                    }
-                  }
-                },
-                tooltip: {
-                  enabled: true,
-                }
-              },
-              
-              yaxis: {
-                axisBorder: {
-                  show: false
-                },
-                axisTicks: {
-                  show: false,
-                },
-                labels: {
-                  show: false,
-                  formatter: function (val) {
-                    return "₱ " + val;
-                  }
-                }
-              
-              },
-              title: {
-                text: 'OVER ALL SALES',
-                floating: true,
-                offsetY: 330,
-                align: 'center',
-                style: {
-                  color: '#444'
                 }
               }
-              };
+            },
+            title: {
+              text: 'OVERALL SALES',
+              floating: true,
+              offsetY: 330,
+              align: 'center',
+              style: {
+                color: '#444'
+              }
+            }
+          };
 
-              var chart = new ApexCharts(document.querySelector("#chart"), options);
-              chart.render();
-            </script>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-8">
-          <div class="panel panel-box clearfix" style="padding: 10px;">
-            <div id="chart"></div>
-            <script>
-              var options = {
-                series: [<?=$total_bought?>, <?=$total_sales?>],
-                chart: {
-                  height: 350,
-                  type: 'pie', // Corrected to 'pie' from 'bar'
-                },
-                labels: ['Available Gas', 'Sales'], // Labels for the pie chart
-                dataLabels: {
-                  enabled: true,
-                  formatter: function (val) {
-                    return "₱ " + val; // Currency formatting for pie chart values
-                  },
-                  style: {
-                    fontSize: '12px',
-                    colors: ["#304758"]
-                  }
-                },
-                tooltip: {
-                  enabled: true,
-                  y: {
-                    formatter: function (val) {
-                      return "₱ " + val; // Tooltip currency format
-                    }
-                  }
-                },
-                title: {
-                  text: 'OVERALL SALES',
-                  floating: true,
-                  offsetY: 330,
-                  align: 'center',
-                  style: {
-                    color: '#444'
-                  }
+          var chart = new ApexCharts(document.querySelector("#chart1"), options);
+          chart.render();
+        </script>
+      </div>
+    </div>
+
+    <div class="col-md-8" style="margin-top: 20px;"> <!-- Added margin-top for spacing -->
+      <div class="panel panel-box clearfix" style="padding: 10px;">
+        <div id="chart2"></div> <!-- Changed ID for the second chart -->
+        <script>
+          var options = {
+            series: [<?=$total_bought?>, <?=$total_sales?>],
+            chart: {
+              height: 350,
+              type: 'pie',
+            },
+            labels: ['Available Gas', 'Sales'],
+            dataLabels: {
+              enabled: true,
+              formatter: function (val) {
+                return "₱ " + val;
+              },
+              style: {
+                fontSize: '12px',
+                colors: ["#304758"]
+              }
+            },
+            tooltip: {
+              enabled: true,
+              y: {
+                formatter: function (val) {
+                  return "₱ " + val;
                 }
-              };
+              }
+            },
+            title: {
+              text: 'OVERALL SALES',
+              floating: true,
+              offsetY: 330,
+              align: 'center',
+              style: {
+                color: '#444'
+              }
+            }
+          };
 
-              var chart = new ApexCharts(document.querySelector("#chart"), options);
-              chart.render();
-            </script>
-          </div>
-        </div>
+          var chart = new ApexCharts(document.querySelector("#chart2"), options);
+          chart.render();
+        </script>
+      </div>
+    </div>
+
 
   <div class="row">
     <div class="col-md-6">
