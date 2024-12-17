@@ -287,9 +287,9 @@
         colors: ['#5A57FF', '#0DC27B', '#E3E5E5'], // Adjust colors
         dataLabels: {
           enabled: true,
-          formatter: function (val) {
-            return val.toFixed(1) + "%"; // Display as percentage
-          },
+          // formatter: function (val) {
+          //   return val.toFixed(1) + "%"; // Display as percentage
+          // },
           style: {
             fontSize: '10px',
             fontWeight: 'bold',
