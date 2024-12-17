@@ -372,6 +372,66 @@
         </script>
       </div>
     </div>
+    <?php
+      // Assuming you fetch all categories from the database
+      $categories = fetch_all_categories(); // Replace with actual method to fetch categories
+
+      // Prepare data for pie chart: available gas and sales for each category
+      $category_data = [];
+      foreach ($categories as $category) {
+          $category_data[] = $category['value'];  // Assuming 'value' is the amount for each category
+      }
+
+      // Convert the data to a JSON string for JavaScript
+      $category_data_js = json_encode($category_data);
+      $category_labels_js = json_encode(array_column($categories, 'name'));
+    ?>
+  <div class="col-md-8" style="margin-top: 20px;"> <!-- Added margin-top for spacing -->
+    <div class="panel panel-box clearfix" style="padding: 10px;">
+      <div id="chart2"></div> <!-- Changed ID for the second chart -->
+      <script>
+        var options = {
+          series: <?php echo $category_data_js; ?>,  // Use the PHP array as JavaScript array
+          chart: {
+            height: 350,
+            type: 'pie',
+          },
+          labels: <?php echo $category_labels_js; ?>,  // Use the category names as labels
+          dataLabels: {
+            enabled: true,
+            formatter: function (val) {
+              return "₱ " + val;
+            },
+            style: {
+              fontSize: '12px',
+              colors: ["#304758"]
+            }
+          },
+          tooltip: {
+            enabled: true,
+            y: {
+              formatter: function (val) {
+                return "₱ " + val;
+              }
+            }
+          },
+          title: {
+            text: 'CATEGORIES',
+            floating: true,
+            offsetY: 330,
+            align: 'center',
+            style: {
+              color: '#444'
+            }
+          }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart2"), options);
+        chart.render();
+      </script>
+    </div>
+  </div>
+
 
   <div class="row">
     <div class="col-md-6">
