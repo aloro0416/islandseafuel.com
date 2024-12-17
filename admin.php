@@ -246,68 +246,81 @@
     <div class="row">
 
     <div class="col">
-        <div class="panel panel-box clearfix" style="padding: 10px;">
-          <!-- Second Chart: Pie Chart -->
-          <div id="pieChart"></div>
-        </div>
-
-        <script>
-          // Console log to debug PHP variables
-          console.log(<?=$january?>, <?=$febuary?>, <?=$march?>, <?=$april?>, <?=$may?>, <?=$june?>, <?=$july?>, <?=$aug?>, <?=$sept?>, <?=$oct?>, <?=$nov?>, <?=$dec?>);
-          console.log(<?= $product_sales_json ?>, <?= $product_sales_json_2 ?>, <?= $product_sales_json_3 ?>);
-
-          // Ensure all data arrays are correctly populated
-          var options = {
-            series: [
-              <?=$january?>, <?=$febuary?>, <?=$march?>, <?=$april?>, <?=$may?>, <?=$june?>, <?=$july?>, <?=$aug?>, <?=$sept?>, <?=$oct?>, <?=$nov?>, <?=$dec?>,
-              <?= $product_sales_json ?>,  // Product sales data for Premium
-              <?= $product_sales_json_2 ?>, // Product sales data for Diesel
-              <?= $product_sales_json_3 ?>  // Product sales data for Super93
-            ],
-            chart: {
-              height: 350,
-              type: 'pie', // Change the chart type to pie
-            },
-            labels: [
-              'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',
-              'Premium', 'Diesel', 'Super93'
-            ],
-            dataLabels: {
-              enabled: true,
-              formatter: function(val) {
-                return "₱ " + val.toFixed(2);  // Format the values with currency
-              },
-              style: {
-                fontSize: '12px',
-                colors: ["#304758"]
-              }
-            },
-            tooltip: {
-              enabled: true,
-              y: {
-                formatter: function(val) {
-                  return "₱ " + val.toFixed(2);  // Tooltip formatting with currency
-                }
-              }
-            },
-            title: {
-              text: 'Sales Distribution',
-              floating: true,
-              offsetY: 330,
-              align: 'center',
-              style: {
-                color: '#444'
-              }
-            }
-          };
-
-          // Render the chart
-          var chart2 = new ApexCharts(document.querySelector("#pieChart"), options);
-          chart2.render();
-        </script>
+      <div class="panel panel-box clearfix" style="padding: 10px;">
+        <!-- Pie Chart -->
+        <div id="pieChart"></div>
       </div>
 
+      <script>
+        // Prepare the sales data from the PHP variable $recent_sales
+        var recentSales = <?php echo json_encode($recent_sales); ?>;
+
+        // Summarize the sales by product
+        var salesSummary = {};
+        recentSales.forEach(function(sale) {
+          var productName = sale.name;  // Product name from the sale record
+          var saleAmount = parseFloat(sale.price);  // Sale amount as a number
+
+          // If the product already exists, add the sale amount to it
+          if (salesSummary[productName]) {
+            salesSummary[productName] += saleAmount;
+          } else {
+            // Otherwise, initialize the sale amount for this product
+            salesSummary[productName] = saleAmount;
+          }
+        });
+
+        // Prepare the data for the pie chart
+        var chartData = [];
+        var chartLabels = [];
+        for (var product in salesSummary) {
+          chartLabels.push(product);  // Product name
+          chartData.push(salesSummary[product]);  // Total sales for that product
+        }
+
+        // Options for the pie chart
+        var options = {
+          series: chartData,  // Total sales for each product
+          chart: {
+            height: 350,
+            type: 'pie',  // Pie chart type
+          },
+          labels: chartLabels,  // Product names as labels
+          dataLabels: {
+            enabled: true,
+            formatter: function(val) {
+              return "₱ " + val.toFixed(2);  // Format the values as currency
+            },
+            style: {
+              fontSize: '12px',
+              colors: ["#304758"]
+            }
+          },
+          tooltip: {
+            enabled: true,
+            y: {
+              formatter: function(val) {
+                return "₱ " + val.toFixed(2);  // Tooltip formatting with currency
+              }
+            }
+          },
+          title: {
+            text: 'Sales Distribution by Product',
+            floating: true,
+            offsetY: 330,
+            align: 'center',
+            style: {
+              color: '#444'
+            }
+          }
+        };
+
+        // Render the pie chart
+        var chart = new ApexCharts(document.querySelector("#pieChart"), options);
+        chart.render();
+      </script>
     </div>
+
 
   <div class="row">
   <div class="col-md-4">
