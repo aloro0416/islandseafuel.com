@@ -296,7 +296,7 @@
   </div>
  </div>
   </div>
-        <div class="col-md-8">
+        <!-- <div class="col-md-8">
           <div class="panel panel-box clearfix" style="padding: 10px;">
             <div id="chart"></div>
             <script>
@@ -388,7 +388,53 @@
             </div>
           </div>
           
-        </div>
+        </div> -->
+        <div class="col-md-8">
+  <div class="panel panel-box clearfix" style="padding: 10px;">
+    <div id="chart"></div>
+    <script>
+      var options = {
+        series: [<?=$total_bought?>, <?=$total_sales?>],
+        chart: {
+          height: 350,
+          type: 'pie', // Changed to 'pie' from 'bar'
+        },
+        labels: ['Available Gas', 'Sales'], // Labels for the pie chart sections
+        dataLabels: {
+          enabled: true,
+          formatter: function (val) {
+            return "₱ " + val;
+          },
+          style: {
+            fontSize: '12px',
+            colors: ["#304758"]
+          }
+        },
+        title: {
+          text: 'OVERALL SALES',
+          floating: true,
+          offsetY: 330,
+          align: 'center',
+          style: {
+            color: '#444'
+          }
+        },
+        tooltip: {
+          enabled: true,
+          y: {
+            formatter: function (val) {
+              return "₱ " + val;
+            }
+          }
+        }
+      };
+
+      var chart = new ApexCharts(document.querySelector("#chart"), options);
+      chart.render();
+    </script>
+  </div>
+</div>
+
         
     </div>
   <div class="row">
