@@ -13,15 +13,6 @@
  $products_sold   = find_higest_saleing_product('10');
  $recent_products = find_recent_product_added('5');
  $recent_sales    = find_recent_sale_added('5')
- // SQL query to get the sum of sales or quantity per category (adjust query as needed)
-$sql = "
-SELECT categories.name, SUM(sales.price * sales.qty) AS total_sales
-FROM categories
-LEFT JOIN products ON categories.id = products.categorie_id
-LEFT JOIN sales ON products.id = sales.product_id
-GROUP BY categories.name;
-";
-
 $result = $conn->query($sql);
 
 $categories = [];
