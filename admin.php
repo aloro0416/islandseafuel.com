@@ -246,7 +246,8 @@
   <div class="col-md-4">
     <div class="panel panel-box clearfix" style="padding: 10px;">
       <div id="pieChart"></div>
-      <div id="pieChartLabels" style="text-align: center; margin-top: 10px;"></div>
+      <!-- Product Labels Below Pie Chart -->
+      <div id="pieChartLabels" style="text-align: center; margin-top: 20px;"></div>
     </div>
     <script>
       var recentSales = <?php echo json_encode($recent_sales); ?>;
@@ -273,7 +274,7 @@
       var options = {
         series: chartData,
         chart: {
-          height: 350,  // Match the height of the line chart
+          height: 350, // Match the height of the line chart
           type: 'pie',
         },
         labels: chartLabels,
@@ -297,12 +298,10 @@
         },
         title: {
           text: 'Sales Distribution by Product',
-          floating: true,
-          offsetY: 330, // Adjust for title position
           align: 'center',
           style: {
             color: '#444',
-            fontSize: '10px',
+            fontSize: '12px',
             fontWeight: 'bold',
             fontFamily: 'Arial, sans-serif'
           }
@@ -312,18 +311,19 @@
       var chart = new ApexCharts(document.querySelector("#pieChart"), options);
       chart.render();
 
-      // Add product names below the pie chart
-      var labelsHtml = chartLabels
-        .map(function(label, index) {
-          return `<span style="display: inline-block; margin: 0 5px; font-size: 12px; color: #444;">
-                    <strong>${label}</strong>
-                  </span>`;
-        })
-        .join(" ");
-      document.getElementById("pieChartLabels").innerHTML = labelsHtml;
+      // Render product labels below the pie chart
+      var labelsContainer = document.querySelector("#pieChartLabels");
+      chartLabels.forEach(function(label, index) {
+        var color = chart.w.config.colors[index]; // Get the color for the current label
+        var labelDiv = document.createElement("div");
+        labelDiv.style.margin = "5px 0";
+        labelDiv.innerHTML = `<span style="display: inline-block; width: 15px; height: 15px; background-color: ${color}; margin-right: 5px;"></span>${label}`;
+        labelsContainer.appendChild(labelDiv);
+      });
     </script>
   </div>
 </div>
+
 
 
 
